@@ -13,11 +13,9 @@ export default function Home() {
         <div className="z-10 absolute bottom-0 left-0 w-full h-1/4 bg-gradient-to-b from-transparent to-background pointer-events-none" />
 
         <div className="absolute inset-0 bg-black/40 flex flex-col items-start md:items-start md:pl-24 lg:pl-48 justify-center text-white text-start p-4">
-          <ScrollReveal side="top" type="h1">
-            당신만의 힐링, 자연 속에서
-          </ScrollReveal>
-          <ScrollReveal side="left" type="p" className="text-xl md:text-2xl mb-8 ml-1">
-            태안 바다와 숲 속에서 가족, 연인, 친구와 함께하는 특별한 여유
+          <ScrollReveal side="top" type="h1" className="mb-6 md:mb-2">
+            {/* 당신만의 힐링, 자연 속에서 */}
+            프라이빗 비치만이 <br />선사하는 완벽한 휴식
           </ScrollReveal>
           <ScrollReveal side="bottom">
             <Button size={"xl"}>
