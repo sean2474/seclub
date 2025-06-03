@@ -1,26 +1,164 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "../styles/fonts.css";
+@import "../styles/animations.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  .font-pretendard {
+    font-family: var(--font-pretendard);
+  }
+  .font-black-han-sans {
+    font-family: var(--font-black-han-sans);
+  }
+  .font-nanum-square {
+    font-family: var(--font-nanum-square);
+  }
 }
 
+@custom-variant dark (&:is(.dark *));
+
 @theme inline {
+  --font-pretendard: 'Pretendard', sans-serif;
+  --font-black-han-sans: 'Black Han Sans', sans-serif;
+  --font-nanum-square: 'NanumSquare', sans-serif;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.625rem;
+
+  --background: #FAF5E9;
+  --foreground: #020E1B;
+  --card: #FAF5E9;
+  --popover: #FAF5E9;
+
+  --primary: #0B3D91;
+  --primary-foreground: #FAF5E9;
+  --secondary: #BFA181;
+  --accent: #A7D3E0;
+  --muted: #FAF5E9;
+
+  --border: #0B3D91;
+  --input: #0B3D91;
+  --ring: #A7D3E0;
+  
+  --chart-1: #0B3D91;
+  --chart-2: #BFA181;
+  --chart-3: #A7D3E0;
+  --chart-4: #0B3D91;
+  --chart-5: #BFA181;
+
+  --sidebar: #FAF5E9;
+  --sidebar-primary: #0B3D91;
+  --sidebar-primary-foreground: #FAF5E9;
+  --sidebar-accent: #A7D3E0;
+  --sidebar-border: #0B3D91;
+  --sidebar-ring: #A7D3E0;
+}
+
+/*──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────*/
+/* ▶▶▶ 다크 모드(.dark)에서 쓸 컬러들도 새로운 스킴에 맞춰 적절히 지정합니다. 
+       (아래 예시는 라이트 모드의 반전(역톤)이나 강조를 위해 대략 매핑한 예제입니다.) ◀◀◀			*/
+/*──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────*/
+.dark {
+  --background: #002349;
+  --foreground: #FAF5E9;
+
+  --card: #0B3D91;
+  --card-foreground: #FAF5E9;      
+  
+  --popover: #0B3D91;              
+  --popover-foreground: #FAF5E9;   
+
+  --primary: #A7D3E0;
+  --primary-foreground: #002349;   
+
+  --secondary: #BFA181;
+  --secondary-foreground: #002349; 
+
+  --accent: #0B3D91;
+  --accent-foreground: #FAF5E9;    
+
+  --muted: #002349;
+  --muted-foreground: #FAF5E9;
+
+  --border: #A7D3E0;              
+  --input: #A7D3E0;               
+  --ring: #BFA181;                
+
+  --chart-1: #FAF5E9;
+  --chart-2: #BFA181;
+  --chart-3: #A7D3E0;
+  --chart-4: #FAF5E9;
+  --chart-5: #BFA181;
+
+  --sidebar: #0B3D91;
+  --sidebar-foreground: #FAF5E9;
+  --sidebar-primary: #A7D3E0;
+  --sidebar-primary-foreground: #002349;
+  --sidebar-accent: #BFA181;
+  --sidebar-accent-foreground: #002349;
+  --sidebar-border: #A7D3E0;
+  --sidebar-ring: #BFA181;
+}
+
+.scroll-reveal-show {
+  @apply translate-y-0 translate-x-0 opacity-100;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-}
+  body {
+    @apply bg-background text-foreground text-balance break-keep;
+  }
+  h1 {
+    @apply font-black-han-sans text-4xl md:text-6xl;
+  }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  p {
+    @apply font-pretendard text-lg md:text-xl;
+  }
+
+  main::after {
+    @apply w-[180%] h-[180%] fixed left-[-40%] top-[-40%] z-[99999999] opacity-30 pointer-events-none mix-blend-overlay bg-[url('/images/noise.webp')] bg-repeat content-[""] animate-[noise_3s_steps(4)_infinite];
+  }
 }
