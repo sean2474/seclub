@@ -86,7 +86,7 @@ export default function ScrollReveal({
 
   return (
     <Tag
-      ref={ref as React.RefObject<any>}
+      ref={ref as React.RefObject<HTMLElement>}
       className={`transition-all duration-[1300ms] opacity-0 delay-100 ease-[cubic-bezier(.14,.46,0,1.34)] ${initialTransform} ${className}`}
       style={{ transitionDelay: delay }}
     >
