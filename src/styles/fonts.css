@@ -1,0 +1,83 @@
+/* 나눔스퀘어 - 브랜드 로고/슬로건용 */
+@font-face {
+  font-family: 'NanumSquare';
+  font-weight: 300;
+  font-style: normal;
+  src: url('/fonts/nanum-square/NanumSquareL.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NanumSquare';
+  font-weight: 400;
+  font-style: normal;
+  src: url('/fonts/nanum-square/NanumSquareR.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NanumSquare';
+  font-weight: 700;
+  font-style: normal;
+  src: url('/fonts/nanum-square/NanumSquareB.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NanumSquare';
+  font-weight: 800;
+  font-style: normal;
+  src: url('/fonts/nanum-square/NanumSquareEB.ttf') format('truetype');
+  font-display: swap;
+}
+
+/* 나눔스퀘어 AC - 대체용 */
+@font-face {
+  font-family: 'NanumSquareAc';
+  font-weight: 300;
+  font-style: normal;
+  src: url('/fonts/nanum-square/NanumSquare_acL.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NanumSquareAc';
+  font-weight: 400;
+  font-style: normal;
+  src: url('/fonts/nanum-square/NanumSquare_acR.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NanumSquareAc';
+  font-weight: 700;
+  font-style: normal;
+  src: url('/fonts/nanum-square/NanumSquare_acB.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NanumSquareAc';
+  font-weight: 800;
+  font-style: normal;
+  src: url('/fonts/nanum-square/NanumSquare_acEB.ttf') format('truetype');
+  font-display: swap;
+}
+
+/* Black Han Sans - 제목/강조용 */
+@font-face {
+  font-family: 'Black Han Sans';
+  font-weight: 400;
+  font-style: normal;
+  src: url('/fonts/black-han-sans/BlackHanSans-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+
+/* Pretendard Variable - 본문 및 메뉴용 */
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 45 920;
+  font-style: normal;
+  src: url('/fonts/pretendard/PretendardVariable.woff2') format('woff2-variations');
+  font-display: swap;
+}

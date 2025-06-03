@@ -1,0 +1,15 @@
+@theme {
+  @keyframes noise {
+    0%   { transform: translate(0); }
+    10%  { transform: translate(-7%, -7%); }
+    20%  { transform: translate(-9%, 7%); }
+    30%  { transform: translate(7%, -9%); }
+    40%  { transform: translate(-7%, 12%); }
+    50%  { transform: translate(-9%, 7%); }
+    60%  { transform: translate(12%); }
+    70%  { transform: translateY(9%); }
+    80%  { transform: translate(-17%); }
+    90%  { transform: translate(9%, 7%); }
+    100% { transform: translate(7%); }
+  }
+}
