@@ -1,17 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/assets/header";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { Footer } from "@/assets/footer";
 
 export const metadata: Metadata = {
   title: "SE클럽 | 태안둘레길캠핑장",
@@ -26,10 +16,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased font-pretendard`}
+        className={`$antialiased font-pretendard`}
       >
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

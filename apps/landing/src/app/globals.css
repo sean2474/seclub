@@ -91,12 +91,14 @@
   --sidebar-accent: #A7D3E0;
   --sidebar-border: #0B3D91;
   --sidebar-ring: #A7D3E0;
+
+  @media (width >= 64rem /* 1024px */) {
+    --header-height-expanded: calc(var(--spacing) * 36);
+  }
+  --header-height-expanded: calc(var(--spacing) * 16);
+  --header-height: calc(var(--spacing) * 16);
 }
 
-/*──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────*/
-/* ▶▶▶ 다크 모드(.dark)에서 쓸 컬러들도 새로운 스킴에 맞춰 적절히 지정합니다. 
-       (아래 예시는 라이트 모드의 반전(역톤)이나 강조를 위해 대략 매핑한 예제입니다.) ◀◀◀			*/
-/*──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────*/
 .dark {
   --background: #002349;
   --foreground: #FAF5E9;
@@ -146,19 +148,28 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    /* @apply outline outline-red-500 */
   }
   body {
     @apply bg-background text-foreground text-balance break-keep;
   }
   h1 {
-    @apply font-black-han-sans text-4xl md:text-6xl;
+    @apply font-nanum-square text-4xl md:text-6xl;
+  }
+
+  h2 {
+    @apply font-nanum-square text-2xl md:text-4xl;
+  }
+
+  h3 {
+    @apply font-nanum-square text-xl md:text-3xl;
   }
 
   p {
-    @apply font-pretendard text-lg md:text-xl;
+    @apply font-pretendard text-base md:text-lg;
   }
 
-  main::after {
+  /* main::after {
     @apply w-[180%] h-[180%] fixed left-[-40%] top-[-40%] z-[99999999] opacity-30 pointer-events-none mix-blend-overlay bg-[url('/images/noise.webp')] bg-repeat content-[""] animate-[noise_3s_steps(4)_infinite];
-  }
+  } */
 }

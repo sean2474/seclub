@@ -36,7 +36,7 @@ export const PlusMinusIcon = ({
             height: "2px",
             transform: "translateY(-50%)", // y축 중앙 보정
           }}
-          className="bg-font rounded border border-font duration-300 ease-in-out"
+          className="bg-foreground rounded border border-foreground duration-300 ease-in-out"
         />
         {/*
           2) 두 번째 선: 가운데서 세로줄 → 클릭 시 90도 회전하여 가로줄과 겹침
@@ -55,7 +55,7 @@ export const PlusMinusIcon = ({
               ? "translateX(-50%) rotate(90deg)" // "-" 상태
               : "translateX(-50%) rotate(0deg)",  // "+" 상태
           }}
-          className="bg-font rounded border border-font duration-300 ease-in-out"
+          className="bg-foreground rounded border border-foreground duration-300 ease-in-out"
         />
       </ul>
     </div>

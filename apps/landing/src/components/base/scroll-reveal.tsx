@@ -79,6 +79,8 @@ export default function ScrollReveal({
         return "p";
       case "h1":
         return "h1";
+      case "h2":
+        return "h2";
       default:
         return "div";
     }
