@@ -3,21 +3,13 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
-export default function HeroImage() {
-  const images = [
-    '/images/hero-1.jpeg',
-    '/images/hero-2.jpeg',
-    '/images/hero-3.jpeg',
-    '/images/hero-4.jpeg',
-    '/images/hero-5.jpeg',
-  ];
-
+export default function HeroImage({ images }: { images: string[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 3000); // 5초마다 다음 이미지로 전환
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);

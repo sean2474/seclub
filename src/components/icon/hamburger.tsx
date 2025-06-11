@@ -27,7 +27,7 @@ export const HamburgerIcon = ({
             transform: open ? `rotate(45deg)` : "rotate(0)",
             width: `${30 * size}px`,
           }}
-          className="absolute bg-primary rounded border border-font duration-300 ease-in-out origin-left"
+          className="absolute bg-foreground rounded border border-foreground duration-300 ease-in-out origin-left"
         />
         <li
           style={{
@@ -36,7 +36,7 @@ export const HamburgerIcon = ({
             opacity: open ? 0 : 1,
             width: open ? "0px" : `${30 * size}px`,
           }}
-          className="absolute bg-primary rounded border border-font duration-300 ease-in-out origin-left"
+          className="absolute bg-foreground rounded border border-foreground duration-300 ease-in-out origin-left"
         />
         <li
           style={{
@@ -46,7 +46,7 @@ export const HamburgerIcon = ({
             transform: open ? "rotate(-45deg)" : "rotate(0)",
             width: `${30 * size}px`,
           }}
-          className="absolute bg-primary rounded border border-font duration-300 ease-in-out origin-left"
+          className="absolute bg-foreground rounded border border-foreground duration-300 ease-in-out origin-left"
         />
       </ul>
     </div>

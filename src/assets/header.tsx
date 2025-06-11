@@ -5,8 +5,8 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { HamburgerIcon } from "@/components/icon/hamburger";
 import { PlusMinusIcon } from "@/components/icon/plusminus";
-import { HeaderMenuType, HeaderSingleItemType } from "@/types";
 import Link from "next/link";
+import { desktopMenu, menuItems, singleItems } from "@/const/header-items";
 
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -49,33 +49,12 @@ export const Header = () => {
     setOpenSection(openSection === index ? null : index);
   };
 
-  const menuItems: HeaderMenuType[] = [
-    
-  ];
-
-  const singleItems: HeaderSingleItemType[] = [
-  ];
-
-  const desktopMenu = [
-    ...menuItems.map((m) => ({
-      name: m.title,
-      items: m.items,
-      href: null,
-    })),
-    ...singleItems.map((s) => ({
-      name: s.name,
-      items: null,
-      href: s.href,
-      target: s.target,
-    })),
-  ];
-
   if (pathname.includes("/auth")) return <></>;
   
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-[9999] px-2 lg:pr-12 transition-all duration-300 ease-in text-font backdrop-blur-md bg-white h-16
-        ${!scrolled ? "lg:h-36" : ""}
+      className={`fixed inset-x-0 top-0 z-[9999] px-2 lg:pr-12 transition-all duration-300 ease-in text-font backdrop-blur-md bg-white h-[var(--header-height)]
+        ${!scrolled && "h-[var(--header-height-expanded)]"}
         ${
           mobileMenuOpen
             ? "h-full bg-white/80 overflow-y-scroll overflow-x-hidden"
@@ -89,7 +68,7 @@ export const Header = () => {
         aria-label="Global"
       >
         {/* 로고 */}
-        <div className="flex items-center lg:gap-28 w-full">
+        <div className="flex items-center lg:gap-32 w-full">
           <Link
             className={`
               absolute lg:relative transition-all duration-500 ease-out
@@ -104,7 +83,7 @@ export const Header = () => {
             href={"/"}
             onClick={() => setMobileMenuOpen(false)}
           >
-            <div className="relative w-[100px] h-16">
+            <div className="relative w-[100px] h-[var(--header-height)]">
               <Image
                 src={`/logos/logo.png`}
                 className={`transition-all duration-300 delay-100 object-contain ${
@@ -122,13 +101,13 @@ export const Header = () => {
               item.items ? (
                 // 드롭다운 (하위 items 존재)
                 <div className="relative group" key={idx}>
-                  <button className="inline-flex items-center text-sm font-semibold leading-6 px-3 py-2 hover:text-primary">
+                  <Link href={item.href || ""} className="inline-flex items-center leading-6 px-3 py-2 hover:text-primary">
                     {item.name}
-                  </button>
+                  </Link>
                   <div
                     className={`
-                      absolute left-0 top-full bg-font divide-y px-3 py-2 divide-white/15
-                      shadow-lg z-50 break-keep
+                      absolute left-0 top-full bg-background/70 divide-y px-3 py-2 divide-foreground/15
+                      shadow-lg z-50 break-keep text-foreground
                       invisible opacity-0 group-hover:visible group-hover:opacity-100
                       transition-all duration-200
                     `}
@@ -137,7 +116,7 @@ export const Header = () => {
                       <Link
                         href={sub.href}
                         key={subIdx}
-                        className="block px-4 py-2 text-sm text-center text-background hover:font-extrabold"
+                        className="block px-4 py-2 text-sm text-center hover:font-extrabold transition-all"
                       >
                         {sub.name.replaceAll(" ", "\u00A0")}
                       </Link>
@@ -149,7 +128,7 @@ export const Header = () => {
                 <Link
                   href={item.href || "#"}
                   key={idx}
-                  className="text-sm font-semibold leading-6 px-3 py-2 hover:text-primary"
+                  className="leading-6 px-3 py-2 hover:text-primary"
                   target={item.target}
                 >
                   {item.name}
@@ -189,7 +168,7 @@ export const Header = () => {
             {/* 모바일 아코디언 */}
             <div className="w-full">
               {menuItems.map((section, index) => (
-                <div key={index} className="border-b">
+                <div key={index} className="border-b border-foreground">
                   <button
                     type="button"
                     className="text-lg font-medium py-4 w-full text-left flex justify-between items-center px-4"
@@ -207,7 +186,7 @@ export const Header = () => {
                         : "max-h-0 duration-300"}`}
                   >
                     <div className="flex flex-col space-y-3 px-4 pb-3">
-                      {section.items.map((item, i) => (
+                      {section.items?.map((item, i) => (
                         <Link
                           key={i}
                           href={item.href}
@@ -237,24 +216,6 @@ export const Header = () => {
                 </Link>
               ))}
             </div>
-
-            {/* 언어 스위치 + 로그인 */}
-            {/* <div className="flex items-center justify-between px-1 mt-10">
-              <LanguageBtn />
-              {session 
-              ? <Link className="flex center gap-2 cursor-pointer hover:font-bold" href={"/myInfo"} onClick={() => setMobileMenuOpen(false)}>
-                  <div> {t("header.myInfo")} </div>
-                  <UserIcon className="w-10 h-10" />
-                </Link>
-              : <Link
-                  href={"/auth/login"}
-                  className="w-24 text-center p-3 bg-font border border-font text-background hover:bg-opacity-0 hover:font-bold hover:text-font transition-all duration-300"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {t("header.login")}
-                </Link>
-              }
-            </div> */}
           </div>
         </nav>
       </div>

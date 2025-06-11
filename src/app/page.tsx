@@ -8,18 +8,25 @@ export default function Home() {
   return (
     <main className="flex flex-col min-h-screen">
       {/* 히어로 섹션 */}
-      <section className="relative h-svh w-full">
-        <HeroImage />
+      <section className="relative h-svh w-full text-background">
+        <HeroImage images={[
+          '/images/hero-1.jpeg',
+          '/images/hero-2.jpeg',
+          '/images/hero-3.jpeg',
+          '/images/hero-4.jpeg',
+          '/images/hero-5.jpeg',
+        ]} />
         <div className="z-10 absolute bottom-0 left-0 w-full h-1/4 bg-gradient-to-b from-transparent to-background pointer-events-none" />
 
-        <div className="absolute inset-0 bg-black/40 flex flex-col items-start md:items-start md:pl-24 lg:pl-48 justify-center text-white text-start p-4">
-          <ScrollReveal side="top" type="h1" className="mb-6 md:mb-2">
+        <div className="absolute inset-0 bg-black/40 flex flex-col items-start md:items-start md:pl-24 lg:pl-48 justify-center text-start p-4 leading-5">
+          <ScrollReveal side="top" type="h1" className="mb-8 md:mb-4">
             {/* 당신만의 힐링, 자연 속에서 */}
-            프라이빗 비치만이 <br />선사하는 완벽한 휴식
+            <span className="font-thin">프라이빗 비치만이 <br />선사하는 </span>
+            완벽한 휴식
           </ScrollReveal>
-          <ScrollReveal side="bottom">
-            <Button size={"xl"}>
-              <Link href="/reservation" className="mt-1">
+          <ScrollReveal side="bottom" className="ml-1">
+            <Button size={"lg"}>
+              <Link href="/reservation" className="">
                 지금 예약하기
               </Link>
             </Button>
@@ -31,7 +38,7 @@ export default function Home() {
       <section className="py-16 container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="order-2 md:order-1">
-            <ScrollReveal side="top" type="h1" className="mb-6">
+            <ScrollReveal side="top" type="h2" className="mb-6">
               당신만을 위한 특별한 공간
             </ScrollReveal>
             <ScrollReveal side="left" delay="100ms" type="p">
@@ -60,15 +67,16 @@ export default function Home() {
       </section>
 
       {/* 객실 및 간략 소개 */}
-      <section className="py-16">
+      <section className="bg-white relative pt-[60px]">
+        <div className="absolute -top-[60px] left-0 w-full h-30 z-10 bg-gradient-to-t from-white to-background" />
         <div className="container mx-auto px-4 mb-12">
-          <ScrollReveal side="top" type="h1" className="text-center">
-            숙박시설 한눈에 보기
+          <ScrollReveal side="left" type="h2" className="text-center">
+            숙박시설
           </ScrollReveal>
         </div>
         
         {/* 풀빌라 */}
-        <section className="py-12 bg-white/30">
+        <div className="py-12">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div className="order-1">
@@ -84,11 +92,12 @@ export default function Home() {
                 </ScrollReveal>
               </div>
               <div className="order-2">
-                <ScrollReveal side="right" type="h2" className="text-3xl font-black-han-sans mb-4">
+                <ScrollReveal side="right" type="h2" className="text-3xl mb-4">
                   풀빌라
                 </ScrollReveal>
                 <ScrollReveal side="right" delay="100ms" type="p" className="mb-6">
-                  바다를 머금은 프라이빗 풀, 온전히 나만의 힐링 공간
+                  바다를 머금은 프라이빗 풀, <br />
+                  온전히 나만의 힐링 공간
                 </ScrollReveal>
                 <ScrollReveal side="right" delay="200ms">
                   <Button variant="outline" size="lg" className="mt-4">
@@ -98,18 +107,19 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </div>
         
         {/* 자쿠지 하우스 */}
         <section className="py-12">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div className="order-2 md:order-1">
-                <ScrollReveal side="left" type="h2" className="text-3xl font-black-han-sans mb-4">
+                <ScrollReveal side="left" type="h2" className="mb-2">
                   자쿠지 하우스
                 </ScrollReveal>
-                <ScrollReveal side="left" delay="100ms" type="p" className="mb-6">
-                  밤바다 속 로맨틱 스파, 둘만의 기억을 새기다
+                <ScrollReveal side="left" delay="100ms" type="p" className="mb-2">
+                  밤바다 속 로맨틱 스파, <br />
+                  둘만의 기억을 새기다
                 </ScrollReveal>
                 <ScrollReveal side="left" delay="200ms">
                   <Button variant="outline" size="lg" className="mt-4">
@@ -134,7 +144,7 @@ export default function Home() {
         </section>
         
         {/* 호텔형 객실 */}
-        <section className="py-12 bg-white/30">
+        <section className="py-12">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div className="order-1">
@@ -150,11 +160,12 @@ export default function Home() {
                 </ScrollReveal>
               </div>
               <div className="order-2">
-                <ScrollReveal side="right" type="h2" className="text-3xl font-black-han-sans mb-4">
+                <ScrollReveal side="right" type="h2" className="mb-2">
                   호텔형 객실
                 </ScrollReveal>
-                <ScrollReveal side="right" delay="100ms" type="p" className="mb-6">
-                  모던 오션뷰 스테이, 발코니 너머 노을을 담다
+                <ScrollReveal side="right" delay="100ms" type="p" className="mb-2">
+                  모던 오션뷰 스테이, <br />
+                  발코니 너머 노을을 담다
                 </ScrollReveal>
                 <ScrollReveal side="right" delay="200ms">
                   <Button variant="outline" size="lg" className="mt-4">
@@ -171,11 +182,12 @@ export default function Home() {
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div className="order-2 md:order-1">
-                <ScrollReveal side="left" type="h2" className="text-3xl font-black-han-sans mb-4">
+                <ScrollReveal side="left" type="h2" className="mb-2">
                   캠핑하우스
                 </ScrollReveal>
-                <ScrollReveal side="left" delay="100ms" type="p" className="mb-6">
-                  캠핑의 자유로움과 하우스텔 안락함이 만났다
+                <ScrollReveal side="left" delay="100ms" type="p" className="mb-2">
+                  캠핑의 자유로움과 <br />
+                  하우스텔 안락함이 만났다
                 </ScrollReveal>
                 <ScrollReveal side="left" delay="200ms">
                   <Button variant="outline" size="lg" className="mt-4">
@@ -211,18 +223,19 @@ export default function Home() {
                 <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">#전용해변</span>
               </div>
               <p className="text-gray-700 mb-8">반려견 동반 객실 완비 · 공용 수영장·자쿠지 사용 가능</p>
-              <p className="text-2xl font-black-han-sans italic text-secondary">&#34;다가오는 바다빛 노을, SE클럽에서 멈춰버린 시간을 경험하세요.&#34;</p>
+              <p className="italic text-secondary">&#34;다가오는 바다빛 노을, SE클럽에서 멈춰버린 시간을 경험하세요.&#34;</p>
             </ScrollReveal>
           </div>
         </section>
       </section>
       
       {/* 고객 후기/리뷰 */}
+      
       {/* 프로모션/이벤트 안내 */}
 
-
       {/* 객실 및 캠핑 더보기 */}
-      <section className="py-16 bg-muted/50">
+      <section className="py-16 bg-muted/50 relative mt-[60px] pt-[60px]">
+        <div className="absolute -top-[60px] left-0 w-full h-30 z-10 bg-gradient-to-b from-white to-background" />
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">객실 및 캠핑장</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -256,7 +269,7 @@ export default function Home() {
                   className="object-cover transition-transform group-hover:scale-105 duration-300"
                 />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex flex-col justify-end p-6 text-white">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex flex-col justify-end p-6">
                 <h3 className="text-2xl font-bold mb-2">자연 속 캠핑</h3>
                 <p className="mb-4">바다가 보이는 아늑한 캠핑장</p>
                 <a href="/camping" className="inline-flex items-center text-sm font-medium">
