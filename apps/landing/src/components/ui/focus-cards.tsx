@@ -11,7 +11,7 @@ export const Card = React.memo(
     hovered,
     setHovered,
   }: {
-    card: any;
+    card: Card;
     index: number;
     hovered: number | null;
     setHovered: React.Dispatch<React.SetStateAction<number | null>>;
@@ -19,9 +19,11 @@ export const Card = React.memo(
     <div
       onMouseEnter={() => setHovered(index)}
       onMouseLeave={() => setHovered(null)}
+      onClick={card.onClick}
       className={cn(
         "rounded-lg relative bg-gray-100 dark:bg-neutral-900 overflow-hidden h-60 md:h-96 w-full transition-all duration-300 ease-out",
-        hovered !== null && hovered !== index && "blur-sm scale-[0.98]"
+        hovered !== null && hovered !== index && "blur-sm scale-[0.98]",
+        card.onClick && "cursor-pointer hover:shadow-lg"
       )}
     >
       <Image
@@ -36,8 +38,15 @@ export const Card = React.memo(
           hovered === index ? "opacity-100" : "opacity-0"
         )}
       >
-        <div className="text-xl md:text-2xl font-medium bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-200">
-          {card.title}
+        <div className="flex flex-col">  
+          <div className="text-xl md:text-2xl font-medium bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-200">
+            {card.title}
+          </div>
+          {card.description && (
+            <div className="text-sm md:text-base text-gray-300 mt-1">
+              {card.description}
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -49,6 +58,8 @@ Card.displayName = "Card";
 type Card = {
   title: string;
   src: string;
+  description?: string;
+  onClick?: () => void;
 };
 
 export function FocusCards({ cards }: { cards: Card[] }) {
