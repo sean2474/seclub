@@ -17,11 +17,26 @@ interface ModalContextType {
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
-export const ModalProvider = ({ children }: { children: ReactNode }) => {
-  const [open, setOpen] = useState(false);
+export const ModalProvider = ({ children, open, onOpen, onClose }: { children: ReactNode, open?: boolean, onOpen?: () => void, onClose?: () => void }) => {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      setModalOpen(open);
+    }
+  }, [open]);
+
+  const setOpen = (open: boolean) => {
+    setModalOpen(open);
+    if (open) {
+      onOpen?.();
+    } else {
+      onClose?.();
+    }
+  };
 
   return (
-    <ModalContext.Provider value={{ open, setOpen }}>
+    <ModalContext.Provider value={{ open: modalOpen, setOpen }}>
       {children}
     </ModalContext.Provider>
   );
@@ -35,8 +50,8 @@ export const useModal = () => {
   return context;
 };
 
-export function Modal({ children }: { children: ReactNode }) {
-  return <ModalProvider>{children}</ModalProvider>;
+export function Modal({ children, open, onOpen, onClose }: { children: ReactNode, open?: boolean, onOpen?: () => void, onClose?: () => void }) {
+  return <ModalProvider open={open} onOpen={onOpen} onClose={onClose}>{children}</ModalProvider>;
 }
 
 export const ModalTrigger = ({
@@ -178,7 +193,7 @@ const Overlay = ({ className }: { className?: string }) => {
         opacity: 0,
       }}
       animate={{
-        opacity: 1,
+        opacity: 0.5,
         backdropFilter: "blur(10px)",
       }}
       exit={{
