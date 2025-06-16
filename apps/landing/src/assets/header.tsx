@@ -53,7 +53,7 @@ export const Header = () => {
   
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-40 px-2 lg:pr-12 transition-all duration-300 ease-in text-font backdrop-blur-md bg-white h-[var(--header-height)]
+      className={`fixed inset-x-0 top-0 z-40 px-2 lg:pr-12 transition-all duration-300 ease-in text-font backdrop-blur-md bg-white h-[var(--header-height)] overscroll-none
         ${!scrolled && "h-[var(--header-height-expanded)]"}
         ${
           mobileMenuOpen
@@ -89,6 +89,7 @@ export const Header = () => {
                 className={`transition-all duration-300 delay-100 object-contain ${
                   scrolled ? "lg:scale-100" : "lg:scale-150"
                 }`}
+                sizes="100px"
                 alt="Main Logo"
                 fill
               />

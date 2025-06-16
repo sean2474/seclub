@@ -12,4 +12,21 @@
     90%  { transform: translate(9%, 7%); }
     100% { transform: translate(7%); }
   }
+
+  @keyframes arrow-rotate {
+    0% { rotate: 0deg; }
+    100% { rotate: 3600deg; }
+  }
+
+  @keyframes arrow-translate {
+    0% { translate: 0px; }
+    50% { translate: 8px; }
+    100% { translate: 0px; }
+  }
+
+  @keyframes arrow-grow {
+    0% { scale: 1; }
+    50% { scale: 1.5; }
+    100% { scale: 1; }
+  }
 }
