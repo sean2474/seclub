@@ -12,7 +12,7 @@ export default function HeroImage({ images }: { images: string[] }) {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [images.length]);
 
   return (
     <>

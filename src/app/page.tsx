@@ -251,13 +251,13 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex flex-col justify-end p-6 text-white">
                 <h3 className="text-2xl font-bold mb-2">편안한 객실</h3>
                 <p className="mb-4">풀빌라부터 호텔형 객실까지 다양한 선택지</p>
-                <a href="/rooms" className="inline-flex items-center text-sm font-medium">
+                <Link href="/rooms" className="inline-flex items-center text-sm font-medium">
                   더 알아보기
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 h-4 w-4">
                     <path d="M5 12h14"></path>
                     <path d="m12 5 7 7-7 7"></path>
                   </svg>
-                </a>
+                </Link>
               </div>
             </div>
             <div className="relative group overflow-hidden rounded-lg">

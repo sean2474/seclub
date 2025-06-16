@@ -1,52 +1,32 @@
 "use client";
 
 import { FocusCards } from "@/components/ui/focus-cards";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { roomData } from "@/const/room-data";
-import { RoomModal } from "./room-modal";
-import { Modal, useModal } from "@/components/ui/animated-modal";
+import { RoomDetail } from "./room-modal";
+import { Modal, ModalBody, ModalContent } from "@/components/ui/animated-modal";
 
 export const RoomGrid = () => {
-  const router = useRouter();
+  const [modalSlug, setModalSlug] = useState<string | null>(null);
   
-  return (
-    <Modal onClose={() => {router.push("/rooms", { scroll: false });}}>
-      <RoomGridManager />
-    </Modal>
-  )
-}
-
-const RoomGridManager = () => {
-  const router = useRouter();
-  const modal = useModal();
-  const searchParams = useSearchParams();
-  const modalSlug = searchParams.get("modal");
-  const selectedRoom = roomData.find(room => room.slug === modalSlug);
-
-  // 카드 클릭 핸들러
-  const handleCardClick = (slug: string) => {
-    modal.setOpen(true);
-    router.push(`/rooms?modal=${slug}`, { scroll: false });
-  };
-
-  // 모달 닫기 핸들러
-  const handleCloseModal = () => {
-    modal.setOpen(false);
-    router.push("/rooms", { scroll: false });
-  };
-
-  // 모달 상태를 URL과 동기화하기 위해 Escape 키 핸들러 추가
+  // 초기 진입 시나 뒤로/앞으로 이동(popstate) 시 URL 검사
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && modalSlug) {
-        handleCloseModal();
-      }
+    const checkPath = () => {
+      const match = window.location.pathname.match(/^\/rooms\/(.+)/);
+      setModalSlug(match ? match[1] : null);
     };
     
-    window.addEventListener("keydown", handleEscape);
-    return () => window.removeEventListener("keydown", handleEscape);
-  }, [modalSlug]);
+    checkPath();
+    window.addEventListener('popstate', checkPath);
+    return () => window.removeEventListener('popstate', checkPath);
+  }, []);
+  
+  // 모달 닫기 : URL 복원
+  const closeModal = () => {
+    window.history.pushState({}, '', '/rooms');
+    setModalSlug(null);
+  };
+  
   return (
     <>
       <FocusCards 
@@ -54,10 +34,22 @@ const RoomGridManager = () => {
           title: room.title,
           src: room.image,
           description: room.description,
-          onClick: () => handleCardClick(room.slug)
+          onClick: () => {
+            window.history.pushState({}, '', `/rooms/${room.slug}`);
+            setModalSlug(room.slug);
+          }
         }))} 
       />
-      <RoomModal selectedRoom={selectedRoom || roomData[0]} />
+      
+      {modalSlug && (
+        <Modal open={!!modalSlug} onClose={closeModal}>
+          <ModalBody>
+            <ModalContent>
+              <RoomDetail selectedRoom={roomData.find(room => room.slug === modalSlug) || roomData[0]} />
+            </ModalContent>
+          </ModalBody>
+        </Modal>
+      )}
     </>
   )
 }

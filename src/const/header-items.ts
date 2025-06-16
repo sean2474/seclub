@@ -31,6 +31,10 @@ export const menuItems: HeaderMenuType[] = [
     href: "/rooms",
     items: [
       {
+        name: "모든 객실",
+        href: "/rooms"
+      },
+      {
         name: "해수 풀빌라",
         href: "/rooms/pool-villa"
       },
