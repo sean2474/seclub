@@ -6,7 +6,6 @@ import React, {
   createContext,
   useContext,
   useEffect,
-  useRef,
   useState,
 } from "react";
 
@@ -25,6 +24,12 @@ export const ModalProvider = ({ children, open, onOpen, onClose }: { children: R
       setModalOpen(open);
     }
   }, [open]);
+  
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
   const setOpen = (open: boolean) => {
     setModalOpen(open);
@@ -32,6 +37,7 @@ export const ModalProvider = ({ children, open, onOpen, onClose }: { children: R
       onOpen?.();
     } else {
       onClose?.();
+      document.body.style.overflow = "auto";
     }
   };
 
@@ -90,6 +96,10 @@ export const ModalBody = ({
     } else {
       document.body.style.overflow = "auto";
     }
+    
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, [open]);
 
   return (
@@ -113,7 +123,7 @@ export const ModalBody = ({
 
           <motion.div
             className={cn(
-              "min-h-[50%] h-[95%] max-h-[90%] w-[95%] max-w-5xl bg-white dark:bg-neutral-950 border border-transparent dark:border-neutral-800 rounded-2xl relative z-50 flex flex-col flex-1 overflow-hidden",
+              "min-h-[50%] h-[95%] max-h-[90%] w-[95%] max-w-5xl bg-white dark:bg-neutral-950 dark:border-neutral-800 rounded-2xl relative z-50 flex flex-col flex-1 overflow-hidden",
               className
             )}
             initial={{
@@ -156,7 +166,7 @@ export const ModalContent = ({
   className?: string;
 }) => {
   return (
-    <div className={cn("flex flex-col flex-1 p-8 md:p-10", className)}>
+    <div className={cn("flex flex-col flex-1 overflow-y-auto", className)}>
       {children}
     </div>
   );
@@ -207,7 +217,7 @@ const CloseIcon = () => {
   return (
     <button
       onClick={() => setOpen(false)}
-      className="absolute top-4 right-4 group"
+      className="absolute z-50 top-7 right-7 lg:top-4 lg:right-4 group rounded-full bg-background text-foreground lg:bg-transparent"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

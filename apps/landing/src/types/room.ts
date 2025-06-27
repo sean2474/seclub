@@ -1,8 +1,1 @@
-export type Room = {
-  slug: string;
-  title: string;
-  image: string;
-  description: string;
-  details: string;
-  amenities: string[];
-}
+export type RoomType = "pool-villa" | "ocean-condo" | "spa-villa" | "camping-house";
