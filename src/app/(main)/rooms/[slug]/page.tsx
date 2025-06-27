@@ -1,5 +1,5 @@
-import { RoomDetail } from "@/assets/room-modal"
-import { roomData } from "@/const/room-data"
+import { RoomDetail } from "@/assets/room-detail"
+import { RoomType } from "@/types"
 
 export default async function Page({
   params,
@@ -8,5 +8,5 @@ export default async function Page({
 }) {
   const { slug } = await params
   
-  return <RoomDetail selectedRoom={roomData.find(room => room.slug === slug) || roomData[0]} />
+  return <RoomDetail roomType={slug as RoomType} />
 }
