@@ -9,7 +9,7 @@ export const OceanCondo = () => {
         <Image src="/images/room/ocean-condo.jpg" alt="오션 콘도" fill className="object-cover" />
         <div className="mt-6 absolute z-10 bottom-0 left-0 w-full h-1/4 bg-gradient-to-b from-transparent to-background pointer-events-none" />
         <div className="mt-6 absolute z-20 bottom-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
-          <h1 className="text-2xl font-semibold">오션 콘도</h1>
+          <h1 className="text-5xl font-bold">오션 콘도</h1>
           <p className="mt-2">호텔 객실과 같은 편안함과, 발코니에서 바라보는 탁 트인 오션뷰를 제공합니다.</p>
         </div>
       </section>
