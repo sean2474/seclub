@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { HamburgerIcon } from "@/components/icon/hamburger";
 import { PlusMinusIcon } from "@/components/icon/plusminus";
 import Link from "next/link";
-import { desktopMenu, menuItems, singleItems } from "@/const/header-items";
+import { desktopMenu, menuItems } from "@/const/header-items";
 
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -17,6 +17,7 @@ export const Header = () => {
   const [openSection, setOpenSection] = useState<number | null>(null);
   
   const pathname = usePathname();
+  const router = useRouter();
 
   // 스크롤 감지
   useEffect(() => {
@@ -113,11 +114,11 @@ export const Header = () => {
                       transition-all duration-200
                     `}
                   >
-                    {item.items.map((sub, subIdx) => (
+                    {item.items?.map((sub, subIdx) => (
                       <Link
                         href={sub.href}
                         key={subIdx}
-                        className="block px-4 py-2 text-sm text-center hover:font-extrabold transition-all"
+                        className="block px-4 py-2 text-sm text-center hover:font-extrabold transition-all whitespace-nowrap"
                       >
                         {sub.name.replaceAll(" ", "\u00A0")}
                       </Link>
@@ -130,7 +131,6 @@ export const Header = () => {
                   href={item.href || "#"}
                   key={idx}
                   className="leading-6 px-3 py-2 hover:text-primary"
-                  target={item.target}
                 >
                   {item.name}
                 </Link>
@@ -173,10 +173,17 @@ export const Header = () => {
                   <button
                     type="button"
                     className="text-lg font-medium py-4 w-full text-left flex justify-between items-center px-4"
-                    onClick={() => toggleSection(index)}
+                    onClick={() => {
+                      if (section.items) {
+                        toggleSection(index)
+                      } else {
+                        router.push(section.href || "");
+                        setMobileMenuOpen(false);
+                      }
+                    }}
                   >
                     {section.title}
-                    <PlusMinusIcon open={openSection === index} size={0.5} />
+                    {section.items && <PlusMinusIcon open={openSection === index} size={0.5} />}
                   </button>
 
                   {/* 아코디언 영역 */}
@@ -200,21 +207,6 @@ export const Header = () => {
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-
-            {/* 모바일 단일 링크들 */}
-            <div className="mt-4 flex flex-col space-y-2">
-              {singleItems.map((item, index) => (
-                <Link
-                  key={index}
-                  href={item.href}
-                  className="text-lg font-medium hover:text-primary hover:font-extrabold py-2 px-4"
-                  onClick={() => setMobileMenuOpen(false)}
-                  target={item.target}
-                >
-                  {item.name}
-                </Link>
               ))}
             </div>
           </div>

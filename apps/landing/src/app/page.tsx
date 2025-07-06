@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex flex-col min-h-screen">
+    <main className="flex flex-col min-h-screen overflow-x-hidden">
       {/* 히어로 섹션 */}
       <section className="relative h-svh w-full text-background">
         <HeroImage images={[

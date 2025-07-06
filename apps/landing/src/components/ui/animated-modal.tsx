@@ -1,5 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
+import { ArrowLeft } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import React, {
   ReactNode,
@@ -123,7 +124,7 @@ export const ModalBody = ({
 
           <motion.div
             className={cn(
-              "min-h-[50%] h-[95%] max-h-[90%] w-[95%] max-w-5xl bg-white dark:bg-neutral-950 dark:border-neutral-800 rounded-2xl relative z-50 flex flex-col flex-1 overflow-hidden",
+              "min-h-[50%] h-[98%] max-h-[98%] w-[95%] mx-1 max-w-5xl bg-white dark:bg-neutral-950 dark:border-neutral-800 rounded-2xl relative z-50 flex flex-col flex-1 overflow-hidden",
               className
             )}
             initial={{
@@ -217,24 +218,11 @@ const CloseIcon = () => {
   return (
     <button
       onClick={() => setOpen(false)}
-      className="absolute z-50 top-7 right-7 lg:top-4 lg:right-4 group rounded-full bg-background text-foreground lg:bg-transparent"
+      className="absolute z-50 top-2 left-2 lg:top-4 lg:right-4 w-10 h-10 group rounded-full bg-background text-foreground lg:bg-transparent flex items-center justify-center"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="text-black dark:text-white h-4 w-4 group-hover:scale-125 group-hover:rotate-3 transition duration-200"
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <path d="M18 6l-12 12" />
-        <path d="M6 6l12 12" />
-      </svg>
+      <ArrowLeft
+        className="text-black dark:text-white h-6 w-6 group-hover:scale-125 group-hover:rotate-3 transition duration-200"
+      />
     </button>
   );
 };
