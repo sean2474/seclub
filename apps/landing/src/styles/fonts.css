@@ -81,3 +81,12 @@
   src: url('/fonts/pretendard/PretendardVariable.woff2') format('woff2-variations');
   font-display: swap;
 }
+
+/* The Signature - 로고용 */
+@font-face {
+  font-family: 'TheSignature';
+  font-weight: 400;
+  font-style: normal;
+  src: url('/fonts/thesignature/Thesignature.ttf') format('truetype');
+  font-display: swap;
+}

@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`$antialiased font-pretendard`}
+        className={`$antialiased font-pretendard font-thin`}
       >
         <Header />
         {children}
