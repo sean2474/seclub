@@ -1,211 +1,157 @@
-"use client";
-import { IconArrowNarrowRight } from "@tabler/icons-react";
-import { useState, useRef, useId, useEffect } from "react";
-import Image from "next/image";
+'use client';
 
-interface SlideData {
+import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+
+/**
+ * SlideLink represents a link under each carousel item.
+ */
+export type SlideLink = {
+  label: string;
+  href: string;
+};
+
+/**
+ * CarouselSlide defines the content of one slide.
+ */
+export type CarouselSlide = {
+  image: string;
   title: string;
-  button: string;
-  src: string;
+  subtitle: string;
+  links: SlideLink[];
+};
+
+interface RoomCarouselProps {
+  slides: CarouselSlide[];
+  autoPlay?: boolean;
+  autoPlayInterval?: number;
 }
 
-interface SlideProps {
-  slide: SlideData;
-  index: number;
-  current: number;
-  handleSlideClick: (index: number) => void;
-}
+/**
+ * RoomCarousel displays a horizontal sliding carousel of room categories.
+ */
+export default function RoomCarousel({
+  slides,
+  autoPlay = true,
+  autoPlayInterval = 5000,
+}: RoomCarouselProps) {
+  const [current, setCurrent] = useState(0);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
-  const slideRef = useRef<HTMLLIElement>(null);
-
-  const xRef = useRef(0);
-  const yRef = useRef(0);
-  const frameRef = useRef<number>(null);
+  const resetTimeout = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+  };
 
   useEffect(() => {
-    const animate = () => {
-      if (!slideRef.current) return;
-
-      const x = xRef.current;
-      const y = yRef.current;
-
-      slideRef.current.style.setProperty("--x", `${x}px`);
-      slideRef.current.style.setProperty("--y", `${y}px`);
-
-      frameRef.current = requestAnimationFrame(animate);
-    };
-
-    frameRef.current = requestAnimationFrame(animate);
-
-    return () => {
-      if (frameRef.current) {
-        cancelAnimationFrame(frameRef.current);
-      }
-    };
-  }, []);
-
-  const handleMouseMove = (event: React.MouseEvent) => {
-    const el = slideRef.current;
-    if (!el) return;
-
-    const r = el.getBoundingClientRect();
-    xRef.current = event.clientX - (r.left + Math.floor(r.width / 2));
-    yRef.current = event.clientY - (r.top + Math.floor(r.height / 2));
-  };
-
-  const handleMouseLeave = () => {
-    xRef.current = 0;
-    yRef.current = 0;
-  };
-
-  const imageLoaded = (event: React.SyntheticEvent<HTMLImageElement>) => {
-    event.currentTarget.style.opacity = "1";
-  };
-
-  const { src, title } = slide;
-
-  return (
-    <div className="[perspective:1200px] [transform-style:preserve-3d]">
-      <li
-        ref={slideRef}
-        className="flex flex-1 flex-col items-center justify-center relative text-center text-white opacity-100 transition-all duration-300 ease-in-out w-[70vmin] h-[70vmin] mx-[4vmin] z-10 "
-        onClick={() => handleSlideClick(index)}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        style={{
-          transform:
-            current !== index
-              ? "scale(0.98) rotateX(8deg)"
-              : "scale(1) rotateX(0deg)",
-          transition: "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
-          transformOrigin: "bottom",
-        }}
-      >
-        <div
-          className="absolute top-0 left-0 w-full h-full bg-[#1D1F2F] rounded-[1%] overflow-hidden transition-all duration-150 ease-out"
-          style={{
-            transform:
-              current === index
-                ? "translate3d(calc(var(--x) / 30), calc(var(--y) / 30), 0)"
-                : "none",
-          }}
-        >
-          <Image
-            className="absolute inset-0 w-[120%] h-[120%] object-cover opacity-100 transition-opacity duration-600 ease-in-out"
-            style={{
-              opacity: current === index ? 1 : 0.5,
-            }}
-            alt={title}
-            src={src}
-            onLoad={imageLoaded}
-            loading="eager"
-            decoding="sync"
-            fill
-          />
-          {current === index && (
-            <div className="absolute inset-0 bg-black/30 transition-all duration-1000" />
-          )}
-        </div>
-
-        <article
-          className={`relative p-[4vmin] transition-opacity duration-1000 ease-in-out ${
-            current === index ? "opacity-100 visible" : "opacity-0 invisible"
-          }`}
-        >
-          <h2 className="text-lg md:text-2xl lg:text-4xl font-semibold  relative">
-            {title}
-          </h2>
-        </article>
-      </li>
-    </div>
-  );
-};
-
-interface CarouselControlProps {
-  type: string;
-  title: string;
-  handleClick: () => void;
-}
-
-const CarouselControl = ({
-  type,
-  title,
-  handleClick,
-}: CarouselControlProps) => {
-  return (
-    <button
-      className={`w-10 h-10 flex items-center mx-2 justify-center bg-neutral-200 dark:bg-neutral-800 border-3 border-transparent rounded-full focus:border-[#6D64F7] focus:outline-none hover:-translate-y-0.5 active:translate-y-0.5 transition duration-200 ${
-        type === "previous" ? "rotate-180" : ""
-      }`}
-      title={title}
-      onClick={handleClick}
-    >
-      <IconArrowNarrowRight className="text-neutral-600 dark:text-neutral-200" />
-    </button>
-  );
-};
-
-interface CarouselProps {
-  slides: SlideData[];
-}
-
-export function Carousel({ slides }: CarouselProps) {
-  const [current, setCurrent] = useState(0);
-
-  const handlePreviousClick = () => {
-    const previous = current - 1;
-    setCurrent(previous < 0 ? slides.length - 1 : previous);
-  };
-
-  const handleNextClick = () => {
-    const next = current + 1;
-    setCurrent(next === slides.length ? 0 : next);
-  };
-
-  const handleSlideClick = (index: number) => {
-    if (current !== index) {
-      setCurrent(index);
+    if (autoPlay) {
+      resetTimeout();
+      timeoutRef.current = setTimeout(
+        () => setCurrent((prevIndex) => (prevIndex + 1) % slides.length),
+        autoPlayInterval
+      );
+      return resetTimeout;
     }
+  }, [current, autoPlay, autoPlayInterval, slides.length]);
+
+  const goNext = () => {
+    resetTimeout();
+    setCurrent((prevIndex) => (prevIndex + 1) % slides.length);
   };
 
-  const id = useId();
+  const goPrev = () => {
+    resetTimeout();
+    setCurrent((prevIndex) => (prevIndex - 1 + slides.length) % slides.length);
+  };
 
   return (
-    <div
-      className="relative w-[70vmin] h-[70vmin] mx-auto"
-      aria-labelledby={`carousel-heading-${id}`}
-    >
-      <ul
-        className="absolute flex mx-[-4vmin] transition-transform duration-1000 ease-in-out"
-        style={{
-          transform: `translateX(-${current * (100 / slides.length)}%)`,
-        }}
+    <div className="relative w-full overflow-hidden">
+      <div
+        className="flex transition-transform duration-500"
+        style={{ transform: `translateX(-${current * 100}%)` }}
       >
-        {slides.map((slide, index) => (
-          <Slide
-            key={index}
-            slide={slide}
-            index={index}
-            current={current}
-            handleSlideClick={handleSlideClick}
-          />
+        {slides.map((slide, idx) => (
+          <div key={idx} className="relative min-w-full h-72 md:h-96">
+            <Image
+              src={slide.image}
+              alt={slide.title}
+              fill
+              className="object-cover"
+            />
+            {/* Dark overlay for readability */}
+            <div className="absolute inset-0 bg-black/30" />
+            {/* Content overlay */}
+            <div className="absolute inset-0 px-6 md:px-12 flex flex-col justify-center text-white">
+              <h2 className="text-2xl md:text-4xl font-semibold">
+                {slide.title}
+              </h2>
+              <p className="mt-1 text-sm md:text-lg">
+                {slide.subtitle}
+              </p>
+              <div className="mt-4 flex flex-wrap gap-4">
+                {slide.links.map((link, i) => (
+                  <a
+                    key={i}
+                    href={link.href}
+                    className="text-sm md:text-base underline hover:text-gray-200"
+                  >
+                    {link.label} &rarr;
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
         ))}
-      </ul>
-
-      <div className="absolute flex justify-center w-full top-[calc(100%+1rem)]">
-        <CarouselControl
-          type="previous"
-          title="Go to previous slide"
-          handleClick={handlePreviousClick}
-        />
-
-        <CarouselControl
-          type="next"
-          title="Go to next slide"
-          handleClick={handleNextClick}
-        />
       </div>
+      {/* Navigation buttons */}
+      <button
+        onClick={goPrev}
+        aria-label="Previous"
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/50 rounded-full p-2 hover:bg-white"
+      >
+        <ArrowLeft size={20} />
+      </button>
+      <button
+        onClick={goNext}
+        aria-label="Next"
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/50 rounded-full p-2 hover:bg-white"
+      >
+        <ArrowRight size={20} />
+      </button>
     </div>
   );
 }
+
+/**
+ * Usage example (e.g. in rooms/page.tsx):
+ *
+ * import RoomCarousel, { CarouselSlide } from '@/components/RoomCarousel';
+ *
+ * const slides: CarouselSlide[] = [
+ *   {
+ *     image: '/images/rooms/suite.jpg',
+ *     title: 'Suite',
+ *     subtitle: '스위트',
+ *     links: [
+ *       { label: '디럭스 스위트 룸', href: '/rooms/suite/deluxe' },
+ *       { label: '프리미어 스위트 룸', href: '/rooms/suite/premier' },
+ *       // ...etc
+ *     ],
+ *   },
+ *   // other categories: SIGNIEL Premier, Premier, Grand Deluxe...
+ * ];
+ *
+ * export default function RoomsPage() {
+ *   return (
+ *     <main>
+ *       <section className="py-16 px-4 text-center">
+ *         <h1 className="text-4xl font-bold">Room & Suites</h1>
+ *         <p className="mt-2 text-gray-600">
+ *           환상적인 서울 도심의 파노라마뷰와 모던한 인테리어의 객실은 최상의 휴식을 제공합니다.
+ *         </p>
+ *       </section>
+ *       <RoomCarousel slides={slides} autoPlay />
+ *     </main>
+ *   );
+ * }
+ */

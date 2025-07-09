@@ -1,0 +1,1 @@
+export type MapNaver = naver.maps.Map;

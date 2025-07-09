@@ -1,6 +1,10 @@
 import HeroImage from "@/assets/hero-image";
 import ScrollReveal from "@/components/base/scroll-reveal";
 import { Button } from "@/components/ui/button";
+import { ImageSlider } from "@/components/ui/image-slider";
+import { NaverMap } from "@/components/ui/naver-map";
+import { roomData } from "@/const/room-data";
+import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,16 +14,16 @@ export default function Home() {
       {/* 히어로 섹션 */}
       <section className="relative h-svh w-full text-background">
         <HeroImage images={[
-          '/images/hero-1.jpeg',
-          '/images/hero-2.jpeg',
-          '/images/hero-3.jpeg',
-          '/images/hero-4.jpeg',
-          '/images/hero-5.jpeg',
+          '/images/landing/hero-1.jpeg',
+          '/images/landing/hero-2.jpeg',
+          '/images/landing/hero-3.jpeg',
+          '/images/landing/hero-4.jpeg',
+          '/images/landing/hero-5.jpeg',
         ]} />
         <div className="z-10 absolute bottom-0 left-0 w-full h-1/4 bg-gradient-to-b from-transparent to-background pointer-events-none" />
 
-        <div className="absolute inset-0 bg-black/40 flex flex-col items-start md:items-start md:pl-24 lg:pl-48 justify-center text-start p-4 leading-5">
-          <ScrollReveal side="top" type="h1" className="mb-8 md:mb-4">
+        <div className="absolute inset-0 bg-black/40 flex flex-col items-start md:items-start md:pl-24 lg:pl-48 justify-center text-start p-4 leading-8">
+          <ScrollReveal side="top" type="h1" className="mb-8 md:mb-4 font-medium">
             {/* 당신만의 힐링, 자연 속에서 */}
             <span className="font-thin">프라이빗 비치만이 <br />선사하는 </span>
             완벽한 휴식
@@ -35,10 +39,10 @@ export default function Home() {
       </section>
 
       {/* 소개 섹션 */}
-      <section className="py-16 container mx-auto px-4">
+      <section className="py-32 w-full center px-48">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="order-2 md:order-1">
-            <ScrollReveal side="top" type="h2" className="mb-6">
+            <ScrollReveal side="top" type="h2" className="mb-6 font-medium">
               당신만을 위한 특별한 공간
             </ScrollReveal>
             <ScrollReveal side="left" delay="100ms" type="p">
@@ -53,9 +57,9 @@ export default function Home() {
           </div>
           <div className="order-1 md:order-2">
             <ScrollReveal side="right">
-              <div className="relative aspect-square rounded-lg overflow-hidden">
+              <div className="relative aspect-square overflow-hidden">
                 <Image 
-                  src="https://placehold.co/800x800/png" 
+                  src="/images/landing/section-1.jpg" 
                   alt="SE클럽 전경" 
                   fill 
                   className="object-cover"
@@ -65,223 +69,84 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* 객실 및 간략 소개 */}
-      <section className="bg-white relative pt-[60px]">
-        <div className="absolute -top-[60px] left-0 w-full h-30 z-10 bg-gradient-to-t from-white to-background" />
-        <div className="container mx-auto px-4 mb-12">
-          <ScrollReveal side="left" type="h2" className="text-center">
-            숙박시설
+      <section className="bg-green-900 center py-32 grid grid-cols-2 relative text-white mb-32">
+        <div className="pl-48">
+          <ScrollReveal side="left">
+            <ImageSlider slides={[{
+              img: "/images/wellness/walk.jpg",
+              title: "산책로",
+              description: "아름다운 숲길과 해안길 코스",
+              href: "/wellness/walk"
+            }, {
+              img: "/images/wellness/swimming-pool.jpg",
+              title: "수영장",
+              description: "바다 내음 가득 전용 야외 풀장",
+              href: "/wellness/swimming-pool"
+            }, {
+              img: "/images/wellness/photo-spot.jpg",
+              title: "포토스팟",
+              description: "환상적인 바다 전망 포토존",
+              href: "/wellness/photo-spot"
+            }, {
+              img: "/images/wellness/nature-experience.jpg",
+              title: "자연 체험 프로그램",
+              description: "생태 관찰 및 자연 체험",
+              href: "/wellness/nature-experience"
+            }, {
+              img: "/images/wellness/facility.jpg",
+              title: "부대시설",
+              description: "카페·라운지 등 편의 시설",
+              href: "/wellness/facility"
+            }, {
+              img: "/images/wellness/special-activity.jpg",
+              title: "조각공원",
+              description: "예술과 자연이 어우러진 조각공원",
+              href: "/wellness/special-activity"
+            }]} />
           </ScrollReveal>
         </div>
-        
-        {/* 풀빌라 */}
-        <div className="py-12">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div className="order-1">
-                <ScrollReveal side="left">
-                  <div className="relative aspect-video rounded-lg overflow-hidden">
-                    <Image 
-                      src="https://placehold.co/800x450/png" 
-                      alt="풀빌라" 
-                      fill 
-                      className="object-cover"
-                    />
+        <ScrollReveal side="right" className="center flex-col">
+          <h3 className="text-5xl font-serif">Wellness</h3>
+          <h4 className="text-2xl mt-2">SECLUB</h4>
+        </ScrollReveal>
+      </section>
+      <section className="px-48 text-black divide-y pb-20">
+        <ScrollReveal side="left" type="h2" className="font-serif font-bold pb-10">Stay & Lodge</ScrollReveal>
+        <div className="divide-y">
+          {roomData.map((item, idx) => (
+            <ScrollReveal side="left" delay={`${idx * 100}ms`} key={idx} className="relative">
+              <Link className="group" href={`/rooms/${item.slug}`}>
+                <div className="relative w-full h-32">
+                  <Image src={item.image} alt={item.title} fill className="object-cover group-hover:opacity-100 opacity-1 transition-all duration-300" />
+                </div>
+                <div className="absolute w-full h-full top-0 left-0 flex justify-between items-center group-hover:text-white p-10">
+                  <div className="">
+                    <h3 className="text-xl font-semibold group-hover:text-2xl">{item.title}</h3>
+                    <p className="text-sm group-hover:text-base">{item.description}</p>
                   </div>
-                </ScrollReveal>
-              </div>
-              <div className="order-2">
-                <ScrollReveal side="right" type="h2" className="text-3xl mb-4">
-                  풀빌라
-                </ScrollReveal>
-                <ScrollReveal side="right" delay="100ms" type="p" className="mb-6">
-                  바다를 머금은 프라이빗 풀, <br />
-                  온전히 나만의 힐링 공간
-                </ScrollReveal>
-                <ScrollReveal side="right" delay="200ms">
-                  <Button variant="outline" size="lg" className="mt-4">
-                    자세히 보기
-                  </Button>
-                </ScrollReveal>
-              </div>
-            </div>
-          </div>
+                  <div className="flex items-center gap-2">
+                    자세히보기 <ChevronRight strokeWidth={1} />
+                  </div>
+                </div>
+              </Link>
+            </ScrollReveal>
+          ))}
         </div>
-        
-        {/* 자쿠지 하우스 */}
-        <section className="py-12">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div className="order-2 md:order-1">
-                <ScrollReveal side="left" type="h2" className="mb-2">
-                  자쿠지 하우스
-                </ScrollReveal>
-                <ScrollReveal side="left" delay="100ms" type="p" className="mb-2">
-                  밤바다 속 로맨틱 스파, <br />
-                  둘만의 기억을 새기다
-                </ScrollReveal>
-                <ScrollReveal side="left" delay="200ms">
-                  <Button variant="outline" size="lg" className="mt-4">
-                    자세히 보기
-                  </Button>
-                </ScrollReveal>
-              </div>
-              <div className="order-1 md:order-2">
-                <ScrollReveal side="right">
-                  <div className="relative aspect-video rounded-lg overflow-hidden">
-                    <Image 
-                      src="https://placehold.co/800x400/png" 
-                      alt="자쿠지 하우스" 
-                      fill 
-                      className="object-cover"
-                    />
-                  </div>
-                </ScrollReveal>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        {/* 호텔형 객실 */}
-        <section className="py-12">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div className="order-1">
-                <ScrollReveal side="left">
-                  <div className="relative aspect-video rounded-lg overflow-hidden">
-                    <Image 
-                      src="https://placehold.co/800x450/png" 
-                      alt="호텔형 객실" 
-                      fill 
-                      className="object-cover"
-                    />
-                  </div>
-                </ScrollReveal>
-              </div>
-              <div className="order-2">
-                <ScrollReveal side="right" type="h2" className="mb-2">
-                  호텔형 객실
-                </ScrollReveal>
-                <ScrollReveal side="right" delay="100ms" type="p" className="mb-2">
-                  모던 오션뷰 스테이, <br />
-                  발코니 너머 노을을 담다
-                </ScrollReveal>
-                <ScrollReveal side="right" delay="200ms">
-                  <Button variant="outline" size="lg" className="mt-4">
-                    자세히 보기
-                  </Button>
-                </ScrollReveal>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        {/* 캠핑하우스 */}
-        <section className="py-12">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div className="order-2 md:order-1">
-                <ScrollReveal side="left" type="h2" className="mb-2">
-                  캠핑하우스
-                </ScrollReveal>
-                <ScrollReveal side="left" delay="100ms" type="p" className="mb-2">
-                  캠핑의 자유로움과 <br />
-                  하우스텔 안락함이 만났다
-                </ScrollReveal>
-                <ScrollReveal side="left" delay="200ms">
-                  <Button variant="outline" size="lg" className="mt-4">
-                    자세히 보기
-                  </Button>
-                </ScrollReveal>
-              </div>
-              <div className="order-1 md:order-2">
-                <ScrollReveal side="right">
-                  <div className="relative aspect-video rounded-lg overflow-hidden">
-                    <Image 
-                      src="https://placehold.co/800x450/png" 
-                      alt="캠핑하우스" 
-                      fill 
-                      className="object-cover"
-                    />
-                  </div>
-                </ScrollReveal>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        {/* 태그 및 마무리 */}
-        <section className="py-12">
-          <div className="container mx-auto px-4 text-center">
-            <ScrollReveal side="bottom">
-              <div className="flex flex-wrap justify-center gap-2 mb-6">
-                <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">#프리미엄</span>
-                <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">#프라이빗</span>
-                <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">#오션뷰</span>
-                <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">#노을뷰</span>
-                <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">#전용해변</span>
-              </div>
-              <p className="text-gray-700 mb-8">반려견 동반 객실 완비 · 공용 수영장·자쿠지 사용 가능</p>
-              <p className="italic text-secondary">&#34;다가오는 바다빛 노을, SE클럽에서 멈춰버린 시간을 경험하세요.&#34;</p>
+      </section>
+      <section className="h-[65svh] flex w-dvw flex-col lg:flex-row bg-beige">
+        <div className="w-full lg:w-1/2 h-full center">
+          <div>
+            <ScrollReveal side="left" className="text-5xl font-serif">Location</ScrollReveal>
+            <ScrollReveal side="left" delay="100ms" className="mt-12 text-3xl font-light border-b border-black pb-2 mb-2">SECLUB</ScrollReveal> 
+            <ScrollReveal side="left" delay="200ms" className="grid grid-cols-2 gap-y-1">
+              <p>주소</p> <p className="justify-self-end">충청남도 태안군 이원면 내리 503</p>
+              <p>전화번호</p> <p className="justify-self-end">010-9703-1711 / 010-4668-1704</p>
+              <p>체크인/아웃</p> <p className="justify-self-end">15:00 ~ 11:00</p>
             </ScrollReveal>
           </div>
-        </section>
-      </section>
-      
-      {/* 고객 후기/리뷰 */}
-      
-      {/* 프로모션/이벤트 안내 */}
-
-      {/* 객실 및 캠핑 더보기 */}
-      <section className="py-16 bg-muted/50 relative mt-[60px] pt-[60px]">
-        <div className="absolute -top-[60px] left-0 w-full h-30 z-10 bg-gradient-to-b from-white to-background" />
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">객실 및 캠핑장</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="relative group overflow-hidden rounded-lg">
-              <div className="aspect-video relative overflow-hidden">
-                <Image
-                  src="https://placehold.co/600x400/png"
-                  alt="객실 미리보기"
-                  fill
-                  className="object-cover transition-transform group-hover:scale-105 duration-300"
-                />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex flex-col justify-end p-6 text-white">
-                <h3 className="text-2xl font-bold mb-2">편안한 객실</h3>
-                <p className="mb-4">풀빌라부터 호텔형 객실까지 다양한 선택지</p>
-                <Link href="/rooms" className="inline-flex items-center text-sm font-medium">
-                  더 알아보기
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 h-4 w-4">
-                    <path d="M5 12h14"></path>
-                    <path d="m12 5 7 7-7 7"></path>
-                  </svg>
-                </Link>
-              </div>
-            </div>
-            <div className="relative group overflow-hidden rounded-lg">
-              <div className="aspect-video relative overflow-hidden">
-                <Image
-                  src="https://placehold.co/600x400/png"
-                  alt="캠핑장 미리보기"
-                  fill
-                  className="object-cover transition-transform group-hover:scale-105 duration-300"
-                />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-2xl font-bold mb-2">자연 속 캠핑</h3>
-                <p className="mb-4">바다가 보이는 아늑한 캠핑장</p>
-                <a href="/camping" className="inline-flex items-center text-sm font-medium">
-                  더 알아보기
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 h-4 w-4">
-                    <path d="M5 12h14"></path>
-                    <path d="m12 5 7 7-7 7"></path>
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
+        </div>
+        <div className="w-full lg:w-1/2 h-full">
+          <NaverMap />
         </div>
       </section>
     </main>
