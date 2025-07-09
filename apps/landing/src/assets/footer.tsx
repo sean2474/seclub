@@ -1,5 +1,4 @@
 import { Arrow } from "@/components/icon/arrow"
-import { TextHoverEffect } from "@/components/ui/text-hover-effect"
 import Image from "next/image"
 
 export const Footer = () => {
