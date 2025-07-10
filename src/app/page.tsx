@@ -120,7 +120,7 @@ export default function Home() {
           <ScrollReveal side="left" type="h2" className="font-serif font-bold pb-10">Stay & Lodge</ScrollReveal>
           <div className="divide-y">
             {ROOM_DATA.map((item, idx) => (
-              <ScrollReveal side="left" delay={`${idx * 100}ms`} key={idx} className="relative">
+              <ScrollReveal side="left" delay={`${idx * 100}ms`} revealHeight={`${idx * 10 - 10}%`} key={idx} className="relative">
                 <Link className="group" href={`/rooms/${item.slug}`}>
                   <div className="relative w-full h-24 md:h-32">
                     <Image src={item.image} alt={item.title} fill className="object-cover group-hover:opacity-100 group-active:opacity-100 opacity-1 transition-all duration-300" />
