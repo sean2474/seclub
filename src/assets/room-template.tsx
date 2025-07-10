@@ -9,6 +9,7 @@ import { MainImageSlider } from "@/components/ui/main-image-slider";
 
 import { RoomInfo } from "@/types";
 import { ROOM_DATA } from "@/const/room-data";
+import ScrollReveal from "@/components/base/scroll-reveal";
 
 export const RoomTemplate = ({ roomInfo }: { roomInfo: RoomInfo }) => {
   if (!roomInfo) {
@@ -27,25 +28,27 @@ export const RoomTemplate = ({ roomInfo }: { roomInfo: RoomInfo }) => {
         />
         <div className="absolute inset-0 bg-black/50" />
         <div className="absolute inset-0 flex items-center justify-center flex-col">
-          <div className="text-white font-mono font-light text-xl">
+          <ScrollReveal side="left" className="text-white font-mono font-light text-xl">
             {roomInfo.subtitle}
-          </div>
-          {typeof roomInfo.title === 'string' ? (
-            <h1 className="text-white font-mono font-light text-5xl md:text-7xl mt-2 md:mt-4">
-              {roomInfo.title}
-            </h1>
-          ) : (
-            roomInfo.title
-          )}
+          </ScrollReveal>
+          <ScrollReveal side="right">
+            {typeof roomInfo.title === 'string' ? (
+              <h1 className="text-white font-mono font-light text-5xl md:text-7xl mt-2 md:mt-4">
+                {roomInfo.title}
+              </h1>
+            ) : (
+              roomInfo.title
+            )}
+          </ScrollReveal>
         </div>
       </section>
       <main className="mx-auto">
         <section className="space-y-8 pt-8 md:pt-16 center relative mt-[95svh] bg-background">
           <div className="text-start md:text-end space-y-4 flex flex-col md:flex-row justify-between items-start md:items-center max-w-6xl p-5">
-            <h2 className="text-3xl md:text-5xl font-serif">Overview</h2>
-            <div className="text-md md:text-xl">
+            <ScrollReveal side="left" type="h2" className="text-3xl md:text-5xl font-serif">Overview</ScrollReveal>
+            <ScrollReveal side="right" className="text-md md:text-xl">
               {roomInfo.overview}
-            </div>
+            </ScrollReveal>
           </div>
         </section>
         <section className="bg-background center w-full relative pb-0 md:pb-10 pt-5">
@@ -58,20 +61,22 @@ export const RoomTemplate = ({ roomInfo }: { roomInfo: RoomInfo }) => {
         </section>
         <section className="bg-beige center py-12 md:py-32 w-full text-black relative">
           <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 w-full">
-            <div className="center flex-col md:absolute md:left-1/4 md:-translate-x-1/2 md:top-1/2 md:-translate-y-1/2">
-              <h3 className="text-3xl md:text-5xl font-serif">Amenities</h3>
-              <h4 className="text-xl md:text-2xl mt-1 md:mt-2">SECLUB</h4>
-            </div>
-            <div className="px-5 mt-10 md:mt-0 col-start-1 md:col-start-2">
+            <ScrollReveal side="left" className="center order-2 md:order-1">
+              <div className="center flex-col md:absolute md:top-1/2 md:-translate-y-1/2 md:left-1/4 md:-translate-x-1/2">
+                <h3 className="text-3xl md:text-5xl font-serif">Amenities</h3>
+                <h4 className="text-xl md:text-2xl mt-2">SECLUB</h4>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal side="right" className="px-5 mt-10 md:mt-0 order-1 md:order-2">
               <ImageSlider slides={roomInfo.amenities} />
-            </div>
+            </ScrollReveal>
           </div>
         </section>
         <section className="bg-background py-4 md:py-16">
           <RoomFeatures features={roomInfo.features} />
-          <div className="center mt-2 md:mt-10">
+          <ScrollReveal side="left" className="center mt-2 md:mt-10">
             <Button variant={"primary"} size={"xl"} className="text-white">예약하기</Button>
-          </div>
+          </ScrollReveal>
         </section>
         <section>
           <div className="bg-background w-full pt-6 md:pt-0 center">

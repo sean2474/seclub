@@ -13,14 +13,14 @@ interface ScrollRevealProps {
   type?: RevealType;
 }
 
-const DISABLE_SCROLL_REVEAL = true;
+const DISABLE_SCROLL_REVEAL = false;
 
 /**
  * 스크롤로 화면에 들어올 때 한 번만 나타나는 컴포넌트
  * @param side 등장 방향 (left, right, top, bottom)
  * @param className
  * @param delay 단위: milliseconds
- * @param revealHeight IntersectionObserver rootMargin 조절
+ * @param revealHeight IntersectionObserver rootMargin 조절, 클수록 일찍 등장
  * @param type 렌더링할 태그 (p, h1, default: div)
  * @param children 자식 요소
  */
