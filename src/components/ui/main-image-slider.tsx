@@ -69,7 +69,7 @@ export function MainImageSlider({
               alt={idx.toString()}
               fill
               className="object-cover"
-              priority={idx === current}
+              priority={idx === 0}
             />
           </div>
         ))}

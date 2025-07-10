@@ -61,13 +61,13 @@ export const RoomTemplate = ({ roomInfo }: { roomInfo: RoomInfo }) => {
         </section>
         <section className="bg-beige center py-12 md:py-32 w-full text-black relative">
           <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 w-full">
-            <ScrollReveal side="left" className="center order-2 md:order-1">
+            <ScrollReveal side="left" className="center order-1 md:order-1">
               <div className="center flex-col md:absolute md:top-1/2 md:-translate-y-1/2 md:left-1/4 md:-translate-x-1/2">
                 <h3 className="text-3xl md:text-5xl font-serif">Amenities</h3>
                 <h4 className="text-xl md:text-2xl mt-2">SECLUB</h4>
               </div>
             </ScrollReveal>
-            <ScrollReveal side="right" className="px-5 mt-10 md:mt-0 order-1 md:order-2">
+            <ScrollReveal side="right" className="px-5 mt-10 md:mt-0 order-2 md:order-2">
               <ImageSlider slides={roomInfo.amenities} />
             </ScrollReveal>
           </div>
@@ -99,7 +99,7 @@ export const RoomTemplate = ({ roomInfo }: { roomInfo: RoomInfo }) => {
             </div>
           </div>
         </section>
-        <section className="bg-background py-12 center">
+        <section className="bg-background py-12 px-4 center">
           <div className="max-w-6xl mx-4 w-full">
             <h2>다른 객실 추천</h2>
 
