@@ -13,6 +13,8 @@ interface ScrollRevealProps {
   type?: RevealType;
 }
 
+const DISABLE_SCROLL_REVEAL = true;
+
 /**
  * 스크롤로 화면에 들어올 때 한 번만 나타나는 컴포넌트
  * @param side 등장 방향 (left, right, top, bottom)
@@ -30,6 +32,19 @@ export default function ScrollReveal({
   type = "div",
   children,
 }: PropsWithChildren<ScrollRevealProps>) {
+  const Tag = ((): React.ElementType => {
+    switch (type) {
+      case "p":
+        return "p";
+      case "h1":
+        return "h1";
+      case "h2":
+        return "h2";
+      default:
+        return "div";
+    }
+  })();
+
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -72,19 +87,13 @@ export default function ScrollReveal({
       break;
   }
 
-  // type에 따라 렌더링할 태그 결정
-  const Tag = ((): React.ElementType => {
-    switch (type) {
-      case "p":
-        return "p";
-      case "h1":
-        return "h1";
-      case "h2":
-        return "h2";
-      default:
-        return "div";
-    }
-  })();
+  if (process.env.NODE_ENV === "development" && DISABLE_SCROLL_REVEAL) {
+    return (
+      <Tag className={className}>
+        {children}
+      </Tag>
+    );
+  }
 
   return (
     <Tag
