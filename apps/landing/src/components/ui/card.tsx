@@ -1,16 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 interface CardProps {
   href: string;
   title: string;
   description: string;
   image: string;
+  className?: string;
 }
 
-export const Card = ({ href, title, description, image }: CardProps) => {
+export const Card = ({ href, title, description, image, className }: CardProps) => {
   return (
-    <Link href={href} className="overflow-hidden rounded-lg bg-white/50"> 
+    <Link href={href} className={cn("overflow-hidden rounded-lg bg-white/50", className)}> 
       <div className="relative h-[150px] md:h-[300px] w-full">
         <Image src={image} alt={title} fill className="object-cover" />
       </div>

@@ -130,14 +130,14 @@ export function NaverMap({
         new window.naver.maps.Marker({
           position: new window.naver.maps.LatLng(36.9319955987042, 126.293749897582),
           map,
-          title: "퓨린 피부과의원",
-          icon: {
-            url: "/map/map_pin.png",
-            size: new window.naver.maps.Size(200, 50),
-            scaledSize: new window.naver.maps.Size(200, 50),
-            origin: new window.naver.maps.Point(0, 0),
-            anchor: new window.naver.maps.Point(12, 37),
-          },
+          // title: "퓨린 피부과의원",
+          // icon: {
+          //   url: "/map/map_pin.png",
+          //   size: new window.naver.maps.Size(200, 50),
+          //   scaledSize: new window.naver.maps.Size(200, 50),
+          //   origin: new window.naver.maps.Point(0, 0),
+          //   anchor: new window.naver.maps.Point(12, 37),
+          // },
         });
 
         // Ref에 보관, 필요하면 콜백으로 알림
