@@ -1,4 +1,3 @@
-import ScrollReveal from "@/components/base/scroll-reveal";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { MainImageSlider } from "@/components/ui/main-image-slider";
