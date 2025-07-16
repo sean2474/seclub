@@ -15,7 +15,7 @@ export const WellnessTemplate = ({ wellnessData: wellnessPageData, slug }: { wel
         <h2 className="font-medium text-5xl text-center">{wellnessPageData.header.title}</h2>
         <p className="mt-4 text-center">{wellnessPageData.header.subtitle}</p>
         <div className="mt-8 p-4 w-full bg-beige/10">
-          <div className="grid grid-cols-3 w-full divide-x">
+          <div className="grid grid-cols-1 md:grid-cols-3 w-full divide-y md:divide-y-0 md:divide-x">
             <div className="flex items-center gap-4 p-4">
               <BuildingLibraryIcon className="w-12 h-12" strokeWidth={0.5} />
               <div>
@@ -40,7 +40,7 @@ export const WellnessTemplate = ({ wellnessData: wellnessPageData, slug }: { wel
         </div>
         </div>
       </section>
-      <section className="bg-background center w-full relative pb-0 md:pb-10 pt-5">
+      <section className="bg-background center w-full relative pb-4 md:pb-10 pt-5">
         <div className="absolute h-60 md:h-[550px] bottom-0 w-full bg-beige" />
         <div className="w-full max-w-6xl p-3.5">
           <div className="relative w-full h-80 md:h-[700px] max-w-4xl mx-auto">
@@ -54,7 +54,7 @@ export const WellnessTemplate = ({ wellnessData: wellnessPageData, slug }: { wel
             <h3 className="font-medium">
               추가 정보
             </h3>
-            <ol className="border border-gray-400/50 p-5 mt-5 space-y-4 list-decimal pl-10 text-wrap">
+            <ol className="border border-gray-400/50 p-5 mt-5 space-y-4 list-disc pl-10 text-wrap">
               {wellnessPageData.contents.map((content, idx) => (
                 <li key={idx} className="space-y-1"> {content} </li>
               ))}
@@ -62,11 +62,13 @@ export const WellnessTemplate = ({ wellnessData: wellnessPageData, slug }: { wel
           </div>
         </div>
       </section>
-      <section className="border-b border-gray-400/50 h-[500px] max-w-4xl m-auto flex gap-20 mt-15">
-        <h3 className="font-medium">
-          갤러리
-        </h3>
-        <MainImageSlider images={wellnessPageData.images} color="black" />
+      <section className="border-b border-gray-400/50 h-[500px] m-auto center mt-0 md:mt-15">
+        <div className="w-full flex gap-5 md:gap-20 h-full mx-4 max-w-4xl flex-col md:flex-row">
+          <h3 className="font-medium">
+            갤러리
+          </h3>
+          <MainImageSlider images={wellnessPageData.images} color="black" />
+        </div>
       </section>
       <section className="bg-background py-12 px-4 center">
         <div className="max-w-4xl mx-4 w-full">
