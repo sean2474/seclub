@@ -168,46 +168,62 @@ export const Header = () => {
           <div className="container mx-auto max-w-md">
             {/* 모바일 아코디언 */}
             <div className="w-full">
-              {menuItems.map((section, index) => (
-                <div key={index} className="border-b border-foreground">
-                  <button
-                    type="button"
-                    className="text-lg font-medium py-4 w-full text-left flex justify-between items-center px-4"
-                    onClick={() => {
-                      if (section.items) {
-                        toggleSection(index)
-                      } else {
+              {menuItems.map((section, index) => {
+                if (section.href === "/wellness" || section.href === "/rooms") return (
+                  <div key={index} className="border-b border-foreground active:bg-black/20 transition-all duration-300 ease-in-out">
+                    <button
+                      type="button"
+                      className="text-lg font-medium py-4 w-full text-left flex justify-between items-center px-4"
+                      onClick={() => {
                         router.push(section.href || "");
                         setMobileMenuOpen(false);
-                      }
-                    }}
-                  >
-                    {section.title}
-                    {section.items && <PlusMinusIcon open={openSection === index} size={0.5} />}
-                  </button>
+                      }}
+                    >
+                      {section.title}
+                    </button>
+                  </div>
+                );
+                return(
+                  <div key={index} className="border-b border-foreground">
+                    <button
+                      type="button"
+                      className="text-lg font-medium py-4 w-full text-left flex justify-between items-center px-4"
+                      onClick={() => {
+                        if (section.items) {
+                          toggleSection(index)
+                        } else {
+                          router.push(section.href || "");
+                          setMobileMenuOpen(false);
+                        }
+                      }}
+                    >
+                      {section.title}
+                      {section.items && <PlusMinusIcon open={openSection === index} size={0.5} />}
+                    </button>
 
-                  {/* 아코디언 영역 */}
-                  <div
-                    className={`overflow-hidden transition-all ease-out px-4
-                      ${openSection === index
-                        ? `max-h-[300px] duration-[1000ms] ${prevOpenSection !== null && "delay-200"}`
-                        : "max-h-0 duration-300"}`}
-                  >
-                    <div className="flex flex-col space-y-3 px-4 pb-3">
-                      {section.items?.map((item, i) => (
-                        <Link
-                          key={i}
-                          href={item.href}
-                          className="text-base text-muted-foreground hover:text-primary hover:font-extrabold py-1"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          {item.name}
-                        </Link>
-                      ))}
+                    {/* 아코디언 영역 */}
+                    <div
+                      className={`overflow-hidden transition-all ease-out px-4
+                        ${openSection === index
+                          ? `max-h-[300px] duration-[1000ms] ${prevOpenSection !== null && "delay-200"}`
+                          : "max-h-0 duration-300"}`}
+                    >
+                      <div className="flex flex-col space-y-3 px-4 pb-3">
+                        {section.items?.map((item, i) => (
+                          <Link
+                            key={i}
+                            href={item.href}
+                            className="text-base text-muted-foreground hover:text-primary hover:font-extrabold py-1"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            {item.name}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                )}
+              )}
             </div>
           </div>
         </nav>
