@@ -8,7 +8,7 @@ import { RoomFeatures } from "@/components/ui/room-features";
 import { MainImageSlider } from "@/components/ui/main-image-slider";
 
 import { RoomInfo } from "@/types";
-import { ROOM_DATA } from "@/const/room-data";
+import { roomData } from "@/const/room-data";
 import ScrollReveal from "@/components/base/scroll-reveal";
 
 export const RoomTemplate = ({ roomInfo }: { roomInfo: RoomInfo }) => {
@@ -19,7 +19,7 @@ export const RoomTemplate = ({ roomInfo }: { roomInfo: RoomInfo }) => {
   return (
     <>
       {/* Hero Section */}
-      <section className="fixed -z-10 top-0 h-svh w-full">
+      <section className="fixed -z-10 top-0 h-svh w-full overflow-x-hidden">
         <Image
           src={roomInfo.heroImage}
           alt={`${roomInfo.title} Hero Image`}
@@ -42,7 +42,7 @@ export const RoomTemplate = ({ roomInfo }: { roomInfo: RoomInfo }) => {
           </ScrollReveal>
         </div>
       </section>
-      <main className="mx-auto">
+      <main className="mx-auto overflow-x-hidden">
         <section className="space-y-8 pt-8 md:pt-16 center relative mt-[95svh] bg-background">
           <div className="text-start md:text-end space-y-4 flex flex-col md:flex-row justify-between items-start md:items-center max-w-6xl p-5">
             <ScrollReveal side="left" type="h2" className="text-3xl md:text-5xl font-serif">Overview</ScrollReveal>
@@ -52,10 +52,10 @@ export const RoomTemplate = ({ roomInfo }: { roomInfo: RoomInfo }) => {
           </div>
         </section>
         <section className="bg-background center w-full relative pb-0 md:pb-10 pt-5">
-          <div className="absolute h-60 md:h-[450px] bottom-0 w-full bg-green-900" />
+          <div className="absolute h-60 md:h-[550px] bottom-0 w-full bg-green-900" />
           <div className="w-full max-w-6xl p-3.5">
-            <div className="relative w-full h-80 md:h-[700px]">
-              <MainImageSlider imgs={roomInfo.mainImages} />
+            <div className="relative w-full h-80 md:h-[700px] max-w-4xl mx-auto">
+              <MainImageSlider images={roomInfo.mainImages} />
             </div>
           </div>
         </section>
@@ -80,10 +80,10 @@ export const RoomTemplate = ({ roomInfo }: { roomInfo: RoomInfo }) => {
         </section>
         <section>
           <div className="bg-background w-full pt-6 md:pt-0 center">
-            <div className="max-w-6xl pb-16 mx-4 w-full border-b border-gray-400/50">
-              <h2 className="font-medium">
+            <div className="max-w-4xl pb-16 mx-4 w-full border-b border-gray-400/50">
+              <h3 className="font-medium">
                 추가 정보
-              </h2>
+              </h3>
               <ol className="border border-gray-400/50 p-5 mt-5 space-y-4 list-decimal pl-10 text-wrap">
                 {roomInfo.additionalInfo.map((section, idx) => (
                   <li key={idx} className="space-y-2">
@@ -100,20 +100,17 @@ export const RoomTemplate = ({ roomInfo }: { roomInfo: RoomInfo }) => {
           </div>
         </section>
         <section className="bg-background py-12 px-4 center">
-          <div className="max-w-6xl mx-4 w-full">
-            <h2>다른 객실 추천</h2>
+          <div className="max-w-4xl mx-4 w-full">
+            <h3>다른 객실 추천</h3>
 
             {/* 모바일: 가로 스크롤 / 데스크탑: 3열 그리드 */}
-            <div className="mt-10 flex space-x-5 overflow-x-auto md:grid md:grid-cols-3 md:gap-5">
-              {ROOM_DATA
+            <div className="mt-10 flex space-x-5 overflow-x-auto md:gap-5">
+              {roomData
                 .filter((room) => room.slug !== roomInfo.slug)
                 .map((room) => (
                   <Card
-                    href={`/rooms/${room.slug}`}
-                    title={room.title}
-                    description={room.description}
-                    image={room.image}
-                    className="min-w-40 flex-shrink-0"
+                    {...room}
+                    className="w-90 flex-shrink-0"
                     key={room.slug}
                   />
                 ))}

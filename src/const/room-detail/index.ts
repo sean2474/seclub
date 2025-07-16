@@ -3,7 +3,7 @@ import { poolVillaData } from "./pool-villa-data";
 import { campingHouseData } from "./camping-house-data";
 import { spaVillaData } from "./spa-villa-data";
 
-export const ROOM_DETAIL_DATA = {
+export const roomDetailData = {
   'pool-villa': poolVillaData,
   'ocean-condo': oceanCondoData,
   'spa-villa': spaVillaData,

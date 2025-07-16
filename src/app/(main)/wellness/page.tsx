@@ -15,11 +15,11 @@ export default function Page() {
       </section>
       
       <section className="py-16 px-4">
-        <h2 className="text-3xl font-bold text-center mb-12"> OVERVIEW </h2>
+        <h2 className="text-3xl font-bold text-center mb-12 font-serif"> Overview </h2>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-10 mx-auto w-full max-w-7xl p-1 md:p-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10 mx-auto w-full max-w-7xl p-1 md:p-4">
           {wellnessData.map((wellness) => (
-            <Card key={wellness.slug} href={`/wellness/${wellness.slug}`} title={wellness.title} description={wellness.description} image={wellness.image} />
+            <Card key={wellness.slug} {...wellness} />
           ))}
         </div>
       </section>

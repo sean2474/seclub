@@ -54,7 +54,7 @@ export const Header = () => {
   
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-40 px-2 lg:pr-12 transition-all duration-300 ease-in text-font backdrop-blur-md bg-white h-[var(--header-height)] overscroll-none
+      className={`fixed inset-x-0 top-0 z-40 px-2 lg:pr-12 transition-all duration-300 ease-in text-font backdrop-blur-md bg-white h-[var(--header-height)] overscroll-none border-b border-gray-400/50
         ${!scrolled && "h-[var(--header-height-expanded)]"}
         ${
           mobileMenuOpen
@@ -118,7 +118,7 @@ export const Header = () => {
                       <Link
                         href={sub.href}
                         key={subIdx}
-                        className="block px-4 py-2 text-sm text-center hover:font-extrabold transition-all whitespace-nowrap"
+                        className="block px-4 py-2 text-sm text-center hover:font-medium transition-all whitespace-nowrap"
                       >
                         {sub.name.replaceAll(" ", "\u00A0")}
                       </Link>
