@@ -6,13 +6,16 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from '@heroicons/react/24/solid';
+import { cn } from '@/lib/utils';
 
 interface ImageSliderProps {
-  imgs: string[];
+  images: string[];
+  color?: string;
 }
 
 export function MainImageSlider({
-  imgs,
+  images,
+  color = "default"
 }: ImageSliderProps) {
   const [current, setCurrent] = useState(0);
 
@@ -20,9 +23,9 @@ export function MainImageSlider({
   const touchStartX = useRef<number | null>(null);
 
   const prevSlide = () =>
-    setCurrent((prev) => (prev - 1 + imgs.length) % imgs.length);
+    setCurrent((prev) => (prev - 1 + images.length) % images.length);
   const nextSlide = () =>
-    setCurrent((prev) => (prev + 1) % imgs.length);
+    setCurrent((prev) => (prev + 1) % images.length);
 
   // Handlers for touch events
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -55,7 +58,7 @@ export function MainImageSlider({
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        {imgs.map((img, idx) => (
+        {images.map((img, idx) => (
           <div
             key={idx}
             className={`
@@ -75,40 +78,50 @@ export function MainImageSlider({
         ))}
 
         {/* 데스크톱 컨트롤 바 */}
-        <div className="absolute bottom-4 right-4 items-center px-3 py-1 hidden md:flex">
+        <div className={cn(
+          "absolute bottom-4 right-4 items-center px-3 py-1 hidden md:flex",
+          color === "default" ? "text-white" : "text-black"
+        )}>
           {/* 진행바 */}
-          <div className="relative h-1 w-24 bg-gray-400 overflow-hidden rounded-full mr-4">
+          <div className={cn("relative h-1 w-24 overflow-hidden rounded-full mr-4", color === "default" ? "bg-gray-400" : "bg-gray-200")}>
             <div
-              className="h-full bg-white"
-              style={{
-                width: `${((current + 1) / imgs.length) * 100}%`,
-              }}
+              className={cn("h-full bg-white transition-all duration-500 ease-in-out", color === "default" ? "bg-white" : "bg-black")}
+              style={{width: `${((current + 1) / images.length) * 100}%`}}
             />
           </div>
 
           {/* 슬라이드 카운트 */}
-          <span className="text-white text-sm mr-4 w-8">
-            {current + 1} / {imgs.length}
+          <span className="text-sm mr-4 w-8">
+            {current + 1} / {images.length}
           </span>
 
           {/* 이전/다음 */}
           <button onClick={prevSlide} className="p-1">
-            <ChevronLeftIcon className="h-8 w-8 text-white border rounded-full p-2 mr-2 hover:bg-white hover:text-primary transition-colors duration-300" />
+            <ChevronLeftIcon className={cn(
+              "h-8 w-8 border rounded-full p-2 mr-2 hover:text-primary transition-colors duration-300",
+              color === "default" ? "hover:bg-white hover:text-black border-white" : "hover:bg-black hover:text-white border-black"
+            )} />
           </button>
           <button onClick={nextSlide} className="p-1">
-            <ChevronRightIcon className="h-8 w-8 text-white border border-white rounded-full p-2 hover:bg-white hover:text-primary transition-colors duration-300" />
+            <ChevronRightIcon className={cn(
+              "h-8 w-8 border rounded-full p-2 transition-colors duration-300",
+              color === "default" ? "hover:bg-white hover:text-black border-white" : "hover:bg-black hover:text-white border-black"
+            )} />
           </button>
         </div>
 
         {/* 모바일 슬라이트 카운트 */}
         <div className="w-full center absolute bottom-4 md:hidden">
-          {imgs.map((_, idx) => (
+          {images.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrent(idx)}
-              className={`w-2 h-2 rounded-full mx-1 ${
-                idx === current ? 'bg-white' : 'bg-gray-400'
-              }`}
+              className={cn(
+                "w-2 h-2 rounded-full mx-1",
+                idx === current ? 
+                  color === "default" ? "bg-white" : "bg-black" : 
+                  color === "default" ? "bg-gray-400" : "bg-gray-400"
+              )}
             />
           ))}
         </div>

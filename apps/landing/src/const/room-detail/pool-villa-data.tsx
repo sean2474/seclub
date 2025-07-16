@@ -20,6 +20,11 @@ export const poolVillaData: RoomInfo = {
   ),
   amenities: [
     {
+      img: "/images/room/pool-villa/pool.jpg",
+      title: "해수 풀",
+      description: "바닷물을 이용한 풀 (규격 4.5 * 2.5 * 0.9m)",
+    }, 
+    {
       img: "/images/room/pool-villa/grill.jpg",
       title: "바비큐 그릴",
       description: "개별 바비큐 그릴 (숯·번개탄·장갑 등 무료 제공)",

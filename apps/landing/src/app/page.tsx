@@ -3,7 +3,7 @@ import ScrollReveal from "@/components/base/scroll-reveal";
 import { Button } from "@/components/ui/button";
 import { ImageSlider } from "@/components/ui/image-slider";
 import { NaverMap } from "@/components/ui/naver-map";
-import { ROOM_DATA } from "@/const/room-data";
+import { roomData } from "@/const/room-data";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -119,7 +119,7 @@ export default function Home() {
         <div className="w-full max-w-4xl divide-y pb-10 md:pb-20">
           <ScrollReveal side="left" type="h2" className="font-serif font-bold pb-10">Stay & Lodge</ScrollReveal>
           <div className="divide-y">
-            {ROOM_DATA.map((item, idx) => (
+            {roomData.map((item, idx) => (
               <ScrollReveal side="left" delay={`${idx * 100}ms`} revealHeight={`${idx * 10 - 10}%`} key={idx} className="relative">
                 <Link className="group" href={`/rooms/${item.slug}`}>
                   <div className="relative w-full h-24 md:h-32">

@@ -85,7 +85,7 @@
     /* outline: 1px solid red !important; */
   }
   body {
-    @apply bg-background text-foreground text-balance break-keep;
+    @apply bg-background text-foreground text-balance break-keep overscroll-none;
   }
   h1 {
     @apply font-nanum-square text-4xl md:text-6xl;

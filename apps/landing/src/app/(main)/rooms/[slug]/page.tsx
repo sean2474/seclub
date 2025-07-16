@@ -1,5 +1,5 @@
 import { RoomTemplate } from "@/assets/room-template"
-import { ROOM_DETAIL_DATA } from "@/const/room-detail"
+import { roomDetailData } from "@/const/room-detail"
 import { RoomType } from "@/types"
 
 export default async function Page({
@@ -9,5 +9,5 @@ export default async function Page({
 }) {
   const { slug } = await params
 
-  return <RoomTemplate roomInfo={ROOM_DETAIL_DATA[slug as RoomType]} />
+  return <RoomTemplate roomInfo={roomDetailData[slug as RoomType]} />
 }
