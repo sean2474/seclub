@@ -1,5 +1,5 @@
 import HeroImage from "@/assets/hero-image";
-import ScrollReveal from "@/components/base/scroll-reveal";
+import { ScrollReveal } from "@/components/base/scroll-reveal";
 import { Button } from "@/components/ui/button";
 import { ImageSlider } from "@/components/ui/image-slider";
 import { NaverMap } from "@/components/ui/naver-map";
@@ -110,7 +110,7 @@ export default function Home() {
           <ScrollReveal side="right" className="center order-1 md:order-2">
             <div className="center flex-col md:absolute md:top-1/2 md:-translate-y-1/2 md:left-3/4 md:-translate-x-1/2">
               <h3 className="text-3xl md:text-5xl font-serif">Wellness</h3>
-              <h4 className="text-xl md:text-2xl mt-2">SECLUB</h4>
+              <h4 className="mt-2">SECLUB</h4>
             </div>
           </ScrollReveal>
         </div>

@@ -9,7 +9,7 @@ import { MainImageSlider } from "@/components/ui/main-image-slider";
 
 import { RoomInfo } from "@/types";
 import { roomData } from "@/const/room-data";
-import ScrollReveal from "@/components/base/scroll-reveal";
+import { ScrollReveal } from "@/components/base/scroll-reveal";
 
 export const RoomTemplate = ({ roomInfo }: { roomInfo: RoomInfo }) => {
   if (!roomInfo) {
@@ -101,7 +101,7 @@ export const RoomTemplate = ({ roomInfo }: { roomInfo: RoomInfo }) => {
         </section>
         <section className="bg-background py-12 px-4 center">
           <div className="max-w-4xl mx-4 w-full">
-            <h3>다른 객실 추천</h3>
+            <h3 className="font-medium">다른 객실 추천</h3>
 
             {/* 모바일: 가로 스크롤 / 데스크탑: 3열 그리드 */}
             <div className="mt-10 flex space-x-5 overflow-x-auto md:gap-5">

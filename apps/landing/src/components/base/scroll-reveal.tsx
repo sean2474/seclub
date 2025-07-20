@@ -24,7 +24,7 @@ const DISABLE_SCROLL_REVEAL = false;
  * @param type 렌더링할 태그 (p, h1, default: div)
  * @param children 자식 요소
  */
-export default function ScrollReveal({
+export function ScrollReveal({
   side = "bottom",
   className = "",
   delay = "0ms",

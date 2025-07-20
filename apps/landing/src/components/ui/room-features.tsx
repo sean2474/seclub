@@ -1,6 +1,6 @@
 import { LucideProps } from 'lucide-react';
 import { Fragment } from 'react';
-import ScrollReveal from '../base/scroll-reveal';
+import { ScrollReveal } from '@/components/base/scroll-reveal';
 
 type Feature = {
   icon: React.ForwardRefExoticComponent<Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>>;
