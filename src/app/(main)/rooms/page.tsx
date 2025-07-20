@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { roomData } from "@/const/room-data";
 import { Card } from "@/components/ui/card";
-import ScrollReveal from "@/components/base/scroll-reveal";
+import { ScrollReveal } from "@/components/base/scroll-reveal";
 
 export default function RoomsPage() {
   return (
@@ -16,7 +16,7 @@ export default function RoomsPage() {
       </section>
       
       <section className="py-16 px-4">
-        <ScrollReveal side="top" type="h2" className="text-3xl font-bold text-center mb-12 font-serif">Overview</ScrollReveal>
+        <ScrollReveal side="top" type="h2" className="text-3xl md:text-5xl font-bold text-center mb-12 font-serif">Overview</ScrollReveal>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10 mx-auto w-full max-w-5xl p-1 md:p-4">
           {roomData.map((room, idx) => (
             <ScrollReveal side="left" delay={`${idx * 100}ms`} key={room.slug} revealHeight="10%">

@@ -21,7 +21,7 @@ export const Card = ({ items, title, description, image, className }: CardProps)
         </div>
         <div className="flex gap-2 flex-col items-end">
           {items.map((item, idx) => (
-            <Link key={idx} href={item.href} className="flex items-center gap-2">{item.title} <ChevronRightIcon className="w-4 h-4" /></Link>
+            <Link key={idx} href={item.href} className="flex items-center gap-2 hover:scale-105 active:translate-x-2 active:scale-105 transition-all duration-300 ease-in-out">{item.title} <ChevronRightIcon className="w-4 h-4" /></Link>
           ))}
         </div>
       </div>
