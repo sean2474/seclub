@@ -69,14 +69,11 @@
   --accent: #A7D3E0;
   --muted: #FAF5E9;
   
-  /* Default header height for mobile */
-  --header-height: calc(var(--spacing) * 16);
-  --header-height-expanded: calc(var(--spacing) * 16);
-
-  /* Larger header height for desktop */
   @media (width >= 64rem /* 1024px */) {
     --header-height-expanded: calc(var(--spacing) * 36);
   }
+  --header-height-expanded: calc(var(--spacing) * 16);
+  --header-height: calc(var(--spacing) * 16);
 }
 
 .scroll-reveal-show {

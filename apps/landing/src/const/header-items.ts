@@ -24,6 +24,20 @@ export const menuItems: HeaderMenuType[] = [
     ]
   },
   {
+    title: "캠핑장",
+    href: "/camping",
+    items: [
+      {
+        name: "캠핑사이트",
+        href: "/camping"
+      },
+      {
+        name: "이용 안내",
+        href: "/camping/guide"
+      }
+    ]
+  },
+  {
     title: "객실",
     href: "/rooms",
     items: [
@@ -42,24 +56,6 @@ export const menuItems: HeaderMenuType[] = [
       {
         name: "선셋 캠핑 하우스",
         href: "/rooms/camping-house"
-      }
-    ]
-  },
-  {
-    title: "캠핑장",
-    href: "/camping",
-    items: [
-      {
-        name: "캠핑사이트",
-        href: "/camping/site"
-      },
-      {
-        name: "시설 안내",
-        href: "/camping/facilities"
-      },
-      {
-        name: "이용 안내",
-        href: "/camping/guide"
       }
     ]
   },
@@ -94,11 +90,15 @@ export const menuItems: HeaderMenuType[] = [
     href: "/reservation",
     items: [
       {
+        name: "요금 안내",
+        href: "/reservation/pricing"
+      },
+      {
         name: "예약 안내",
         href: "/reservation"
       },
       {
-        name: "단체 연수·시설 대관",
+        name: "단체 예약",
         href: "/reservation/group"
       }
     ]
