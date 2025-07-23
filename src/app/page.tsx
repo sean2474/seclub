@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <main className="flex flex-col min-h-screen overflow-x-hidden">
       {/* 히어로 섹션 */}
-      <section className="relative h-svh w-full text-background">
+      <section className="fixed -z-10 top-0 h-svh w-full overflow-x-hidden text-background">
         <HeroImage images={[
           '/images/landing/hero-1.jpeg',
           '/images/landing/hero-2.jpeg',
@@ -20,9 +20,7 @@ export default function Home() {
           '/images/landing/hero-4.jpeg',
           '/images/landing/hero-5.jpeg',
         ]} />
-        <div className="z-10 absolute bottom-0 left-0 w-full h-1/4 bg-gradient-to-b from-transparent to-background pointer-events-none" />
-
-        <div className="absolute inset-0 bg-black/40 flex flex-col items-start md:items-start md:pl-24 lg:pl-48 justify-center text-start p-4 leading-8">
+        <div className="absolute inset-0 bg-black/40 flex flex-col items-start md:items-start md:pl-24 lg:pl-48 justify-center text-start p-4">
           <ScrollReveal side="top" type="h1" className="mb-8 md:mb-4 font-medium">
             {/* 당신만의 힐링, 자연 속에서 */}
             <span className="font-thin">프라이빗 비치만이 <br />선사하는 </span>
@@ -30,7 +28,7 @@ export default function Home() {
           </ScrollReveal>
           <ScrollReveal side="bottom" className="ml-1">
             <Button size={"lg"}>
-              <Link href="/reservation" className="">
+              <Link href="/reservation" className="font-medium">
                 지금 예약하기
               </Link>
             </Button>
@@ -39,7 +37,7 @@ export default function Home() {
       </section>
 
       {/* 소개 섹션 */}
-      <section className="py-16 md:py-32 w-full center">
+      <section className="py-16 md:py-32 w-full center mt-[100svh] bg-background">
         <div className="grid grid-cols-1 md:grid-cols-2 md:gap-12 items-center max-w-4xl mx-4">
           <ScrollReveal side="top" type="h2" className="font-medium text-center md:hidden">
             당신만을 위한 특별한 공간
@@ -76,32 +74,32 @@ export default function Home() {
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 w-full">
           <ScrollReveal side="left" className="px-5 mt-10 md:mt-0 order-2 md:order-1">
             <ImageSlider slides={[{
-              img: "/images/wellness/walk.jpg",
+              img: "/images/wellness/walk/hero.jpg",
               title: "산책로",
               description: "아름다운 숲길과 해안길 코스",
               href: "/wellness/walk"
             }, {
-              img: "/images/wellness/swimming-pool.jpg",
+              img: "/images/wellness/swimming-pool/hero.jpg",
               title: "수영장",
               description: "바다 내음 가득 전용 야외 풀장",
               href: "/wellness/swimming-pool"
             }, {
-              img: "/images/wellness/photo-spot.jpg",
+              img: "/images/wellness/photo-spot/hero.jpg",
               title: "포토스팟",
               description: "환상적인 바다 전망 포토존",
               href: "/wellness/photo-spot"
             }, {
-              img: "/images/wellness/nature-experience.jpg",
+              img: "/images/wellness/nature-experience/hero.jpg",
               title: "자연 체험 프로그램",
               description: "생태 관찰 및 자연 체험",
               href: "/wellness/nature-experience"
             }, {
-              img: "/images/wellness/facility.jpg",
+              img: "/images/wellness/facility/hero.jpg",
               title: "부대시설",
               description: "카페·라운지 등 편의 시설",
               href: "/wellness/facility"
             }, {
-              img: "/images/wellness/special-activity.jpg",
+              img: "/images/wellness/special-activity/hero.jpg",
               title: "조각공원",
               description: "예술과 자연이 어우러진 조각공원",
               href: "/wellness/special-activity"
@@ -115,7 +113,7 @@ export default function Home() {
           </ScrollReveal>
         </div>
       </section>
-      <section className="text-black center px-4 mt-12 md:mt-32">
+      <section className="text-black center px-4 pt-12 md:pt-32 bg-background">
         <div className="w-full max-w-4xl divide-y pb-10 md:pb-20">
           <ScrollReveal side="left" type="h2" className="font-serif font-bold pb-10">Stay & Lodge</ScrollReveal>
           <div className="divide-y">

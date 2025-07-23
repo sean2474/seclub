@@ -44,7 +44,7 @@ export const WellnessTemplate = ({ wellnessData: wellnessPageData, slug }: { wel
         <div className="absolute h-60 md:h-[550px] bottom-0 w-full bg-beige" />
         <div className="w-full p-3.5">
           <div className="relative w-full h-80 md:h-[700px] max-w-4xl mx-auto">
-            <Image src={wellnessData.find((wellness) => wellness.slug === slug)?.image || ""} alt="SE클럽 수영장" fill className="object-cover" />
+            <Image src={wellnessPageData.header.image} alt="SE클럽 수영장" fill className="object-cover" />
           </div>
         </div>
       </section>

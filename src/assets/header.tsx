@@ -108,8 +108,8 @@ export const Header = () => {
                   </Link>
                   <div
                     className={`
-                      absolute left-0 top-full bg-background/70 divide-y px-3 py-2 divide-foreground/15
-                      shadow-lg z-50 break-keep text-foreground
+                      absolute left-0 top-full bg-background divide-y px-3 py-2 divide-foreground/15
+                      z-50 break-keep text-foreground
                       invisible opacity-0 group-hover:visible group-hover:opacity-100
                       transition-all duration-200
                     `}

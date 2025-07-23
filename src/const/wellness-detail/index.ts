@@ -10,7 +10,7 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
       type: "산책로",
       location: "꾸지나무골 해변 → 만대항 (단지 전역)",
       hours: "상시 개방",
-      image: "https://placehold.co/600x400/png", // 솔숲과 해안길이 함께 보이는 헤더 배너
+      image: "/images/wellness/walk.jpg", // 솔숲과 해안길이 함께 보이는 헤더 배너
     },
     contents: [
       "솔향기길 1코스: 꾸지나무골 해변 → 만대항 (10.2km, 약 4시간 소요). 간조 시 바닷길 진입 가능",
@@ -19,10 +19,15 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
       "안전 팁: 등산화 착용, 물·간식 지참, 물때표 확인, 해안 구간 미끄럼 주의",
     ],
     images: [
-      "https://placehold.co/600x400/png", // 솔숲 오솔길 전경
-      "https://placehold.co/600x400/png", // 간조 시 드러난 해안 바닷길
-      "https://placehold.co/600x400/png", // 만대항으로 이어지는 해안 조망
-      "https://placehold.co/600x400/png", // 농원 코스의 계절별 꽃 풍경
+      "/images/wellness/walk/1.jpg",
+      "/images/wellness/walk/2.jpg",
+      "/images/wellness/walk/3.jpg",
+      "/images/wellness/walk/4.jpg",
+      "/images/wellness/walk/5.jpg",
+      "/images/wellness/walk/6.jpg",
+      "/images/wellness/walk/7.jpg",
+      "/images/wellness/walk/8.jpg",
+      "/images/wellness/walk/9.jpg",
     ]
   },
 
@@ -35,7 +40,7 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
       type: "수영장",
       location: "별장 2·3구역",
       hours: "10:00 – 19:00",
-      image: "https://placehold.co/600x400/png", // 풀장과 바다가 겹친 전경의 헤더 배너
+      image: "/images/wellness/swimming-pool/hero.jpg",
     },
     contents: [
       "운영 기간: 매년 7월~8월 (상세 일정 별도 공지)",
@@ -45,10 +50,10 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
       "부대 서비스: 타월·튜브·구명조끼 대여",
     ],
     images: [
-      "https://placehold.co/600x400/png", // 바다를 배경으로 한 풀장 전경
-      "https://placehold.co/600x400/png", // 족욕탕에서 본 노을 뷰
-      "https://placehold.co/600x400/png", // 어린이·성인 구역 구분 모습
-      "https://placehold.co/600x400/png", // 안전 계단 및 진·출입로
+      "/images/wellness/swimming-pool/1.jpg",
+      "/images/wellness/swimming-pool/2.jpg",
+      "/images/wellness/swimming-pool/3.jpg",
+      "/images/wellness/swimming-pool/4.jpg",
     ]
   },
 
@@ -61,7 +66,7 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
       type: "해수 풀장",
       location: "캠핑장 구역",
       hours: "10:00 – 19:00",
-      image: "https://placehold.co/600x400/png", // 캠핑장 배경 속 해수 풀장 헤더 배너
+      image: "/images/wellness/camping-pool/hero.jpg",
     },
     contents: [
       "운영 기간: 매년 7월~8월 (상세 일정 별도 공지)",
@@ -73,10 +78,9 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
       "금연 구역, 쓰레기 분리수거장(쥬라기 포토존 앞) 이용",
     ],
     images: [
-      "https://placehold.co/600x400/png", // 캠핑장 풀장 전경
-      "https://placehold.co/600x400/png", // 바닷물 수위 및 머드 흔적
-      "https://placehold.co/600x400/png", // 입구 진·출입 계단
-      "https://placehold.co/600x400/png", // 가족 단위 이용 모습
+      "/images/wellness/camping-pool/1.jpg",
+      "/images/wellness/camping-pool/2.jpg",
+      "/images/wellness/camping-pool/3.jpg",
     ]
   },
 
@@ -88,7 +92,7 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
       type: "포토스팟",
       location: "단지 전역",
       hours: "상시 개방",
-      image: "https://placehold.co/600x400/png", // 전경이 돋보이는 포토스팟 헤더 배너
+      image: "/images/wellness/photo-spot/hero.jpg",
     },
     contents: [
       "1전망대(반려견 캠핑장 위): 산·바다 파노라마 뷰",
@@ -100,10 +104,8 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
       "나무화석: 제2해변 낚시터 근처 위치",
     ],
     images: [
-      "https://placehold.co/600x400/png", // 1전망대 일출·일몰 장면
-      "https://placehold.co/600x400/png", // 풀장과 바다 일체감 앵글
-      "https://placehold.co/600x400/png", // 조각공원 작품 앞 포즈
-      "https://placehold.co/600x400/png", // 갯바위 위 황금빛 석양
+      "/images/wellness/photo-spot/1.jpg",
+      "/images/wellness/photo-spot/2.jpg",
     ]
   },
 
@@ -116,7 +118,7 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
       type: "체험 프로그램",
       location: "앞바다 및 갯바위 전역",
       hours: "프로그램별 상이 (사전 문의)",
-      image: "https://placehold.co/600x400/png", // 활동 장면을 담은 체험 프로그램 헤더 배너
+      image: "/images/wellness/nature-experience/hero.jpg",
     },
     contents: [
       "바다 속 산책: 간조 시 신발 신고 최대 500m 진입, 갯바위·조개 지대 탐험",
@@ -126,10 +128,12 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
       "유의 사항: 매일 물때표 확인 필수, 구명조끼·장갑 권장, 갯바위 미끄럼 주의",
     ],
     images: [
-      "https://placehold.co/600x400/png", // 바다 속 신발 트레킹 모습
-      "https://placehold.co/600x400/png", // 독살 전통 어로 시연 장면
-      "https://placehold.co/600x400/png", // 갯바위 낚시하는 가족
-      "https://placehold.co/600x400/png", // 갯벌 생태 관찰 모습
+      "/images/wellness/nature-experience/1.jpg",
+      "/images/wellness/nature-experience/2.jpg",
+      "/images/wellness/nature-experience/3.jpg",
+      "/images/wellness/nature-experience/4.jpg",
+      "/images/wellness/nature-experience/5.jpg",
+      "/images/wellness/nature-experience/6.jpg",
     ]
   },
 
@@ -142,7 +146,7 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
       type: "매점 & 리필스테이션",
       location: "관리동 입구",
       hours: "09:00 – 21:00",
-      image: "https://placehold.co/600x400/png", // 매점 외관 또는 내부 모습 헤더 배너
+      image: "/images/wellness/store/hero.jpg",
     },
     contents: [
       "위치·운영: 관리동 입구 내, 09:00–21:00, 문의 010-3945-2079",
@@ -153,10 +157,7 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
       "이벤트: 당일 밭 수확 상추 무료 제공 (매장 공지 확인)",
     ],
     images: [
-      "https://placehold.co/600x400/png", // 리필스테이션 선반 전경
-      "https://placehold.co/600x400/png", // 제로웨이스트 샵 제품 디스플레이
-      "https://placehold.co/600x400/png", // 핸드드립 커피 바 모습
-      "https://placehold.co/600x400/png", // 비건 과자·초콜릿 코너
+      "/images/wellness/store/1.jpg",
     ]
   },
 
@@ -169,7 +170,7 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
       type: "세미나실",
       location: "관리동 내",
       hours: "09:00 – 21:00 (예약제)",
-      image: "https://placehold.co/600x400/png", // 세미나실 내부 또는 무대 전경 헤더 배너
+      image: "/images/wellness/seminar-room/hero.jpg", // 세미나실 내부 또는 무대 전경 헤더 배너
     },
     contents: [
       "예약·문의: 사전 예약 필수, 010-9703-1711",
@@ -179,10 +180,7 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
       "부대 서비스: 음향·영상 기술 스탭 파견 가능",
     ],
     images: [
-      "https://placehold.co/600x400/png", // 내부 객석 배치 전경
-      "https://placehold.co/600x400/png", // 무대 위 프로젝터 화면
-      "https://placehold.co/600x400/png", // 음향·조명 장비 클로즈업
-      "https://placehold.co/600x400/png", // 소규모 공연 리허설 장면
+      "/images/wellness/seminar-room/1.jpg",
     ]
   },
 
@@ -195,7 +193,7 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
       type: "조각공원",
       location: "단지 내 조각공원 구역",
       hours: "09:00 – 18:00",
-      image: "https://placehold.co/600x400/png", // 조각공원 전경 또는 대표 작품 헤더 배너
+      image: "/images/wellness/special-activity/hero.jpg",
     },
     contents: [
       "주요 작가·작품: 김영중(유기적 곡선), 김석우(금속·돌 대비), 이필언(자연물 기반 대형 아트)",
@@ -203,10 +201,10 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
       "이용 팁: QR코드 AR 해설 제공, 포토스팟 안내도 비치, 우천 시 우산 대여 가능",
     ],
     images: [
-      "https://placehold.co/600x400/png", // 숲속 곡선 조각 전경
-      "https://placehold.co/600x400/png", // 금속·돌 설치작품 디테일
-      "https://placehold.co/600x400/png", // 전망데크 위 대형 조형물
-      "https://placehold.co/600x400/png", // 잔디밭 아트워크 전경
+      "/images/wellness/special-activity/1.jpg",
+      "/images/wellness/special-activity/2.jpg",
+      "/images/wellness/special-activity/3.jpg",
+      "/images/wellness/special-activity/4.jpg",
     ]
   }
 }
