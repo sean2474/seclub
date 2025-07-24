@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { LinkCard } from "@/components/ui/link-card";
 import { ImageSlider } from "@/components/ui/image-slider";
 import { RoomFeatures } from "@/components/ui/room-features";
 import { MainImageSlider } from "@/components/ui/main-image-slider";
@@ -108,7 +108,7 @@ export const RoomTemplate = ({ roomInfo }: { roomInfo: RoomInfo }) => {
               {roomData
                 .filter((room) => room.slug !== roomInfo.slug)
                 .map((room) => (
-                  <Card
+                  <LinkCard
                     {...room}
                     className="w-90 flex-shrink-0"
                     key={room.slug}

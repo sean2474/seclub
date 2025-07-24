@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { roomData } from "@/const/room-data";
-import { Card } from "@/components/ui/card";
+import { LinkCard } from "@/components/ui/link-card";
 import { ScrollReveal } from "@/components/base/scroll-reveal";
 
 export default function RoomsPage() {
@@ -20,7 +20,7 @@ export default function RoomsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10 mx-auto w-full max-w-5xl p-1 md:p-4">
           {roomData.map((room, idx) => (
             <ScrollReveal side="left" delay={`${idx * 100}ms`} key={room.slug} revealHeight="10%">
-              <Card {...room} />
+              <LinkCard {...room} />
             </ScrollReveal>
           ))}
         </div>

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { LinkCard } from "@/components/ui/link-card";
 import { MainImageSlider } from "@/components/ui/main-image-slider";
 import { wellnessData } from "@/const/wellness-data";
 import { WellnessPageData } from "@/types";
@@ -79,7 +79,7 @@ export const WellnessTemplate = ({ wellnessData: wellnessPageData, slug }: { wel
             {wellnessData
               .filter((wellness) => wellness.slug !== slug)
               .map((wellness) => (
-                <Card
+                <LinkCard
                   {...wellness}
                   className="w-100 flex-shrink-0"
                   key={wellness.slug}
