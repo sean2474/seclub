@@ -10,7 +10,7 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
       type: "산책로",
       location: "꾸지나무골 해변 → 만대항 (단지 전역)",
       hours: "상시 개방",
-      image: "/images/wellness/walk.jpg", // 솔숲과 해안길이 함께 보이는 헤더 배너
+      image: "/images/wellness/walk/hero.jpg", // 솔숲과 해안길이 함께 보이는 헤더 배너
     },
     contents: [
       "솔향기길 1코스: 꾸지나무골 해변 → 만대항 (10.2km, 약 4시간 소요). 간조 시 바닷길 진입 가능",
