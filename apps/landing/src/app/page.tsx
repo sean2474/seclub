@@ -28,7 +28,7 @@ export default function Home() {
           </ScrollReveal>
           <ScrollReveal side="bottom" className="ml-1">
             <Button size={"lg"}>
-              <Link href="/reservation" className="font-medium">
+              <Link href="https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP" target="_blank" className="font-medium">
                 지금 예약하기
               </Link>
             </Button>
