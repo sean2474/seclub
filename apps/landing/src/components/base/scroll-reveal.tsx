@@ -3,7 +3,7 @@
 import React, { useRef, useEffect, PropsWithChildren } from "react";
 
 type Side = "left" | "right" | "top" | "bottom";
-type RevealType = "p" | "h1" | "h2" | "div";
+type RevealType = "p" | "h1" | "h2" | "h3" | "li" | "div";
 
 interface ScrollRevealProps {
   side?: Side; // 기본값: "bottom"
@@ -40,6 +40,10 @@ export function ScrollReveal({
         return "h1";
       case "h2":
         return "h2";
+      case "h3":
+        return "h3";
+      case "li":
+        return "li";
       default:
         return "div";
     }
