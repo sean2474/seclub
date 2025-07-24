@@ -75,7 +75,9 @@ export const RoomTemplate = ({ roomInfo }: { roomInfo: RoomInfo }) => {
         <section className="bg-background py-4 md:py-16">
           <RoomFeatures features={roomInfo.features} />
           <ScrollReveal side="left" className="center mt-2 md:mt-10">
-            <Button variant={"primary"} size={"xl"} className="text-white">예약하기</Button>
+            <Link href="https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP" target="_blank">
+              <Button variant={"primary"} size={"xl"} className="text-white">예약하기</Button>
+            </Link>
           </ScrollReveal>
         </section>
         <section>
