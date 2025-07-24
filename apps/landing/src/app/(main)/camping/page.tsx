@@ -126,8 +126,8 @@ export default function SeclubElegantGuidePage() {
           <ScrollReveal type="h2" side="left" className="text-3xl md:text-4xl mb-8 font-serif">Overview & Packages</ScrollReveal>
           <Modal>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <ScrollReveal side="left" delay="100ms">
-                <ModalTrigger className="relative group overflow-hidden text-white cursor-pointer">
+              <ScrollReveal side="left" delay="100ms" className="relative group overflow-hidden text-white cursor-pointer">
+                <ModalTrigger className="w-full h-full">
                   <Image
                     src="/images/wellness/store/hero.jpg"
                     alt="공용 수영장"
@@ -322,7 +322,7 @@ export default function SeclubElegantGuidePage() {
               ))}
             </div>
             <ModalBody>
-              <Image src={"/images/site/" + openedSite + " site.png"} alt={openedSite || ""} width={800} height={600} />
+              <Image src={"/images/site/map/" + openedSite + " site.png"} alt={openedSite || ""} width={800} height={600} />
             </ModalBody>
           </Modal>
         </section>

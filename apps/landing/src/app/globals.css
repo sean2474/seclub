@@ -69,11 +69,14 @@
   --accent: #A7D3E0;
   --muted: #FAF5E9;
   
-  @media (width >= 64rem /* 1024px */) {
-    --header-height-expanded: calc(var(--spacing) * 36);
-  }
   --header-height-expanded: calc(var(--spacing) * 16);
   --header-height: calc(var(--spacing) * 16);
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --header-height-expanded: calc(var(--spacing) * 36);
+  }
 }
 
 .scroll-reveal-show {
