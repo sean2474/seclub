@@ -9,7 +9,7 @@ import { MapIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 
-export const WellnessTemplate = ({ wellnessData: wellnessPageData, slug }: { wellnessData: WellnessPageData, slug: string }) => {
+export const WellnessTemplate = ({ wellnessPageData, slug }: { wellnessPageData: WellnessPageData, slug: string }) => {
   return (
     <main className="mt-[var(--header-height-expanded)] pt-10 md:pt-20">
       <section className="center flex-col px-4 w-full mx-auto">

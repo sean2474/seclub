@@ -5,5 +5,5 @@ import { WellnessType } from "@/types";
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const slug = (await params).slug as WellnessType
-  return <WellnessTemplate wellnessData={wellnessPageData[slug]} slug={slug} />
+  return <WellnessTemplate wellnessPageData={wellnessPageData[slug]} slug={slug} />
 }
