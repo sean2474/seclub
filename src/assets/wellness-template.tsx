@@ -45,7 +45,7 @@ export const WellnessTemplate = ({ wellnessPageData, slug }: { wellnessPageData:
         <div className="absolute h-60 md:h-[550px] bottom-0 w-full bg-beige" />
         <div className="w-full p-3.5">
           <ScrollReveal side="left" delay="400ms" className="relative w-full h-80 md:h-[700px] max-w-4xl mx-auto">
-            <Image src={wellnessPageData.header.image} alt="SE클럽 수영장" fill className="object-cover" />
+            <Image src={wellnessPageData.header.image} alt={wellnessPageData.header.title} fill className="object-cover" />
           </ScrollReveal>
         </div>
       </section>
