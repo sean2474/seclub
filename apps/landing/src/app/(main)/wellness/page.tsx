@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { wellnessData } from "@/const/wellness-data";
-import { Card } from "@/components/ui/card";
+import { LinkCard } from "@/components/ui/link-card";
 import { ScrollReveal } from "@/components/base/scroll-reveal";
 
 export default function Page() {
@@ -19,7 +19,7 @@ export default function Page() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10 mx-auto w-full max-w-7xl p-1 md:p-4">
           {wellnessData.map((wellness, idx) => (
             <ScrollReveal side="left" delay={`${idx * 100}ms`} key={wellness.slug} revealHeight="10%">
-              <Card {...wellness} />
+              <LinkCard {...wellness} />
             </ScrollReveal>
           ))}
         </div>
