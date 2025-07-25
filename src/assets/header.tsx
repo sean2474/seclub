@@ -90,9 +90,7 @@ export const Header = () => {
                 className={`transition-all duration-300 delay-100 object-contain ${
                   scrolled ? "lg:scale-100" : "lg:scale-150"
                 }`}
-                sizes="100px"
-                alt="Main Logo"
-                fill
+                alt="Main Logo" fill quality={100}
               />
             </div>
           </Link>

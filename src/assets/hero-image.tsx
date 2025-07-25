@@ -30,6 +30,7 @@ export default function HeroImage({ images }: { images: string[] }) {
             fill
             className="object-cover"
             priority={i === 0}
+            quality={100}
           />
         </div>
       ))}
