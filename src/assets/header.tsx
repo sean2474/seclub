@@ -86,7 +86,7 @@ export const Header = () => {
           >
             <div className="relative w-[100px] h-[var(--header-height)]">
               <Image
-                src={`/logos/logo.png`}
+                src={`/logos/main_logo.png`}
                 className={`transition-all duration-300 delay-100 object-contain ${
                   scrolled ? "lg:scale-100" : "lg:scale-150"
                 }`}
