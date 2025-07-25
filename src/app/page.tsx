@@ -21,9 +21,11 @@ export default function Home() {
           '/images/landing/hero-5.jpeg',
         ]} />
         <div className="absolute inset-0 bg-black/40 flex flex-col items-start md:items-start md:pl-24 lg:pl-48 justify-center text-start p-4">
-          <ScrollReveal side="top" type="h1" className="mb-8 md:mb-4 font-medium">
-            {/* 당신만의 힐링, 자연 속에서 */}
-            <span className="font-thin">프라이빗 비치만이 <br />선사하는 </span>
+          <ScrollReveal side="top" type="p" className="mb-1 md:mb-2 ml-1.5 font-medium">
+            당신만의 힐링, 자연 속에서
+          </ScrollReveal>
+          <ScrollReveal side="top" type="h1" className="mb-4 md:mb-6 font-medium">
+            <span className="font-thin">SE클럽에서 누리는</span><br />
             완벽한 휴식
           </ScrollReveal>
           <ScrollReveal side="bottom" className="ml-1">

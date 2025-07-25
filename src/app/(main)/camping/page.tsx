@@ -122,7 +122,7 @@ export default function SeclubElegantGuidePage() {
   return (
     <div className="min-h-screen font-sans mt-[var(--header-height-expanded)] pt-10">
       <main>
-        <section id="overview" className="mb-16 px-8 md:px-12 pb-16">
+        <section id="overview" className="px-8 md:px-12 pb-16 md:pb-20">
           <ScrollReveal type="h2" side="left" className="text-3xl md:text-4xl mb-8 font-serif">Overview & Packages</ScrollReveal>
           <Modal>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -258,7 +258,7 @@ export default function SeclubElegantGuidePage() {
           </Modal>
         </section>
 
-        <section id="sites" className="bg-beige px-8 md:px-12 pb-24 pt-16">
+        <section id="sites" className="bg-beige px-8 md:px-12 pb-24 pt-12 md:pt-16">
           <div className="flex justify-between items-end mb-8">
             <h2 className="font-serif text-3xl md:text-4xl">Site Information</h2>
           </div>
