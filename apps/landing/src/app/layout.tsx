@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 const Head = () => {
-  const baseUrl = "https://seclub.co.kr";
+  const baseUrl = "https://seclub.vercel.app";
   
   const title = "SE클럽 | 태안둘레길캠핑장";
               
