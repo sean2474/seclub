@@ -79,8 +79,8 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
     ],
     images: [
       "/images/wellness/camping-pool/1.jpg",
-      "/images/wellness/camping-pool/2.jpg",
-      "/images/wellness/camping-pool/3.jpg",
+      "/images/wellness/camping-pool/2.jpeg",
+      "/images/wellness/camping-pool/3.jpeg",
     ]
   },
 
