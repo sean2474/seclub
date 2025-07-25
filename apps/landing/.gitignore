@@ -57,12 +57,3 @@ node_modules/
 *.njsproj
 *.sln
 *.sw?
-# OS specific
-# Task files
-tasks.json
-tasks/ 
-scripts/
-docs/
-.cursor/
-.roo/
-docs/
