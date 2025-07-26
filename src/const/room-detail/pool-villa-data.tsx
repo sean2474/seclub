@@ -42,7 +42,7 @@ export const poolVillaData: RoomInfo = {
   ],
   features: [
     { icon: BedDouble, label: '침대 개수', value: '2개' },
-    { icon: Users,     label: '인원',     value: '4~6인' },
+    { icon: Users,     label: '인원',     value: '4인 (최대 6인)' },
     { icon: Dog,       label: '반려견 동반 가능', value: '최대 2마리' },
     { icon: Car,       label: '차량 주차',  value: '독채당 1대 무료' },
     { icon: Clock,     label: '체크인/아웃', value: '15:00 / 11:00' },

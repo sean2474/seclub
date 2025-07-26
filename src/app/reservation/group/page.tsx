@@ -1,6 +1,8 @@
 import { ScrollReveal } from "@/components/base/scroll-reveal";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { ChevronRightIcon } from "lucide-react";
 import Image from "next/image"
+import Link from "next/link";
 
 const SectionHeader = ({ title, subtitle }: { title: string; subtitle?: string }) => (
   <div className="mb-4 md:mb-8">
@@ -32,7 +34,7 @@ export default function GroupReservationPage() {
   const lodgingTotal = { totalCap: "88명 (144명)" }
 
   const activities = [
-    { title: "세미나실", description: "워크숍, 회의 등 다양한 목적의 행사를 진행할 수 있습니다." },
+    { title: "세미나실", description: "워크숍, 회의 등 다양한 목적의 행사를 진행할 수 있습니다.", link: "/wellness/seminar-room" },
     { title: "해양 액티비티", description: "바로 앞 바다에서 바다생태체험, 독살, 바다 낚시, 해수욕을 즐겨보세요." },
     {
       title: "야외 수영장",
@@ -57,7 +59,7 @@ export default function GroupReservationPage() {
         </div>
       </section>
 
-      <main className="w-full mt-[100svh] bg-background">
+      <main className="w-full translate-y-[100svh] mb-[100svh] bg-background">
         {/* 1. Introduction */}
         <section className="pt-16 md:pt-32 pb-8 md:pb-16 px-6 lg:px-8">
           <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 md:gap-16 items-center">
@@ -74,40 +76,15 @@ export default function GroupReservationPage() {
             </div>
           </div>
         </section>
-
-        {/* 2. Seminar Room */}
-        <section className="py-8 md:py-16 px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-2 md:gap-16 items-center">
-            <h2 className="text-3xl md:text-4xl font-medium leading-snug mb-2 md:hidden"> 세미나실 </h2>
-              <div className="relative h-96 md:h-[500px] overflow-hidden">
-                <Image src={"/images/reservation/2.jpg"} alt="세미나실 전경" fill className="object-cover" />
-              </div>
-              <div>
-                <h2 className="text-3xl md:text-4xl font-medium leading-snug mb-2 md:mb-6 hidden md:block"> 세미나실 </h2>
-                <div className="space-y-2 md:space-y-6 mt-4">
-                  <div>
-                    <h3 className="text-sm uppercase tracking-wider">면적</h3>
-                    <p className="text-xl font-medium mt-1">154.25㎡ (46.7평)</p>
-                  </div>
-                  <div>
-                    <h3 className="text-sm uppercase tracking-wider">수용 인원</h3>
-                    <p className="text-xl font-medium mt-1">30명 내외</p>
-                  </div>
-                  <div>
-                    <h3 className="text-sm uppercase tracking-wider">구비 비품</h3>
-                    <p className="text-xl font-medium mt-1">책상, 의자, 빔 프로젝터 등</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* 3. Lodging Facilities */}
         <section className="py-8 md:py-16 px-6 lg:px-8 whitespace-nowrap">
           <div className="max-w-4xl mx-auto">
-            <SectionHeader title="숙박 시설 (펜션)" />
+            <div>
+              <div className="mb-4 md:mb-8">
+                <h2 className="text-3xl font-bold text-gray-900">숙박 시설 (펜션)</h2>
+                <p className="mt-2 text-sm text-gray-600">* 최대 144명 수용 가능합니다</p>
+              </div>
+            </div>
             <Table>
               <TableHeader>
                 <TableRow>
@@ -135,12 +112,11 @@ export default function GroupReservationPage() {
                 </TableRow>
               </TableBody>
             </Table>
-            <p className="text-sm text-gray-600 mt-4 text-right">
+            <p className="text-sm text-gray-600 mt-2 md:mt-4 text-right">
               * 동(호실)별 최대 인원 이용 시 침구류 등은 추가로 세팅됩니다.
             </p>
           </div>
         </section>
-
         {/* 4. Activities */}
         <section className="py-8 md:py-16 px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
@@ -148,7 +124,11 @@ export default function GroupReservationPage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
               {activities.map((activity) => (
                 <div key={activity.title} className="border p-6">
-                  <h3 className="text-xl font-semibold mb-2">{activity.title}</h3>
+                  <div className="flex justify-between items-center mb-2">
+                    <h3 className="text-xl font-semibold">{activity.title}</h3>
+                    {activity.link && (<Link href={activity.link} className="flex items-center gap-2 group">자세히보기 <ChevronRightIcon className="w-4 h-4 group-hover:translate-x-2 transition-all duration-300 ease-in-out" /></Link>)}
+                  </div>
+
                   <p className="text-gray-600">{activity.description}</p>
                 </div>
               ))}
@@ -160,12 +140,12 @@ export default function GroupReservationPage() {
         </section>
 
         {/* 6. Contact & History */}
-        <section className="py-0 md:py-16 px-6 lg:px-8">
+        <section className="py-0 md:py-16 px-6 lg:px-8 pb-16">
           <div className="max-w-4xl mx-auto">
-            <SectionHeader title="문의 및 현황" />
-            <div className="grid md:grid-cols-2 gap-12">
+            <SectionHeader title="문의 및 연역" />
+            <div className="grid md:grid-cols-2 gap-4 md:gap-12">
               <div>
-                <h3 className="text-xl font-semibold mb-4">주요 연수 및 행사 현황</h3>
+                <h3 className="text-xl font-semibold mb-1.5 md:mb-4">주요 연수 및 행사 현황</h3>
                 <ul className="list-disc list-inside text-gray-700 space-y-1">
                   <li>헬스포츠 인비테이션</li>
                   <li>뮤직카우 임·직원 연중 휴양</li>
@@ -175,17 +155,17 @@ export default function GroupReservationPage() {
                 </ul>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-4">문의 안내</h3>
-                <div className="space-y-3 text-lg">
+                <h3 className="text-xl font-semibold mb-1.5 md:mb-4">문의 안내</h3>
+                <div className="space-y-1 md:space-y-3 text-lg">
                   <p>
                     <span className="font-medium">전화:</span>{" "}
-                    <a href="tel:010-9703-1711" className="hover:underline">
+                    <a href="tel:010-9703-1711" className="hover:underline font-semibold">
                       010-9703-1711
                     </a>
                   </p>
                   <p>
                     <span className="font-medium">이메일:</span>{" "}
-                    <a href="mailto:taean2015@naver.com" className="hover:underline">
+                    <a href="mailto:taean2015@naver.com" className="hover:underline font-semibold">
                       taean2015@naver.com
                     </a>
                   </p>

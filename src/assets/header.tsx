@@ -54,7 +54,7 @@ export const Header = () => {
   
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-40 px-2 lg:pr-12 transition-all duration-300 ease-in text-font backdrop-blur-md bg-white h-[var(--header-height)] overscroll-none border-b-[0.5px] border-gray-300/30 font-light
+      className={`fixed inset-x-0 top-0 z-40 px-2 lg:pr-12 transition-all duration-300 ease-in text-font backdrop-blur-xl bg-white h-[var(--header-height)] overscroll-none border-b-[0.5px] border-gray-300/30 font-light
         ${!scrolled && "h-[var(--header-height-expanded)]"}
         ${
           mobileMenuOpen
