@@ -4,109 +4,10 @@ import { useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Check, Ban } from "lucide-react"
-import { SiteData } from "@/types"
 import Link from "next/link"
 import { Modal, ModalBody, ModalTrigger } from "@/components/ui/animated-modal"
 import { ScrollReveal } from "@/components/base/scroll-reveal"
-
-const siteData: SiteData[] = [
-  {
-    id: "S",
-    title: "S 사이트",
-    features: ["갯바위 낚시 인접", "최적의 오션뷰", "S1·S2 반려견 가능"],
-    imageQuery: "serene campsite by the rocky shore at sunset",
-    disallowed: ["차박", "카라반", "캠핑카", "루프탑"],
-    image: "/images/site/A.jpg",
-  },
-  {
-    id: "A",
-    title: "A 사이트",
-    features: ["바닷가 솔숲 평지", "2해변·낚시터 인접", "반려견 동반 가능"],
-    imageQuery: "cozy tent in a pine forest near the beach",
-    disallowed: ["차박", "카라반", "캠핑카", "루프탑"],
-    image: "/images/site/A.jpg",
-  },
-  {
-    id: "B",
-    title: "B 사이트",
-    features: ["해변 평지형", "공용수영장 인접"],
-    imageQuery: "family campsite near a swimming pool and beach",
-    allowed: ["카라반", "캠핑카"],
-    disallowed: ["차박", "루프탑"],
-    image: "/images/site/A.jpg",
-  },
-  {
-    id: "C",
-    title: "C 사이트",
-    features: ["해변 평지형", "독살체험장 인접"],
-    imageQuery: "campsite on a flat area next to a calm beach",
-    allowed: ["카라반", "캠핑카"],
-    image: "/images/site/A.jpg",
-  },
-  {
-    id: "D",
-    title: "D 사이트",
-    features: ["중앙 평지형", "영유아·어르신 추천"],
-    imageQuery: "accessible flat campsite with easy access",
-    allowed: ["차박", "루프탑"],
-    disallowed: ["카라반", "캠핑카"],
-    image: "/images/site/A.jpg",
-  },
-  {
-    id: "E",
-    title: "E 사이트",
-    features: ["중앙 평지형", "소형 카라반 가능"],
-    imageQuery: "spacious central campsite suitable for small caravans",
-    allowed: ["차박", "루프탑", "소형 카라반"],
-    image: "/images/site/A.jpg",
-  },
-  {
-    id: "F",
-    title: "F 사이트",
-    features: ["바닷가 솔숲 테라스", "독살체험장 인접"],
-    imageQuery: "tent on a terrace in a pine forest overlooking the sea",
-    image: "/images/site/A.jpg",
-  },
-  {
-    id: "G",
-    title: "G 사이트",
-    features: ["바닷가 솔숲 테라스", "해먹 설치 가능"],
-    imageQuery: "hammock between pine trees at a campsite with sea view",
-    image: "/images/site/A.jpg",
-  },
-  {
-    id: "H",
-    title: "H 사이트",
-    features: ["중앙 평지형", "2가족 이용 추천"],
-    imageQuery: "two tents set up for a group on a flat grassy area",
-    image: "/images/site/A.jpg",
-  },
-  {
-    id: "K",
-    title: "K 사이트",
-    features: ["기본 파쇄석 사이트"],
-    imageQuery: "simple gravel campsite area with basic amenities",
-    disallowed: ["카라반", "캠핑카"],
-    image: "/images/site/A.jpg",
-  },
-  {
-    id: "전망",
-    title: "전망 사이트",
-    features: ["독립된 데크", "탁 트인 오션뷰·낙조"],
-    imageQuery: "wooden deck campsite with a panoramic ocean sunset view",
-    image: "/images/site/A.jpg",
-  },
-  {
-    id: "반려견",
-    title: "반려견 캠핑장",
-    features: ["솔숲 테라스", "반려견 전용"],
-    imageQuery: "happy dog playing at a dedicated pet-friendly campsite",
-    allowed: ["차박", "루프탑"],
-    image: "/images/site/A.jpg",
-  },
-]
-
-const siteCategories = ["All", "S", "A", "B", "C", "D", "E", "F", "G", "H", "K", "전망", "반려견"]
+import { siteCategories, siteData } from "@/const/camping-data"
 
 export default function SeclubElegantGuidePage() {
   const [activeCategory, setActiveCategory] = useState("S")
@@ -120,39 +21,40 @@ export default function SeclubElegantGuidePage() {
         )
 
   return (
-    <div className="min-h-screen font-sans">
-      <section className="fixed -z-10 top-0 h-svh w-full overflow-x-hidden">
+    <div className="min-h-screen font-sans overflow-x-hidden">
+      <section className="fixed -z-10 top-0 h-svh w-full">
         <Image src={"/images/landing/hero-4.jpeg"} sizes="100vw" alt={"SE클럽 객실 전경"} fill className="object-cover" />
         <div className="z-10 absolute w-full h-full top-0 left-0 bg-black/30" />
-        <div className="z-10 absolute top-1/2 left-1/2 md:left-1/4 transform -translate-x-1/2 -translate-y-1/2 text-background whitespace-nowrap">
+        <div className="z-10 absolute top-1/2 left-1/2 md:left-20 lg:left-1/4 transform -translate-x-1/2 md:-translate-x-0 lg:-translate-x-1/2 -translate-y-1/2 text-background whitespace-nowrap">
           <ScrollReveal side="top" type="h1"> SE클럽 캠핑 사이트 </ScrollReveal>
           <ScrollReveal side="bottom" type="p" className="text-xl md:text-2xl mt-4"> 아름다운 경관과 함께하는 힐링 </ScrollReveal>
         </div>
       </section>
-      <main className="translate-y-[100svh] mb-[100svh]">
-        <section id="sites" className="px-8 md:px-12 pb-12 pt-4 md:pt-8 bg-background">
-          <div className="flex justify-between items-end mb-8">
-            <h2 className="font-serif text-3xl md:text-4xl">Site Information</h2>
-          </div>
+      <main className="">
+        <div className="h-svh" />
+        <Modal>
+          <section id="sites" className="px-2 md:px-6 pb-12 pt-4 md:pt-8 bg-background">
+            <div className="flex justify-between items-end mb-8">
+              <h2 className="font-serif text-3xl md:text-4xl">Site Information</h2>
+            </div>
 
-          <div className="flex space-x-2 mb-8 pb-2 -mx-8 px-8 flex-wrap gap-y-2">
-            {siteCategories.map((category) => (
-              <Button
-                key={category}
-                variant="ghost"
-                onClick={() => setActiveCategory(category)}
-                className={`rounded-full px-4 py-2 text-sm transition-colors duration-200 whitespace-nowrap ${
-                  activeCategory === category
-                    ? "bg-stone-800 text-white hover:bg-stone-700"
-                    : "bg-white text-stone-600 hover:bg-stone-200"
-                }`}
-              >
-                {category === "반려견" ? "반려견 전용" : category}
-              </Button>
-            ))}
-          </div>
+            <div className="flex space-x-2 mb-8 pb-2 -mx-8 px-8 flex-wrap gap-y-2">
+              {siteCategories.map((category) => (
+                <Button
+                  key={category}
+                  variant="ghost"
+                  onClick={() => setActiveCategory(category)}
+                  className={`rounded-full px-4 py-2 text-sm transition-colors duration-200 whitespace-nowrap ${
+                    activeCategory === category
+                      ? "bg-stone-800 text-white hover:bg-stone-700"
+                      : "bg-white text-stone-600 hover:bg-stone-200"
+                  }`}
+                >
+                  {category === "반려견" ? "반려견 전용" : category}
+                </Button>
+              ))}
+            </div>
 
-          <Modal>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
               {filteredSites.map((site) => (
                 <div key={site.id} className="group relative">
@@ -196,11 +98,11 @@ export default function SeclubElegantGuidePage() {
             <ModalBody>
               <Image src={"/images/site/map/" + openedSite + " site.png"} alt={openedSite || ""} width={800} height={600} />
             </ModalBody>
-          </Modal>
-        </section>
-        <section id="overview" className="bg-beige px-8 md:px-12 pb-16 md:pb-20 pt-12">
-          <ScrollReveal type="h2" side="left" className="text-3xl md:text-4xl mb-8 font-serif">Overview & Packages</ScrollReveal>
-          <Modal>
+          </section>
+        </Modal>
+        <Modal>
+          <section id="overview" className="bg-beige px-8 md:px-12 pb-16 md:pb-20 pt-12">
+            <ScrollReveal type="h2" side="left" className="text-3xl md:text-4xl mb-8 font-serif">Overview & Packages</ScrollReveal>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               <ScrollReveal side="left" delay="100ms" className="relative group overflow-hidden text-white cursor-pointer">
                 <ModalTrigger className="w-full h-full">
@@ -225,7 +127,7 @@ export default function SeclubElegantGuidePage() {
                 </ModalTrigger>
               </ScrollReveal>
               <ModalBody>
-                <main className="px-8 md:px-12 pb-24">
+                <main className="px-0 md:px-12 overflow-y-auto">
                   <div className="max-w-4xl mx-auto p-8 md:p-12">
                     <div className="grid md:grid-cols-2 gap-x-12 gap-y-10">
                       <div className="space-y-6">
@@ -331,8 +233,8 @@ export default function SeclubElegantGuidePage() {
                 </Link>
               </ScrollReveal>
             </div>
-          </Modal>
-        </section>
+          </section>
+        </Modal>
       </main>
     </div>
   )
