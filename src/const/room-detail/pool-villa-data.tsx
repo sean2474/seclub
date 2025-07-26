@@ -16,9 +16,14 @@ export const poolVillaData: RoomInfo = {
     "/images/room/pool-villa/main-3.jpg"
   ],
   overview: (
-    <p>SECLUB 풀빌라는 각 독채별로 <span className="text-green-900 font-semibold">프라이빗 가든</span>과 <span className="text-green-900 font-semibold">풀·스파</span>가 완비되어 있어 외부 방해 없이 온전한 휴식을 취할 수 있습니다. 3동과 6동은 직영으로 운영되어 더욱 <span className="text-green-900 font-semibold">깐깐한 </span>관리가 이루어지며, 평일과 주말 모두 <span className="text-green-900 font-semibold">장기 숙박</span>이 가능합니다.</p>
+    <p>피부 진정과 스트레스 완화에 효과적인 <span className="text-green-900 font-semibold">해수</span>를 사용하는 SE CLUB 해수 풀빌라는, 각 독채마다 <span className="text-green-900 font-semibold">프라이빗 가든</span>과 전용 <span className="text-green-900 font-semibold">풀·스파</span>가 완비된 유니크한 힐링 공간입니다. 외부의 방해 없이 오롯이 나만의 시간을 즐기며 깊은 휴식을 경험할 수 있습니다</p>
   ),
   amenities: [
+    {
+      img: "/images/room/pool-villa/kitchen.jpg",
+      title: "주방",
+      description: "개별 주방 (냉장고, 전자레인지, 전기밥솥, 커피포트 등)",
+    }, 
     {
       img: "/images/room/pool-villa/pool.jpg",
       title: "해수 풀",
@@ -28,11 +33,6 @@ export const poolVillaData: RoomInfo = {
       img: "/images/room/pool-villa/grill.jpg",
       title: "바비큐 그릴",
       description: "개별 바비큐 그릴 (숯·번개탄·장갑 등 무료 제공)",
-    }, 
-    {
-      img: "/images/room/pool-villa/kitchen.jpg",
-      title: "주방",
-      description: "개별 주방 (냉장고, 전자레인지, 전기밥솥, 커피포트 등)",
     }, 
     {
       img: "/images/room/pool-villa/spa.jpg",

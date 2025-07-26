@@ -53,9 +53,9 @@ export const WellnessTemplate = ({ wellnessPageData, slug }: { wellnessPageData:
         <div className="bg-background w-full pt-6 md:pt-0 center">
           <div className="max-w-4xl mx-4 w-full mt-5 md:mt-15">
             <ScrollReveal side="left" type="h3" className="font-medium">
-              추가 정보
+              {slug === "walk" ? "코스 정보" : "추가 정보"}
             </ScrollReveal>
-            <ol className="border border-gray-400/50 p-5 mt-5 space-y-4 list-disc pl-10 text-wrap">
+            <ol className="border border-gray-400/50 p-5 mt-5 space-y-4 list-disc pl-10 text-wrap font-light">
               {wellnessPageData.contents.map((content, idx) => (
                 <ScrollReveal side="right" type="li" delay={`${idx * 100}ms`} key={idx} className="space-y-1"> {content} </ScrollReveal>
               ))}
@@ -82,7 +82,7 @@ export const WellnessTemplate = ({ wellnessPageData, slug }: { wellnessPageData:
               .map((wellness) => (
                 <LinkCard
                   {...wellness}
-                  className="w-100 flex-shrink-0"
+                  className="w-72 sm:w-100 flex-shrink-0"
                   key={wellness.slug}
                 />
               ))}

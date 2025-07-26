@@ -15,9 +15,9 @@ export default function Page() {
         </div>
       </section>
       
-      <section className="py-16 px-4 mt-[100svh] bg-background">
+      <section className="py-16 px-4 translate-y-[100svh] mb-[100svh] bg-background">
         <ScrollReveal side="top" type="h2" className="text-2xl md:text-4xl font-medium text-center mb-12 font-serif">Overview</ScrollReveal>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10 mx-auto w-full max-w-7xl p-1 md:p-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10 mx-auto w-full max-w-5xl p-1 md:p-4">
           {wellnessData.map((wellness, idx) => (
             <ScrollReveal side="left" delay={`${idx * 100}ms`} key={wellness.slug} revealHeight="10%">
               <LinkCard {...wellness} />

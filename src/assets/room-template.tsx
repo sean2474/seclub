@@ -54,7 +54,7 @@ export const RoomTemplate = ({ roomInfo }: { roomInfo: RoomInfo }) => {
         <section className="bg-background center w-full relative pb-0 md:pb-10 pt-5">
           <div className="absolute h-60 md:h-[550px] bottom-0 w-full bg-green-900" />
           <div className="w-full max-w-6xl p-3.5">
-            <div className="relative w-full h-80 md:h-[700px] max-w-4xl mx-auto">
+            <div className="relative w-full h-80 sm:h-[600px] md:h-[700px] max-w-4xl mx-auto">
               <MainImageSlider images={roomInfo.mainImages} />
             </div>
           </div>
@@ -112,7 +112,7 @@ export const RoomTemplate = ({ roomInfo }: { roomInfo: RoomInfo }) => {
                 .map((room) => (
                   <LinkCard
                     {...room}
-                    className="w-90 flex-shrink-0"
+                    className="w-72 sm:w-100 flex-shrink-0"
                     key={room.slug}
                   />
                 ))}

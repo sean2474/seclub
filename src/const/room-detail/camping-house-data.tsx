@@ -9,21 +9,23 @@ export const campingHouseData: RoomInfo = {
   mainImages: [
     "/images/room/camping-house/main-1.jpg", 
     "/images/room/camping-house/main-2.jpeg",
-    "/images/room/camping-house/main-3.jpg"
+    "/images/room/camping-house/main-3.jpg",
+    "/images/room/camping-house/main-4.jpeg"
   ],
   overview: (
-    <p>SE CLUB 오션콘도는 탁 트인 <span className="text-green-900 font-semibold">바다전망</span>과 황홀한 낙조를 객실에서 감상할 수 있는 호텔형 콘도로, 모두 <span className="text-green-900 font-semibold">장기 숙박</span>이 가능합니다. 실내 주방 외에 <span className="text-green-900 font-semibold">야외 베란다 인덕션</span>과 테이블을 갖춰 바다·산·별빛을 배경으로 요리할 수 있으며, 일부 객실에서는 <span className="text-green-900 font-semibold">무료 숯불 화덕 바비큐</span>도 즐길 수 있습니다.</p>
+    <p>SE CLUB 캠핑 하우스는 2층 복층형 단독주택과 <span className="text-green-900 font-semibold">캠핑 사이트</span>가 어우러진 공간으로, <span className="text-green-900 font-semibold">실내의 편안함</span>과 <span className="text-green-900 font-semibold">캠핑의 즐거움</span>을 함께 누릴 수 있습니다. 야외 데크에서는 바다와 산, 별빛을 배경으로 <span className="text-green-900 font-semibold">바비큐</span>를 즐기며 낭만적인 시간을 보낼 수 있습니다.
+</p>
   ),
   amenities: [
-    {
-      img: "/images/room/camping-house/grill.jpg",
-      title: "바비큐 그릴",
-      description: "개별 바비큐 그릴 (숯·번개탄·장갑 등 무료 제공)",
-    }, 
     {
       img: "/images/room/camping-house/kitchen.jpg",
       title: "주방",
       description: "개별 주방 (냉장고, 전자레인지, 전기밥솥, 커피포트 등)",
+    }, 
+    {
+      img: "/images/room/camping-house/grill.jpg",
+      title: "바비큐 그릴",
+      description: "개별 바비큐 그릴 (숯·번개탄·장갑 등 무료 제공)",
     }, 
   ],
   features: [

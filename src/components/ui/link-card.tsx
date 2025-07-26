@@ -11,15 +11,15 @@ interface CardProps extends CardData {
 export const LinkCard = ({ items, title, description, image, className }: CardProps) => {
   return (
     <div className={cn("overflow-hidden rounded-lg bg-white/50", className)}> 
-      <div className="relative h-[350px] md:h-[300px] w-full">
+      <div className="relative h-[250px] sm:h-[350px] md:h-[300px] w-full">
         <Image src={image} alt={title} fill className="object-cover" />
       </div>
-      <div className="p-4 flex justify-between items-center">
+      <div className="p-4 flex flex-col justify-start sm:justify-between sm:items-center sm:flex-row">
         <div className="flex flex-col gap-1 md:gap-2">
           <h2 className="text-xl md:text-2xl font-bold">{title}</h2>
           <p className="text-sm md:text-base">{description}</p>
         </div>
-        <div className="flex gap-2 flex-col items-end">
+        <div className="flex sm:gap-2 flex-col items-start mt-2 sm:mt-0 sm:items-end">
           {items.map((item, idx) => (
             <Link key={idx} href={item.href} className="flex items-center gap-2 hover:scale-105 active:translate-x-2 active:scale-105 transition-all duration-300 ease-in-out">{item.title} <ChevronRightIcon className="w-4 h-4" /></Link>
           ))}

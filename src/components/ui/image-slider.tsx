@@ -84,7 +84,7 @@ export function ImageSlider({
     <div className="w-full max-w-4xl mx-auto">
       {/* 이미지 영역 */}
       <div
-        className="relative overflow-hidden h-[350px]"
+        className="relative overflow-hidden h-[350px] sm:w-[400px] md:w-full mx-auto"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
@@ -93,7 +93,7 @@ export function ImageSlider({
             key={idx}
             className={`
               absolute inset-0
-              transition-opacity duration-1000 ease-in-out
+              transition-opacity duration-1000 ease-in-out md:flex
               ${idx === current ? 'opacity-100' : 'opacity-0'}
             `}
           >
@@ -142,7 +142,7 @@ export function ImageSlider({
       </div>
 
       {/* 제목·설명 */}
-      <div className="mt-6 ml-2 flex flex-col md:flex-row items-start md:items-start gap-1 md:gap-5">
+      <div className="mt-6 ml-2 flex flex-col md:flex-row items-start sm:items-center md:items-start gap-1 md:gap-5">
         <h3 className="text-lg font-semibold text-nowrap">{slides[current].title}</h3>
         <p className="mt-2 text-sm -translate-y-1/8">
           {slides[current].description}

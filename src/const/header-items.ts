@@ -17,10 +17,6 @@ export const menuItems: HeaderMenuType[] = [
         name: "오시는길",
         href: "/about/directions"
       },
-      {
-        name: "공지사항",
-        href: "/notices"
-      }
     ]
   },
   {
@@ -36,7 +32,7 @@ export const menuItems: HeaderMenuType[] = [
     href: "/wellness"
   },
   {
-    title: "예약",
+    title: "예약 안내",
     href: "/reservation",
     items: [
       {
@@ -52,6 +48,10 @@ export const menuItems: HeaderMenuType[] = [
         href: "/reservation/group"
       }
     ]
+  },
+  {
+    title: "공지·이벤트",
+    href: "/notices"
   }
 ];
 
