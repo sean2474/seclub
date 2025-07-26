@@ -16,7 +16,8 @@ export const roomData: CardData[] = [
     image: "/images/room/ocean-condo/hero.jpg",
     description: "호텔형",
     items: [
-      { title: "오션 콘도", href: "/rooms/ocean-condo" }
+      { title: "오션 콘도 기본형", href: "/rooms/ocean-condo" },
+      { title: "오션 콘도 확장형", href: "/rooms/ocean-condo-extended" }
     ]
   },
   {

@@ -3,7 +3,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import Image from "next/image"
 
 const SectionHeader = ({ title, subtitle }: { title: string; subtitle?: string }) => (
-  <div className="mb-8">
+  <div className="mb-4 md:mb-8">
     <h2 className="text-3xl font-bold text-gray-900">{title}</h2>
     {subtitle && <p className="mt-2 text-lg text-gray-600">{subtitle}</p>}
   </div>
@@ -30,22 +30,6 @@ export default function GroupReservationPage() {
     },
   ]
   const lodgingTotal = { totalCap: "88명 (144명)" }
-
-  const campingData = [
-    { zone: "S", count: 10, unitCap: "4명 (6명)", totalCap: "40명 (60명)", type: "데크" },
-    { zone: "A", count: 9, unitCap: "4명 (6명)", totalCap: "36명 (54명)", type: "데크 4개, 파쇄석 5개" },
-    { zone: "B", count: 11, unitCap: "4명 (6명)", totalCap: "44명 (66명)", type: "파쇄석" },
-    { zone: "C", count: 12, unitCap: "4명 (6명)", totalCap: "48명 (72명)", type: "파쇄석" },
-    { zone: "D", count: 9, unitCap: "4명 (6명)", totalCap: "36명 (54명)", type: "파쇄석" },
-    { zone: "E", count: 7, unitCap: "4명 (6명)", totalCap: "28명 (42명)", type: "파쇄석" },
-    { zone: "F", count: 7, unitCap: "4명 (6명)", totalCap: "28명 (42명)", type: "데크" },
-    { zone: "G", count: 11, unitCap: "4명 (6명)", totalCap: "44명 (66명)", type: "데크" },
-    { zone: "H", count: 3, unitCap: "4명 (6명)", totalCap: "12명 (18명)", type: "파쇄석" },
-    { zone: "K", count: 5, unitCap: "4명 (6명)", totalCap: "20명 (30명)", type: "파쇄석" },
-    { zone: "전망", count: 17, unitCap: "4명 (6명)", totalCap: "68명 (102명)", type: "파쇄석" },
-    { zone: "반려견 캠핑장", count: 17, unitCap: "4명 (6명)", totalCap: "68명 (102명)", type: "파쇄석" },
-  ]
-  const campingTotal = { count: 118, totalCap: "472명 (708명)" }
 
   const activities = [
     { title: "세미나실", description: "워크숍, 회의 등 다양한 목적의 행사를 진행할 수 있습니다." },
@@ -94,13 +78,14 @@ export default function GroupReservationPage() {
         {/* 2. Seminar Room */}
         <section className="py-8 md:py-16 px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
+            <div className="grid md:grid-cols-2 md:gap-16 items-center">
+            <h2 className="text-3xl md:text-4xl font-medium leading-snug mb-2 md:hidden"> 세미나실 </h2>
               <div className="relative h-96 md:h-[500px] overflow-hidden">
                 <Image src={"/images/reservation/2.jpg"} alt="세미나실 전경" fill className="object-cover" />
               </div>
               <div>
-                <h2 className="text-3xl md:text-4xl font-medium leading-snug mb-0 md:mb-6"> 세미나실 </h2>
-                <div className="space-y-6">
+                <h2 className="text-3xl md:text-4xl font-medium leading-snug mb-2 md:mb-6 hidden md:block"> 세미나실 </h2>
+                <div className="space-y-2 md:space-y-6 mt-4">
                   <div>
                     <h3 className="text-sm uppercase tracking-wider">면적</h3>
                     <p className="text-xl font-medium mt-1">154.25㎡ (46.7평)</p>
@@ -120,7 +105,7 @@ export default function GroupReservationPage() {
         </section>
 
         {/* 3. Lodging Facilities */}
-        <section className="py-8 md:py-16 px-6 lg:px-8">
+        <section className="py-8 md:py-16 px-6 lg:px-8 whitespace-nowrap">
           <div className="max-w-4xl mx-auto">
             <SectionHeader title="숙박 시설 (펜션)" />
             <Table>
@@ -156,48 +141,11 @@ export default function GroupReservationPage() {
           </div>
         </section>
 
-        {/* 4. Camping Sites */}
-        <section className="py-8 md:py-16 px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-
-            <SectionHeader title="캠핑장 사이트" />
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>구역명</TableHead>
-                  <TableHead>사이트 수</TableHead>
-                  <TableHead>사이트별 인원(최대)</TableHead>
-                  <TableHead>구역별 인원(최대)</TableHead>
-                  <TableHead>비고</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {campingData.map((item) => (
-                  <TableRow key={item.zone}>
-                    <TableCell className="font-medium">{item.zone}</TableCell>
-                    <TableCell>{item.count}개</TableCell>
-                    <TableCell>{item.unitCap}</TableCell>
-                    <TableCell>{item.totalCap}</TableCell>
-                    <TableCell>{item.type}</TableCell>
-                  </TableRow>
-                ))}
-                <TableRow className="font-bold">
-                  <TableCell>총계</TableCell>
-                  <TableCell>{campingTotal.count}개</TableCell>
-                  <TableCell></TableCell>
-                  <TableCell>{campingTotal.totalCap}</TableCell>
-                  <TableCell></TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </div>
-        </section>
-
-        {/* 5. Activities */}
+        {/* 4. Activities */}
         <section className="py-8 md:py-16 px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <SectionHeader title="부대시설 & 액티비티" />
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
               {activities.map((activity) => (
                 <div key={activity.title} className="border p-6">
                   <h3 className="text-xl font-semibold mb-2">{activity.title}</h3>
@@ -205,14 +153,14 @@ export default function GroupReservationPage() {
                 </div>
               ))}
             </div>
-            <p className="text-center mt-8 text-lg p-4">
+            <p className="text-center mt-0 md:mt-8 text-md p-4">
               * <strong>전체 대관:</strong> 전체 시설 이용 시, 이용일정 3개월 전 신청이 필수입니다.
             </p>
           </div>
         </section>
 
         {/* 6. Contact & History */}
-        <section className="py-8 md:py-16 px-6 lg:px-8">
+        <section className="py-0 md:py-16 px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <SectionHeader title="문의 및 현황" />
             <div className="grid md:grid-cols-2 gap-12">

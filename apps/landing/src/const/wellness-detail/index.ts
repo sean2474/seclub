@@ -8,7 +8,7 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
       subtitle:
         "울창한 솔향기 숲길과 간조 시 열리는 드넓은 해안길을 따라 걷는 10.2km 트레킹 코스입니다.",
       type: "산책로",
-      location: "꾸지나무골 해변 → 만대항 (단지 전역)",
+      location: "단지 전역",
       hours: "상시 개방",
       image: "/images/wellness/walk/hero.jpg", // 솔숲과 해안길이 함께 보이는 헤더 배너
     },
@@ -115,7 +115,7 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
       title: "자연 체험 프로그램",
       subtitle:
         "바다 속 산책부터 갯벌 생태·독살 체험, 갯바위 낚시까지 다양한 해양 액티비티를 제공합니다.",
-      type: "체험 프로그램",
+      type: "생태 체험·갯바위 낚시",
       location: "앞바다 및 갯바위 전역",
       hours: "프로그램별 상이 (사전 문의)",
       image: "/images/wellness/nature-experience/hero.jpg",
@@ -125,6 +125,7 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
       "생태 체험: 굴·고동·개불·명주조개 관찰 및 소량 채집 (자연 보호 준수)",
       "독살 체험: 전통 어로법 이해 및 체험, 안전 교육 후 진행",
       "갯바위 낚시: 낚싯대·미끼 대여, 초보자 프로그램 운영",
+      "안내: 체험 후에는 캠핑장 내 야외 개수대를 자유롭게 이용 가능",
       "유의 사항: 매일 물때표 확인 필수, 구명조끼·장갑 권장, 갯바위 미끄럼 주의",
     ],
     images: [

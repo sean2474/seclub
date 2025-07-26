@@ -149,12 +149,10 @@ export function NaverMap({
     }, 100);
   }, [scriptLoaded, isVisible, mapId, onMapLoad]);
 
-  // -----------------------
-  // (3) 언마운트 시 맵 destroy
-  // -----------------------
   useEffect(() => {
     return () => {
-      mapRef.current?.destroy();
+      if (mapRef === null || mapRef.current === null) return;
+      mapRef.current.destroy();
     };
   }, []);
 

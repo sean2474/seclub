@@ -54,7 +54,7 @@ export const Header = () => {
   
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-40 px-2 lg:pr-12 transition-all duration-300 ease-in text-font backdrop-blur-md bg-white h-[var(--header-height)] overscroll-none border-b-[0.5px] border-gray-300/30
+      className={`fixed inset-x-0 top-0 z-40 px-2 lg:pr-12 transition-all duration-300 ease-in text-font backdrop-blur-md bg-white h-[var(--header-height)] overscroll-none border-b-[0.5px] border-gray-300/30 font-light
         ${!scrolled && "h-[var(--header-height-expanded)]"}
         ${
           mobileMenuOpen
@@ -137,6 +137,10 @@ export const Header = () => {
           </div>
         </div>
 
+        <Link href={"https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP"} target="_blank" className="border border-foreground px-4 py-2 bg-foreground text-background hover:text-foreground hover:bg-transparent hover:font-medium transition-all duration-300 hidden lg:block">
+          예약하기
+        </Link>
+
         {/* -------------- 모바일 햄버거 버튼 -------------- */}
         <div className="flex lg:hidden">
           <button
@@ -181,7 +185,7 @@ export const Header = () => {
                     </button>
                   </div>
                 );
-                return(
+                return (
                   <div key={index} className="border-b border-foreground">
                     <button
                       type="button"
@@ -223,6 +227,9 @@ export const Header = () => {
                 )}
               )}
             </div>
+            <Link href={"https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP"} target="_blank" className="border border-foreground px-4 py-2 bg-foreground text-background active:text-foreground active:bg-background active:font-medium transition-all duration-300 absolute translate-y-5 left-1/2 -translate-x-1/2">
+              예약하기
+            </Link>
           </div>
         </nav>
       </div>

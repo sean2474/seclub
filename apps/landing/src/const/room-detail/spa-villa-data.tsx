@@ -7,15 +7,23 @@ export const spaVillaData: RoomInfo = {
   subtitle: "자쿠지",
   heroImage: "/images/room/spa-villa/hero.jpg",
   mainImages: [
-    "/images/room/spa-villa/main-1.jpg", 
-    "/images/room/spa-villa/main-2.jpg", 
+    "/images/room/spa-villa/main-1.png", 
+    "/images/room/spa-villa/main-2.jpeg", 
     "/images/room/spa-villa/main-3.jpg", 
     "/images/room/spa-villa/main-4.jpg", 
+    "/images/room/spa-villa/main-5.jpg", 
+    "/images/room/spa-villa/main-6.jpg", 
   ],
   overview: (
-    <p>SE CLUB 오션 스파빌라는 다락방이 있는 <span className="text-green-900 font-semibold">2층 복층형 단독주택</span>으로, 넓은 <span className="text-green-900 font-semibold">테라스</span>와 프라이빗 야외 <span className="text-green-900 font-semibold">자쿠지 스파</span>를 갖추어 바다와 산, 별빛을 배경으로 온전한 휴식을 선사하며, 평일·주말 모두 <span className="text-green-900 font-semibold">장기 숙박</span>이 가능합니다. 개별 <span className="text-green-900 font-semibold">바비큐 화덕</span>과 완비된 주방·세면도구로 편리함까지 더한 특별한 힐링 공간을 경험해 보세요.</p>
+    <p>SE CLUB 오션 스파빌라는 다락방이 있는 2층 복층형 단독주택으로, <span className="text-green-900 font-semibold">넓은 테라스</span>와 프라이빗 야외 <span className="text-green-900 font-semibold">자쿠지 스파</span>가 마련된 힐링 공간입니다. 바다와 산, 별빛을 배경으로 온전한 휴식을 즐길 수 있으며, <span className="text-green-900 font-semibold">개별 바비큐 화덕</span>과 <span className="text-green-900 font-semibold">완비된 주방</span>, 세면도구까지 갖추어 편안함과 낭만을 모두 누릴 수 있습니다
+</p>
   ),
   amenities: [
+    {
+      img: "/images/room/spa-villa/kitchen.jpeg",
+      title: "주방",
+      description: "개별 주방 (냉장고, 전자레인지, 전기밥솥, 커피포트 등)",
+    },
     {
       img: "/images/room/spa-villa/grill.jpeg",
       title: "바비큐 그릴",
@@ -26,11 +34,6 @@ export const spaVillaData: RoomInfo = {
       title: "자쿠지",
       description: "개별 자쿠지 (계절 관계없이 사용 가능)",
     }, 
-    {
-      img: "/images/room/spa-villa/kitchen.jpg",
-      title: "주방",
-      description: "개별 주방 (냉장고, 전자레인지, 전기밥솥, 커피포트 등)",
-    }
   ],
   features: [
     { icon: BedDouble, label: '침대 개수', value: '2개' },

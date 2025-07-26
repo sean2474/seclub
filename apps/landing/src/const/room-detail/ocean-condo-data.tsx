@@ -7,12 +7,19 @@ export const oceanCondoData: RoomInfo = {
   subtitle: "호텔형",
   heroImage: "/images/room/ocean-condo/hero.jpg",
   mainImages: [
-    "/images/room/ocean-condo/main-1.jpg", 
+    "/images/room/ocean-condo/main-1.png", 
+    "/images/room/ocean-condo/main-2.jpeg", 
+    "/images/room/ocean-condo/main-3.png", 
   ],
   overview: (
-    <p>SE CLUB 오션콘도는 탁 트인 <span className="text-green-900 font-semibold">바다전망</span>과 황홀한 낙조를 객실에서 감상할 수 있는 호텔형 콘도로, 모두 <span className="text-green-900 font-semibold">장기 숙박</span>이 가능합니다. 실내 주방 외에 <span className="text-green-900 font-semibold">야외 베란다 인덕션</span>과 테이블을 갖춰 바다·산·별빛을 배경으로 요리할 수 있으며, 확장형 객실에서는 <span className="text-green-900 font-semibold">무료 숯불 화덕 바비큐</span>도 즐길 수 있습니다.</p>
+    <p>SE CLUB 오션콘도는 탁 트인 바다 전망과 황홀한 노을을 객실에서 감상할 수 있는 콘도입니다. <span className="text-green-900 font-semibold">실내 주방</span>과 <span className="text-green-900 font-semibold">야외 인덕션</span> 테이블이 마련되어 있어 바다와 산, 별빛을 배경으로 낭만적인 요리를 즐길 수 있습니다.</p>
   ),
   amenities: [
+    {
+      img: "/images/room/ocean-condo/kitchen.jpg",
+      title: "주방",
+      description: "개별 주방 (냉장고, 전자레인지, 전기밥솥, 커피포트 등)",
+    }, 
     {
       img: "/images/room/ocean-condo/grill.jpg",
       title: "바비큐 그릴",
@@ -25,8 +32,8 @@ export const oceanCondoData: RoomInfo = {
     }
   ],
   features: [
-    { icon: BedDouble, label: '침대 개수', value: '1~2개' },
-    { icon: Users,     label: '인원',     value: '2~6인' },
+    { icon: BedDouble, label: '침대 개수', value: '1개' },
+    { icon: Users,     label: '인원',     value: '2~4인' },
     { icon: Car,       label: '차량 주차',  value: '독채당 1대 무료' },
     { icon: Clock,     label: '체크인/아웃', value: '15:00 / 11:00' },
   ],

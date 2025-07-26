@@ -51,10 +51,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <Head />
       <body
-        className={`$antialiased font-pretendard font-thin`}
+        className={`antialiased font-pretendard font-[400]`}
       >
         <Header />
         {children}
