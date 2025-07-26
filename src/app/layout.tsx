@@ -53,9 +53,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <Head />
-      <body
-        className={`antialiased font-pretendard font-[400]`}
-      >
+      <body className={`antialiased font-pretendard font-[400]`} suppressHydrationWarning>
         <Header />
         {children}
         <Footer />

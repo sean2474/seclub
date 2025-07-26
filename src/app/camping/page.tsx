@@ -109,7 +109,7 @@ const siteData: SiteData[] = [
 const siteCategories = ["All", "S", "A", "B", "C", "D", "E", "F", "G", "H", "K", "전망", "반려견"]
 
 export default function SeclubElegantGuidePage() {
-  const [activeCategory, setActiveCategory] = useState("All")
+  const [activeCategory, setActiveCategory] = useState("S")
   const [openedSite, setOpenedSite] = useState<string | null>(null)
 
   const filteredSites =
@@ -120,9 +120,85 @@ export default function SeclubElegantGuidePage() {
         )
 
   return (
-    <div className="min-h-screen font-sans mt-[var(--header-height-expanded)] pt-10">
-      <main>
-        <section id="overview" className="px-8 md:px-12 pb-16 md:pb-20">
+    <div className="min-h-screen font-sans">
+      <section className="fixed -z-10 top-0 h-svh w-full overflow-x-hidden">
+        <Image src={"/images/landing/hero-4.jpeg"} sizes="100vw" alt={"SE클럽 객실 전경"} fill className="object-cover" />
+        <div className="z-10 absolute w-full h-full top-0 left-0 bg-black/30" />
+        <div className="z-10 absolute top-1/2 left-1/2 md:left-1/4 transform -translate-x-1/2 -translate-y-1/2 text-background whitespace-nowrap">
+          <ScrollReveal side="top" type="h1"> SE클럽 캠핑 사이트 </ScrollReveal>
+          <ScrollReveal side="bottom" type="p" className="text-xl md:text-2xl mt-4"> 아름다운 경관과 함께하는 힐링 </ScrollReveal>
+        </div>
+      </section>
+      <main className="translate-y-[100svh] mb-[100svh]">
+        <section id="sites" className="px-8 md:px-12 pb-12 pt-4 md:pt-8 bg-background">
+          <div className="flex justify-between items-end mb-8">
+            <h2 className="font-serif text-3xl md:text-4xl">Site Information</h2>
+          </div>
+
+          <div className="flex space-x-2 mb-8 pb-2 -mx-8 px-8 flex-wrap gap-y-2">
+            {siteCategories.map((category) => (
+              <Button
+                key={category}
+                variant="ghost"
+                onClick={() => setActiveCategory(category)}
+                className={`rounded-full px-4 py-2 text-sm transition-colors duration-200 whitespace-nowrap ${
+                  activeCategory === category
+                    ? "bg-stone-800 text-white hover:bg-stone-700"
+                    : "bg-white text-stone-600 hover:bg-stone-200"
+                }`}
+              >
+                {category === "반려견" ? "반려견 전용" : category}
+              </Button>
+            ))}
+          </div>
+
+          <Modal>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+              {filteredSites.map((site) => (
+                <div key={site.id} className="group relative">
+                  <div className="overflow-hidden mb-4">
+                    <Image
+                      src={site.image}
+                      alt={site.title}
+                      width={600}
+                      height={700}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
+                  <h3 className="text-2xl">{site.title}</h3>
+                  <p className="mt-1 mb-3">{site.features.join(" · ")}</p>
+                  <div className="flex flex-wrap gap-2 text-xs">
+                    {site.allowed &&
+                      site.allowed.map((item) => (
+                        <div
+                          key={item}
+                          className="flex items-center gap-1 bg-green-100 text-green-800 px-2 py-1 rounded-full"
+                        >
+                          <Check className="w-3 h-3" /> {item}
+                        </div>
+                      ))}
+                    {site.disallowed &&
+                      site.disallowed.map((item) => (
+                        <div
+                          key={item}
+                          className="flex items-center gap-1 bg-red-100 text-red-800 px-2 py-1 rounded-full"
+                        >
+                          <Ban className="w-3 h-3" /> {item}
+                        </div>
+                      ))}
+                  </div>
+                  <ModalTrigger className="mt-4 justify-start h-auto flex items-center cursor-pointer" onClick={() => setOpenedSite(site.id)}>
+                    사이트 및 주차 배치도 보기 <ArrowRight className="w-4 h-4 ml-2" />
+                  </ModalTrigger>
+                </div>
+              ))}
+            </div>
+            <ModalBody>
+              <Image src={"/images/site/map/" + openedSite + " site.png"} alt={openedSite || ""} width={800} height={600} />
+            </ModalBody>
+          </Modal>
+        </section>
+        <section id="overview" className="bg-beige px-8 md:px-12 pb-16 md:pb-20 pt-12">
           <ScrollReveal type="h2" side="left" className="text-3xl md:text-4xl mb-8 font-serif">Overview & Packages</ScrollReveal>
           <Modal>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -255,75 +331,6 @@ export default function SeclubElegantGuidePage() {
                 </Link>
               </ScrollReveal>
             </div>
-          </Modal>
-        </section>
-
-        <section id="sites" className="bg-beige px-8 md:px-12 pb-24 pt-12 md:pt-16">
-          <div className="flex justify-between items-end mb-8">
-            <h2 className="font-serif text-3xl md:text-4xl">Site Information</h2>
-          </div>
-
-          <div className="flex space-x-2 mb-8 pb-2 -mx-8 px-8 flex-wrap gap-y-2">
-            {siteCategories.map((category) => (
-              <Button
-                key={category}
-                variant="ghost"
-                onClick={() => setActiveCategory(category)}
-                className={`rounded-full px-4 py-2 text-sm transition-colors duration-200 whitespace-nowrap ${
-                  activeCategory === category
-                    ? "bg-stone-800 text-white hover:bg-stone-700"
-                    : "bg-white text-stone-600 hover:bg-stone-200"
-                }`}
-              >
-                {category === "반려견" ? "반려견 전용" : category}
-              </Button>
-            ))}
-          </div>
-
-          <Modal>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-              {filteredSites.map((site) => (
-                <div key={site.id} className="group relative">
-                  <div className="overflow-hidden mb-4">
-                    <Image
-                      src={site.image}
-                      alt={site.title}
-                      width={600}
-                      height={700}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </div>
-                  <h3 className="text-2xl">{site.title}</h3>
-                  <p className="mt-1 mb-3">{site.features.join(" · ")}</p>
-                  <div className="flex flex-wrap gap-2 text-xs">
-                    {site.allowed &&
-                      site.allowed.map((item) => (
-                        <div
-                          key={item}
-                          className="flex items-center gap-1 bg-green-100 text-green-800 px-2 py-1 rounded-full"
-                        >
-                          <Check className="w-3 h-3" /> {item}
-                        </div>
-                      ))}
-                    {site.disallowed &&
-                      site.disallowed.map((item) => (
-                        <div
-                          key={item}
-                          className="flex items-center gap-1 bg-red-100 text-red-800 px-2 py-1 rounded-full"
-                        >
-                          <Ban className="w-3 h-3" /> {item}
-                        </div>
-                      ))}
-                  </div>
-                  <ModalTrigger className="mt-4 justify-start h-auto flex items-center cursor-pointer" onClick={() => setOpenedSite(site.id)}>
-                    사이트 및 주차 배치도 보기 <ArrowRight className="w-4 h-4 ml-2" />
-                  </ModalTrigger>
-                </div>
-              ))}
-            </div>
-            <ModalBody>
-              <Image src={"/images/site/map/" + openedSite + " site.png"} alt={openedSite || ""} width={800} height={600} />
-            </ModalBody>
           </Modal>
         </section>
       </main>

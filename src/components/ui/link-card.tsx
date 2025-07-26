@@ -14,7 +14,7 @@ export const LinkCard = ({ items, title, description, image, className }: CardPr
       <div className="relative h-[250px] sm:h-[350px] md:h-[300px] w-full">
         <Image src={image} alt={title} fill className="object-cover" />
       </div>
-      <div className="p-4 flex flex-col justify-start sm:justify-between sm:items-center sm:flex-row">
+      <div className="p-4 flex justify-between items-center flex-wrap">
         <div className="flex flex-col gap-1 md:gap-2">
           <h2 className="text-xl md:text-2xl font-bold">{title}</h2>
           <p className="text-sm md:text-base">{description}</p>
