@@ -12,12 +12,12 @@ export const roomData: CardData[] = [
   },
   {
     slug: "ocean-condo",
-    title: "오션 콘도",
+    title: "오션 콘도 Standard",
     image: "/images/room/ocean-condo/hero.jpg",
     description: "호텔형",
     items: [
-      { title: "오션 콘도 기본형", href: "/rooms/ocean-condo" },
-      { title: "오션 콘도 확장형", href: "/rooms/ocean-condo-extended" }
+      { title: "오션 콘도 Standard", href: "/rooms/ocean-condo" },
+      { title: "오션 콘도 Delux", href: "/rooms/ocean-condo-extended" }
     ]
   },
   {

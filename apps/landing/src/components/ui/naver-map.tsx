@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { HTMLAttributes, ReactNode } from "react";
 import React, { useEffect, useRef, useState } from "react";
 import { MapNaver } from "@/types/map";
 import { Coordinates } from "@/types/store";
@@ -149,12 +151,35 @@ export function NaverMap({
     }, 100);
   }, [scriptLoaded, isVisible, mapId, onMapLoad]);
 
+  // 맵 정리 함수
   useEffect(() => {
     return () => {
-      if (mapRef === null || mapRef.current === null) return;
-      mapRef.current.destroy();
+      try {
+        // 맵 DOM 요소 참조 정리
+        const mapDiv = document.getElementById(mapId);
+        if (mapDiv) {
+          // DOM 요소 초기화
+          mapDiv.innerHTML = '';
+        }
+        
+        // 맵 인스턴스 정리 시도
+        if (mapRef.current) {
+          // 명시적으로 null 할당 전에 destroy 호출
+          try {
+            // @ts-ignore - 네이버 맵 API에서는 destroy가 함수로 존재함
+            mapRef.current.destroy();
+          } catch (destroyError) {
+            console.warn('맵 destroy 중 오류:', destroyError);
+          }
+          
+          // 참조 정리
+          mapRef.current = null;
+        }
+      } catch (error) {
+        console.error('맵 정리 중 오류:', error);
+      }
     };
-  }, []);
+  }, [mapId]);
 
   return (
     <div

@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div>
       {/* 히어로 섹션 */}
-      <section className="fixed top-0 h-svh w-full overflow-x-hidden text-background">
+      <section className="fixed top-0 h-svh w-full overflow-x-hidden text-background" suppressHydrationWarning>
         <HeroImage images={[
           '/images/landing/hero-2.jpeg',
           '/images/landing/hero-5.jpg',
@@ -29,13 +29,13 @@ export default function Home() {
             완벽한 휴식
           </ScrollReveal>
           <ScrollReveal side="bottom" className="ml-1">
-            <Link href={"https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP"} target="_blank" className="border border-background pl-5 pr-2.5 py-3 bg-background text-foreground hover:text-background hover:bg-transparent hover:font-medium transition-all duration-300 text-md flex items-center gap-2 rounded-xs">
+            <Link href={"https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP"} target="_blank" className="border border-background pl-4 pr-1.5 py-2 text-sm md:pl-5 md:pr-2.5 md:py-3 bg-background text-foreground hover:text-background hover:bg-transparent hover:font-medium transition-all duration-300 md:text-md flex items-center gap-2 rounded-xs">
               지금 예약하기 <ChevronRight strokeWidth={1} />
             </Link>
           </ScrollReveal>
         </div>
       </section>
-      <main className="flex flex-col min-h-screen overflow-x-hidden translate-y-[100svh] mb-[100svh]">
+      <main className="flex flex-col min-h-screen overflow-x-hidden translate-y-[100svh] mb-[100svh]" suppressHydrationWarning>
         {/* 소개 섹션 */}
         <section className="py-16 md:py-32 w-full center bg-background relative">
           <div className="grid grid-cols-1 md:grid-cols-2 md:gap-12 items-center max-w-4xl mx-4">
@@ -117,24 +117,86 @@ export default function Home() {
           <div className="w-full max-w-4xl divide-y pb-10 md:pb-20">
             <ScrollReveal side="left" type="h2" className="font-serif font-bold pb-10">Stay & Lodge</ScrollReveal>
             <div className="divide-y">
-              {roomData.map((item, idx) => (
-                <ScrollReveal side="left" delay={`${idx * 100}ms`} revealHeight={`${idx * 10 - 10}%`} key={idx} className="relative">
-                  <Link className="group" href={`/rooms/${item.slug}`}>
-                    <div className="relative w-full h-24 md:h-32">
-                      <Image src={item.image} alt={item.title} fill className="object-cover group-hover:opacity-100 group-active:opacity-100 opacity-1 transition-all duration-300" />
+              <ScrollReveal side="left" delay="0ms" revealHeight="10%" className="relative">
+                <Link className="group" href={`/rooms/${roomData[0].slug}`}>
+                  <div className="relative w-full h-24 md:h-32">
+                    <Image src={roomData[0].image} alt={roomData[0].title} fill className="object-cover group-hover:opacity-100 group-active:opacity-100 opacity-1 transition-all duration-300" />
+                  </div>
+                  <div className="absolute w-full h-full top-0 left-0 flex justify-between items-center group-hover:text-white group-active:text-white p-4 md:p-10">
+                    <div>
+                      <h3 className="text-xl font-semibold group-hover:text-2xl">{roomData[0].title}</h3>
+                      <p className="text-sm group-hover:text-base group-active:text-base">{roomData[0].description}</p>
                     </div>
-                    <div className="absolute w-full h-full top-0 left-0 flex justify-between items-center group-hover:text-white group-active:text-white p-4 md:p-10">
-                      <div>
-                        <h3 className="text-xl font-semibold group-hover:text-2xl">{item.title}</h3>
-                        <p className="text-sm group-hover:text-base group-active:text-base">{item.description}</p>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        자세히보기 <ChevronRight strokeWidth={1} />
-                      </div>
+                    <div className="flex items-center gap-2">
+                      자세히보기 <ChevronRight strokeWidth={1} />
                     </div>
-                  </Link>
-                </ScrollReveal>
-              ))}
+                  </div>
+                </Link>
+              </ScrollReveal>
+              <ScrollReveal side="left" delay="0ms" revealHeight="10%" className="relative">
+                <Link className="group" href={`/rooms/${roomData[1].slug}`}>
+                  <div className="relative w-full h-24 md:h-32">
+                    <Image src={roomData[1].image} alt={roomData[1].title} fill className="object-cover group-hover:opacity-100 group-active:opacity-100 opacity-1 transition-all duration-300" />
+                  </div>
+                  <div className="absolute w-full h-full top-0 left-0 flex justify-between items-center group-hover:text-white group-active:text-white p-4 md:p-10">
+                    <div>
+                      <h3 className="text-xl font-semibold group-hover:text-2xl">{roomData[1].title}</h3>
+                      <p className="text-sm group-hover:text-base group-active:text-base">{roomData[1].description}</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      자세히보기 <ChevronRight strokeWidth={1} />
+                    </div>
+                  </div>
+                </Link>
+              </ScrollReveal>
+              <ScrollReveal side="left" delay="0ms" revealHeight="10%" className="relative">
+                <Link className="group" href={`/rooms/${roomData[1].items[1].href}`}>
+                  <div className="relative w-full h-24 md:h-32">
+                    <Image src={roomData[1].image} alt={roomData[1].items[1].title} fill className="object-cover group-hover:opacity-100 group-active:opacity-100 opacity-1 transition-all duration-300" />
+                  </div>
+                  <div className="absolute w-full h-full top-0 left-0 flex justify-between items-center group-hover:text-white group-active:text-white p-4 md:p-10">
+                    <div>
+                      <h3 className="text-xl font-semibold group-hover:text-2xl">{roomData[1].items[1].title}</h3>
+                      <p className="text-sm group-hover:text-base group-active:text-base">{roomData[1].description}</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      자세히보기 <ChevronRight strokeWidth={1} />
+                    </div>
+                  </div>
+                </Link>
+              </ScrollReveal>
+              <ScrollReveal side="left" delay="0ms" revealHeight="10%" className="relative">
+                <Link className="group" href={`/rooms/${roomData[2].slug}`}>
+                  <div className="relative w-full h-24 md:h-32">
+                    <Image src={roomData[2].image} alt={roomData[2].title} fill className="object-cover group-hover:opacity-100 group-active:opacity-100 opacity-1 transition-all duration-300" />
+                  </div>
+                  <div className="absolute w-full h-full top-0 left-0 flex justify-between items-center group-hover:text-white group-active:text-white p-4 md:p-10">
+                    <div>
+                      <h3 className="text-xl font-semibold group-hover:text-2xl">{roomData[2].title}</h3>
+                      <p className="text-sm group-hover:text-base group-active:text-base">{roomData[2].description}</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      자세히보기 <ChevronRight strokeWidth={1} />
+                    </div>
+                  </div>
+                </Link>
+              </ScrollReveal>
+              <ScrollReveal side="left" delay="0ms" revealHeight="10%" className="relative">
+                <Link className="group" href={`/rooms/${roomData[3].slug}`}>
+                  <div className="relative w-full h-24 md:h-32">
+                    <Image src={roomData[3].image} alt={roomData[3].title} fill className="object-cover group-hover:opacity-100 group-active:opacity-100 opacity-1 transition-all duration-300" />
+                  </div>
+                  <div className="absolute w-full h-full top-0 left-0 flex justify-between items-center group-hover:text-white group-active:text-white p-4 md:p-10">
+                    <div>
+                      <h3 className="text-xl font-semibold group-hover:text-2xl">{roomData[3].title}</h3>
+                      <p className="text-sm group-hover:text-base group-active:text-base">{roomData[3].description}</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      자세히보기 <ChevronRight strokeWidth={1} />
+                    </div>
+                  </div>
+                </Link>
+              </ScrollReveal>
             </div>
           </div>
         </section>

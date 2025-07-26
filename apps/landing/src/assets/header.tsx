@@ -128,9 +128,10 @@ export const Header = () => {
                 <Link
                   href={item.href || "#"}
                   key={idx}
-                  className="leading-6 px-3 py-2 hover:text-primary"
+                  className="leading-6 px-3 py-2 hover:text-primary relative"
                 >
                   {item.name}
+                  {item.href === "/notices" && <div className="opacity-90 absolute rounded-full bg-primary text-white w-5 h-5 text-xs flex center top-1/2 -right-3 -translate-y-1/2">N</div>}
                 </Link>
               )
             )}
@@ -189,7 +190,7 @@ export const Header = () => {
                   <div key={index} className="border-b border-foreground">
                     <button
                       type="button"
-                      className="text-lg font-medium py-4 w-full text-left flex justify-between items-center px-4"
+                      className="text-lg font-medium py-4 w-full text-left flex justify-between items-center px-4 relative"
                       onClick={() => {
                         if (section.items) {
                           toggleSection(index)
@@ -201,6 +202,7 @@ export const Header = () => {
                     >
                       {section.title}
                       {section.items && <PlusMinusIcon open={openSection === index} size={0.5} />}
+                      {section.href === "/notices" && <div className="opacity-90 absolute rounded-full bg-primary text-white w-5 h-5 text-xs flex center top-1/2 left-26 -translate-y-1/2">N</div>}
                     </button>
 
                     {/* 아코디언 영역 */}
