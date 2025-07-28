@@ -1,5 +1,6 @@
 import { Arrow } from "@/components/icon/arrow"
-import Image from "next/image"
+// import Image from "next/image"
+import Link from "next/link"
 
 export const Footer = () => {
   return (
@@ -43,11 +44,11 @@ export const Footer = () => {
           </div>
         </div>
         <div className="flex flex-col gap-5 relative z-20 justify-start w-full md:w-auto md:h-1/2 mt-1 order-3 text-sm md:text-base">
-          <div className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">찾아오시는 길 <Arrow side="right" size={5} /> </div>
-          <div className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">이용안내 <Arrow side="right" size={5} /> </div>
-          <div className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">예약안내 <Arrow side="right" size={5} /> </div>
-          <div className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">개인정보처리방침 <Arrow side="right" size={5} /> </div>
-          <div className="mt-3 md:mt-10">
+          <Link href="/about/location" className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">찾아오시는 길 <Arrow side="right" size={5} /> </Link>
+          <Link href="/reservation" className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">예약안내 <Arrow side="right" size={5} /> </Link>
+          <Link href="/reservation/pricing" className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">요금안내 <Arrow side="right" size={5} /> </Link>
+          <Link href="/privacy-policy.html" className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">개인정보처리방침 <Arrow side="right" size={5} /> </Link>
+          {/* <div className="mt-3 md:mt-10">
             <div className="flex gap-4 h-10">
               <div className="bg-background/50 rounded-full size-6 center">
                 <Image src="/icons/instagram.png" alt="logo" width={16} height={16} className="cursor-pointer aspect-square hover:scale-110 transition-all duration-500"/>
@@ -62,7 +63,7 @@ export const Footer = () => {
                 <Image src="/icons/twitter.avif" alt="logo" width={16} height={16} className="cursor-pointer aspect-square rounded hover:scale-110 transition-all duration-500"/>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="md:hidden text-xs mb-10">
             &copy; {new Date().getFullYear()} SECLUB. All rights reserved.
           </div>

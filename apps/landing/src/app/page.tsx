@@ -1,6 +1,5 @@
 import HeroImage from "@/assets/hero-image";
 import { ScrollReveal } from "@/components/base/scroll-reveal";
-import { Button } from "@/components/ui/button";
 import { ImageSlider } from "@/components/ui/image-slider";
 import { NaverMap } from "@/components/ui/naver-map";
 import { roomData } from "@/const/room-data";

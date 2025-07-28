@@ -2,6 +2,33 @@ import { CardData } from "@/types";
 
 export const wellnessData: CardData[] = [
   {
+    slug: "nature-experience",
+    title: "자연 체험 프로그램",
+    image: "/images/wellness/nature-experience/hero.jpg",
+    description: "생태 관찰 및 자연 체험",
+    items: [
+      { title: "자연 체험", href: "/wellness/nature-experience" }
+    ]
+  },
+  {
+    slug: "special-activity",
+    title: "조각공원",
+    image: "/images/wellness/special-activity/hero.jpg",
+    description: "예술과 자연이 어우러진 조각공원",
+    items: [
+      { title: "조각공원", href: "/wellness/special-activity" }
+    ]
+  },
+  {
+    slug: "photo-spot",
+    title: "포토스팟",
+    image: "/images/wellness/photo-spot/hero.jpg",
+    description: "환상적인 바다 전망 포토존",
+    items: [
+      { title: "포토스팟", href: "/wellness/photo-spot" }
+    ]
+  },
+  {
     slug: "walk",
     title: "산책로",
     image: "/images/wellness/walk/hero.jpg",
@@ -21,24 +48,6 @@ export const wellnessData: CardData[] = [
     ]
   },
   {
-    slug: "photo-spot",
-    title: "포토스팟",
-    image: "/images/wellness/photo-spot/hero.jpg",
-    description: "환상적인 바다 전망 포토존",
-    items: [
-      { title: "포토스팟", href: "/wellness/photo-spot" }
-    ]
-  },
-  {
-    slug: "nature-experience",
-    title: "자연 체험 프로그램",
-    image: "/images/wellness/nature-experience/hero.jpg",
-    description: "생태 관찰 및 자연 체험",
-    items: [
-      { title: "자연 체험", href: "/wellness/nature-experience" }
-    ]
-  },
-  {
     slug: "facility",
     title: "부대시설",
     image: "/images/wellness/facility/hero.jpg",
@@ -48,13 +57,4 @@ export const wellnessData: CardData[] = [
       { title: "세미나실(공연장)", href: "/wellness/seminar-room" }
     ]
   },
-  {
-    slug: "special-activity",
-    title: "조각공원",
-    image: "/images/wellness/special-activity/hero.jpg",
-    description: "예술과 자연이 어우러진 조각공원",
-    items: [
-      { title: "조각공원", href: "/wellness/special-activity" }
-    ]
-  }
 ];

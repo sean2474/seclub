@@ -10,12 +10,16 @@ export const menuItems: HeaderMenuType[] = [
         href: "/about"
       },
       {
-        name: "경관",
+        name: "갤러리",
         href: "/about/gallery"
       },
       {
+        name: "영상 갤러리",
+        href: "/about/video"
+      },
+      {
         name: "오시는길",
-        href: "/about/directions"
+        href: "/about/location"
       },
     ]
   },

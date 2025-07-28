@@ -112,7 +112,7 @@ export default function GroupReservationPage() {
                 </TableRow>
               </TableBody>
             </Table>
-            <p className="text-sm text-gray-600 mt-2 md:mt-4 text-right">
+            <p className="text-sm text-gray-600 md:mt-2 text-right">
               * 동(호실)별 최대 인원 이용 시 침구류 등은 추가로 세팅됩니다.
             </p>
           </div>

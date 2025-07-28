@@ -1,7 +1,5 @@
 "use client";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import type { HTMLAttributes, ReactNode } from "react";
 import React, { useEffect, useRef, useState } from "react";
 import { MapNaver } from "@/types/map";
 import { Coordinates } from "@/types/store";
@@ -155,18 +153,13 @@ export function NaverMap({
   useEffect(() => {
     return () => {
       try {
-        // 맵 DOM 요소 참조 정리
         const mapDiv = document.getElementById(mapId);
         if (mapDiv) {
-          // DOM 요소 초기화
           mapDiv.innerHTML = '';
         }
         
-        // 맵 인스턴스 정리 시도
         if (mapRef.current) {
-          // 명시적으로 null 할당 전에 destroy 호출
           try {
-            // @ts-ignore - 네이버 맵 API에서는 destroy가 함수로 존재함
             mapRef.current.destroy();
           } catch (destroyError) {
             console.warn('맵 destroy 중 오류:', destroyError);
