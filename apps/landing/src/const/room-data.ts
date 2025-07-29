@@ -11,6 +11,15 @@ export const roomData: CardData[] = [
     ]
   },
   {
+    slug: "premium-villa",
+    title: "프리미엄 빌라",
+    image: "/images/room/premium-villa/hero.jpeg",
+    description: "호텔형",
+    items: [
+      { title: "프리미엄 빌라", href: "/rooms/premium-villa" }
+    ]
+  },
+  {
     slug: "ocean-condo",
     title: "오션 콘도 Standard",
     image: "/images/room/ocean-condo/hero.jpg",

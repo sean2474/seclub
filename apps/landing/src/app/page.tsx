@@ -149,14 +149,30 @@ export default function Home() {
                 </Link>
               </ScrollReveal>
               <ScrollReveal side="left" delay="0ms" revealHeight="10%" className="relative">
-                <Link className="group" href={`/rooms/${roomData[1].items[1].href}`}>
+                <Link className="group" href={`/rooms/${roomData[2].slug}`}>
                   <div className="relative w-full h-24 md:h-32">
-                    <Image src={roomData[1].image} alt={roomData[1].items[1].title} fill className="object-cover group-hover:opacity-100 group-active:opacity-100 opacity-1 transition-all duration-300" />
+                    <Image src={roomData[2].image} alt={roomData[2].title} fill className="object-cover group-hover:opacity-100 group-active:opacity-100 opacity-1 transition-all duration-300" />
                   </div>
                   <div className="absolute w-full h-full top-0 left-0 flex justify-between items-center group-hover:text-white group-active:text-white p-4 md:p-10">
                     <div>
-                      <h3 className="text-xl font-semibold group-hover:text-2xl">{roomData[1].items[1].title}</h3>
-                      <p className="text-sm group-hover:text-base group-active:text-base">{roomData[1].description}</p>
+                      <h3 className="text-xl font-semibold group-hover:text-2xl">{roomData[2].title}</h3>
+                      <p className="text-sm group-hover:text-base group-active:text-base">{roomData[2].description}</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      자세히보기 <ChevronRight strokeWidth={1} />
+                    </div>
+                  </div>
+                </Link>
+              </ScrollReveal>
+              <ScrollReveal side="left" delay="0ms" revealHeight="10%" className="relative">
+                <Link className="group" href={`/rooms/${roomData[2].items[1].href}`}>
+                  <div className="relative w-full h-24 md:h-32">
+                    <Image src={roomData[2].image} alt={roomData[2].items[1].title} fill className="object-cover group-hover:opacity-100 group-active:opacity-100 opacity-1 transition-all duration-300" />
+                  </div>
+                  <div className="absolute w-full h-full top-0 left-0 flex justify-between items-center group-hover:text-white group-active:text-white p-4 md:p-10">
+                    <div>
+                      <h3 className="text-xl font-semibold group-hover:text-2xl">{roomData[2].items[1].title}</h3>
+                      <p className="text-sm group-hover:text-base group-active:text-base">{roomData[2].description}</p>
                     </div>
                     <div className="flex items-center gap-2">
                       자세히보기 <ChevronRight strokeWidth={1} />
