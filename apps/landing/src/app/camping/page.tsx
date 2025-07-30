@@ -62,8 +62,8 @@ export default function SeclubElegantGuidePage() {
                     <Image
                       src={site.image}
                       alt={site.title}
-                      width={600}
-                      height={700}
+                      width={300}
+                      height={200}
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>

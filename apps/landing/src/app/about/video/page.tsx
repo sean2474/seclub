@@ -11,6 +11,7 @@ type Video = {
   title: string
 }
 
+// TODO: DB connect
 const videos: Video[] = [
   { id: "GWQziHmK9A4", title: "조각공원" },
   { id: "WOpqyDl0XiY", title: "풀빌라" },
