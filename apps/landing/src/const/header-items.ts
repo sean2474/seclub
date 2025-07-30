@@ -25,7 +25,17 @@ export const menuItems: HeaderMenuType[] = [
   },
   {
     title: "캠핑장",
-    href: "/camping"
+    href: "/camping",
+    items: [
+      {
+        name: "캠핑 사이트",
+        href: "/camping"
+      },
+      {
+        name: "이용안내",
+        href: "/camping/rule"
+      },
+    ]
   },
   {
     title: "객실",
