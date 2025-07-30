@@ -4,7 +4,7 @@ import { BedDouble, Clock, DoorClosed, Users } from "lucide-react";
 export const oceanCondoData: RoomInfo = {
   slug: "ocean-condo",
   title: "오션 콘도 스탠다드",
-  subtitle: "호텔형",
+  subtitle: "콘도형",
   heroImage: "/images/room/ocean-condo/hero.jpg",
   mainImages: [
     "/images/room/ocean-condo/main-1.jpg", 

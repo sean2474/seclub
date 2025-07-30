@@ -4,7 +4,7 @@ import { BedDouble, Clock, Dog, DoorClosed, Users } from "lucide-react";
 export const campingHouseData: RoomInfo = {
   slug: "camping-house",
   title: "선셋 캠핑하우스",
-  subtitle: "글램핑/캠핑",
+  subtitle: "캠핑",
   heroImage: "/images/room/camping-house/hero.jpg",
   mainImages: [
     "/images/room/camping-house/main-1.jpg", 

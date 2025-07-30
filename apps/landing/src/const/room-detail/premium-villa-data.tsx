@@ -4,7 +4,7 @@ import { BedDouble, Clock, Dog, DoorClosed, Users } from "lucide-react";
 export const premiumVillaData: RoomInfo = {
   slug: "premium-villa",
   title: "프리미엄 빌라",
-  subtitle: "호텔형",
+  subtitle: "독채형",
   heroImage: "/images/room/premium-villa/hero.jpg",
   mainImages: [
     "/images/room/premium-villa/main-1.jpeg", 
