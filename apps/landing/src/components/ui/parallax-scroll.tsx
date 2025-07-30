@@ -29,14 +29,14 @@ export const ParallaxScroll = ({
       className={cn("items-start overflow-y-auto w-full", className)}
     >
       <div
-        className="grid grid-cols-2 lg:grid-cols-3 items-start max-w-5xl mx-auto gap-10 py-40 px-10"
+        className="grid grid-cols-2 lg:grid-cols-3 items-start max-w-7xl mx-auto gap-10 py-40 px-10"
       >
         <div className="grid gap-10">
           {firstPart.map((el, idx) => (
             <motion.div
               style={{ y: translateFirst }} // Apply the translateY motion value here
               key={"grid-1" + idx}
-              className="h-80 w-full relative"
+              className="w-full relative aspect-[3/2]"
             >
               <Image
                 src={el}
@@ -49,7 +49,7 @@ export const ParallaxScroll = ({
         </div>
         <div className="grid gap-10">
           {secondPart.map((el, idx) => (
-            <motion.div style={{ y: translateSecond }} key={"grid-2" + idx} className="h-80 w-full relative">
+            <motion.div style={{ y: translateSecond }} key={"grid-2" + idx} className="w-full relative aspect-[3/2]">
               <Image
                 src={el}
                 className="object-cover object-left-top rounded-lg gap-10 !m-0 !p-0"
@@ -61,7 +61,7 @@ export const ParallaxScroll = ({
         </div>
         <div className="grid gap-10">
           {thirdPart.map((el, idx) => (
-            <motion.div style={{ y: translateThird }} key={"grid-3" + idx} className="h-80 w-full relative">
+            <motion.div style={{ y: translateThird }} key={"grid-3" + idx} className="w-full relative aspect-[3/2]">
               <Image
                 src={el}
                 className="object-cover object-left-top rounded-lg gap-10 !m-0 !p-0"
