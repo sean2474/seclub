@@ -7,7 +7,7 @@ export const siteData: SiteData[] = [
     features: ["갯바위 낚시 인접", "최적의 오션뷰", "S1·S2 반려견 가능"],
     imageQuery: "serene campsite by the rocky shore at sunset",
     disallowed: ["차박", "카라반", "캠핑카", "루프탑"],
-    image: "/images/site/A.jpg",
+    image: "/images/site/s.jpg",
   },
   {
     id: "A",
@@ -15,7 +15,7 @@ export const siteData: SiteData[] = [
     features: ["바닷가 솔숲 평지", "2해변·낚시터 인접", "반려견 동반 가능"],
     imageQuery: "cozy tent in a pine forest near the beach",
     disallowed: ["차박", "카라반", "캠핑카", "루프탑"],
-    image: "/images/site/A.jpg",
+    image: "/images/site/a.jpg",
   },
   {
     id: "B",
@@ -24,7 +24,7 @@ export const siteData: SiteData[] = [
     imageQuery: "family campsite near a swimming pool and beach",
     allowed: ["카라반", "캠핑카"],
     disallowed: ["차박", "루프탑"],
-    image: "/images/site/A.jpg",
+    image: "/images/site/b.jpg",
   },
   {
     id: "C",
@@ -32,7 +32,7 @@ export const siteData: SiteData[] = [
     features: ["해변 평지형", "독살체험장 인접"],
     imageQuery: "campsite on a flat area next to a calm beach",
     allowed: ["카라반", "캠핑카"],
-    image: "/images/site/A.jpg",
+    image: "/images/site/c.jpg",
   },
   {
     id: "D",
@@ -41,7 +41,7 @@ export const siteData: SiteData[] = [
     imageQuery: "accessible flat campsite with easy access",
     allowed: ["차박", "루프탑"],
     disallowed: ["카라반", "캠핑카"],
-    image: "/images/site/A.jpg",
+    image: "/images/site/d.jpg",
   },
   {
     id: "E",
@@ -49,28 +49,28 @@ export const siteData: SiteData[] = [
     features: ["중앙 평지형", "소형 카라반 가능"],
     imageQuery: "spacious central campsite suitable for small caravans",
     allowed: ["차박", "루프탑", "소형 카라반"],
-    image: "/images/site/A.jpg",
+    image: "/images/site/e.jpg",
   },
   {
     id: "F",
     title: "F 사이트",
     features: ["바닷가 솔숲 테라스", "독살체험장 인접"],
     imageQuery: "tent on a terrace in a pine forest overlooking the sea",
-    image: "/images/site/A.jpg",
+    image: "/images/site/f.jpg",
   },
   {
     id: "G",
     title: "G 사이트",
     features: ["바닷가 솔숲 테라스", "해먹 설치 가능"],
     imageQuery: "hammock between pine trees at a campsite with sea view",
-    image: "/images/site/A.jpg",
+    image: "/images/site/g.jpg",
   },
   {
     id: "H",
     title: "H 사이트",
     features: ["중앙 평지형", "2가족 이용 추천"],
     imageQuery: "two tents set up for a group on a flat grassy area",
-    image: "/images/site/A.jpg",
+    image: "/images/site/h.jpg",
   },
   {
     id: "K",
@@ -78,14 +78,14 @@ export const siteData: SiteData[] = [
     features: ["기본 파쇄석 사이트"],
     imageQuery: "simple gravel campsite area with basic amenities",
     disallowed: ["카라반", "캠핑카"],
-    image: "/images/site/A.jpg",
+    image: "/images/site/k.jpg",
   },
   {
     id: "전망",
     title: "전망 사이트",
     features: ["독립된 데크", "탁 트인 오션뷰·낙조"],
     imageQuery: "wooden deck campsite with a panoramic ocean sunset view",
-    image: "/images/site/A.jpg",
+    image: "/images/site/전망대.jpg",
   },
   {
     id: "반려견",
@@ -93,7 +93,7 @@ export const siteData: SiteData[] = [
     features: ["솔숲 테라스", "반려견 전용"],
     imageQuery: "happy dog playing at a dedicated pet-friendly campsite",
     allowed: ["차박", "루프탑"],
-    image: "/images/site/A.jpg",
+    image: "/images/site/반려견.jpg",
   },
 ]
 

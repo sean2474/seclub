@@ -13,7 +13,8 @@ export const poolVillaData: RoomInfo = {
   mainImages: [
     "/images/room/pool-villa/main-1.jpg", 
     "/images/room/pool-villa/main-2.jpg", 
-    "/images/room/pool-villa/main-3.jpg"
+    "/images/room/pool-villa/main-3.jpg",
+    "/images/room/pool-villa/main-4.jpg"
   ],
   overview: (
     <p>피부 진정과 스트레스 완화에 효과적인 <span className="text-green-900 font-semibold">해수</span>를 사용하는 SE CLUB 해수 풀빌라는, 각 독채마다 <span className="text-green-900 font-semibold">프라이빗 가든</span>과 전용 <span className="text-green-900 font-semibold">풀·스파</span>가 완비된 유니크한 힐링 공간입니다. 외부의 방해 없이 오롯이 나만의 시간을 즐기며 깊은 휴식을 경험할 수 있습니다</p>

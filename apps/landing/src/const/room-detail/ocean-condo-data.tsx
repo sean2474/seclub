@@ -7,8 +7,8 @@ export const oceanCondoData: RoomInfo = {
   subtitle: "호텔형",
   heroImage: "/images/room/ocean-condo/hero.jpg",
   mainImages: [
-    "/images/room/ocean-condo/main-1.png", 
-    "/images/room/ocean-condo/main-2.jpeg", 
+    "/images/room/ocean-condo/main-1.jpg", 
+    "/images/room/ocean-condo/main-2.jpg", 
     "/images/room/ocean-condo/main-3.png", 
   ],
   overview: (

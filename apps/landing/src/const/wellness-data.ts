@@ -50,7 +50,7 @@ export const wellnessData: CardData[] = [
   {
     slug: "facility",
     title: "부대시설",
-    image: "/images/wellness/facility/hero.jpg",
+    image: "/images/wellness/store/hero.jpg",
     description: "카페·라운지 등 편의 시설",
     items: [
       { title: "매점 & 리필스테이션", href: "/wellness/store" },

@@ -54,6 +54,7 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
       "/images/wellness/swimming-pool/2.jpg",
       "/images/wellness/swimming-pool/3.jpg",
       "/images/wellness/swimming-pool/4.jpg",
+      "/images/wellness/swimming-pool/5.jpg",
     ]
   },
 
@@ -159,6 +160,8 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
     ],
     images: [
       "/images/wellness/store/1.jpg",
+      "/images/wellness/store/2.jpg",
+      "/images/wellness/store/3.jpg",
     ]
   },
 
