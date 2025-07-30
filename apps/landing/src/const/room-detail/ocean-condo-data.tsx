@@ -1,5 +1,5 @@
 import { RoomInfo } from "@/types";
-import { BedDouble, Car, Clock, Users } from "lucide-react";
+import { BedDouble, Car, Clock, DoorClosed, Users } from "lucide-react";
 
 export const oceanCondoData: RoomInfo = {
   slug: "ocean-condo",
@@ -32,9 +32,9 @@ export const oceanCondoData: RoomInfo = {
     }
   ],
   features: [
+    { icon: DoorClosed, label: '방 구성', value: '방 · 욕실 · 주방 · 테라스' },
     { icon: BedDouble, label: '침대 개수', value: '1개' },
     { icon: Users,     label: '인원',     value: '2인  (최대 4인)' },
-    { icon: Car,       label: '차량 주차',  value: '독채당 1대 무료' },
     { icon: Clock,     label: '체크인/아웃', value: '15:00 / 11:00' },
   ],
   additionalInfo: [

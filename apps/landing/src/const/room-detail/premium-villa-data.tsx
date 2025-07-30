@@ -1,5 +1,5 @@
 import { RoomInfo } from "@/types";
-import { BedDouble, Car, Clock, Dog, Users } from "lucide-react";
+import { BedDouble, Car, Clock, Dog, DoorClosed, Users } from "lucide-react";
 
 export const premiumVillaData: RoomInfo = {
   slug: "premium-villa",
@@ -15,14 +15,14 @@ export const premiumVillaData: RoomInfo = {
     "/images/room/premium-villa/main-6.jpeg", 
   ],
   overview: (
-    <p>SE CLUB 오션콘도는 탁 트인 바다 전망과 황홀한 노을을 객실에서 감상할 수 있는 콘도입니다. <span className="text-green-900 font-semibold">실내 주방</span>과 <span className="text-green-900 font-semibold">야외 인덕션</span> 테이블, <span className="text-green-900 font-semibold"> 숯불 화덕 바베큐</span>가 마련되어 있어 바다와 산, 별빛을 배경으로 낭만적인 요리를 즐길 수 있습니다.</p>
+    <p>SE CLUB 프리미엄 빌라는 탁 트인 바다 전망과 황홀한 노을을 객실에서 감상할 수 있는 빌라입니다. <span className="text-green-900 font-semibold">실내 주방</span>과 <span className="text-green-900 font-semibold">야외 바비큐 그릴</span>이 마련되어 있어 바다와 산, 별빛을 배경으로 낭만적인 요리를 즐길 수 있습니다.</p>
   ),
   amenities: [
     // {
     //   img: "/images/room/premium-villa/kitchen.jpg",
     //   title: "주방",
     //   description: "개별 주방 (냉장고, 전자레인지, 전기밥솥, 커피포트 등)",
-    // }, 
+    // },  // TODO: 사진받으면 추가하기: 주방, 프라이빗 풀, 욕조 
     {
       img: "/images/room/premium-villa/grill.jpeg",
       title: "바비큐 그릴",
@@ -30,10 +30,10 @@ export const premiumVillaData: RoomInfo = {
     }, 
   ],
   features: [
+    { icon: DoorClosed, label: '방 구성', value: '방 4 · 욕실 2 · 주방 · 테라스 · 풀' },
     { icon: BedDouble, label: '침대 개수', value: '3개' },
     { icon: Users,     label: '인원',     value: '6인' },
     { icon: Dog,       label: '반려견 동반 가능', value: '최대 2마리' },
-    { icon: Car,       label: '차량 주차',  value: '2대 무료' },
     { icon: Clock,     label: '체크인/아웃', value: '15:00 / 11:00' },
   ],
   additionalInfo: [
