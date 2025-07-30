@@ -25,3 +25,7 @@ export interface RoomInfo {
     items: string[];
   }[];
 }
+
+export interface RoomCardProps extends Omit<RoomInfo, 'heroImage' | 'mainImages' | 'overview' | 'amenities' | 'additionalInfo'> {
+  images: string[];
+}

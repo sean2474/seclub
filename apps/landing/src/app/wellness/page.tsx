@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { wellnessData } from "@/const/wellness-data";
-import { LinkCard } from "@/components/ui/link-card";
+import { WellnessLinkCard } from "@/components/ui/wellness-link-card";
 import { ScrollReveal } from "@/components/base/scroll-reveal";
+import { wellnessData } from "@/const/wellness-detail";
 
 export default function Page() {
   return (
@@ -15,12 +15,13 @@ export default function Page() {
         </div>
       </section>
       
-      <section className="py-16 px-4 translate-y-[100svh] mb-[100svh] bg-background" suppressHydrationWarning>
-        <ScrollReveal side="top" type="h2" className="text-2xl md:text-4xl font-medium text-center mb-12 font-serif">Overview</ScrollReveal>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10 mx-auto w-full max-w-5xl p-1 md:p-4">
+      <section className="py-4 md:py-16 px-4 translate-y-[100svh] mb-[100svh] bg-background" suppressHydrationWarning>
+        <ScrollReveal side="right" type="h2" className="text-3xl md:text-4xl font-medium text-center mt-8 mb-4 font-serif">Overview</ScrollReveal>
+        <ScrollReveal side="left" type="div" className="text-md md:text-lg font-medium text-center pb-4 md:pb-12 mb-4 md:mb-12 border-b max-w-7xl mx-auto text-foreground/80">탁 트인 자연 속에서 몸과 마음이 모두 쉬어가는 힐링의 시간을 누려보세요</ScrollReveal>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10 mx-auto w-full max-w-5xl">
           {wellnessData.map((wellness, idx) => (
             <ScrollReveal side="left" delay={`${idx * 100}ms`} key={wellness.slug} revealHeight="10%">
-              <LinkCard {...wellness} />
+              <WellnessLinkCard {...wellness} />
             </ScrollReveal>
           ))}
         </div>

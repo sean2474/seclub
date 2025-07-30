@@ -1,6 +1,6 @@
-import { WellnessPageData, WellnessType } from "@/types";
+import { WellnessCardProps, WellnessPageData } from "@/types";
 
-export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
+export const wellnessPageData: Record<string, WellnessPageData> = {
   // 1. 산책로
   walk: {
     header: {
@@ -54,7 +54,6 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
       "/images/wellness/swimming-pool/2.jpg",
       "/images/wellness/swimming-pool/3.jpg",
       "/images/wellness/swimming-pool/4.jpg",
-      "/images/wellness/swimming-pool/5.jpg",
     ]
   },
 
@@ -64,7 +63,7 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
       title: "캠핑장 내 해수 풀장",
       subtitle:
         "캠핑장 구역에 마련된 바닷물 풀장에서 자연 속 해수욕장 같은 물놀이를 즐겨보세요.",
-      type: "해수 풀장",
+      type: "수영장",
       location: "캠핑장 구역",
       hours: "10:00 – 19:00",
       image: "/images/wellness/camping-pool/hero.jpg",
@@ -80,8 +79,8 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
     ],
     images: [
       "/images/wellness/camping-pool/1.jpg",
-      "/images/wellness/camping-pool/2.jpeg",
-      "/images/wellness/camping-pool/3.jpeg",
+      "/images/wellness/camping-pool/2.jpg",
+      "/images/wellness/camping-pool/3.jpg",
     ]
   },
 
@@ -212,3 +211,12 @@ export const wellnessPageData: Record<WellnessType, WellnessPageData> = {
     ]
   }
 }
+
+export const wellnessData: WellnessCardProps[] = Object.keys(wellnessPageData).map((wellness) => ({
+  slug: wellness,
+  title: wellnessPageData[wellness].header.title,
+  type: wellnessPageData[wellness].header.type,
+  location: wellnessPageData[wellness].header.location,
+  hours: wellnessPageData[wellness].header.hours,
+  image: wellnessPageData[wellness].header.image,
+}));

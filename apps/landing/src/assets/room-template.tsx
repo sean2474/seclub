@@ -2,14 +2,14 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
-import { LinkCard } from "@/components/ui/link-card";
+import { RoomsLinkCard } from "@/components/ui/rooms-link-card";
 import { ImageSlider } from "@/components/ui/image-slider";
 import { RoomFeatures } from "@/components/ui/room-features";
 import { MainImageSlider } from "@/components/ui/main-image-slider";
 
 import { RoomInfo } from "@/types";
-import { roomData } from "@/const/room-data";
 import { ScrollReveal } from "@/components/base/scroll-reveal";
+import { roomData } from "@/const/room-detail";
 
 export const RoomTemplate = ({ roomInfo }: { roomInfo: RoomInfo }) => {
   if (!roomInfo) {
@@ -86,7 +86,7 @@ export const RoomTemplate = ({ roomInfo }: { roomInfo: RoomInfo }) => {
               <h3 className="font-medium">
                 추가 정보
               </h3>
-              <ol className="border border-gray-400/50 p-5 mt-5 space-y-4 list-decimal pl-10 text-wrap">
+              <ol className="border border-gray-400/50 p-5 mt-5 space-y-4 list-decimal pl-10 text-wrap break-all">
                 {roomInfo.additionalInfo.map((section, idx) => (
                   <li key={idx} className="space-y-2">
                     <div className="font-medium">{section.title}</div>
@@ -110,11 +110,15 @@ export const RoomTemplate = ({ roomInfo }: { roomInfo: RoomInfo }) => {
               {roomData
                 .filter((room) => room.slug !== roomInfo.slug)
                 .map((room) => (
-                  <LinkCard
-                    {...room}
-                    className="w-72 sm:w-100 flex-shrink-0"
-                    key={room.slug}
-                  />
+                  <Link href={`/rooms/${room.slug}`} key={room.slug}>
+                    <div className="relative aspect-video w-72 overflow-hidden group">
+                      <Image src={room.images[0]} fill className="object-cover group-hover:scale-110 transition-all duration-300" alt={room.slug} />
+                    </div>
+                    <div className="p-2">
+                      <div className="text-xs">{room.subtitle}</div>
+                      <div>{room.slug === "pool-villa" ? <div className="font-mono font-medium">海水<span className="font-pretendard font-medium">풀빌라</span></div> : room.title}</div>
+                    </div>
+                  </Link>
                 ))}
             </div>
             <div className="center pt-10">

@@ -1,14 +1,14 @@
 import { RoomInfo } from "@/types";
-import { BedDouble, Car, Clock, Users } from "lucide-react";
+import { BedDouble, Car, Clock, Dog, Users } from "lucide-react";
 
 export const premiumVillaData: RoomInfo = {
   slug: "premium-villa",
   title: "프리미엄 빌라",
   subtitle: "호텔형",
-  heroImage: "/images/room/premium-villa/hero.jpeg",
+  heroImage: "/images/room/premium-villa/hero.jpg",
   mainImages: [
     "/images/room/premium-villa/main-1.jpeg", 
-    "/images/room/premium-villa/main-2.jpeg", 
+    "/images/room/premium-villa/main-2.jpg", 
     "/images/room/premium-villa/main-3.jpeg", 
     "/images/room/premium-villa/main-4.jpeg", 
     "/images/room/premium-villa/main-5.jpeg", 
@@ -18,26 +18,22 @@ export const premiumVillaData: RoomInfo = {
     <p>SE CLUB 오션콘도는 탁 트인 바다 전망과 황홀한 노을을 객실에서 감상할 수 있는 콘도입니다. <span className="text-green-900 font-semibold">실내 주방</span>과 <span className="text-green-900 font-semibold">야외 인덕션</span> 테이블, <span className="text-green-900 font-semibold"> 숯불 화덕 바베큐</span>가 마련되어 있어 바다와 산, 별빛을 배경으로 낭만적인 요리를 즐길 수 있습니다.</p>
   ),
   amenities: [
+    // {
+    //   img: "/images/room/premium-villa/kitchen.jpg",
+    //   title: "주방",
+    //   description: "개별 주방 (냉장고, 전자레인지, 전기밥솥, 커피포트 등)",
+    // }, 
     {
-      img: "/images/room/ocean-condo-extended/kitchen.jpg",
-      title: "주방",
-      description: "개별 주방 (냉장고, 전자레인지, 전기밥솥, 커피포트 등)",
-    }, 
-    {
-      img: "/images/room/ocean-condo-extended/grill.jpg",
+      img: "/images/room/premium-villa/grill.jpeg",
       title: "바비큐 그릴",
-      description: "개별 바비큐 그릴 (확장형, 기본형 나동 12호)",
+      description: "개별 바비큐 그릴",
     }, 
-    {
-      img: "/images/room/ocean-condo-extended/induction.jpg",
-      title: "야외 인덕션",
-      description: "주방 별도 야외 베란다 인덕션과 테이블 설치",
-    }
   ],
   features: [
-    { icon: BedDouble, label: '침대 개수', value: '2개' },
-    { icon: Users,     label: '인원',     value: '4인 (최대 6인)' },
-    { icon: Car,       label: '차량 주차',  value: '독채당 1대 무료' },
+    { icon: BedDouble, label: '침대 개수', value: '3개' },
+    { icon: Users,     label: '인원',     value: '6인' },
+    { icon: Dog,       label: '반려견 동반 가능', value: '최대 2마리' },
+    { icon: Car,       label: '차량 주차',  value: '2대 무료' },
     { icon: Clock,     label: '체크인/아웃', value: '15:00 / 11:00' },
   ],
   additionalInfo: [

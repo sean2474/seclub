@@ -1,13 +1,13 @@
 import { ScrollReveal } from "@/components/base/scroll-reveal";
 import { Button } from "@/components/ui/button";
-import { LinkCard } from "@/components/ui/link-card";
+import { RoomsLinkCard } from "@/components/ui/rooms-link-card";
 import { MainImageSlider } from "@/components/ui/main-image-slider";
-import { wellnessData } from "@/const/wellness-data";
 import { WellnessPageData } from "@/types";
 import { BuildingLibraryIcon, ClockIcon } from "@heroicons/react/24/outline";
 import { MapIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
+import { wellnessData } from "@/const/wellness-detail";
 
 export const WellnessTemplate = ({ wellnessPageData, slug }: { wellnessPageData: WellnessPageData, slug: string }) => {
   return (
@@ -55,7 +55,7 @@ export const WellnessTemplate = ({ wellnessPageData, slug }: { wellnessPageData:
             <ScrollReveal side="left" type="h3" className="font-medium">
               {slug === "walk" ? "코스 정보" : "추가 정보"}
             </ScrollReveal>
-            <ol className="border border-gray-400/50 p-5 mt-5 space-y-4 list-disc pl-10 text-wrap font-light">
+            <ol className="border border-gray-400/50 p-5 mt-5 space-y-4 list-disc pl-10 text-wrap font-light break-all">
               {wellnessPageData.contents.map((content, idx) => (
                 <ScrollReveal side="right" type="li" delay={`${idx * 100}ms`} key={idx} className="space-y-1"> {content} </ScrollReveal>
               ))}
@@ -63,7 +63,7 @@ export const WellnessTemplate = ({ wellnessPageData, slug }: { wellnessPageData:
           </div>
         </div>
       </section>
-      <section className="border-b border-gray-400/50 h-[500px] m-auto center mt-10 md:mt-15">
+      <section className="h-[500px] m-auto center mt-10 md:mt-15">
         <div className="w-full flex gap-5 md:gap-20 h-full mx-4 max-w-4xl flex-col md:flex-row">
           <ScrollReveal side="left" type="h3" className="font-medium">
             갤러리
@@ -71,6 +71,7 @@ export const WellnessTemplate = ({ wellnessPageData, slug }: { wellnessPageData:
           <MainImageSlider images={wellnessPageData.images} color="black" />
         </div>
       </section>
+      <div className="border-b border-gray-400/50 w-full h-[1px] max-w-4xl m-auto" />
       <section className="bg-background py-12 px-4 center">
         <div className="max-w-4xl mx-4 w-full">
           <h3 className="font-medium">웰니스 더보기</h3>
@@ -80,11 +81,14 @@ export const WellnessTemplate = ({ wellnessPageData, slug }: { wellnessPageData:
             {wellnessData
               .filter((wellness) => wellness.slug !== slug)
               .map((wellness) => (
-                <LinkCard
-                  {...wellness}
-                  className="w-72 sm:w-100 flex-shrink-0"
-                  key={wellness.slug}
-                />
+                <Link href={`/wellness/${wellness.slug}`} key={wellness.slug}>
+                  <div className="relative h-[250px] sm:h-[250px] md:h-[200px] aspect-[3/2] overflow-hidden">
+                    <Image src={wellness.image} alt={wellness.title} fill className="object-cover group-hover:scale-110 transition-all duration-300" />
+                  </div>
+                  <div className="p-2">
+                    <h2 className="text-lg md:text-xl font-medium">{wellness.title}</h2>
+                  </div>
+                </Link>
               ))}
           </div>
           <div className="center pt-10">
