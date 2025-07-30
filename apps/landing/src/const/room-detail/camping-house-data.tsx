@@ -1,5 +1,5 @@
 import { RoomInfo } from "@/types";
-import { BedDouble, Car, Clock, Dog, DoorClosed, Users } from "lucide-react";
+import { BedDouble, Clock, Dog, DoorClosed, Users } from "lucide-react";
 
 export const campingHouseData: RoomInfo = {
   slug: "camping-house",

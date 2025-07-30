@@ -1,5 +1,5 @@
 import { RoomInfo } from "@/types";
-import { BedDouble, Car, Clock, DoorClosed, Users } from "lucide-react";
+import { BedDouble, Clock, DoorClosed, Users } from "lucide-react";
 
 export const oceanCondoExtendedData: RoomInfo = {
   slug: "ocean-condo-extended",
