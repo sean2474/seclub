@@ -1,6 +1,5 @@
 import { ScrollReveal } from "@/components/base/scroll-reveal";
 import { Button } from "@/components/ui/button";
-import { RoomsLinkCard } from "@/components/ui/rooms-link-card";
 import { MainImageSlider } from "@/components/ui/main-image-slider";
 import { WellnessPageData } from "@/types";
 import { BuildingLibraryIcon, ClockIcon } from "@heroicons/react/24/outline";

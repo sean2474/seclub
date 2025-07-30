@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
-import { RoomsLinkCard } from "@/components/ui/rooms-link-card";
 import { ImageSlider } from "@/components/ui/image-slider";
 import { RoomFeatures } from "@/components/ui/room-features";
 import { MainImageSlider } from "@/components/ui/main-image-slider";
