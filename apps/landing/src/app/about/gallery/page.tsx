@@ -1,17 +1,35 @@
-import fs from "fs";
-import path from "path";
 import { ParallaxScroll } from "@/components/ui/parallax-scroll";
+import { createClient } from "@/lib/supabase/server";
 
-export default function GalleryPage() {
-  const galleryDir = path.join(process.cwd(), "public/images/gallery");
-  const files = fs
-    .readdirSync(galleryDir)
-    .filter((file) => /\.(jpe?g|png|webp|gif)$/i.test(file));
-  const images = files.map((file) => `/images/gallery/${file}`);
+export default async function GalleryPage() {
+  const supabase = await createClient()
+
+  const { data: files, error } = await supabase
+    .storage
+    .from("gallery")
+    .list("", {
+      offset: 0,
+      sortBy: { column: "name", order: "asc" }
+    })
+
+  if (error) {
+    console.error("Supabase list error:", error);
+    return <p>이미지 로드에 실패했습니다.</p>;
+  }
+
+  const images = files.map(file =>
+    supabase
+      .storage
+      .from("gallery")
+      .getPublicUrl(file.name)
+      .data
+      .publicUrl
+  );
+
   const pageImages = [...images, ...images];
 
   return (
-    <main className="mb-20">
+    <main className="pb-20">
       <ParallaxScroll images={pageImages} />
     </main>
   );

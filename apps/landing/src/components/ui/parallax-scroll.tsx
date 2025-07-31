@@ -1,9 +1,31 @@
 "use client";
-import { useScroll, useTransform } from "motion/react";
-import { motion } from "motion/react";
+
+import { useState } from "react";
+import { useScroll, useTransform, motion } from "motion/react";
 import Image from "next/image";
 
 import { cn } from "@/lib/utils";
+
+export const BlurryImage = ({ src, alt }: { src: string; alt?: string }) => {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <div className="relative w-full aspect-[3/2] overflow-hidden rounded-lg">
+      <Image
+        src={src}
+        alt={alt ?? ""}
+        fill
+        className={cn(
+          "object-cover object-left-top transition-all duration-700 ease-out bg-gray-200",
+          loaded
+            ? "filter blur-0 scale-100"
+            : "filter blur-sm scale-110"
+        )}
+        onLoad={() => setLoaded(true)}
+      />
+    </div>
+  );
+};
 
 export const ParallaxScroll = ({
   images,
@@ -19,55 +41,48 @@ export const ParallaxScroll = ({
   const translateThird = useTransform(scrollYProgress, [0, 1], [0, -200]);
 
   const third = Math.floor(images.length / 3);
-
   const firstPart = images.slice(0, third);
   const secondPart = images.slice(third, 2 * third);
   const thirdPart = images.slice(2 * third);
 
   return (
-    <div
-      className={cn("items-start overflow-y-auto w-full", className)}
-    >
-      <div
-        className="grid grid-cols-2 lg:grid-cols-3 items-start max-w-7xl mx-auto gap-10 py-40 px-10"
-      >
+    <div className={cn("overflow-y-auto w-full", className)}>
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-10 py-40 px-10 max-w-7xl mx-auto">
+        {/* 1st column */}
         <div className="grid gap-10">
-          {firstPart.map((el, idx) => (
+          {firstPart.map((src, idx) => (
             <motion.div
-              style={{ y: translateFirst }} // Apply the translateY motion value here
-              key={"grid-1" + idx}
-              className="w-full relative aspect-[3/2]"
+              key={`col1-${idx}`}
+              style={{ y: translateFirst }}
+              className="w-full"
             >
-              <Image
-                src={el}
-                className="object-cover object-left-top rounded-lg gap-10 !m-0 !p-0"
-                fill
-                alt="thumbnail"
-              />
+              <BlurryImage src={src} alt={`image ${idx + 1}`} />
             </motion.div>
           ))}
         </div>
+
+        {/* 2nd column */}
         <div className="grid gap-10">
-          {secondPart.map((el, idx) => (
-            <motion.div style={{ y: translateSecond }} key={"grid-2" + idx} className="w-full relative aspect-[3/2]">
-              <Image
-                src={el}
-                className="object-cover object-left-top rounded-lg gap-10 !m-0 !p-0"
-                fill
-                alt="thumbnail"
-              />
+          {secondPart.map((src, idx) => (
+            <motion.div
+              key={`col2-${idx}`}
+              style={{ y: translateSecond }}
+              className="w-full"
+            >
+              <BlurryImage src={src} alt={`image ${idx + 1 + third}`} />
             </motion.div>
           ))}
         </div>
+
+        {/* 3rd column */}
         <div className="grid gap-10">
-          {thirdPart.map((el, idx) => (
-            <motion.div style={{ y: translateThird }} key={"grid-3" + idx} className="w-full relative aspect-[3/2]">
-              <Image
-                src={el}
-                className="object-cover object-left-top rounded-lg gap-10 !m-0 !p-0"
-                fill
-                alt="thumbnail"
-              />
+          {thirdPart.map((src, idx) => (
+            <motion.div
+              key={`col3-${idx}`}
+              style={{ y: translateThird }}
+              className="w-full"
+            >
+              <BlurryImage src={src} alt={`image ${idx + 1 + 2 * third}`} />
             </motion.div>
           ))}
         </div>
