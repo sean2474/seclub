@@ -2,9 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useMediaQuery } from 'react-responsive';
 
-export default function HeroImage({ images }: { images: string[] }) {
+export default function HeroImage({ images, mbImages }: { images: string[]; mbImages: string[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -14,9 +16,11 @@ export default function HeroImage({ images }: { images: string[] }) {
     return () => clearInterval(interval);
   }, [images.length]);
 
+  const currentImages = isMobile ? mbImages : images;
+
   return (
     <>
-      {images.map((src, i) => (
+      {currentImages.map((src, i) => (
         <div
           key={i}
           className={`

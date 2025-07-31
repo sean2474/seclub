@@ -4,18 +4,18 @@ import { BedDouble, Clock, Dog, DoorClosed, Users } from "lucide-react";
 export const premiumVillaData: RoomInfo = {
   slug: "premium-villa",
   title: "프리미엄 빌라",
-  subtitle: "독채형",
-  heroImage: "/images/room/premium-villa/hero.jpg",
+  subtitle: "인피니티 풀",
+  heroImage: "/images/room/premium-villa/hero.jpeg",
   mainImages: [
-    "/images/room/premium-villa/main-1.jpeg", 
-    "/images/room/premium-villa/main-2.jpg", 
-    "/images/room/premium-villa/main-3.jpeg", 
+    "/images/room/premium-villa/main-1.jpg", 
+    "/images/room/premium-villa/main-2.jpeg", 
+    "/images/room/premium-villa/main-3.jpg", 
     "/images/room/premium-villa/main-4.jpeg", 
     "/images/room/premium-villa/main-5.jpeg", 
-    "/images/room/premium-villa/main-6.jpeg", 
   ],
   overview: (
-    <p>SE CLUB 프리미엄 빌라는 탁 트인 바다 전망과 황홀한 노을을 객실에서 감상할 수 있는 빌라입니다. <span className="text-green-900 font-semibold">실내 주방</span>과 <span className="text-green-900 font-semibold">야외 바비큐 그릴</span>이 마련되어 있어 바다와 산, 별빛을 배경으로 낭만적인 요리를 즐길 수 있습니다.</p>
+    <p>SE CLUB 프리미엄 빌라는 끝없이 펼쳐진 바다와 황홀한 노을이 객실 창문 너머로 펼쳐지는 특별한 휴식처입니다. <span className="text-green-900 font-semibold">실내 주방</span>, <span className="text-green-900 font-semibold">야외 인피니티 풀</span>, <span className="text-green-900 font-semibold">프라이빗 바비큐 공간</span>을 갖춰, 바다, 산, 그리고 별빛이 수놓인 낭만의 순간을 한층 더 완벽하게 즐기실 수 있습니다
+</p>
   ),
   amenities: [
     // {
@@ -30,7 +30,7 @@ export const premiumVillaData: RoomInfo = {
     }, 
   ],
   features: [
-    { icon: DoorClosed, label: '방 구성', value: '방 4 · 욕실 2 · 주방 · 테라스 · 풀' },
+    { icon: DoorClosed, label: '방 구성', value: '방 3 · 욕실 2 · 주방 · 테라스 · 풀' },
     { icon: BedDouble, label: '침대 개수', value: '3개' },
     { icon: Users,     label: '인원',     value: '6인' },
     { icon: Dog,       label: '반려견 동반 가능', value: '최대 2마리' },

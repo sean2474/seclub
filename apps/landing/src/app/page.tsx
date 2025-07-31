@@ -3,7 +3,6 @@ import { ScrollReveal } from "@/components/base/scroll-reveal";
 import { ImageSlider } from "@/components/ui/image-slider";
 import { NaverMap } from "@/components/ui/naver-map";
 import { roomData } from "@/const/room-detail";
-// import { roomData } from "@/const/room-data";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,13 +12,20 @@ export default function Home() {
     <div>
       {/* 히어로 섹션 */}
       <section className="fixed top-0 h-svh w-full overflow-x-hidden text-background" suppressHydrationWarning>
-        <HeroImage images={[
-          '/images/landing/hero-2.jpeg',
-          '/images/landing/hero-5.jpg',
-          '/images/landing/hero-4.jpeg',
-          '/images/landing/hero-1.jpeg',
-          '/images/landing/hero-3.jpeg',
-        ]} />
+        <HeroImage 
+          images={[
+            '/images/landing/hero-1.jpeg',
+            '/images/landing/hero-2.jpg',
+            '/images/landing/hero-3.jpeg',
+            '/images/landing/hero-4.jpeg',
+          ]}
+          mbImages={[
+            '/images/landing/hero-1.jpeg',
+            '/images/landing/hero-2.jpg',
+            '/images/landing/hero-3.jpeg',
+            '/images/landing/hero-4.jpeg',
+          ]}
+        />
         <div className="absolute z-20 inset-0 bg-black/30 flex flex-col items-start md:items-start md:pl-24 lg:pl-48 justify-center text-start p-4">
           <ScrollReveal side="top" type="p" className="mb-1 md:mb-2 ml-1.5 font-medium">
             당신만의 힐링

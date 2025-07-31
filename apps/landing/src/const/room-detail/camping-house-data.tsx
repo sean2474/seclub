@@ -10,7 +10,9 @@ export const campingHouseData: RoomInfo = {
     "/images/room/camping-house/main-1.jpg", 
     "/images/room/camping-house/main-2.jpg",
     "/images/room/camping-house/main-3.jpg",
-    "/images/room/camping-house/main-4.jpg"
+    "/images/room/camping-house/main-4.jpg",
+    "/images/room/camping-house/main-5.jpg"
+    
   ],
   overview: (
     <p>SE CLUB 캠핑 하우스는 2층 복층형 단독주택과 <span className="text-green-900 font-semibold">캠핑 사이트</span>가 어우러진 공간으로, <span className="text-green-900 font-semibold">실내의 편안함</span>과 <span className="text-green-900 font-semibold">캠핑의 즐거움</span>을 함께 누릴 수 있습니다. 야외 데크에서는 바다와 산, 별빛을 배경으로 <span className="text-green-900 font-semibold">바비큐</span>를 즐기며 낭만적인 시간을 보낼 수 있습니다.

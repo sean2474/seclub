@@ -1,7 +1,102 @@
 import { WellnessCardProps, WellnessPageData } from "@/types";
 
 export const wellnessPageData: Record<string, WellnessPageData> = {
-  // 1. 산책로
+  "nature-experience": {
+    header: {
+      title: "자연 체험 프로그램",
+      subtitle:
+        "바다 속 산책부터 갯벌 생태·독살 체험, 갯바위 낚시까지 다양한 해양 액티비티를 제공합니다.",
+      type: "생태 체험·갯바위 낚시",
+      location: "앞바다 및 갯바위 전역",
+      hours: "프로그램별 상이 (사전 문의)",
+      image: "/images/wellness/nature-experience/hero.jpg",
+    },
+    contents: [
+      "바다 속 산책: 간조 시 신발 신고 최대 500m 진입, 갯바위·조개 지대 탐험",
+      "생태 체험: 굴·고동·개불·명주조개 관찰 및 소량 채집 (자연 보호 준수)",
+      "독살 체험: 전통 어로법 이해 및 체험, 안전 교육 후 진행",
+      "갯바위 낚시: 낚싯대·미끼 대여, 초보자 프로그램 운영",
+      "안내: 체험 후에는 캠핑장 내 야외 개수대를 자유롭게 이용 가능",
+      "유의 사항: 매일 물때표 확인 필수, 구명조끼·장갑 권장, 갯바위 미끄럼 주의",
+    ],
+    images: [
+      "/images/wellness/nature-experience/1.jpg",
+      "/images/wellness/nature-experience/2.jpg",
+      "/images/wellness/nature-experience/3.jpg",
+      "/images/wellness/nature-experience/4.jpg",
+      "/images/wellness/nature-experience/5.jpg",
+      "/images/wellness/nature-experience/6.jpg",
+    ]
+  },
+  "special-activity": {
+    header: {
+      title: "조각공원",
+      subtitle:
+        "국내 정상급 조각가들의 작품을 숲·잔디밭·전망데크에서 만나는 야외 미술관입니다.",
+      type: "조각공원",
+      location: "단지 내 조각공원 구역",
+      hours: "09:00 – 18:00",
+      image: "/images/wellness/special-activity/hero.jpg",
+    },
+    contents: [
+      "주요 작가·작품: 김영중(유기적 곡선), 김석우(금속·돌 대비), 이필언(자연물 기반 대형 아트)",
+      "관람 동선: 입구 광장 → 숲속 미로 → 전망데크 → 잔디밭 전시장",
+      "이용 팁: QR코드 AR 해설 제공, 포토스팟 안내도 비치, 우천 시 우산 대여 가능",
+    ],
+    images: [
+      "/images/wellness/special-activity/1.jpg",
+      "/images/wellness/special-activity/2.jpg",
+      "/images/wellness/special-activity/3.jpg",
+      "/images/wellness/special-activity/4.jpg",
+    ]
+  },
+  "swimming-pool": {
+    header: {
+      title: "객실 전용 수영장",
+      subtitle:
+        "별장 2·3구역에 위치한 바다 전경의 프라이빗 야외 풀장과 족욕탕을 즐길 수 있습니다.",
+      type: "수영장",
+      location: "별장 2·3구역",
+      hours: "10:00 – 19:00",
+      image: "/images/wellness/swimming-pool/hero.jpg",
+    },
+    contents: [
+      "운영 기간: 매년 7월~8월 (상세 일정 별도 공지)",
+      "이용 시간: 10:00 – 19:00",
+      "풀장 사양: 가로 17m × 폭 11m, 어린이 0.6m / 성인 1.0m, 족욕탕(280×140×60cm)·사계절 온수",
+      "수칙: 신발 벗고 이용, 음식물·반려동물 금지, 어린이는 보호자 동반·구명조끼 착용, 다이빙·점핑 금지",
+      "부대 서비스: 타월·튜브·구명조끼 대여",
+    ],
+    images: [
+      "/images/wellness/swimming-pool/1.jpg",
+      "/images/wellness/swimming-pool/2.jpg",
+      "/images/wellness/swimming-pool/3.jpg",
+      "/images/wellness/swimming-pool/4.jpg",
+    ]
+  },
+  "photo-spot": {
+    header: {
+      title: "포토스팟",
+      subtitle: "절경 포인트를 모아둔 단지 내 대표 ‘인생샷’ 명소를 안내합니다.",
+      type: "포토스팟",
+      location: "단지 전역",
+      hours: "상시 개방",
+      image: "/images/wellness/photo-spot/hero.jpg",
+    },
+    contents: [
+      "1전망대(반려견 캠핑장 위): 산·바다 파노라마 뷰",
+      "2전망대: 해안 절벽 위 조망",
+      "별장 2·3구역 풀장: 풀과 바다가 연결된 뷰",
+      "조각공원: 대표 작품 앞 연출 샷",
+      "농원 오솔길: 계절별 꽃·과실 배경",
+      "제2·제3해변: 간조 전후 갯바위·모래사장 뷰",
+      "나무화석: 제2해변 낚시터 근처 위치",
+    ],
+    images: [
+      "/images/wellness/photo-spot/1.jpg",
+      "/images/wellness/photo-spot/2.jpg",
+    ]
+  },
   walk: {
     header: {
       title: "산책로",
@@ -30,34 +125,6 @@ export const wellnessPageData: Record<string, WellnessPageData> = {
       "/images/wellness/walk/9.jpg",
     ]
   },
-
-  // 2. 공용 야외 수영장
-  "swimming-pool": {
-    header: {
-      title: "공용 야외 수영장",
-      subtitle:
-        "별장 2·3구역에 위치한 바다 전경의 프라이빗 야외 풀장과 족욕탕을 즐길 수 있습니다.",
-      type: "수영장",
-      location: "별장 2·3구역",
-      hours: "10:00 – 19:00",
-      image: "/images/wellness/swimming-pool/hero.jpg",
-    },
-    contents: [
-      "운영 기간: 매년 7월~8월 (상세 일정 별도 공지)",
-      "이용 시간: 10:00 – 19:00",
-      "풀장 사양: 가로 17m × 폭 11m, 어린이 0.6m / 성인 1.0m, 족욕탕(280×140×60cm)·사계절 온수",
-      "수칙: 신발 벗고 이용, 음식물·반려동물 금지, 어린이는 보호자 동반·구명조끼 착용, 다이빙·점핑 금지",
-      "부대 서비스: 타월·튜브·구명조끼 대여",
-    ],
-    images: [
-      "/images/wellness/swimming-pool/1.jpg",
-      "/images/wellness/swimming-pool/2.jpg",
-      "/images/wellness/swimming-pool/3.jpg",
-      "/images/wellness/swimming-pool/4.jpg",
-    ]
-  },
-
-  // 3. 캠핑장 내 해수 풀장
   "camping-pool": {
     header: {
       title: "캠핑장 내 해수 풀장",
@@ -83,62 +150,6 @@ export const wellnessPageData: Record<string, WellnessPageData> = {
       "/images/wellness/camping-pool/3.jpg",
     ]
   },
-
-  // 4. 포토스팟
-  "photo-spot": {
-    header: {
-      title: "포토스팟",
-      subtitle: "절경 포인트를 모아둔 단지 내 대표 ‘인생샷’ 명소를 안내합니다.",
-      type: "포토스팟",
-      location: "단지 전역",
-      hours: "상시 개방",
-      image: "/images/wellness/photo-spot/hero.jpg",
-    },
-    contents: [
-      "1전망대(반려견 캠핑장 위): 산·바다 파노라마 뷰",
-      "2전망대: 해안 절벽 위 조망",
-      "별장 2·3구역 풀장: 풀과 바다가 연결된 뷰",
-      "조각공원: 대표 작품 앞 연출 샷",
-      "농원 오솔길: 계절별 꽃·과실 배경",
-      "제2·제3해변: 간조 전후 갯바위·모래사장 뷰",
-      "나무화석: 제2해변 낚시터 근처 위치",
-    ],
-    images: [
-      "/images/wellness/photo-spot/1.jpg",
-      "/images/wellness/photo-spot/2.jpg",
-    ]
-  },
-
-  // 5. 자연 체험 프로그램
-  "nature-experience": {
-    header: {
-      title: "자연 체험 프로그램",
-      subtitle:
-        "바다 속 산책부터 갯벌 생태·독살 체험, 갯바위 낚시까지 다양한 해양 액티비티를 제공합니다.",
-      type: "생태 체험·갯바위 낚시",
-      location: "앞바다 및 갯바위 전역",
-      hours: "프로그램별 상이 (사전 문의)",
-      image: "/images/wellness/nature-experience/hero.jpg",
-    },
-    contents: [
-      "바다 속 산책: 간조 시 신발 신고 최대 500m 진입, 갯바위·조개 지대 탐험",
-      "생태 체험: 굴·고동·개불·명주조개 관찰 및 소량 채집 (자연 보호 준수)",
-      "독살 체험: 전통 어로법 이해 및 체험, 안전 교육 후 진행",
-      "갯바위 낚시: 낚싯대·미끼 대여, 초보자 프로그램 운영",
-      "안내: 체험 후에는 캠핑장 내 야외 개수대를 자유롭게 이용 가능",
-      "유의 사항: 매일 물때표 확인 필수, 구명조끼·장갑 권장, 갯바위 미끄럼 주의",
-    ],
-    images: [
-      "/images/wellness/nature-experience/1.jpg",
-      "/images/wellness/nature-experience/2.jpg",
-      "/images/wellness/nature-experience/3.jpg",
-      "/images/wellness/nature-experience/4.jpg",
-      "/images/wellness/nature-experience/5.jpg",
-      "/images/wellness/nature-experience/6.jpg",
-    ]
-  },
-
-  // 6. 매점 & 리필스테이션
   store: {
     header: {
       title: "매점 & 리필스테이션",
@@ -163,8 +174,6 @@ export const wellnessPageData: Record<string, WellnessPageData> = {
       "/images/wellness/store/3.jpg",
     ]
   },
-
-  // 7. 세미나실(공연장)
   "seminar-room": {
     header: {
       title: "세미나실(공연장)",
@@ -183,33 +192,10 @@ export const wellnessPageData: Record<string, WellnessPageData> = {
       "부대 서비스: 음향·영상 기술 스탭 파견 가능",
     ],
     images: [
+      "/images/wellness/seminar-room/2.jpg",
       "/images/wellness/seminar-room/1.jpg",
     ]
   },
-
-  // 8. 조각공원
-  "special-activity": {
-    header: {
-      title: "조각공원",
-      subtitle:
-        "국내 정상급 조각가들의 작품을 숲·잔디밭·전망데크에서 만나는 야외 미술관입니다.",
-      type: "조각공원",
-      location: "단지 내 조각공원 구역",
-      hours: "09:00 – 18:00",
-      image: "/images/wellness/special-activity/hero.jpg",
-    },
-    contents: [
-      "주요 작가·작품: 김영중(유기적 곡선), 김석우(금속·돌 대비), 이필언(자연물 기반 대형 아트)",
-      "관람 동선: 입구 광장 → 숲속 미로 → 전망데크 → 잔디밭 전시장",
-      "이용 팁: QR코드 AR 해설 제공, 포토스팟 안내도 비치, 우천 시 우산 대여 가능",
-    ],
-    images: [
-      "/images/wellness/special-activity/1.jpg",
-      "/images/wellness/special-activity/2.jpg",
-      "/images/wellness/special-activity/3.jpg",
-      "/images/wellness/special-activity/4.jpg",
-    ]
-  }
 }
 
 export const wellnessData: WellnessCardProps[] = Object.keys(wellnessPageData).map((wellness) => ({

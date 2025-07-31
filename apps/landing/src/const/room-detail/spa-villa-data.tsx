@@ -13,7 +13,6 @@ export const spaVillaData: RoomInfo = {
     "/images/room/spa-villa/main-4.jpg", 
     "/images/room/spa-villa/main-5.jpg", 
     "/images/room/spa-villa/main-6.jpg", 
-    "/images/room/spa-villa/main-7.jpg", 
   ],
   overview: (
     <p>SE CLUB 오션 스파빌라는 다락방이 있는 2층 복층형 단독주택으로, <span className="text-green-900 font-semibold">넓은 테라스</span>와 프라이빗 야외 <span className="text-green-900 font-semibold">자쿠지 스파</span>가 마련된 힐링 공간입니다. 바다와 산, 별빛을 배경으로 온전한 휴식을 즐길 수 있으며, <span className="text-green-900 font-semibold">개별 바비큐 화덕</span>과 <span className="text-green-900 font-semibold">완비된 주방</span>, 세면도구까지 갖추어 편안함과 낭만을 모두 누릴 수 있습니다
