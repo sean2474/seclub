@@ -21,10 +21,6 @@ export const menuItems: HeaderMenuType[] = [
         name: "오시는길",
         href: "/about/location"
       },
-      {
-        name: "캠핑장 지도",
-        href: "/about/map"
-      },
     ]
   },
   {
@@ -38,6 +34,10 @@ export const menuItems: HeaderMenuType[] = [
       {
         name: "이용안내",
         href: "/camping/rule"
+      },
+      {
+        name: "캠핑장 지도",
+        href: "/camping/map"
       },
     ]
   },
