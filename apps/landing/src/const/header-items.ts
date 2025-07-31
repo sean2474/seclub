@@ -67,10 +67,10 @@ export const menuItems: HeaderMenuType[] = [
       }
     ]
   },
-  {
-    title: "공지·이벤트",
-    href: "/notices"
-  }
+  // {
+  //   title: "공지·이벤트",
+  //   href: "/notices"
+  // }
 ];
 
 export const desktopMenu = [
