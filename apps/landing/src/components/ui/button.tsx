@@ -38,14 +38,18 @@ const buttonVariants = cva(
   }
 )
 
+export interface ButtonProps {
+  variant?: VariantProps<typeof buttonVariants>['variant']
+  size?: VariantProps<typeof buttonVariants>['size']
+}
+
 function Button({
   className,
   variant,
   size,
   asChild = false,
   ...props
-}: React.ComponentProps<"button"> &
-  VariantProps<typeof buttonVariants> & {
+}: React.ComponentProps<"button"> & ButtonProps & {
     asChild?: boolean
   }) {
   const Comp = asChild ? Slot : "button"
