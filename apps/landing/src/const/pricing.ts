@@ -35,7 +35,7 @@ export const campingRates: CampingRates = {
 }
 
 export const lodgingRates: LodgingRates = {
-  풀빌라: {
+  "해수 풀빌라": {
     rates: {
       최성수기: 359_000,
       동절기: 289_000,

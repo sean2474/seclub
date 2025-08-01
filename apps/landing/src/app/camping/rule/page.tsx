@@ -1,11 +1,11 @@
-import { Clock, ListChecks, Info } from "lucide-react"
+import { Clock, ListChecks, Info, PlusCircle, PawPrint } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function CampsiteInfoPage() {
   return (
-    <div className="min-h-screen p-4 sm:p-6 lg:p-8 mt-[var(--header-height-expanded)]">
+    <div className="min-h-screen p-4 sm:p-6 lg:p-12 mt-[var(--header-height-expanded)]">
       <div className="max-w-4xl mx-auto">
-        <header className="text-center mb-12">
+        <header className="text-center mb-6 md:mb-12">
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">캠핑장 이용 안내</h1>
           <p className="mt-3 text-base text-foreground/80">즐겁고 편안한 캠핑을 위해 아래 내용을 확인해주세요.</p>
         </header>
@@ -68,6 +68,45 @@ export default function CampsiteInfoPage() {
                 </CardContent>
               </Card>
             </div>
+          </section>
+
+          <section>
+            <h2 className="flex items-center gap-2 text-xl font-semibold border-b border-foreground/50 pb-2 mb-4">
+              <PlusCircle className="w-5 h-5 text-foreground/80" />
+              추가 요금 안내
+            </h2>
+            <Card>
+              <CardContent className="p-6 space-y-4">
+                <ul className="list-disc list-inside text-foreground/80 space-y-2">
+                  <li>조기 입장 이용료: 10,000원</li>
+                  <li>연장 이용료: 3시간 연장 시 20,000원, 6시간 연장 시 25,000원</li>
+                  <li>카라반, 캠핑카, 트레일러 등 동반 이용 시 1박에 10,000원 추가 부과</li>
+                </ul>
+                <p className="text-sm text-foreground/80 pt-2 border-t mt-4">
+                  문의 및 신청은 예약담당에게 전화 주세요. (010-9703-1711)
+                </p>
+              </CardContent>
+            </Card>
+          </section>
+
+          <section>
+            <h2 className="flex items-center gap-2 text-xl font-semibold border-b border-foreground/50 pb-2 mb-4">
+              <PawPrint className="w-5 h-5 text-foreground/80" />
+              반려견 동반 안내
+            </h2>
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg font-semibold">주의사항</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="list-disc list-inside text-foreground/80 space-y-2">
+                  <li>세퍼트, 진돗개 등 맹견 및 중대형견(10kg 이상)은 입장할 수 없습니다. (장애인 보조견 제외)</li>
+                  <li>사이트별 2마리로 제한합니다.</li>
+                  <li>모든 반려견은 반드시 목줄을 착용해야 합니다.</li>
+                  <li>편의시설(개수대, 샤워장, 화장실 등)에는 반려견 출입을 엄격히 금합니다.</li>
+                </ul>
+              </CardContent>
+            </Card>
           </section>
 
           <section>

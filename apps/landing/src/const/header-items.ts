@@ -10,7 +10,7 @@ export const menuItems: HeaderMenuType[] = [
         href: "/about"
       },
       {
-        name: "갤러리",
+        name: "사진 갤러리",
         href: "/about/gallery"
       },
       {
@@ -36,7 +36,7 @@ export const menuItems: HeaderMenuType[] = [
         href: "/camping/rule"
       },
       {
-        name: "캠핑장 지도",
+        name: "캠핑장 종합 배치도",
         href: "/camping/map"
       },
     ]

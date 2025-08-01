@@ -18,12 +18,16 @@ export default function Home() {
             '/images/landing/hero-2.jpg',
             '/images/landing/hero-3.jpeg',
             '/images/landing/hero-4.jpeg',
+            '/images/landing/hero-5.jpeg',
+            '/images/landing/hero-6.jpg',
           ]}
           mbImages={[
             '/images/landing/hero-1.jpeg',
             '/images/landing/hero-2.jpg',
             '/images/landing/hero-3.jpeg',
             '/images/landing/hero-4.jpeg',
+            '/images/landing/hero-5.jpeg',
+            '/images/landing/hero-6.jpg',
           ]}
         />
         <div className="absolute z-20 inset-0 bg-black/30 flex flex-col items-start md:items-start md:pl-24 lg:pl-48 justify-center text-start p-4">
@@ -95,20 +99,30 @@ export default function Home() {
                 description: "환상적인 바다 전망 포토존",
                 href: "/wellness/photo-spot"
               }, {
+                img: "/images/wellness/camping-pool/hero.jpg",
+                title: "캠핑장 내 해수 풀장",
+                description: "캠핑장 내 해수 풀장",
+                href: "/wellness/camping-pool"
+              }, {
                 img: "/images/wellness/nature-experience/hero.jpg",
                 title: "자연 체험 프로그램",
                 description: "생태 관찰 및 자연 체험",
                 href: "/wellness/nature-experience"
               }, {
-                img: "/images/wellness/facility/hero.jpg",
-                title: "부대시설",
+                img: "/images/wellness/store/hero.jpg",
+                title: "매점 & 리필스테이션",
                 description: "카페·라운지 등 편의 시설",
-                href: "/wellness/facility"
+                href: "/wellness/store"
               }, {
                 img: "/images/wellness/special-activity/hero.jpg",
                 title: "조각공원",
                 description: "예술과 자연이 어우러진 조각공원",
                 href: "/wellness/special-activity"
+              }, {
+                img: "/images/wellness/seminar-room/hero.jpg",
+                title: "세미나실",
+                description: "소규모 강연·워크숍·공연이 가능한 다목적 공간",
+                href: "/wellness/seminar-room"
               }]} />
             </ScrollReveal>
             <ScrollReveal side="right" className="center order-1 md:order-2">

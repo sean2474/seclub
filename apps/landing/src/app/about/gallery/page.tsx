@@ -26,7 +26,7 @@ export default async function GalleryPage() {
       .publicUrl
   );
 
-  const pageImages = [...images, ...images];
+  const pageImages = [...images, ...images, ...images, ...images, ...images];
 
   return (
     <main className="pb-20">

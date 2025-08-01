@@ -7,10 +7,10 @@ import Link from "next/link"
 export default function Page() {
   return (
     <main className="mt-[var(--header-height-expanded)] flex flex-col items-center gap-4">
-      <h2 className="mt-4">캠핑장 지도</h2>
+      <h2 className="mt-4">캠핑장 종합 배치도</h2>
       <Modal>
         <div className="relative h-[50svh] w-full p-2">
-          <Image src="/images/about/map.png" alt="캠핑장 지도" fill className="object-contain" />
+          <Image src="/images/about/map.png" alt="캠핑장 종합 배치도" fill className="object-contain" />
         </div>
         <div className="flex gap-4">
           <Link href="/images/about/map.png" download="seclub-map.png">
@@ -20,7 +20,7 @@ export default function Page() {
         </div>
         <ModalBody className="w-svw h-svh">
           <div className="relative w-full h-full">
-            <Image src="/images/about/map.png" alt="캠핑장 지도" fill className="object-contain" />
+            <Image src="/images/about/map.png" alt="캠핑장 종합 배치도" fill className="object-contain" />
           </div>
         </ModalBody>
       </Modal>

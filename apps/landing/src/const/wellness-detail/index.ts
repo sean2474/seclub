@@ -33,7 +33,7 @@ export const wellnessPageData: Record<string, WellnessPageData> = {
       title: "조각공원",
       subtitle:
         "국내 정상급 조각가들의 작품을 숲·잔디밭·전망데크에서 만나는 야외 미술관입니다.",
-      type: "조각공원",
+      type: "유명 작품 감상",
       location: "단지 내 조각공원 구역",
       hours: "09:00 – 18:00",
       image: "/images/wellness/special-activity/hero.jpg",
@@ -54,9 +54,9 @@ export const wellnessPageData: Record<string, WellnessPageData> = {
     header: {
       title: "객실 전용 수영장",
       subtitle:
-        "별장 2·3구역에 위치한 바다 전경의 프라이빗 야외 풀장과 족욕탕을 즐길 수 있습니다.",
+        "오션콘도와 오션스파빌리지 사이에 위치한 바다 전경의 프라이빗 야외 풀장과 족욕탕을 즐길 수 있습니다.",
       type: "수영장",
-      location: "별장 2·3구역",
+      location: "오션콘도, 오션스파빌리지 사이",
       hours: "10:00 – 19:00",
       image: "/images/wellness/swimming-pool/hero.jpg",
     },
@@ -78,7 +78,7 @@ export const wellnessPageData: Record<string, WellnessPageData> = {
     header: {
       title: "포토스팟",
       subtitle: "절경 포인트를 모아둔 단지 내 대표 ‘인생샷’ 명소를 안내합니다.",
-      type: "포토스팟",
+      type: "사진 명소",
       location: "단지 전역",
       hours: "상시 개방",
       image: "/images/wellness/photo-spot/hero.jpg",
@@ -155,7 +155,7 @@ export const wellnessPageData: Record<string, WellnessPageData> = {
       title: "매점 & 리필스테이션",
       subtitle:
         "무포장·용기내 캠페인과 제로웨이스트 샵, 핸드드립 커피·비건 스낵을 만나는 편의 공간입니다.",
-      type: "매점 & 리필스테이션",
+      type: "원두 맛집",
       location: "관리동 입구",
       hours: "09:00 – 21:00",
       image: "/images/wellness/store/hero.jpg",
@@ -180,7 +180,7 @@ export const wellnessPageData: Record<string, WellnessPageData> = {
       subtitle:
         "소규모 강연·워크숍·공연이 가능한 다목적 공간으로, 무대·음향·조명 시설을 갖추고 있습니다.",
       type: "세미나실",
-      location: "관리동 내",
+      location: "캠핑장 S사이트",
       hours: "09:00 – 21:00 (예약제)",
       image: "/images/wellness/seminar-room/hero.jpg", // 세미나실 내부 또는 무대 전경 헤더 배너
     },

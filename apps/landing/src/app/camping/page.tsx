@@ -23,7 +23,7 @@ export default function SeclubElegantGuidePage() {
   return (
     <div className="min-h-screen font-sans overflow-x-hidden">
       <section className="fixed -z-10 top-0 h-svh w-full">
-        <Image src={"/images/landing/hero-4.jpeg"} sizes="100vw" alt={"SE클럽 객실 전경"} fill className="object-cover" />
+        <Image src={"/images/site/hero.jpg"} sizes="100vw" alt={"SE클럽 객실 전경"} fill className="object-cover" />
         <div className="z-10 absolute w-full h-full top-0 left-0 bg-black/30" />
         <div className="z-10 absolute top-1/2 left-1/2 md:left-20 lg:left-1/4 transform -translate-x-1/2 md:-translate-x-0 lg:-translate-x-1/2 -translate-y-1/2 text-background whitespace-nowrap">
           <ScrollReveal side="top" type="h1"> SE클럽 캠핑 사이트 </ScrollReveal>

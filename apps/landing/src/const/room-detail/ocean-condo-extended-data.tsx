@@ -10,9 +10,7 @@ export const oceanCondoExtendedData: RoomInfo = {
     "/images/room/ocean-condo-extended/main-1.jpg", 
     "/images/room/ocean-condo-extended/main-2.jpg", 
     "/images/room/ocean-condo-extended/main-3.jpg", 
-    "/images/room/ocean-condo-extended/main-4.jpg", 
-    "/images/room/ocean-condo-extended/main-5.jpg", 
-    "/images/room/ocean-condo-extended/main-6.png", 
+    "/images/room/ocean-condo-extended/main-4.png", 
   ],
   overview: (
     <p>SE CLUB 오션콘도는 탁 트인 바다 전망과 황홀한 노을을 객실에서 감상할 수 있는 콘도입니다. <span className="text-green-900 font-semibold">실내 주방</span>과 <span className="text-green-900 font-semibold">야외 인덕션</span> 테이블, <span className="text-green-900 font-semibold"> 숯불 화덕 바베큐</span>가 마련되어 있어 바다와 산, 별빛을 배경으로 낭만적인 요리를 즐길 수 있습니다.</p>

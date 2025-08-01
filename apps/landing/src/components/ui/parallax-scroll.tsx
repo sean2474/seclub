@@ -5,6 +5,7 @@ import { useScroll, useTransform, motion } from "motion/react";
 import Image from "next/image";
 
 import { cn } from "@/lib/utils";
+import { useMediaQuery } from "react-responsive";
 
 export const BlurryImage = ({ src, alt }: { src: string; alt?: string }) => {
   const [loaded, setLoaded] = useState(false);
@@ -36,20 +37,23 @@ export const ParallaxScroll = ({
 }) => {
   const { scrollYProgress } = useScroll();
 
-  const translateFirst = useTransform(scrollYProgress, [0, 1], [0, -200]);
-  const translateSecond = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const translateThird = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+
+  const translateFirst = useTransform(scrollYProgress, [0, 1], [0, -600]);
+  const translateSecond = useTransform(scrollYProgress, [0, 1], [0, 0]);
+  const translateThird = useTransform(scrollYProgress, [0, 1], [0, -300]);
 
   const third = Math.floor(images.length / 3);
-  const firstPart = images.slice(0, third);
-  const secondPart = images.slice(third, 2 * third);
-  const thirdPart = images.slice(2 * third);
+  const half = Math.floor(images.length / 2);
+  const firstPart = isMobile ? images.slice(0, half) : images.slice(0, third);
+  const secondPart = isMobile ? images.slice(half, images.length) : images.slice(third, 2 * third);
+  const thirdPart = isMobile ? [] : images.slice(2 * third);
 
   return (
     <div className={cn("overflow-y-auto w-full", className)}>
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-10 py-40 px-10 max-w-7xl mx-auto">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 md:gap-10 py-20 md:py-40 px-2 md:px-10 max-w-7xl mx-auto">
         {/* 1st column */}
-        <div className="grid gap-10">
+        <div className="grid gap-2 md:gap-10">
           {firstPart.map((src, idx) => (
             <motion.div
               key={`col1-${idx}`}
@@ -62,7 +66,7 @@ export const ParallaxScroll = ({
         </div>
 
         {/* 2nd column */}
-        <div className="grid gap-10">
+        <div className="grid gap-2 md:gap-10">
           {secondPart.map((src, idx) => (
             <motion.div
               key={`col2-${idx}`}
@@ -75,7 +79,7 @@ export const ParallaxScroll = ({
         </div>
 
         {/* 3rd column */}
-        <div className="grid gap-10">
+        <div className="grid gap-2 md:gap-10">
           {thirdPart.map((src, idx) => (
             <motion.div
               key={`col3-${idx}`}
