@@ -5,7 +5,7 @@ export const premiumVillaData: RoomInfo = {
   slug: "premium-villa",
   title: "프리미엄 빌라",
   subtitle: "인피니티 풀",
-  heroImage: "/images/room/premium-villa/hero.jpeg",
+  heroImage: "/images/room/premium-villa/hero.jpg",
   mainImages: [
     "/images/room/premium-villa/main-1.jpg", 
     "/images/room/premium-villa/main-2.jpeg", 
