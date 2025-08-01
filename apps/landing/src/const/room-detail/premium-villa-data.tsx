@@ -18,20 +18,25 @@ export const premiumVillaData: RoomInfo = {
 </p>
   ),
   amenities: [
-    // {
-    //   img: "/images/room/premium-villa/kitchen.jpg",
-    //   title: "주방",
-    //   description: "개별 주방 (냉장고, 전자레인지, 전기밥솥, 커피포트 등)",
-    // },  // TODO: 사진받으면 추가하기: 주방, 욕조 
+    {
+      img: "/images/room/premium-villa/pool.JPG",
+      title: "인피니티 풀",
+      description: "개별 수영장",
+    }, 
+    {
+      img: "/images/room/premium-villa/kitchen.jpg",
+      title: "주방",
+      description: "개별 주방 (냉장고, 전자레인지, 전기밥솥, 커피포트 등)",
+    },
     {
       img: "/images/room/premium-villa/grill.jpeg",
       title: "바비큐 그릴",
       description: "개별 바비큐 그릴",
     }, 
     {
-      img: "/images/room/premium-villa/pool.JPG",
-      title: "인피니티 풀",
-      description: "개별 수영장",
+      img: "/images/room/premium-villa/jacuzzi.jpg",
+      title: "자쿠지",
+      description: "개별 자쿠지",
     }, 
   ],
   features: [

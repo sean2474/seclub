@@ -17,17 +17,13 @@ export default function Home() {
             '/images/landing/hero-1.jpeg',
             '/images/landing/hero-2.jpg',
             '/images/landing/hero-3.jpeg',
-            '/images/landing/hero-4.jpeg',
-            '/images/landing/hero-5.jpeg',
-            '/images/landing/hero-6.jpg',
+            '/images/landing/hero-4.jpg',
           ]}
           mbImages={[
             '/images/landing/hero-1.jpeg',
             '/images/landing/hero-2.jpg',
             '/images/landing/hero-3.jpeg',
-            '/images/landing/hero-4.jpeg',
-            '/images/landing/hero-5.jpeg',
-            '/images/landing/hero-6.jpg',
+            '/images/landing/hero-4.jpg',
           ]}
         />
         <div className="absolute z-20 inset-0 bg-black/30 flex flex-col items-start md:items-start md:pl-24 lg:pl-48 justify-center text-start p-4">
