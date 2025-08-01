@@ -53,7 +53,7 @@ export default function PricingPage() {
         <section className="max-w-4xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16">
             <div>
-              <SectionTitle title="오션 콘도" subtitle="Ocean Condo" />
+              <SectionTitle title="오션 콘도 Standard & Deluxee" subtitle="Ocean Condo" />
               <Table>
                 <TableHeader>
                   <TableRow>

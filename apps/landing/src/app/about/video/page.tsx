@@ -17,7 +17,7 @@ const videos: Video[] = [
   { id: "WOpqyDl0XiY", title: "풀빌라" },
   { id: "3UOlYohOUIc", title: "스파빌라" },
   { id: "w96Fl9L4Ink", title: "오션콘도 Standard" },
-  { id: "TSwUm6mDlNk", title: "오션콘도 Delux" },
+  { id: "TSwUm6mDlNk", title: "오션콘도 Deluxe" },
   { id: "U5SRkqtV04U", title: "자연체험 프로그램" },
 ]
 

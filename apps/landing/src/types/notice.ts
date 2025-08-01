@@ -1,4 +1,4 @@
-export interface Announcement {
+export interface Notice {
     id: number;
     category: string;
     title: string;
@@ -6,6 +6,7 @@ export interface Announcement {
     views: number;
 }
 
-export interface AnnouncementDetail extends Announcement {
+export interface NoticeDetail extends Notice {
     content: string;
+    images?: string[];
 }

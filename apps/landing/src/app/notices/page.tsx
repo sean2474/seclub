@@ -1,7 +1,6 @@
 import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Search } from "lucide-react"
-import { AnnouncementTable } from "@/assets/announcement-table"
+import { NoticeTable } from "@/assets/notice-table"
 import {
   Pagination,
   PaginationContent,
@@ -11,15 +10,15 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination"
 import Link from "next/link"
-import { getAnnouncementCategories, getAnnouncements } from "@/lib/actions/announcements"
+import { getNoticeCategories, getNotices } from "@/lib/actions/notice"
 
 export default async function Page({
   searchParams,
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
-  const announcements = await getAnnouncements()
-  const categories = (await getAnnouncementCategories());
+  const notices = await getNotices()
+  const categories = (await getNoticeCategories());
   categories.unshift("전체")
 
   const params = await searchParams;
@@ -29,7 +28,7 @@ export default async function Page({
 
   const ITEMS_PER_PAGE = 5
 
-  const totalPages = Math.ceil(announcements.length / ITEMS_PER_PAGE)
+  const totalPages = Math.ceil(notices.length / ITEMS_PER_PAGE)
 
   return (
     <div className="min-h-screen w-full mt-[var(--header-height-expanded)]">
@@ -59,17 +58,6 @@ export default async function Page({
               <input type="hidden" name="category" value={c} />
               <input type="hidden" name="currentPage" value="1" />
 
-              {/* (Optional) 검색 기준 select stays visual only */}
-              <Select defaultValue="title">
-                <SelectTrigger className="w-[120px]">
-                  <SelectValue placeholder="검색 기준" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="title">제목</SelectItem>
-                  <SelectItem value="content">내용</SelectItem>
-                </SelectContent>
-              </Select>
-
               {/* Text input: uncontrolled so Enter submits */}
               <div className="relative flex-1 md:flex-initial">
                 <Input
@@ -88,7 +76,7 @@ export default async function Page({
               </div>
             </form>
           </div>
-          <AnnouncementTable announcements={announcements} itemsPerPage={ITEMS_PER_PAGE} />
+          <NoticeTable notices={notices} itemsPerPage={ITEMS_PER_PAGE} />
           <Pagination className="mt-8">
             <PaginationContent>
               <PaginationItem>

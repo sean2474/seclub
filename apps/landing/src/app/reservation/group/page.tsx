@@ -3,9 +3,10 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { ChevronRightIcon } from "lucide-react";
 import Image from "next/image"
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
-const SectionHeader = ({ title, subtitle }: { title: string; subtitle?: string }) => (
-  <div className="mb-4 md:mb-8">
+const SectionHeader = ({ title, subtitle, className }: { title: string; subtitle?: string; className?: string }) => (
+  <div className={cn("mb-4 md:mb-8", className)}>
     <h2 className="text-3xl font-bold text-gray-900">{title}</h2>
     {subtitle && <p className="mt-2 text-lg text-gray-600">{subtitle}</p>}
   </div>
@@ -141,7 +142,7 @@ export default function GroupReservationPage() {
 
         {/* 6. Contact & History */}
         <section className="py-0 md:py-16 px-6 lg:px-8 pb-16">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto text-center md:text-left">
             <SectionHeader title="문의 및 연역" />
             <div className="grid md:grid-cols-2 gap-4 md:gap-12">
               <div>

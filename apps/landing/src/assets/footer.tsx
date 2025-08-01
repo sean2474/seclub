@@ -47,7 +47,7 @@ export const Footer = () => {
           <Link href="/about/location" className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">찾아오시는 길 <Arrow side="right" size={5} /> </Link>
           <Link href="/reservation" className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">예약안내 <Arrow side="right" size={5} /> </Link>
           <Link href="/reservation/pricing" className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">요금안내 <Arrow side="right" size={5} /> </Link>
-          <Link href="/privacy-policy.html" className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">개인정보처리방침 <Arrow side="right" size={5} /> </Link>
+          {/* <Link href="/privacy-policy.html" className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">개인정보처리방침 <Arrow side="right" size={5} /> </Link> */}
           {/* <div className="mt-3 md:mt-10">
             <div className="flex gap-4 h-10">
               <div className="bg-background/50 rounded-full size-6 center">

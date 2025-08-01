@@ -41,7 +41,6 @@ export const wellnessPageData: Record<string, WellnessPageData> = {
     contents: [
       "주요 작가·작품: 김영중(유기적 곡선), 김석우(금속·돌 대비), 이필언(자연물 기반 대형 아트)",
       "관람 동선: 입구 광장 → 숲속 미로 → 전망데크 → 잔디밭 전시장",
-      "이용 팁: QR코드 AR 해설 제공, 포토스팟 안내도 비치, 우천 시 우산 대여 가능",
     ],
     images: [
       "/images/wellness/special-activity/1.jpg",
@@ -65,7 +64,6 @@ export const wellnessPageData: Record<string, WellnessPageData> = {
       "이용 시간: 10:00 – 19:00",
       "풀장 사양: 가로 17m × 폭 11m, 어린이 0.6m / 성인 1.0m, 족욕탕(280×140×60cm)·사계절 온수",
       "수칙: 신발 벗고 이용, 음식물·반려동물 금지, 어린이는 보호자 동반·구명조끼 착용, 다이빙·점핑 금지",
-      "부대 서비스: 타월·튜브·구명조끼 대여",
     ],
     images: [
       "/images/wellness/swimming-pool/1.jpg",

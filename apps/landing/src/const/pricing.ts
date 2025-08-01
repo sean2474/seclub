@@ -58,12 +58,12 @@ export const lodgingRates: LodgingRates = {
 }
 
 export const condoRates: CondoRates = {
-  기본형: {
+  "Standard": {
     최성수기: 199_000,
     성수기: 169_000,
     동절기: 169_000,
   },
-  확장형: {
+  "Deluxe": {
     최성수기: 289_000,
     성수기: 249_000,
     동절기: 249_000,
