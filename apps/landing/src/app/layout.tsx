@@ -1,6 +1,8 @@
 import "./globals.css";
 import { Header } from "@/assets/header";
 import { Footer } from "@/assets/footer";
+import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const Head = () => {
   const baseUrl = "https://seclub.vercel.app";
@@ -57,6 +59,8 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
