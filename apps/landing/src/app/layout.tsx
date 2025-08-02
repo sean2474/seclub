@@ -19,6 +19,8 @@ const Head = () => {
   
   return (
     <head>
+      <meta name="naver-site-verification" content="09b041ea9831b1189ef5506af8983de8bcca77ab" />
+      
       {/* Primary metadata */}
       <meta name="description" content={description} />
       
