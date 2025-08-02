@@ -38,14 +38,14 @@ export default async function Page({
         </header>
 
         <main>
-          <div className="flex flex-col md:flex-row gap-4 justify-between items-center mb-4">
+          <div className="flex flex-col md:flex-row gap-4 justify-start md:justify-between items-start md:items-center mb-4">
             {/* Category tabs */}
-            <div className="flex">
+            <div className="flex border-b order-2 md:order-1">
               {categories.map((category) => (
                 <Link
                   key={category}
                   href={`?category=${category}`}
-                  className={`px-4 py-2 ${category === c ? "border-b border-foreground" : ""}`}
+                  className={`relative px-4 py-2 ${category === c ? "border border-foreground after:w-full after:h-[10px] after:bg-background after:absolute after:-bottom-1 after:left-0" : ""}`}
                 >
                   {category}
                 </Link>
@@ -53,7 +53,7 @@ export default async function Page({
             </div>
 
             {/* Search form */}
-            <form method="get" className="flex gap-2 w-full md:w-auto">
+            <form method="get" className="flex gap-2 w-full order-1 md:w-auto md:order-2">
               {/* Keep category, reset to page 1 */}
               <input type="hidden" name="category" value={c} />
               <input type="hidden" name="currentPage" value="1" />
