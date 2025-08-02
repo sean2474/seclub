@@ -28,36 +28,51 @@ import { useToast } from "@/components/ui/use-toast"
 import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
 
-type Category = "객실" | "풍경" | "이벤트" | "기타"
-
-interface GalleryItem {
-  id: string
-  title: string
-  category: Category
-  date: string
-  file?: File
-  previewUrl?: string
-}
-
-const initialGalleryItems: GalleryItem[] = [
-  { id: "g1", title: "글램핑 A동 내부", category: "객실", date: "2024-07-25" },
-  { id: "g2", title: "캠핑장 전경", category: "풍경", date: "2024-07-24" },
-  { id: "g3", title: "여름 수영장 개장", category: "이벤트", date: "2024-07-22" },
-  { id: "g4", title: "바베큐 파티", category: "이벤트", date: "2024-07-21" },
-  { id: "g5", title: "카라반 B 내부", category: "객실", date: "2024-07-20" },
-  { id: "g6", title: "야간 조명", category: "풍경", date: "2024-07-19" },
-  { id: "g7", title: "계곡 물놀이", category: "풍경", date: "2024-07-18" },
-  { id: "g8", title: "캠프파이어", category: "이벤트", date: "2024-07-17" },
-]
+// Import gallery actions
+import {
+  fetchGalleryImages,
+  uploadGalleryImages,
+  deleteGalleryImage,
+  deleteGalleryImages,
+  type GalleryItem
+} from "@/lib/action/gallery"
 
 export default function GalleryPage() {
   const { toast } = useToast()
-  const [items, setItems] = useState<GalleryItem[]>(initialGalleryItems)
+  const [items, setItems] = useState<GalleryItem[]>([])
+  const [isLoading, setIsLoading] = useState(true)
   const [selectedIds, setSelectedIds] = useState<string[]>([])
   const [uploadProgress, setUploadProgress] = useState<number | null>(null)
   const [deletingId, setDeletingId] = useState<string | null>(null)
   const [isBulkDeleting, setIsBulkDeleting] = useState(false)
   const newItemsRef = useRef<GalleryItem[]>([])
+  
+  // Fetch images from Supabase storage when component mounts
+  useEffect(() => {
+    async function loadGalleryImages() {
+      try {
+        setIsLoading(true)
+        const { items, error } = await fetchGalleryImages()
+        
+        if (error) {
+          throw error
+        }
+        
+        setItems(items)
+      } catch (error) {
+        console.error('Error fetching gallery images:', error)
+        toast({
+          title: '이미지 로드 오류',
+          description: '갤러리 이미지를 불러오는 중 오류가 발생했습니다.',
+          variant: 'destructive',
+        })
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    
+    loadGalleryImages()
+  }, [])
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
@@ -78,7 +93,6 @@ export default function GalleryPage() {
         const newItem: GalleryItem = {
           id: `g${Date.now()}-${Math.random()}`,
           title: file.name,
-          category: "기타",
           date: new Date().toISOString().split("T")[0],
           file: file,
           previewUrl: previewUrl,
@@ -104,16 +118,43 @@ export default function GalleryPage() {
     if (uploadProgress === null) return
 
     if (uploadProgress >= 100) {
-      setItems((prev) => [...newItemsRef.current, ...prev])
-      toast({
-        title: "업로드 완료",
-        description: `${newItemsRef.current.length}개 이미지가 추가되었습니다.`,
-      })
-      const timer = setTimeout(() => {
-        setUploadProgress(null)
-        newItemsRef.current = []
-      }, 500)
-      return () => clearTimeout(timer)
+      // Upload to Supabase storage
+      const handleUpload = async () => {
+        try {
+          // Format the items for upload
+          const itemsToUpload = newItemsRef.current.map(item => ({
+            id: item.id,
+            title: item.title,
+            date: item.date,
+            file: item.file as File
+          }))
+          
+          // Upload using action function
+          const { uploadedItems, error } = await uploadGalleryImages(itemsToUpload)
+          
+          if (error) throw error
+          
+          // Update UI with the new images
+          setItems((prev) => [...uploadedItems, ...prev])
+          toast({
+            title: "업로드 완료",
+            description: `${uploadedItems.length}개 이미지가 추가되었습니다.`,
+          })
+        } catch (error) {
+          console.error('Error uploading images:', error)
+          toast({
+            title: "업로드 오류",
+            description: "이미지 업로드 중 오류가 발생했습니다.",
+            variant: "destructive",
+          })
+        } finally {
+          setUploadProgress(null)
+          newItemsRef.current = []
+        }
+      }
+      
+      handleUpload()
+      return
     }
 
     const timer = setTimeout(() => {
@@ -131,21 +172,72 @@ export default function GalleryPage() {
     setSelectedIds((prev) => (checked ? [...prev, id] : prev.filter((selectedId) => selectedId !== id)))
   }
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (deletingId) {
-      setItems((prev) => prev.filter((item) => item.id !== deletingId))
-      toast({ title: "삭제 완료", description: "이미지가 삭제되었습니다." })
+      try {
+        const itemToDelete = items.find(item => item.id === deletingId)
+        if (!itemToDelete || !itemToDelete.path) {
+          throw new Error('삭제할 항목을 찾을 수 없습니다.')
+        }
+        
+        // Delete using action function
+        const { success, error } = await deleteGalleryImage(itemToDelete.path)
+          
+        if (error) throw error
+        if (!success) throw new Error('삭제 중 오류가 발생했습니다.')
+        
+        // Update local state
+        setItems((prev) => prev.filter((item) => item.id !== deletingId))
+        toast({ title: "삭제 완료", description: "이미지가 삭제되었습니다." })
+      } catch (error) {
+        console.error('Error deleting image:', error)
+        toast({
+          title: "삭제 오류",
+          description: "이미지를 삭제하는 중 오류가 발생했습니다.",
+          variant: "destructive",
+        })
+      } finally {
+        setDeletingId(null)
+      }
     }
-    setDeletingId(null)
   }
 
-  const handleBulkDelete = () => {
-    if (isBulkDeleting) {
-      setItems((prev) => prev.filter((item) => !selectedIds.includes(item.id)))
-      toast({ title: "일괄 삭제 완료", description: `${selectedIds.length}개 이미지가 삭제되었습니다.` })
-      setSelectedIds([])
+  const handleBulkDelete = async () => {
+    if (isBulkDeleting && selectedIds.length > 0) {
+      try {
+        // Get paths for all selected items
+        const itemsToDelete = items
+          .filter(item => selectedIds.includes(item.id))
+          .map(item => item.path)
+          .filter(Boolean) as string[]
+        
+        if (itemsToDelete.length === 0) {
+          throw new Error('선택된 이미지가 없습니다.')
+        }
+        
+        // Delete using action function
+        const { success, error } = await deleteGalleryImages(itemsToDelete)
+          
+        if (error) throw error
+        if (!success) throw new Error('삭제 중 오류가 발생했습니다.')
+        
+        // Update local state
+        setItems((prev) => prev.filter((item) => !selectedIds.includes(item.id)))
+        toast({ title: "일괄 삭제 완료", description: `${selectedIds.length}개 이미지가 삭제되었습니다.` })
+        setSelectedIds([])
+      } catch (error) {
+        console.error('Error bulk deleting images:', error)
+        toast({
+          title: "일괄 삭제 오류",
+          description: "이미지를 삭제하는 중 오류가 발생했습니다.",
+          variant: "destructive",
+        })
+      } finally {
+        setIsBulkDeleting(false)
+      }
+    } else {
+      setIsBulkDeleting(false)
     }
-    setIsBulkDeleting(false)
   }
 
   return (
@@ -233,10 +325,18 @@ export default function GalleryPage() {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-              {items.map((item) => (
+              {isLoading ? (
+                <div className="col-span-full flex justify-center py-12">
+                  <p className="text-muted-foreground">이미지를 불러오는 중입니다...</p>
+                </div>
+              ) : items.length === 0 ? (
+                <div className="col-span-full flex justify-center py-12">
+                  <p className="text-muted-foreground">갤러리에 이미지가 없습니다. 새 이미지를 추가하세요.</p>
+                </div>
+              ) : items.map((item) => (
                 <div key={item.id} className="relative group aspect-square">
                   <Image
-                    src={item.previewUrl || `/placeholder.svg?width=200&height=200&query=${item.category}`}
+                    src={item.previewUrl || `/placeholder.svg?width=200&height=200&query=${item.title}`}
                     alt={item.title}
                     width={200}
                     height={200}

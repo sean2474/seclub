@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -42,20 +42,18 @@ import { Switch } from "@/components/ui/switch"
 import { useToast } from "@/components/ui/use-toast"
 import Image from "next/image"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select" // 1. Select 컴포넌트 import
+import { Notice, NoticeCategory, NoticeStatus } from "@/types/notices"
 
-type NoticeCategory = "일반" | "이벤트" | "중요" // 2. NoticeCategory 타입 정의
-type NoticeStatus = "게시 중" | "비게시"
-
-interface Notice {
-  id: string
-  title: string
-  category: NoticeCategory // 3. category 속성 추가
-  author: string
-  date: string
-  status: NoticeStatus
-  views: number
-  content?: string
-  imageUrls?: string[]
+// Export the main component with Suspense boundary
+export default function NoticesPage() {
+  return (
+    <Suspense fallback={<div className="p-6 text-center">
+      <h2 className="text-xl font-medium">로딩 중...</h2>
+      <p className="text-muted-foreground">공지사항을 불러오는 중입니다.</p>
+    </div>}>
+      <NoticesContent />
+    </Suspense>
+  )
 }
 
 const initialNoticeItems: Notice[] = [
@@ -102,7 +100,7 @@ const initialNoticeItems: Notice[] = [
   },
 ]
 
-export default function NoticesPage() {
+function NoticesContent() {
   const { toast } = useToast()
   const [notices, setNotices] = useState<Notice[]>(initialNoticeItems)
   const [isModalOpen, setIsModalOpen] = useState(false)
