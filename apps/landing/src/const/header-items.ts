@@ -16,18 +16,8 @@ export const menuItems: HeaderMenuType[] = [
     ]
   },
   {
-    title: "갤러리",
-    href: "/about/gallery",
-    items: [
-      {
-        name: "사진 갤러리",
-        href: "/about/gallery"
-      },
-      {
-        name: "영상 갤러리",
-        href: "/about/video"
-      },
-    ]
+    title: "객실",
+    href: "/rooms"
   },
   {
     title: "캠핑장",
@@ -48,12 +38,22 @@ export const menuItems: HeaderMenuType[] = [
     ]
   },
   {
-    title: "객실",
-    href: "/rooms"
-  },
-  {
     title: "웰니스",
     href: "/wellness"
+  },
+  {
+    title: "갤러리",
+    href: "/about/gallery",
+    items: [
+      {
+        name: "사진 갤러리",
+        href: "/about/gallery"
+      },
+      {
+        name: "영상 갤러리",
+        href: "/about/video"
+      },
+    ]
   },
   {
     title: "예약 안내",
