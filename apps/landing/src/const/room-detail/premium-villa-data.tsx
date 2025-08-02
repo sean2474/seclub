@@ -7,11 +7,11 @@ export const premiumVillaData: RoomInfo = {
   subtitle: "인피니티 풀",
   heroImage: "/images/room/premium-villa/hero.jpg",
   mainImages: [
-    "/images/room/premium-villa/main-1.jpg", 
+    "/images/room/premium-villa/main-1.jpeg", 
     "/images/room/premium-villa/main-2.jpeg", 
     "/images/room/premium-villa/main-3.jpg", 
     "/images/room/premium-villa/main-4.jpeg", 
-    "/images/room/premium-villa/main-5.jpeg", 
+    "/images/room/premium-villa/main-5.jpg", 
   ],
   overview: (
     <p>SE CLUB 프리미엄 빌라는 끝없이 펼쳐진 바다와 황홀한 노을이 객실 창문 너머로 펼쳐지는 특별한 휴식처입니다. <span className="text-green-900 font-semibold">실내 주방</span>, <span className="text-green-900 font-semibold">야외 인피니티 풀</span>, <span className="text-green-900 font-semibold">프라이빗 바비큐 공간</span>을 갖춰, 바다, 산, 그리고 별빛이 수놓인 낭만의 순간을 한층 더 완벽하게 즐기실 수 있습니다
@@ -21,7 +21,7 @@ export const premiumVillaData: RoomInfo = {
     {
       img: "/images/room/premium-villa/pool.JPG",
       title: "인피니티 풀",
-      description: "개별 수영장",
+      description: "선배드와 의자가 어우러진 12미터 전용 인피니티 풀",
     }, 
     {
       img: "/images/room/premium-villa/kitchen.jpg",

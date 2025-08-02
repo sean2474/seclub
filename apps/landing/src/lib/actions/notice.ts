@@ -3,7 +3,7 @@ import { Notice, NoticeDetail } from "@/types"
 export const getNotices = async () : Promise<Notice[]> => {
     return [
       { id: 1, category: "수상", title: "함께 축하해 주세요! SE클럽 '한국경제를 빛낸 인물&경영' 더블 수상", date: "2022-10-21", views: 728 },
-      { id: 2, category: "이벤트", title: "가수 이벤트 - 8월 주말 라이브 공연 안내", date: "2025-07-25", views: 612 },
+      { id: 2, category: "이벤트", title: "8월 특별이벤트 '별빛 아래 음악여행", date: "2025-07-25", views: 612 },
       {
         id: 3,
         category: "공지",
@@ -31,7 +31,7 @@ export const getNoticeById = async (id: number) : Promise<NoticeDetail | null> =
     {
       id: 2,
       category: "이벤트",
-      title: "가수 이벤트 - 8월 주말 라이브 공연 안내",
+      title: "8월 특별이벤트 '별빛 아래 음악여행",
       date: "2025-07-25",
       views: 612,
       content: "8월에는 매 주말마다 SE클럽에서 라이브 공연을 진행하고 있습니다. 캠핑장의 아름다운 경관과 함께 예쁜 노래소리로 주말을 보내세요.\n\n- 일시: 8월 매주 금/토/일 저녁 7시\n- 장소: SE클럽 중앙 광장\n- 출연 가수: 매주 변경 (홈페이지 일정 확인)\n\n많은 참여 부탁드립니다."
