@@ -8,12 +8,6 @@ import { roomData } from '@/const/room-detail'
 const SITE_URL = 'https://seclub.kr'
 
 /**
- * Next.js App Router에서 제공하는 MetadataRoute.Sitemap 타입
- * - url: 반드시 절대 경로(프로토콜 포함) 
- * - lastModified, changeFrequency, priority는 선택 사항
- */
-
-/**
  * app 디렉토리에서 페이지 경로를 찾아 URL을 생성하는 함수
  */
 const getPagePaths = (directoryPath: string, basePath = ''): string[] => {
