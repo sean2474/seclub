@@ -1,0 +1,6 @@
+# public/robots.txt
+User-agent: Yeti
+Allow: /
+
+User-agent: *
+Disallow:
