@@ -1,4 +1,4 @@
-import { CampingRates, CondoRates, Discounts, LodgingRates } from "@/types/pricing"
+import { CampingRates, Discounts, LodgingRates } from "@/types/pricing"
 
 export const discounts: Discounts = {
   highSeason: {

@@ -10,10 +10,6 @@ export interface LodgingRates {
     longStayDiscount?: number
   }
 }
-export type CondoType = "기본형" | "확장형"
-export interface CondoRates {
-  [type: string]: Partial<Record<Season, number>>
-}
 export interface Discounts {
   /** 성수기(3-6월,9-11월) 장박 특별할인 */
   highSeason: {

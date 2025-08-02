@@ -32,7 +32,7 @@ export default function PricingPage() {
               <TableRow>
                 <TableHead>시설</TableHead>
                 <TableHead className="text-right">최성수기</TableHead>
-                <TableHead className="text-right">동절기</TableHead>
+                <TableHead className="text-right">성수기/동절기</TableHead>
                 <TableHead className="text-right">연박할인</TableHead>
               </TableRow>
             </TableHeader>
