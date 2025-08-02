@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo, type ChangeEvent } from "react"
+import { useState, type ChangeEvent, useEffect, useRef } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import {
@@ -8,12 +8,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
-  DropdownMenuSub,
-  DropdownMenuSubTrigger,
-  DropdownMenuSubContent,
-  DropdownMenuPortal,
 } from "@/components/ui/dropdown-menu"
 import {
   AlertDialog,
@@ -26,16 +21,13 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Badge } from "@/components/ui/badge"
-import { MoreHorizontal, PlusCircle, Upload, ImageIcon, Trash2, Eye, EyeOff } from "lucide-react"
+import { MoreHorizontal, PlusCircle, Upload, Trash2 } from "lucide-react"
 import Image from "next/image"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Progress } from "@/components/ui/progress"
 import { useToast } from "@/components/ui/use-toast"
 import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
 
-type GalleryStatus = "Published" | "Unpublished"
 type Category = "객실" | "풍경" | "이벤트" | "기타"
 
 interface GalleryItem {
@@ -43,83 +35,100 @@ interface GalleryItem {
   title: string
   category: Category
   date: string
-  status: GalleryStatus
   file?: File
   previewUrl?: string
 }
 
 const initialGalleryItems: GalleryItem[] = [
-  { id: "g1", title: "글램핑 A동 내부", category: "객실", date: "2024-07-25", status: "Published" },
-  { id: "g2", title: "캠핑장 전경", category: "풍경", date: "2024-07-24", status: "Published" },
-  { id: "g3", title: "여름 수영장 개장", category: "이벤트", date: "2024-07-22", status: "Unpublished" },
-  { id: "g4", title: "바베큐 파티", category: "이벤트", date: "2024-07-21", status: "Published" },
-  { id: "g5", title: "카라반 B 내부", category: "객실", date: "2024-07-20", status: "Published" },
-  { id: "g6", title: "야간 조명", category: "풍경", date: "2024-07-19", status: "Unpublished" },
-  { id: "g7", title: "계곡 물놀이", category: "풍경", date: "2024-07-18", status: "Published" },
-  { id: "g8", title: "캠프파이어", category: "이벤트", date: "2024-07-17", status: "Published" },
+  { id: "g1", title: "글램핑 A동 내부", category: "객실", date: "2024-07-25" },
+  { id: "g2", title: "캠핑장 전경", category: "풍경", date: "2024-07-24" },
+  { id: "g3", title: "여름 수영장 개장", category: "이벤트", date: "2024-07-22" },
+  { id: "g4", title: "바베큐 파티", category: "이벤트", date: "2024-07-21" },
+  { id: "g5", title: "카라반 B 내부", category: "객실", date: "2024-07-20" },
+  { id: "g6", title: "야간 조명", category: "풍경", date: "2024-07-19" },
+  { id: "g7", title: "계곡 물놀이", category: "풍경", date: "2024-07-18" },
+  { id: "g8", title: "캠프파이어", category: "이벤트", date: "2024-07-17" },
 ]
 
 export default function GalleryPage() {
   const { toast } = useToast()
   const [items, setItems] = useState<GalleryItem[]>(initialGalleryItems)
   const [selectedIds, setSelectedIds] = useState<string[]>([])
-  const [activeTab, setActiveTab] = useState("all")
   const [uploadProgress, setUploadProgress] = useState<number | null>(null)
   const [deletingId, setDeletingId] = useState<string | null>(null)
   const [isBulkDeleting, setIsBulkDeleting] = useState(false)
+  const newItemsRef = useRef<GalleryItem[]>([])
 
-  const filteredItems = useMemo(() => {
-    if (activeTab === "all") return items
-    const status = activeTab === "published" ? "Published" : "Unpublished"
-    return items.filter((item) => item.status === status)
-  }, [items, activeTab])
-
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
     if (!files || files.length === 0) return
 
-    const file = files[0]
-    setUploadProgress(0)
-
-    const reader = new FileReader()
-    reader.onloadend = () => {
-      const newItem: GalleryItem = {
-        id: `g${Date.now()}`,
-        title: file.name,
-        category: "기타",
-        date: new Date().toISOString().split("T")[0],
-        status: "Unpublished",
-        file: file,
-        previewUrl: reader.result as string,
-      }
-
-      let progress = 0
-      const interval = setInterval(() => {
-        progress += 20
-        setUploadProgress(progress)
-        if (progress >= 100) {
-          clearInterval(interval)
-          setItems((prev) => [newItem, ...prev])
-          setTimeout(() => setUploadProgress(null), 500)
-          toast({ title: "업로드 완료", description: `${file.name} 이미지가 추가되었습니다.` })
-        }
-      }, 200)
+    const readFileAsDataURL = (file: File): Promise<string> => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.onloadend = () => resolve(reader.result as string)
+        reader.onerror = reject
+        reader.readAsDataURL(file)
+      })
     }
-    reader.readAsDataURL(file)
+
+    try {
+      const newItemsPromises = Array.from(files).map(async (file) => {
+        const previewUrl = await readFileAsDataURL(file)
+        const newItem: GalleryItem = {
+          id: `g${Date.now()}-${Math.random()}`,
+          title: file.name,
+          category: "기타",
+          date: new Date().toISOString().split("T")[0],
+          file: file,
+          previewUrl: previewUrl,
+        }
+        return newItem
+      })
+
+      newItemsRef.current = await Promise.all(newItemsPromises)
+      setUploadProgress(0)
+    } catch (error) {
+      console.error("Error reading files:", error)
+      toast({
+        title: "파일 읽기 오류",
+        description: "파일을 읽는 중 오류가 발생했습니다.",
+        variant: "destructive",
+      })
+    } finally {
+      e.target.value = ""
+    }
   }
 
+  useEffect(() => {
+    if (uploadProgress === null) return
+
+    if (uploadProgress >= 100) {
+      setItems((prev) => [...newItemsRef.current, ...prev])
+      toast({
+        title: "업로드 완료",
+        description: `${newItemsRef.current.length}개 이미지가 추가되었습니다.`,
+      })
+      const timer = setTimeout(() => {
+        setUploadProgress(null)
+        newItemsRef.current = []
+      }, 500)
+      return () => clearTimeout(timer)
+    }
+
+    const timer = setTimeout(() => {
+      setUploadProgress((p) => (p !== null ? p + 20 : 0))
+    }, 200)
+
+    return () => clearTimeout(timer)
+  }, [uploadProgress, toast])
+
   const handleSelectAll = (checked: boolean | "indeterminate") => {
-    setSelectedIds(checked ? filteredItems.map((item) => item.id) : [])
+    setSelectedIds(checked ? items.map((item) => item.id) : [])
   }
 
   const handleSelect = (id: string, checked: boolean) => {
     setSelectedIds((prev) => (checked ? [...prev, id] : prev.filter((selectedId) => selectedId !== id)))
-  }
-
-  const handleUpdateStatus = (ids: string[], status: GalleryStatus) => {
-    setItems((prev) => prev.map((item) => (ids.includes(item.id) ? { ...item, status } : item)))
-    toast({ title: "상태 변경 완료", description: `${ids.length}개 이미지의 상태가 변경되었습니다.` })
-    setSelectedIds([])
   }
 
   const handleDelete = () => {
@@ -148,7 +157,14 @@ export default function GalleryPage() {
             <Button onClick={() => document.getElementById("file-upload")?.click()}>
               <PlusCircle className="mr-2 h-4 w-4" /> 새 이미지 추가
             </Button>
-            <input type="file" id="file-upload" className="hidden" accept="image/*" onChange={handleFileChange} />
+            <input
+              type="file"
+              id="file-upload"
+              className="hidden"
+              accept="image/*"
+              onChange={handleFileChange}
+              multiple
+            />
           </div>
         </div>
         <Card>
@@ -177,147 +193,95 @@ export default function GalleryPage() {
             )}
           </CardContent>
         </Card>
-        <Tabs defaultValue="all" onValueChange={setActiveTab}>
-          <TabsList>
-            <TabsTrigger value="all">전체</TabsTrigger>
-            <TabsTrigger value="published">공개</TabsTrigger>
-            <TabsTrigger value="unpublished">비공개</TabsTrigger>
-          </TabsList>
-          <TabsContent value={activeTab} className="mt-4">
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between">
-                <div>
-                  <CardTitle>이미지 목록</CardTitle>
-                  <CardDescription>
-                    {selectedIds.length > 0
-                      ? `${selectedIds.length}개 이미지 선택됨`
-                      : `${filteredItems.length}개의 이미지가 있습니다.`}
-                  </CardDescription>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      id="select-all"
-                      checked={
-                        selectedIds.length === filteredItems.length && filteredItems.length > 0
-                          ? true
-                          : selectedIds.length > 0
-                            ? "indeterminate"
-                            : false
-                      }
-                      onCheckedChange={handleSelectAll}
-                    />
-                    <Label htmlFor="select-all">전체 선택</Label>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between">
+            <div>
+              <CardTitle>이미지 목록</CardTitle>
+              <CardDescription>
+                {selectedIds.length > 0
+                  ? `${selectedIds.length}개 이미지 선택됨`
+                  : `${items.length}개의 이미지가 있습니다.`}
+              </CardDescription>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <Checkbox
+                  id="select-all"
+                  checked={
+                    selectedIds.length === items.length && items.length > 0
+                      ? true
+                      : selectedIds.length > 0
+                        ? "indeterminate"
+                        : false
+                  }
+                  onCheckedChange={handleSelectAll}
+                />
+                <Label htmlFor="select-all">전체 선택</Label>
+              </div>
+              <div className="flex items-center gap-2 border-l pl-4">
+                <Button
+                  size="sm"
+                  variant="destructive"
+                  onClick={() => setIsBulkDeleting(true)}
+                  disabled={selectedIds.length === 0}
+                >
+                  <Trash2 className="mr-2 h-4 w-4" />
+                  선택 삭제
+                </Button>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+              {items.map((item) => (
+                <div key={item.id} className="relative group aspect-square">
+                  <Image
+                    src={item.previewUrl || `/placeholder.svg?width=200&height=200&query=${item.category}`}
+                    alt={item.title}
+                    width={200}
+                    height={200}
+                    className="object-cover w-full h-full rounded-lg"
+                  />
+                  <div
+                    onClick={() => handleSelect(item.id, !selectedIds.includes(item.id))}
+                    className={cn(
+                      "absolute inset-0 rounded-lg transition-all cursor-pointer",
+                      selectedIds.includes(item.id) ? "ring-2 ring-primary ring-offset-2" : "group-hover:bg-black/20",
+                    )}
+                  />
+                  <Checkbox
+                    checked={selectedIds.includes(item.id)}
+                    onCheckedChange={(checked) => handleSelect(item.id, !!checked)}
+                    className="absolute top-3 left-3 h-5 w-5 bg-background/80 data-[state=checked]:bg-primary"
+                  />
+                  <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="secondary" size="icon" className="h-8 w-8">
+                          <MoreHorizontal className="h-4 w-4" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>작업</DropdownMenuLabel>
+                        <DropdownMenuItem className="text-red-600" onClick={() => setDeletingId(item.id)}>
+                          <Trash2 className="mr-2 h-4 w-4" />
+                          삭제
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </div>
-                  <div className="flex items-center gap-2 border-l pl-4">
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => handleUpdateStatus(selectedIds, "Published")}
-                      disabled={selectedIds.length === 0}
-                    >
-                      <Eye className="mr-2 h-4 w-4" />
-                      선택 공개
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => handleUpdateStatus(selectedIds, "Unpublished")}
-                      disabled={selectedIds.length === 0}
-                    >
-                      <EyeOff className="mr-2 h-4 w-4" />
-                      선택 숨김
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="destructive"
-                      onClick={() => setIsBulkDeleting(true)}
-                      disabled={selectedIds.length === 0}
-                    >
-                      <Trash2 className="mr-2 h-4 w-4" />
-                      선택 삭제
-                    </Button>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                  {filteredItems.map((item) => (
-                    <div key={item.id} className="relative group aspect-square">
-                      <Image
-                        src={item.previewUrl || `/placeholder.svg?width=200&height=200&query=${item.category}`}
-                        alt={item.title}
-                        width={200}
-                        height={200}
-                        className="object-cover w-full h-full rounded-lg"
-                      />
-                      <div
-                        onClick={() => handleSelect(item.id, !selectedIds.includes(item.id))}
-                        className={cn(
-                          "absolute inset-0 rounded-lg transition-all cursor-pointer",
-                          selectedIds.includes(item.id)
-                            ? "ring-2 ring-primary ring-offset-2"
-                            : "group-hover:bg-black/20",
-                        )}
-                      />
-                      <Checkbox
-                        checked={selectedIds.includes(item.id)}
-                        onCheckedChange={(checked) => handleSelect(item.id, !!checked)}
-                        className="absolute top-3 left-3 h-5 w-5 bg-background/80 data-[state=checked]:bg-primary"
-                      />
-                      <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button variant="secondary" size="icon" className="h-8 w-8">
-                              <MoreHorizontal className="h-4 w-4" />
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>작업</DropdownMenuLabel>
-                            <DropdownMenuSub>
-                              <DropdownMenuSubTrigger>
-                                <ImageIcon className="mr-2 h-4 w-4" />
-                                상태 변경
-                              </DropdownMenuSubTrigger>
-                              <DropdownMenuPortal>
-                                <DropdownMenuSubContent>
-                                  <DropdownMenuItem onClick={() => handleUpdateStatus([item.id], "Published")}>
-                                    <Eye className="mr-2 h-4 w-4" />
-                                    공개로 변경
-                                  </DropdownMenuItem>
-                                  <DropdownMenuItem onClick={() => handleUpdateStatus([item.id], "Unpublished")}>
-                                    <EyeOff className="mr-2 h-4 w-4" />
-                                    비공개로 변경
-                                  </DropdownMenuItem>
-                                </DropdownMenuSubContent>
-                              </DropdownMenuPortal>
-                            </DropdownMenuSub>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem className="text-red-600" onClick={() => setDeletingId(item.id)}>
-                              <Trash2 className="mr-2 h-4 w-4" />
-                              삭제
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </div>
-                      <div className="absolute bottom-0 left-0 w-full p-2 bg-linear-to-t from-black/70 to-transparent rounded-b-lg">
-                        <div className="flex items-center justify-between">
-                          <Badge variant={item.status === "Published" ? "default" : "secondary"}>
-                            {item.status === "Published" ? "공개" : "비공개"}
-                          </Badge>
-                          <p className="text-xs text-white/90 font-medium">{item.date}</p>
-                        </div>
-                      </div>
+                  <div className="absolute bottom-0 left-0 w-full p-2 bg-gradient-to-t from-black/70 to-transparent rounded-b-lg">
+                    <div className="flex items-center justify-end w-full">
+                      <p className="text-xs text-white/90 font-medium">{item.date}</p>
                     </div>
-                  ))}
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
-      {/* Delete Confirmation Dialog */}
       <AlertDialog open={!!deletingId} onOpenChange={() => setDeletingId(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -333,7 +297,6 @@ export default function GalleryPage() {
         </AlertDialogContent>
       </AlertDialog>
 
-      {/* Bulk Delete Confirmation Dialog */}
       <AlertDialog open={isBulkDeleting} onOpenChange={setIsBulkDeleting}>
         <AlertDialogContent>
           <AlertDialogHeader>

@@ -1,11 +1,9 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Tent, LayoutDashboard, ImageIcon, Megaphone, ChevronLeft, ChevronRight, Video } from "lucide-react"
+import { Tent, LayoutDashboard, ImageIcon, Megaphone, ChevronRight, Video } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { Badge } from "@/components/ui/badge"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import Image from "next/image"
 
@@ -19,7 +17,7 @@ export default function AdminSidebar({ isMobile = false, isCollapsed = false, on
   const pathname = usePathname()
 
   const navItems = [
-    { href: "", label: "대시보드", icon: LayoutDashboard, badge: "" },
+    { href: "/", label: "대시보드", icon: LayoutDashboard},
     { href: "/gallery", label: "갤러리 관리", icon: ImageIcon },
     { href: "/videos", label: "영상 갤러리", icon: Video },
     { href: "/notices", label: "공지사항 관리", icon: Megaphone },
@@ -51,11 +49,6 @@ export default function AdminSidebar({ isMobile = false, isCollapsed = false, on
               >
                 <item.icon className="h-4 w-4" />
                 {item.label}
-                {item.badge && (
-                  <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                    {item.badge}
-                  </Badge>
-                )}
               </Link>
             ))}
           </nav>
@@ -70,17 +63,17 @@ export default function AdminSidebar({ isMobile = false, isCollapsed = false, on
         <div
           className={cn(
             "flex h-14 items-center border-b lg:h-[60px]",
-            isCollapsed ? "justify-center px-2" : "px-4 lg:px-6",
+            isCollapsed ? "justify-start px-2" : "px-4 lg:px-6",
           )}
         >
-          <Link href="" className="flex items-center gap-2 font-semibold">
+          <Link href="" className={cn("flex items-center gap-2 font-semibold", isCollapsed ? "pl-3.5" : "")}>
             <Image src="/logo.png" alt="logo" width={24} height={24} quality={100} />
-            {!isCollapsed && <span className="">SECLUB 관리자</span>}
+            {!isCollapsed && <span className="whitespace-nowrap overflow-hidden">SECLUB 관리자</span>}
           </Link>
         </div>
         <div className="flex-1 overflow-auto py-2">
           <nav
-            className={cn("grid items-start text-sm font-medium", isCollapsed ? "justify-center px-2" : "px-2 lg:px-4")}
+            className={cn("grid items-start text-sm font-medium", isCollapsed ? "px-2" : "px-2 lg:px-4")}
           >
             {navItems.map((item) =>
               isCollapsed ? (
@@ -89,11 +82,11 @@ export default function AdminSidebar({ isMobile = false, isCollapsed = false, on
                     <Link
                       href={item.href}
                       className={cn(
-                        "flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-primary md:h-8 md:w-8",
+                        "flex h-12 w-full items-center justify-start pl-4.5 rounded-lg text-muted-foreground transition-colors hover:text-primary",
                         pathname === item.href && "bg-muted text-primary",
                       )}
                     >
-                      <item.icon className="h-5 w-5" />
+                      <item.icon className="h-4 w-4" />
                       <span className="sr-only">{item.label}</span>
                     </Link>
                   </TooltipTrigger>
@@ -104,17 +97,12 @@ export default function AdminSidebar({ isMobile = false, isCollapsed = false, on
                   key={item.label}
                   href={item.href}
                   className={cn(
-                    "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary overflow-hidden h-12",
+                    "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary h-12",
                     pathname === item.href && "bg-muted text-primary",
                   )}
                 >
                   <item.icon className="h-4 w-4" />
-                  {item.label}
-                  {item.badge && (
-                    <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                      {item.badge}
-                    </Badge>
-                  )}
+                  <div className="h-12 overflow-hidden flex items-center whitespace-nowrap">{item.label}</div>
                 </Link>
               ),
             )}
@@ -122,7 +110,7 @@ export default function AdminSidebar({ isMobile = false, isCollapsed = false, on
         </div>
         <div className={cn("absolute top-1/2 -translate-y-1/2 transition-all", isCollapsed ? "right-3.5" : "right-5")}>
           <div onClick={onToggle} className="w-full bg-transparent cursor-pointer border rounded-md p-2 hover:bg-foreground hover:text-background hover:border-foreground transition-colors duration-300">
-            <ChevronRight className={cn("h-6 w-6 transition-all duration-300 delay-500", isCollapsed ? "" : "rotate-180")} />
+            <ChevronRight className={cn("h-6 w-6 transition-transform duration-300 delay-500", isCollapsed ? "" : "rotate-180")} />
             <span className="sr-only">사이드바 토글</span>
           </div>
         </div>

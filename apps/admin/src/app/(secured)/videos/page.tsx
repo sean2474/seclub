@@ -1,19 +1,23 @@
 "use client"
 
-import { useState, useMemo, type ChangeEvent } from "react"
+import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
-  DropdownMenuSub,
-  DropdownMenuSubTrigger,
-  DropdownMenuSubContent,
-  DropdownMenuPortal,
 } from "@/components/ui/dropdown-menu"
 import {
   AlertDialog,
@@ -26,86 +30,105 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Badge } from "@/components/ui/badge"
-import { MoreHorizontal, PlusCircle, Upload, VideoIcon, Trash2, Eye, EyeOff, PlayCircle } from "lucide-react"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Progress } from "@/components/ui/progress"
+import { Input } from "@/components/ui/input"
+import { MoreHorizontal, PlusCircle, Trash2, Youtube, ExternalLink, PlayCircle } from "lucide-react"
 import { useToast } from "@/components/ui/use-toast"
 import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
 
-type VideoStatus = "Published" | "Unpublished"
-
 interface VideoItem {
   id: string
+  youtubeId: string
   title: string
   date: string
-  status: VideoStatus
-  file?: File
+}
+
+// Helper to extract YouTube ID from various URL formats
+const getYouTubeId = (url: string): string | null => {
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/
+  const match = url.match(regExp)
+  return match && match[2].length === 11 ? match[2] : null
 }
 
 const initialVideoItems: VideoItem[] = [
-  { id: "v1", title: "캠핑장 드론 촬영 영상", date: "2024-07-20", status: "Published" },
-  { id: "v2", title: "여름맞이 계곡 소개", date: "2024-07-18", status: "Published" },
-  { id: "v3", title: "글램핑 A동 룸투어", date: "2024-07-15", status: "Unpublished" },
-  { id: "v4", title: "바베큐 파티 현장 스케치", date: "2024-07-12", status: "Published" },
+  {
+    id: "v1",
+    title: "캠핑장 드론 촬영 영상",
+    youtubeId: "LXb3EKWsInQ",
+    date: "2024-07-20",
+  },
+  {
+    id: "v2",
+    title: "여름맞이 계곡 소개",
+    youtubeId: "3h0_v9QxGxA",
+    date: "2024-07-18",
+  },
+  {
+    id: "v3",
+    title: "글램핑 A동 룸투어",
+    youtubeId: "s_i5b0lJ_bI",
+    date: "2024-07-15",
+  },
+  {
+    id: "v4",
+    title: "바베큐 파티 현장 스케치",
+    youtubeId: "9bZkp7q19f0",
+    date: "2024-07-12",
+  },
 ]
 
 export default function VideoGalleryPage() {
   const { toast } = useToast()
   const [items, setItems] = useState<VideoItem[]>(initialVideoItems)
   const [selectedIds, setSelectedIds] = useState<string[]>([])
-  const [activeTab, setActiveTab] = useState("all")
-  const [uploadProgress, setUploadProgress] = useState<number | null>(null)
   const [deletingId, setDeletingId] = useState<string | null>(null)
   const [isBulkDeleting, setIsBulkDeleting] = useState(false)
+  const [isAddVideoDialogOpen, setIsAddVideoDialogOpen] = useState(false)
+  const [youtubeUrl, setYoutubeUrl] = useState("")
+  const [videoTitle, setVideoTitle] = useState("")
+  const [urlError, setUrlError] = useState<string | null>(null)
+  const [viewingVideoId, setViewingVideoId] = useState<string | null>(null)
 
-  const filteredItems = useMemo(() => {
-    if (activeTab === "all") return items
-    const status = activeTab === "published" ? "Published" : "Unpublished"
-    return items.filter((item) => item.status === status)
-  }, [items, activeTab])
-
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files
-    if (!files || files.length === 0) return
-
-    const file = files[0]
-    setUploadProgress(0)
-
-    const newVideoItem: VideoItem = {
-      id: `v${Date.now()}`,
-      title: file.name,
-      date: new Date().toISOString().split("T")[0],
-      status: "Unpublished",
-      file: file,
+  const handleAddVideo = () => {
+    if (!videoTitle.trim()) {
+      toast({
+        title: "오류",
+        description: "영상 제목을 입력해주세요.",
+        variant: "destructive",
+      })
+      return
     }
 
-    let progress = 0
-    const interval = setInterval(() => {
-      progress += 20
-      setUploadProgress(progress)
-      if (progress >= 100) {
-        clearInterval(interval)
-        setItems((prev) => [newVideoItem, ...prev])
-        setTimeout(() => setUploadProgress(null), 500)
-        toast({ title: "업로드 완료", description: `${file.name} 영상이 추가되었습니다.` })
-      }
-    }, 200)
+    const videoId = getYouTubeId(youtubeUrl)
+    if (!videoId) {
+      setUrlError("유효하지 않은 YouTube URL입니다. 형식을 확인해주세요.")
+      return
+    }
+    setUrlError(null)
+
+    const newItem: VideoItem = {
+      id: `v${Date.now()}`,
+      youtubeId: videoId,
+      title: videoTitle,
+      date: new Date().toISOString().split("T")[0],
+    }
+
+    setItems((prev) => [newItem, ...prev])
+    toast({
+      title: "영상 추가 완료",
+      description: "YouTube 영상이 목록에 추가되었습니다.",
+    })
+    setYoutubeUrl("")
+    setVideoTitle("")
+    setIsAddVideoDialogOpen(false)
   }
 
   const handleSelectAll = (checked: boolean | "indeterminate") => {
-    setSelectedIds(checked ? filteredItems.map((item) => item.id) : [])
+    setSelectedIds(checked ? items.map((item) => item.id) : [])
   }
 
   const handleSelect = (id: string, checked: boolean) => {
     setSelectedIds((prev) => (checked ? [...prev, id] : prev.filter((selectedId) => selectedId !== id)))
-  }
-
-  const handleUpdateStatus = (ids: string[], status: VideoStatus) => {
-    setItems((prev) => prev.map((item) => (ids.includes(item.id) ? { ...item, status } : item)))
-    toast({ title: "상태 변경 완료", description: `${ids.length}개 영상의 상태가 변경되었습니다.` })
-    setSelectedIds([])
   }
 
   const handleDelete = () => {
@@ -131,174 +154,171 @@ export default function VideoGalleryPage() {
         <div className="flex items-center gap-4">
           <h1 className="text-2xl font-semibold">영상 갤러리 관리</h1>
           <div className="ml-auto">
-            <Button onClick={() => document.getElementById("video-upload")?.click()}>
-              <PlusCircle className="mr-2 h-4 w-4" /> 새 영상 추가
-            </Button>
-            <input type="file" id="video-upload" className="hidden" accept="video/*" onChange={handleFileChange} />
+            <Dialog open={isAddVideoDialogOpen} onOpenChange={setIsAddVideoDialogOpen}>
+              <DialogTrigger asChild>
+                <Button>
+                  <PlusCircle className="mr-2 h-4 w-4" /> 새 영상 추가
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                  <DialogTitle>YouTube 영상 추가</DialogTitle>
+                  <DialogDescription>추가할 YouTube 영상의 제목과 URL을 입력하세요.</DialogDescription>
+                </DialogHeader>
+                <div className="flex flex-col gap-4 py-4">
+                  <div className="flex flex-col gap-2">
+                    <Label htmlFor="video-title">제목</Label>
+                    <Input
+                      id="video-title"
+                      value={videoTitle}
+                      onChange={(e) => setVideoTitle(e.target.value)}
+                      placeholder="영상 제목"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <Label htmlFor="youtube-url">URL</Label>
+                    <Input
+                      id="youtube-url"
+                      value={youtubeUrl}
+                      onChange={(e) => {
+                        setYoutubeUrl(e.target.value)
+                        if (urlError) setUrlError(null)
+                      }}
+                      placeholder="https://www.youtube.com/watch?v=..."
+                      className={cn(urlError && "border-destructive focus-visible:ring-destructive")}
+                    />
+                    {urlError && <p className="text-sm text-destructive -mt-1">{urlError}</p>}
+                  </div>
+                </div>
+                <DialogFooter>
+                  <Button type="submit" onClick={handleAddVideo}>
+                    추가
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
+
         <Card>
-          <CardHeader>
-            <CardTitle>영상 업로드</CardTitle>
-            <CardDescription>영상을 드래그 앤 드롭하거나 파일을 선택하여 업로드하세요.</CardDescription>
+          <CardHeader className="flex flex-row items-center justify-between">
+            <div>
+              <CardTitle>영상 목록</CardTitle>
+              <CardDescription>
+                {selectedIds.length > 0
+                  ? `${selectedIds.length}개 영상 선택됨`
+                  : `${items.length}개의 영상이 있습니다.`}
+              </CardDescription>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <Checkbox
+                  id="select-all"
+                  checked={
+                    selectedIds.length === items.length && items.length > 0
+                      ? true
+                      : selectedIds.length > 0
+                        ? "indeterminate"
+                        : false
+                  }
+                  onCheckedChange={handleSelectAll}
+                />
+                <Label htmlFor="select-all">전체 선택</Label>
+              </div>
+              <div className="flex items-center gap-2 border-l pl-4">
+                <Button
+                  size="sm"
+                  variant="destructive"
+                  onClick={() => setIsBulkDeleting(true)}
+                  disabled={selectedIds.length === 0}
+                >
+                  <Trash2 className="mr-2 h-4 w-4" />
+                  선택 삭제
+                </Button>
+              </div>
+            </div>
           </CardHeader>
           <CardContent>
-            <label
-              htmlFor="video-upload"
-              className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer bg-muted hover:bg-muted/80"
-            >
-              <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                <Upload className="w-8 h-8 mb-2 text-muted-foreground" />
-                <p className="mb-2 text-sm text-muted-foreground">
-                  <span className="font-semibold">클릭하여 업로드</span> 또는 드래그 앤 드롭
-                </p>
-                <p className="text-xs text-muted-foreground">MP4, MOV, AVI</p>
-              </div>
-            </label>
-            {uploadProgress !== null && (
-              <div className="mt-4">
-                <Progress value={uploadProgress} className="w-full" />
-                <p className="text-sm text-center mt-2 text-muted-foreground">업로드 중... {uploadProgress}%</p>
-              </div>
-            )}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+              {items.map((item) => (
+                <div key={item.id} className="relative group aspect-video">
+                  <img
+                    src={`https://img.youtube.com/vi/${item.youtubeId}/mqdefault.jpg`}
+                    alt={`YouTube video thumbnail for ${item.title}`}
+                    className="w-full h-full object-cover rounded-lg"
+                  />
+                  <div
+                    onClick={() => setViewingVideoId(item.youtubeId)}
+                    className={cn(
+                      "absolute inset-0 rounded-lg transition-all cursor-pointer flex items-center justify-center bg-black/20 group-hover:bg-black/50",
+                      selectedIds.includes(item.id) && "ring-2 ring-primary ring-offset-2",
+                    )}
+                  >
+                    <PlayCircle className="w-12 h-12 text-white/80 opacity-0 group-hover:opacity-100 transition-opacity" strokeWidth={1} />
+                  </div>
+                  <Checkbox
+                    checked={selectedIds.includes(item.id)}
+                    onCheckedChange={(checked) => handleSelect(item.id, !!checked)}
+                    className="absolute top-3 left-3 h-5 w-5 bg-background/80 data-[state=checked]:bg-primary"
+                  />
+                  <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="secondary" size="icon" className="h-8 w-8">
+                          <MoreHorizontal className="h-4 w-4" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>작업</DropdownMenuLabel>
+                        <DropdownMenuItem className="text-red-600" onClick={() => setDeletingId(item.id)}>
+                          <Trash2 className="mr-2 h-4 w-4" />
+                          삭제
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+                  <div className="absolute bottom-0 left-0 w-full p-2 bg-gradient-to-t from-black/80 to-transparent rounded-b-lg">
+                    <p className="text-sm font-medium text-white truncate" title={item.title}>
+                      {item.title}
+                    </p>
+                    <div className="flex items-center justify-between mt-1">
+                      <p className="text-xs text-white/90 font-medium">{item.date}</p>
+                      <a
+                        href={`https://www.youtube.com/watch?v=${item.youtubeId}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="text-white/90 hover:text-white transition-colors"
+                      >
+                        <ExternalLink className="h-4 w-4" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </CardContent>
         </Card>
-        <Tabs defaultValue="all" onValueChange={setActiveTab}>
-          <TabsList>
-            <TabsTrigger value="all">전체</TabsTrigger>
-            <TabsTrigger value="published">공개</TabsTrigger>
-            <TabsTrigger value="unpublished">비공개</TabsTrigger>
-          </TabsList>
-          <TabsContent value={activeTab} className="mt-4">
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between">
-                <div>
-                  <CardTitle>영상 목록</CardTitle>
-                  <CardDescription>
-                    {selectedIds.length > 0
-                      ? `${selectedIds.length}개 영상 선택됨`
-                      : `${filteredItems.length}개의 영상이 있습니다.`}
-                  </CardDescription>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      id="select-all"
-                      checked={
-                        selectedIds.length === filteredItems.length && filteredItems.length > 0
-                          ? true
-                          : selectedIds.length > 0
-                            ? "indeterminate"
-                            : false
-                      }
-                      onCheckedChange={handleSelectAll}
-                    />
-                    <Label htmlFor="select-all">전체 선택</Label>
-                  </div>
-                  <div className="flex items-center gap-2 border-l pl-4">
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => handleUpdateStatus(selectedIds, "Published")}
-                      disabled={selectedIds.length === 0}
-                    >
-                      <Eye className="mr-2 h-4 w-4" />
-                      선택 공개
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => handleUpdateStatus(selectedIds, "Unpublished")}
-                      disabled={selectedIds.length === 0}
-                    >
-                      <EyeOff className="mr-2 h-4 w-4" />
-                      선택 숨김
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="destructive"
-                      onClick={() => setIsBulkDeleting(true)}
-                      disabled={selectedIds.length === 0}
-                    >
-                      <Trash2 className="mr-2 h-4 w-4" />
-                      선택 삭제
-                    </Button>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                  {filteredItems.map((item) => (
-                    <div key={item.id} className="relative group aspect-video">
-                      <div className="w-full h-full rounded-lg bg-muted flex items-center justify-center">
-                        <PlayCircle className="w-12 h-12 text-muted-foreground" strokeWidth={1} />
-                      </div>
-                      <div
-                        onClick={() => handleSelect(item.id, !selectedIds.includes(item.id))}
-                        className={cn(
-                          "absolute inset-0 rounded-lg transition-all cursor-pointer",
-                          selectedIds.includes(item.id)
-                            ? "ring-2 ring-primary ring-offset-2"
-                            : "group-hover:bg-black/50",
-                        )}
-                      />
-                      <Checkbox
-                        checked={selectedIds.includes(item.id)}
-                        onCheckedChange={(checked) => handleSelect(item.id, !!checked)}
-                        className="absolute top-3 left-3 h-5 w-5 bg-background/80 data-[state=checked]:bg-primary"
-                      />
-                      <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button variant="secondary" size="icon" className="h-8 w-8">
-                              <MoreHorizontal className="h-4 w-4" />
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>작업</DropdownMenuLabel>
-                            <DropdownMenuSub>
-                              <DropdownMenuSubTrigger>
-                                <VideoIcon className="mr-2 h-4 w-4" />
-                                상태 변경
-                              </DropdownMenuSubTrigger>
-                              <DropdownMenuPortal>
-                                <DropdownMenuSubContent>
-                                  <DropdownMenuItem onClick={() => handleUpdateStatus([item.id], "Published")}>
-                                    <Eye className="mr-2 h-4 w-4" />
-                                    공개로 변경
-                                  </DropdownMenuItem>
-                                  <DropdownMenuItem onClick={() => handleUpdateStatus([item.id], "Unpublished")}>
-                                    <EyeOff className="mr-2 h-4 w-4" />
-                                    비공개로 변경
-                                  </DropdownMenuItem>
-                                </DropdownMenuSubContent>
-                              </DropdownMenuPortal>
-                            </DropdownMenuSub>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem className="text-red-600" onClick={() => setDeletingId(item.id)}>
-                              <Trash2 className="mr-2 h-4 w-4" />
-                              삭제
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </div>
-                      <div className="absolute bottom-0 left-0 w-full p-2 bg-linear-to-t from-black/80 to-transparent rounded-b-lg">
-                        <p className="text-sm font-medium text-white truncate">{item.title}</p>
-                        <div className="flex items-center justify-between mt-1">
-                          <Badge variant={item.status === "Published" ? "default" : "secondary"}>
-                            {item.status === "Published" ? "공개" : "비공개"}
-                          </Badge>
-                          <p className="text-xs text-white/90 font-medium">{item.date}</p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
       </div>
+
+      {/* Video Player Dialog */}
+      <Dialog open={!!viewingVideoId} onOpenChange={() => setViewingVideoId(null)}>
+        <DialogHeader className="hidden">
+          <DialogTitle>영상 재생</DialogTitle>
+        </DialogHeader>
+        <DialogContent className="max-w-3xl p-0">
+          <div className="aspect-video">
+            <iframe
+              className="w-full h-full"
+              src={`https://www.youtube.com/embed/${viewingVideoId}?autoplay=1`}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* Delete Confirmation Dialog */}
       <AlertDialog open={!!deletingId} onOpenChange={() => setDeletingId(null)}>

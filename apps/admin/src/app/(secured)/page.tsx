@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { BookCheck, CalendarPlus, XCircle, BedDouble, Tent, ArrowUpRight, PlusCircle, FileEdit } from "lucide-react"
+import { BookCheck, CalendarPlus, XCircle, BedDouble, Tent, ArrowUpRight, PlusCircle, ImageIcon } from "lucide-react"
 import Link from "next/link"
 import { BookingChart } from "@/components/charts"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -69,12 +69,16 @@ export default function DashboardPage() {
               <CardTitle>빠른 작업</CardTitle>
             </CardHeader>
             <CardContent className="grid gap-2">
-              <Button>
-                <PlusCircle className="mr-2 h-4 w-4" /> 새 공지 작성
-              </Button>
-              <Button variant="outline">
-                <FileEdit className="mr-2 h-4 w-4" /> 후기 검토 바로가기
-              </Button>
+              <Link href="/notices?new=true" passHref>
+                <Button className="w-full">
+                  <PlusCircle className="mr-2 h-4 w-4" /> 새 공지 작성
+                </Button>
+              </Link>
+              <Link href="/gallery" passHref>
+                <Button variant="outline" className="w-full bg-transparent">
+                  <ImageIcon className="mr-2 h-4 w-4" /> 갤러리 바로가기
+                </Button>
+              </Link>
             </CardContent>
           </Card>
           <Card>

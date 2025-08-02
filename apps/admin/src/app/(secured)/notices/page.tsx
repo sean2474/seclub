@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { useState, useEffect } from "react"
+import { useSearchParams, useRouter } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -107,6 +108,15 @@ export default function NoticesPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingNotice, setEditingNotice] = useState<Notice | null>(null)
   const [deletingId, setDeletingId] = useState<string | null>(null)
+  const searchParams = useSearchParams()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (searchParams.get("new") === "true") {
+      handleOpenModal(null)
+      router.replace("/notices", { scroll: false })
+    }
+  }, [searchParams, router])
 
   const handleOpenModal = (notice: Notice | null) => {
     setEditingNotice(notice)
@@ -200,7 +210,7 @@ export default function NoticesPage() {
                       </div>
                     </TableCell>
                     <TableCell>
-                      <Badge variant={item.category === "중요" ? "destructive" : "outline-solid"}>{item.category}</Badge>
+                      <Badge variant={item.category === "중요" ? "destructive" : "outline"}>{item.category}</Badge>
                     </TableCell>
                     <TableCell>{item.author}</TableCell>
                     <TableCell>{item.date}</TableCell>
@@ -225,7 +235,6 @@ export default function NoticesPage() {
                             <Switch
                               className="mr-2 h-4 w-4 data-[state=checked]:bg-primary"
                               checked={item.status === "게시 중"}
-                              readOnly
                             />
                             상태 변경
                           </DropdownMenuItem>
