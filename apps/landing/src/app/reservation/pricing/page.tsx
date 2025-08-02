@@ -1,5 +1,5 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { campingRates, condoRates, discounts, lodgingRates } from "@/const/pricing"
+import { campingRates, discounts, lateCheckoutRates, lodgingRates } from "@/const/pricing"
 
 const formatCurrency = (value?: number) => {
   if (value === undefined) return "-"
@@ -7,8 +7,8 @@ const formatCurrency = (value?: number) => {
 }
 
 const SectionTitle = ({ title, subtitle }: { title: string; subtitle: string }) => (
-  <div className="text-center mb-12 md:mb-16">
-    <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4">{subtitle}</h2>
+  <div className="text-center mb-4 md:mb-8">
+    <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4 whitespace-nowrap break-keep">{subtitle}</h2>
     <p className="text-3xl md:text-4xl font-medium text-gray-900">{title}</p>
   </div>
 )
@@ -23,7 +23,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <main className="container mx-auto px-6 lg:px-8 py-12 md:py-24 space-y-24 md:space-y-32">
+      <main className="container mx-auto px-6 lg:px-8 py-6 md:py-12 space-y-8 md:space-y-12">
         {/* Lodging Section */}
         <section className="max-w-4xl mx-auto">
           <SectionTitle title="프리미엄 숙박 시설" subtitle="Premium Lodging" />
@@ -51,55 +51,54 @@ export default function PricingPage() {
 
         {/* Condo & Camping Section */}
         <section className="max-w-4xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16">
-            <div>
-              <SectionTitle title="오션 콘도 Standard & Deluxee" subtitle="Ocean Condo" />
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>타입</TableHead>
-                    <TableHead className="text-right">최성수기</TableHead>
-                    <TableHead className="text-right">성수기/동절기</TableHead>
+          <SectionTitle title="캠핑장" subtitle="Campsite" />
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>사이트</TableHead>
+                <TableHead className="text-right">최성수기</TableHead>
+                <TableHead className="text-right">성수기/동절기</TableHead>
+                <TableHead className="text-right">연박할인</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {Object.entries(campingRates)
+                .filter(([site]) => site !== "연박할인")
+                .map(([site, rates]) => (
+                  <TableRow key={site}>
+                    <TableCell className="font-medium">{site}</TableCell>
+                    <TableCell className="text-right">{formatCurrency(rates.최성수기)}</TableCell>
+                    <TableCell className="text-right">{formatCurrency(rates.성수기)}</TableCell>
+                    <TableCell className="text-right">-</TableCell>
                   </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {Object.entries(condoRates).map(([type, rates]) => (
-                    <TableRow key={type}>
-                      <TableCell className="font-medium">{type}</TableCell>
-                      <TableCell className="text-right">{formatCurrency(rates.최성수기)}</TableCell>
-                      <TableCell className="text-right">{formatCurrency(rates.성수기)}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-            <div>
-              <SectionTitle title="캠핑장" subtitle="Campsite" />
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>사이트</TableHead>
-                    <TableHead className="text-right">최성수기</TableHead>
-                    <TableHead className="text-right">성수기/동절기</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {Object.entries(campingRates)
-                    .filter(([site]) => site !== "연박할인")
-                    .map(([site, rates]) => (
-                      <TableRow key={site}>
-                        <TableCell className="font-medium">{site}</TableCell>
-                        <TableCell className="text-right">{formatCurrency(rates.최성수기)}</TableCell>
-                        <TableCell className="text-right">{formatCurrency(rates.성수기)}</TableCell>
-                      </TableRow>
-                    ))}
-                </TableBody>
-              </Table>
-              <p className="text-right mt-4 text-sm text-gray-600">
-                * 성수기/동절기 연박 시 {formatCurrency(campingRates["연박할인"].성수기)} 할인
-              </p>
-            </div>
-          </div>
+                ))}
+            </TableBody>
+          </Table>
+          <p className="text-right mt-4 text-sm text-gray-600">
+            * 성수기/동절기 연박 시 {formatCurrency(campingRates["연박할인"].성수기)} 할인
+          </p>
+        </section>
+        {/* Late Checkout Section */}
+        <section className="max-w-4xl mx-auto">
+          <SectionTitle title="시간 연장 요금 안내" subtitle="Late Check-out" />
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>시설</TableHead>
+                <TableHead className="text-right">3시간 연장</TableHead>
+                <TableHead className="text-right">6시간 연장</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {lateCheckoutRates.map((item) => (
+                <TableRow key={item.name}>
+                  <TableCell className="font-medium">{item.name}</TableCell>
+                  <TableCell className="text-right">{formatCurrency(item["3시간"])}</TableCell>
+                  <TableCell className="text-right">{formatCurrency(item["6시간"])}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </section>
 
         {/* Long Stay Discount Section */}

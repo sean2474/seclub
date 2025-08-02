@@ -93,6 +93,7 @@ export const wellnessPageData: Record<string, WellnessPageData> = {
     images: [
       "/images/wellness/photo-spot/1.jpg",
       "/images/wellness/photo-spot/2.jpg",
+      "/images/wellness/photo-spot/3.jpg",
     ]
   },
   walk: {
