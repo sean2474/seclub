@@ -261,6 +261,7 @@
 @layer base {
   * {
     @apply border-border;
+    /* outline: solid 1px red !important; */
   }
   body {
     @apply bg-background text-foreground;
