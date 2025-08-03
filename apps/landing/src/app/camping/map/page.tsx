@@ -5,7 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { generateMetadata } from "@/utils/metadata-generator";
 
-export const metadata = generateMetadata("SE클럽 캠핑장 배치도", "SE클럽 캠핑장의 종합 배치도 및 안내");
+export const metadata = generateMetadata("SE클럽 | 캠핑장 배치도", "SE클럽 캠핑장의 종합 배치도 및 안내");
 
 export default function Page() {
   return (

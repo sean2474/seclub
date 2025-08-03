@@ -2,7 +2,7 @@ import { ScrollReveal } from "@/components/base/scroll-reveal";
 import { NaverMap } from "@/components/ui/naver-map";
 import { generateMetadata } from "@/utils/metadata-generator";
 
-export const metadata = generateMetadata("SE클럽 위치", "SE클럽의 위치 및 오시는 길 안내");
+export const metadata = generateMetadata("SE클럽 | 위치", "SE클럽의 위치 및 오시는 길 안내");
 
 export default function LocationPage() {
   return (

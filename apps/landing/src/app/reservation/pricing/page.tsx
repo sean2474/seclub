@@ -2,7 +2,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { campingRates, discounts, lateCheckoutRates, lodgingRates } from "@/const/pricing"
 import { generateMetadata } from "@/utils/metadata-generator"
 
-export const metadata = generateMetadata("SE클럽 요금 안내", "SE클럽의 객실 및 캠핑장 요금 안내")
+export const metadata = generateMetadata("SE클럽 | 요금 안내", "SE클럽의 객실 및 캠핑장 요금 안내")
 
 const formatCurrency = (value?: number) => {
   if (value === undefined) return "-"

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { generateMetadata } from "@/utils/metadata-generator";
 
-export const metadata = generateMetadata("SE클럽 단체 예약", "SE클럽의 단체 예약 안내 및 문의");
+export const metadata = generateMetadata("SE클럽 | 단체 예약", "SE클럽의 단체 예약 안내 및 문의");
 
 const SectionHeader = ({ title, subtitle, className }: { title: string; subtitle?: string; className?: string }) => (
   <div className={cn("mb-4 md:mb-8", className)}>

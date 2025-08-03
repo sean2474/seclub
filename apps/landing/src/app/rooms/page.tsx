@@ -4,7 +4,7 @@ import { ScrollReveal } from "@/components/base/scroll-reveal";
 import { roomData } from "@/const/room-detail";
 import { generateMetadata } from "@/utils/metadata-generator";
 
-export const metadata = generateMetadata("SE클럽 객실", "아름다운 경관과 함께하는 힐링");
+export const metadata = generateMetadata("SE클럽 | 객실", "아름다운 경관과 함께하는 힐링");
 
 export default function RoomsPage() {
   return (
