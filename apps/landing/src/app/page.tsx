@@ -9,7 +9,7 @@ import Link from "next/link";
 
 import { generateMetadata } from "@/utils/metadata-generator";
 
-export const metadata = generateMetadata("SE클럽 (태안둘레길캠핑장)", "당신만을 위한 특별한 공간");
+export const metadata = generateMetadata("SE클럽", "충청남도 태안군에 위치한 SE클럽(태안둘레길캠핑장)의 공식 웹사이트입니다. 객실 예약, 캠핑장 예약, 시설 안내 등 다양한 정보를 제공합니다.");
 
 export default function Home() {
   return (
