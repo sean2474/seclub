@@ -4,7 +4,7 @@ import { useState, type ReactNode, Suspense, useEffect } from "react"
 import AdminSidebar from "@/components/admin-sidebar"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu } from "lucide-react"
+import { LockKeyhole, Menu } from "lucide-react"
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -19,10 +19,14 @@ import { cn } from "@/lib/utils"
 import { getProfile, getUser, logout } from "@/lib/action/auth"
 import { redirect } from "next/navigation"
 import { Profile } from "@/types/auth"
+import { User } from "@supabase/supabase-js"
+import { useRouter } from "next/navigation"
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const [isCollapsed, setIsCollapsed] = useState(false)
+  const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
+  const router = useRouter();
 
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed)
@@ -32,6 +36,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
     const getUserData = async () => {
       const user = await getUser();
       if (!user) redirect("/login");
+      setUser(user);
       const profile = await getProfile(user.id);
       if (!profile) redirect("/login");
       setProfile(profile);
@@ -40,6 +45,12 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   }, [])
 
   if (!profile) return null;
+
+  if (profile.role !== "admin") return (
+    <h1 className="flex items-center justify-center h-screen text-2xl"> 
+      <LockKeyhole className="mr-2 h-8 w-8" strokeWidth={1.5} /> 접근 권한이 없습니다.
+    </h1>
+  )
 
   return (
     <div className="min-h-screen w-full bg-background">
@@ -78,7 +89,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                       className="rounded-full"
                     />
                     : <div>
-                      {profile?.id.charAt(0).toUpperCase()}
+                      {user?.email?.charAt(0).toUpperCase()}
                     </div>
                   }
                   <span className="sr-only">사용자 메뉴 토글</span>
@@ -89,7 +100,10 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>설정</DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => logout()}>로그아웃</DropdownMenuItem>
+                <DropdownMenuItem onClick={async () => { 
+                  const { success, error } = await logout(); 
+                  if (success) router.push("/login") 
+                }}>로그아웃</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </Suspense>

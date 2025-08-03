@@ -158,6 +158,9 @@ export async function registerWithEmail(email: string, password: string): Promis
     const { error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        emailRedirectTo: "https://admin.seclub.kr",
+      },
     });
 
     if (error) {
