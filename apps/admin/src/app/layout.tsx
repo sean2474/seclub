@@ -6,9 +6,9 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 
 export const metadata: Metadata = {
-  title: "v0 App",
-  description: "Created with v0",
-  generator: "v0.dev",
+  title: "SE 클럽 관리자 페이지",
+  description: "SE 클럽 관리자 페이지입니다",
+  generator: "Sean Park",
 }
 
 export default function RootLayout({

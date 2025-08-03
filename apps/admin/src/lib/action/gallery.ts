@@ -7,6 +7,7 @@ export interface GalleryItem {
   date: string
   file?: File
   previewUrl?: string
+  originalUrl?: string // 원본 URL 추가
   path?: string
 }
 
@@ -25,6 +26,7 @@ export async function fetchGalleryImages(): Promise<{ items: GalleryItem[], erro
         offset: 0,
         sortBy: { column: "name", order: "asc" }
       })
+
       
     if (error) {
       throw error
@@ -39,8 +41,16 @@ export async function fetchGalleryImages(): Promise<{ items: GalleryItem[], erro
       // Skip folders
       if (file.id.endsWith('/')) return null
       
-      // Get public URL for the file
-      const publicUrl = supabase
+      // Get thumbnailUrl with size parameters (작은 썸네일용)
+      const thumbnailUrl = supabase
+        .storage
+        .from("gallery")
+        .getPublicUrl(file.name)
+        .data
+        .publicUrl + '?width=150&height=150&quality=30'
+      
+      // Get original URL without size parameters (원본 이미지용)
+      const originalUrl = supabase
         .storage
         .from("gallery")
         .getPublicUrl(file.name)
@@ -52,7 +62,8 @@ export async function fetchGalleryImages(): Promise<{ items: GalleryItem[], erro
         id: file.id,
         title: file.name.split('/').pop() || file.name,
         date: new Date(file.created_at || Date.now()).toISOString().split('T')[0],
-        previewUrl: publicUrl,
+        previewUrl: thumbnailUrl,
+        originalUrl: originalUrl,
         path: file.name
       }
     }).filter(Boolean) as GalleryItem[]
@@ -89,8 +100,16 @@ export async function uploadGalleryImages(images: { file: File, id: string, titl
         
       if (error) throw error
       
-      // Get the public URL
-      const publicUrl = supabase
+      // Get thumbnail URL with size parameters
+      const thumbnailUrl = supabase
+        .storage
+        .from('gallery')
+        .getPublicUrl(fileName)
+        .data
+        .publicUrl + '?width=150&height=150&quality=30'
+      
+      // Get original URL without size parameters
+      const originalUrl = supabase
         .storage
         .from('gallery')
         .getPublicUrl(fileName)
@@ -102,7 +121,8 @@ export async function uploadGalleryImages(images: { file: File, id: string, titl
         id: image.id,
         title: image.title,
         date: image.date,
-        previewUrl: publicUrl,
+        previewUrl: thumbnailUrl,
+        originalUrl: originalUrl,
         path: fileName
       })
     }

@@ -2,7 +2,6 @@
 
 import { useState, FormEvent, useEffect } from "react"
 import Image from "next/image"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 import { Button } from "@/components/ui/button"
@@ -10,7 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useToast } from "@/components/ui/use-toast"
 
-import { loginWithEmail, redirectIfAuthenticated } from "@/lib/action/auth"
+import { redirectIfAuthenticated, registerWithEmail } from "@/lib/action/auth"
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
@@ -33,17 +32,17 @@ export default function LoginPage() {
     setIsLoading(true)
 
     try {
-      const { success, error } = await loginWithEmail(email, password)
+      const { success, error } = await registerWithEmail(email, password)
 
       if (success) {
         toast({
-          title: "로그인 성공",
+          title: "가입 성공",
           description: "관리자 페이지로 이동합니다.",
         })
         router.push("/")
       } else {
         toast({
-          title: "로그인 실패",
+          title: "가입 실패",
           description: error || "이메일 또는 비밀번호가 올바르지 않습니다.",
           variant: "destructive",
         })
@@ -64,8 +63,7 @@ export default function LoginPage() {
       <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
-            <h1 className="text-3xl font-bold">로그인</h1>
-            <p className="text-balance text-muted-foreground">관리자 계정 정보를 입력하세요.</p>
+            <h1 className="text-3xl font-bold">가입</h1>
           </div>
           <form onSubmit={handleSubmit} className="grid gap-4">
             <div className="grid gap-2">
@@ -83,9 +81,6 @@ export default function LoginPage() {
             <div className="grid gap-2">
               <div className="flex items-center">
                 <Label htmlFor="password">비밀번호</Label>
-                <Link href="#" className="ml-auto inline-block text-sm underline">
-                  비밀번호를 잊으셨나요?
-                </Link>
               </div>
               <Input 
                 id="password" 
@@ -97,24 +92,21 @@ export default function LoginPage() {
               />
             </div>
             <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? "로그인 중..." : "로그인"}
+              {isLoading ? "가입 중..." : "가입"}
             </Button>
           </form>
           <div className="mt-4 text-center text-sm">
-            계정이 없으신가요?{" "}
-            <Link href="#" className="underline">
-              문의하기
-            </Link>
+            관리자가 확인 후 수락합니다
           </div>
         </div>
       </div>
       <div className="hidden bg-muted lg:block">
         <Image
-          src="/placeholder.svg?width=1920&height=1080"
+          src="/29.webp"
           alt="Image"
           width="1920"
           height="1080"
-          className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+          className="h-full w-full object-cover dark:brightness-[0.5]"
         />
       </div>
     </div>

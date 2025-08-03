@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, type ReactNode, Suspense } from "react"
+import { useState, type ReactNode, Suspense, useEffect } from "react"
 import AdminSidebar from "@/components/admin-sidebar"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
@@ -16,13 +16,31 @@ import {
 import Image from "next/image"
 import { Toaster } from "@/components/ui/toaster"
 import { cn } from "@/lib/utils"
+import { createClient } from "@/lib/supabase/client"
+import { getProfile, getUser } from "@/lib/action/auth"
+import { redirect } from "next/navigation"
+import { Profile } from "@/types/auth"
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
+  const supabase = createClient();
+
   const [isCollapsed, setIsCollapsed] = useState(false)
+  const [profile, setProfile] = useState<Profile | null>(null);
 
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed)
   }
+
+  useEffect(() => {
+    const getUserData = async () => {
+      const user = await getUser();
+      if (!user) redirect("/login");
+      const profile = await getProfile(user.id);
+      if (!profile) redirect("/login");
+      setProfile(profile);
+    }
+    getUserData();
+  }, [])
 
   return (
     <div className="min-h-screen w-full bg-background">
@@ -52,13 +70,18 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="secondary" size="icon" className="rounded-full">
-                  <Image
-                    src="/placeholder.svg?width=32&height=32"
-                    width={32}
-                    height={32}
-                    alt="관리자 아바타"
-                    className="rounded-full"
-                  />
+                  {profile?.image_path ? 
+                    <Image
+                      src={profile!.image_path}
+                      width={32}
+                      height={32}
+                      alt="관리자 아바타"
+                      className="rounded-full"
+                    />
+                    : <div>
+                      {profile?.id.charAt(0).toUpperCase()}
+                    </div>
+                  }
                   <span className="sr-only">사용자 메뉴 토글</span>
                 </Button>
               </DropdownMenuTrigger>

@@ -28,7 +28,6 @@ import { useToast } from "@/components/ui/use-toast"
 import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
 
-// Import gallery actions
 import {
   fetchGalleryImages,
   uploadGalleryImages,
@@ -47,7 +46,6 @@ export default function GalleryPage() {
   const [isBulkDeleting, setIsBulkDeleting] = useState(false)
   const newItemsRef = useRef<GalleryItem[]>([])
   
-  // Fetch images from Supabase storage when component mounts
   useEffect(() => {
     async function loadGalleryImages() {
       try {
