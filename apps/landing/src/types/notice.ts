@@ -1,9 +1,9 @@
 export interface Notice {
-    id: number;
+    id: string;
     category: string;
     title: string;
-    date: string;
-    views: number;
+    created_at: string;
+    view: number;
 }
 
 export interface NoticeDetail extends Notice {

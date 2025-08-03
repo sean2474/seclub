@@ -3,6 +3,7 @@ import { getNoticeById } from "@/lib/actions/notice"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { NoticeViewCounter } from "@/components/base/notice-view-counter"
 
 export default async function Page({
   params,
@@ -10,7 +11,7 @@ export default async function Page({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
-  const notice = await getNoticeById(Number(id))
+  const notice = await getNoticeById(id)
 
   if (!notice) {
     return (
@@ -25,13 +26,14 @@ export default async function Page({
 
   return (
     <div className="min-h-screen w-full mt-[var(--header-height-expanded)]">
+      <NoticeViewCounter noticeId={notice.id.toString()} />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="border-b border-foreground pb-6 mb-6">
           <p className="text-sm text-foreground/80 mb-2">{notice.category}</p>
           <h1 className="text-3xl font-bold text-foreground">{notice.title}</h1>
           <div className="flex items-center gap-4 text-sm text-foreground/80 mt-4">
-            <span>작성일: {notice.date}</span>
-            <span>조회수: {notice.views}</span>
+            <span>작성일: {notice.created_at.split("T")[0]}</span>
+            <span>조회수: {notice.view}</span>
           </div>
         </div>
 

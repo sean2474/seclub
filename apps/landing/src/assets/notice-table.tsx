@@ -38,8 +38,8 @@ export const NoticeTable = ({
               <p className="text-sm text-foreground/80">{notice.category}</p>
               <h4>{notice.title}</h4>
               <div className="flex gap-2">
-                <p className="text-sm text-foreground/80">작성일: {notice.date}</p>
-                <p className="text-sm text-foreground/80">조회수: {notice.views}</p>
+                <p className="text-sm text-foreground/80">작성일: {notice.created_at}</p>
+                <p className="text-sm text-foreground/80">조회수: {notice.view}</p>
               </div>
             </Link>
             <ChevronRight className="absolute right-2 top-1/2 -translate-y-1/2 text-foreground/50" strokeWidth={1.5} />
@@ -64,8 +64,8 @@ export const NoticeTable = ({
                   {item.title}
                 </div>
               </TableCell>
-              <TableCell className="text-center text-foreground/80">{item.date}</TableCell>
-              <TableCell className="text-center text-foreground/80">{item.views}</TableCell>
+              <TableCell className="text-center text-foreground/80">{item.created_at.split("T")[0]}</TableCell>
+              <TableCell className="text-center text-foreground/80">{item.view}</TableCell>
             </TableRow>
           ))}
         </TableBody>

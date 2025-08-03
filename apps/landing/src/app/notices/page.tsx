@@ -28,7 +28,7 @@ export default async function Page({
 
   const ITEMS_PER_PAGE = 5
 
-  const totalPages = Math.ceil(notices.length / ITEMS_PER_PAGE)
+  const totalPages = Math.ceil(notices.data?.length || 0 / ITEMS_PER_PAGE)
 
   return (
     <div className="min-h-screen w-full mt-[var(--header-height-expanded)]">
@@ -76,7 +76,8 @@ export default async function Page({
               </div>
             </form>
           </div>
-          <NoticeTable notices={notices} itemsPerPage={ITEMS_PER_PAGE} />
+          {notices.data && <NoticeTable notices={notices.data} itemsPerPage={ITEMS_PER_PAGE} />}
+          {notices.error && <p className="text-red-500">{notices.error}</p>}
           <Pagination className="mt-8">
             <PaginationContent>
               <PaginationItem>

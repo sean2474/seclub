@@ -1,31 +1,28 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { PlayCircle } from "lucide-react"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { DialogTitle } from "@radix-ui/react-dialog"
 import Image from "next/image"
-
-type Video = {
-  id: string
-  title: string
-}
-
-// TODO: DB connect
-const videos: Video[] = [
-  { id: "U5SRkqtV04U", title: "자연체험 프로그램" },
-  { id: "GWQziHmK9A4", title: "조각공원" },
-  { id: "WOpqyDl0XiY", title: "풀빌라" },
-  { id: "3UOlYohOUIc", title: "스파빌라" },
-  { id: "w96Fl9L4Ink", title: "오션콘도 Standard" },
-  { id: "TSwUm6mDlNk", title: "오션콘도 Deluxe" },
-]
+import { getVideos } from "@/lib/actions/video"
+import { Video } from "@/types/video"
 
 export default function VideoGalleryPage() {
+  const [videos, setVideos] = useState<Video[]>([])
   const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null)
 
+  useEffect(() => {
+    const fetchVideos = async () => {
+      const data = await getVideos();
+      if (!data) return;
+      setVideos(data);
+    };
+    fetchVideos();
+  }, []);
+
   return (
-    <div className="bg-beige min-h-screen text-foreground pt-[var(--header-height-expanded)]">
+    <div className="bg-background min-h-screen text-foreground pt-[var(--header-height-expanded)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         <header className="text-center mb-12">
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">영상 갤러리</h1>
