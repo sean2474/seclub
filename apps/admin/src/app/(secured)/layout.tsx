@@ -16,14 +16,11 @@ import {
 import Image from "next/image"
 import { Toaster } from "@/components/ui/toaster"
 import { cn } from "@/lib/utils"
-import { createClient } from "@/lib/supabase/client"
-import { getProfile, getUser } from "@/lib/action/auth"
+import { getProfile, getUser, logout } from "@/lib/action/auth"
 import { redirect } from "next/navigation"
 import { Profile } from "@/types/auth"
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
-  const supabase = createClient();
-
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [profile, setProfile] = useState<Profile | null>(null);
 
@@ -41,6 +38,8 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
     }
     getUserData();
   }, [])
+
+  if (!profile) return null;
 
   return (
     <div className="min-h-screen w-full bg-background">
@@ -90,7 +89,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>설정</DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>로그아웃</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => logout()}>로그아웃</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </Suspense>
