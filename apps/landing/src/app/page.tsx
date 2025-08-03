@@ -7,6 +7,10 @@ import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { generateMetadata } from "@/utils/metadata-generator";
+
+export const metadata = generateMetadata("SE클럽", "당신만을 위한 특별한 공간");
+
 export default function Home() {
   return (
     <div>

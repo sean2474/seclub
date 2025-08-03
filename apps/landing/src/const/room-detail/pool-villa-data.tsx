@@ -3,6 +3,7 @@ import { BedDouble, Clock, Dog, DoorClosed, Users } from "lucide-react";
 
 export const poolVillaData: RoomInfo = {
   slug: "pool-villa",
+  name: "해수 풀빌라",
   title: (
     <h1 className="text-white font-mono font-light text-5xl md:text-7xl mt-2 md:mt-4">
       海水 <span className="font-pretendard font-thin">풀빌라</span>

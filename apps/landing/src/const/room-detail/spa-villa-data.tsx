@@ -3,6 +3,7 @@ import { BedDouble, Clock, Dog, DoorClosed, Users } from "lucide-react";
 
 export const spaVillaData: RoomInfo = {
   slug: "spa-villa",
+  name: "오션스파빌라",
   title: "오션스파빌라",
   subtitle: "자쿠지",
   heroImage: "/images/room/spa-villa/hero.jpg",

@@ -5,6 +5,7 @@ export type RoomType = "pool-villa" | "ocean-condo" | "spa-villa" | "camping-hou
 
 export interface RoomInfo {
   slug: string;
+  name: string;
   title: string | ReactNode;
   subtitle: string;
   heroImage: string;
@@ -26,6 +27,6 @@ export interface RoomInfo {
   }[];
 }
 
-export interface RoomCardProps extends Omit<RoomInfo, 'heroImage' | 'mainImages' | 'overview' | 'amenities' | 'additionalInfo'> {
+export interface RoomCardProps extends Omit<RoomInfo, 'heroImage' | 'mainImages' | 'overview' | 'amenities' | 'additionalInfo' | 'name'> {
   images: string[];
 }

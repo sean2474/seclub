@@ -4,6 +4,9 @@ import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { NoticeViewCounter } from "@/components/base/notice-view-counter"
+import { generateMetadata } from "@/utils/metadata-generator"
+
+export const metadata = generateMetadata("SE클럽 공지사항", "SE클럽 공지사항");
 
 export default async function Page({
   params,
