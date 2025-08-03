@@ -7,6 +7,7 @@ import { HamburgerIcon } from "@/components/icon/hamburger";
 import { PlusMinusIcon } from "@/components/icon/plusminus";
 import Link from "next/link";
 import { desktopMenu, menuItems } from "@/const/header-items";
+import { LinkEventTracker } from "@/components/base/link-event-tracker";
 
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -138,9 +139,15 @@ export const Header = () => {
           </div>
         </div>
 
-        <Link href={"https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP"} target="_blank" className="border border-foreground px-4 py-2 bg-foreground text-background hover:text-foreground hover:bg-transparent hover:font-medium transition-all duration-300 hidden lg:block">
+        <LinkEventTracker 
+          href={"https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP"} 
+          eventName="reservation" 
+          location="header_reservation_btn" 
+          target="_blank" 
+          className="border border-foreground px-4 py-2 bg-foreground text-background hover:text-foreground hover:bg-transparent hover:font-medium transition-all duration-300 hidden lg:block"
+        >
           예약하기
-        </Link>
+        </LinkEventTracker>
 
         {/* -------------- 모바일 햄버거 버튼 -------------- */}
         <div className="flex lg:hidden">
@@ -229,9 +236,15 @@ export const Header = () => {
                 )}
               )}
             </div>
-            <Link href={"https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP"} target="_blank" className="border border-foreground px-4 py-2 bg-foreground text-background active:text-foreground active:bg-background active:font-medium transition-all duration-300 absolute translate-y-5 left-1/2 -translate-x-1/2">
+            <LinkEventTracker 
+              href={"https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP"} 
+              eventName="reservation" 
+              location="header_reservation_btn" 
+              target="_blank" 
+              className="border border-foreground px-4 py-2 bg-foreground text-background active:text-foreground active:bg-background active:font-medium transition-all duration-300 absolute translate-y-5 left-1/2 -translate-x-1/2"
+            >
               예약하기
-            </Link>
+            </LinkEventTracker>
           </div>
         </nav>
       </div>

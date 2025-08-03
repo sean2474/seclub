@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { generateMetadata } from "@/utils/metadata-generator";
+import { LinkEventTracker } from "@/components/base/link-event-tracker";
 
 export const metadata = generateMetadata("SE클럽 (태안둘레길캠핑장)", "충청남도 태안군에 위치한 SE클럽(태안둘레길캠핑장)의 공식 웹사이트입니다. 객실 예약, 캠핑장 예약, 시설 안내 등 다양한 정보를 제공합니다.");
 
@@ -41,9 +42,15 @@ export default function Home() {
             완벽한 휴식
           </ScrollReveal>
           <ScrollReveal side="bottom" className="ml-1">
-            <Link href={"https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP"} target="_blank" className="border border-background pl-4 pr-1.5 py-2 text-sm md:pl-5 md:pr-2.5 md:py-3 bg-background text-foreground hover:text-background hover:bg-transparent hover:font-medium transition-all duration-300 md:text-md flex items-center gap-2 rounded-xs">
+            <LinkEventTracker 
+              href={"https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP"} 
+              eventName="reservation"
+              location="landing_hero_section"
+              target="_blank" 
+              className="border border-background pl-4 pr-1.5 py-2 text-sm md:pl-5 md:pr-2.5 md:py-3 bg-background text-foreground hover:text-background hover:bg-transparent hover:font-medium transition-all duration-300 md:text-md flex items-center gap-2 rounded-xs"
+            >
               지금 예약하기 <ChevronRight strokeWidth={1} />
-            </Link>
+            </LinkEventTracker>
           </ScrollReveal>
         </div>
       </section>

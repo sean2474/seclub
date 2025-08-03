@@ -9,6 +9,7 @@ import { MainImageSlider } from "@/components/ui/main-image-slider";
 import { RoomInfo } from "@/types";
 import { ScrollReveal } from "@/components/base/scroll-reveal";
 import { roomData } from "@/const/room-detail";
+import { LinkEventTracker } from "@/components/base/link-event-tracker";
 
 export const RoomTemplate = ({ roomInfo }: { roomInfo: RoomInfo }) => {
   if (!roomInfo) {
@@ -74,9 +75,14 @@ export const RoomTemplate = ({ roomInfo }: { roomInfo: RoomInfo }) => {
         <section className="bg-background py-4 md:py-16">
           <RoomFeatures features={roomInfo.features} />
           <ScrollReveal side="left" className="center mt-2 md:mt-10">
-            <Link href="https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP" target="_blank">
+            <LinkEventTracker 
+              eventName="reservation" 
+              location={`room_${roomInfo.slug}_reservation_btn`}
+              href="https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP" 
+              target="_blank"
+            >
               <Button variant={"primary"} size={"xl"} className="text-white">예약하기</Button>
-            </Link>
+            </LinkEventTracker>
           </ScrollReveal>
         </section>
         <section>

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { RoomCardProps } from "@/types";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Button } from "./button";
+import { LinkEventTracker } from "../base/link-event-tracker";
 
 interface CardProps extends RoomCardProps {
   className?: string;
@@ -33,9 +34,14 @@ export const RoomsLinkCard = ({slug, title, subtitle, images, features}: CardPro
             </div>
           ))}
         </div>
-        <Link href={"https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP"} target="_blank">
+        <LinkEventTracker 
+          eventName="reservation" 
+          location={`room-link-card_${slug}_reservation_btn`} 
+          href="https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP" 
+          target="_blank"
+        >
           <Button className="mt-4 md:absolute md:bottom-3 md:right-3 text-white" size={"lg"} variant="primary">예약하기</Button>
-        </Link>
+        </LinkEventTracker>
       </div>
     </div>
   );
