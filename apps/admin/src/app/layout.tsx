@@ -4,8 +4,6 @@ import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { getProfile, getUser } from "@/lib/action/auth"
-import { redirect } from "next/navigation"
 
 export const metadata: Metadata = {
   title: "SE 클럽 관리자 페이지",

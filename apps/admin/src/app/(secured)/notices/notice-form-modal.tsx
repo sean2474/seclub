@@ -395,7 +395,7 @@ export function NoticeFormModal({ isOpen, onOpenChange, onSave, notice }: Notice
                       <SelectItem key={cat} value={cat}>{cat}</SelectItem>
                     ))
                   ) : (
-                    <SelectItem value="">카테고리 없음</SelectItem>
+                    <SelectItem value="no-category">카테고리 없음</SelectItem>
                   )}
                 </SelectContent>
               </Select>
