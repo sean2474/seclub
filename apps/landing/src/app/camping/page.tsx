@@ -151,7 +151,7 @@ export default function SeclubElegantGuidePage() {
                 </Link>
               </ScrollReveal>
               <ScrollReveal side="left" delay="300ms" className="overflow-hidden">
-                <Link href="/wellness/walk" className="relative group overflow-hidden">
+                <Link href="/wellness/nature-experience" className="relative group overflow-hidden">
                   <Image
                     src="/images/wellness/walk/hero.jpg"
                     alt="바다 체험"
