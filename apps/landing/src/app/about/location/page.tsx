@@ -15,7 +15,7 @@ export default function LocationPage() {
             <ScrollReveal side="left" delay="200ms" className="grid grid-cols-2 gap-y-2 md:gap-y-1">
                 <p>주소</p> <p className="justify-self-end text-end">충청남도 태안군 이원면 내리 503</p>
                 <p>전화번호</p> <p className="justify-self-end text-end">010-9703-1711 / 010-4668-1704</p>
-                <p>체크인/아웃</p> <p className="justify-self-end text-end">15:00 ~ 11:00</p>
+                <p>체크인/아웃</p> <p className="justify-self-end text-end whitespace-nowrap">숙박시설 15:00 – 11:00 <br /> (반려견) 캠핑장 14:00 – 12:00</p>
               </ScrollReveal>
             </div>
           </div>

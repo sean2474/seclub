@@ -55,7 +55,7 @@ export const wellnessPageData: Record<string, WellnessPageData> = {
       subtitle:
         "오션콘도와 오션스파빌리지 사이에 위치한 바다 전경의 프라이빗 야외 풀장과 족욕탕을 즐길 수 있습니다.",
       type: "수영장",
-      location: "오션콘도, 오션스파빌리지 사이",
+      location: "오션스파빌라 & 오션 콘도 & 선셋 캠핑하우스 인근",
       hours: "10:00 – 19:00",
       image: "/images/wellness/swimming-pool/hero.jpg",
     },
@@ -130,7 +130,7 @@ export const wellnessPageData: Record<string, WellnessPageData> = {
       subtitle:
         "캠핑장 구역에 마련된 바닷물 풀장에서 자연 속 해수욕장 같은 물놀이를 즐겨보세요.",
       type: "수영장",
-      location: "캠핑장 구역",
+      location: "캠핑장 B사이트 인근ㅁ",
       hours: "10:00 – 19:00",
       image: "/images/wellness/camping-pool/hero.jpg",
     },
@@ -155,7 +155,7 @@ export const wellnessPageData: Record<string, WellnessPageData> = {
       subtitle:
         "무포장·용기내 캠페인과 제로웨이스트 샵, 핸드드립 커피·비건 스낵을 만나는 편의 공간입니다.",
       type: "원두 맛집",
-      location: "관리동 입구",
+      location: "관리동",
       hours: "09:00 – 21:00",
       image: "/images/wellness/store/hero.jpg",
     },
@@ -175,11 +175,11 @@ export const wellnessPageData: Record<string, WellnessPageData> = {
   },
   "seminar-room": {
     header: {
-      title: "세미나실(공연장)",
+      title: "세미나실(전시장)",
       subtitle:
         "소규모 강연·워크숍·공연이 가능한 다목적 공간으로, 무대·음향·조명 시설을 갖추고 있습니다.",
       type: "세미나실",
-      location: "캠핑장 S사이트",
+      location: "캠핑장 A사이트 인근",
       hours: "09:00 – 21:00 (예약제)",
       image: "/images/wellness/seminar-room/hero.jpg", // 세미나실 내부 또는 무대 전경 헤더 배너
     },

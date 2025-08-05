@@ -54,7 +54,7 @@ export default function SeclubElegantGuidePage() {
                         : "bg-white text-stone-600 hover:bg-stone-200"
                     }`}
                   >
-                    {category === "반려견" ? "반려견 전용" : category}
+                    {category === "반려견" ? "반려견 캠핑장" : category}
                   </Button>
                 ))}
               </div>

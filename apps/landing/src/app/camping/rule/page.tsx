@@ -31,8 +31,8 @@ export default function CampsiteInfoPage() {
                 </div>
                 <div className="sm:col-span-2">
                   <ul className="list-disc list-inside text-sm text-foreground/80 space-y-1 pl-1">
-                    <li>전일 예약 없을 시 얼리 체크인 가능 (문의 필요)</li>
-                    <li>레이트 체크아웃은 별도 옵션으로 운영됩니다.</li>
+                    <li>입장 전일에 예약이 없을 시 얼리체크인 가능 (문의필요)</li>
+                    <li>퇴장일에 예약이 없을시 레이트체크아웃 가능 (문의필요)</li>
                   </ul>
                 </div>
               </CardContent>
@@ -51,10 +51,10 @@ export default function CampsiteInfoPage() {
                 </CardHeader>
                 <CardContent>
                   <ol className="list-decimal list-inside space-y-2 text-foreground/80">
-                    <li>관리동에서 고객안내 및 체크인</li>
-                    <li>쓰레기봉투 수령 및 위치 확인</li>
-                    <li>퇴장 전 쓰레기 분리배출</li>
-                    <li>깔판 및 대여용품 정돈</li>
+                    <li>입구 관리동에서 체크인</li>
+                    <li>쓰레기 분리 수거봉투(2장)수령, 사이트및 주차위치 확인</li>
+                    <li>이용 중 쓰레기 분리 수거 및 퇴장 전 쓰레기(일반, 재황용, 음식물)분리 배출 (쓰레기 처리장)</li>
+                    <li>사이트 내 쓰레기 수거 및 깔판 정리정돈</li>
                   </ol>
                 </CardContent>
               </Card>
@@ -82,8 +82,10 @@ export default function CampsiteInfoPage() {
               <CardContent className="p-6 space-y-4">
                 <ul className="list-disc list-inside text-foreground/80 space-y-2">
                   <li>조기 입장 이용료: 10,000원</li>
-                  <li>연장 이용료: 3시간 연장 시 20,000원, 6시간 연장 시 25,000원</li>
+                  <li>퇴장 연장 이용료: 3시간 연장 20,000원, 6시간 연장 25,000원</li>
                   <li>카라반, 캠핑카, 트레일러 등 동반 이용 시 1박에 10,000원 추가 부과</li>
+                  <li>캠핑장 사이트 별 기준인원 초과 시 1인당 1박에 10,000원 추가 부과</li>
+                  <li>반려견 동반 이용 시 1마리당 1박에 5,000원 추가 부과</li>
                 </ul>
                 <p className="text-sm text-foreground/80 pt-2 border-t mt-4">
                   문의 및 신청은 예약담당에게 전화 주세요. (010-9703-1711)
@@ -151,7 +153,7 @@ export default function CampsiteInfoPage() {
                 <CardContent className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <p className="text-sm text-foreground/80">관리실 (현장 문의)</p>
-                    <p className="font-semibold mt-1">010-6343-1711</p>
+                    <p className="font-semibold mt-1">010-4668-1704</p>
                   </div>
                   <div>
                     <p className="text-sm text-foreground/80">예약 담당</p>

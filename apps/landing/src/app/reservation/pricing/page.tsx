@@ -50,6 +50,14 @@ export default function PricingPage() {
               ))}
             </TableBody>
           </Table>
+          <div className="text-right mt-4 text-sm text-gray-600">
+            <div className="flex flex-col gap-2">
+              <span>* 최성수기(7~8월), 성수기(3~6월, 9~11월), 동절기(12~2월)</span>
+              <span>* 연박할인: 성수기/동절기</span>
+              <span>* 시설별 기준인원 초과시 1인당 1박에 20,000원 추가 부과</span>
+              <span>* 반려견 동반 이용 시 1마리당 1박에 10,000원 추가 부과</span>
+            </div>
+          </div>
         </section>
 
         {/* Condo & Camping Section */}
@@ -67,19 +75,22 @@ export default function PricingPage() {
             <TableBody>
               {Object.entries(campingRates)
                 .filter(([site]) => site !== "연박할인")
-                .map(([site, rates]) => (
+                .map(([site, data]) => (
                   <TableRow key={site}>
                     <TableCell className="font-medium">{site}</TableCell>
-                    <TableCell className="text-right">{formatCurrency(rates.최성수기)}</TableCell>
-                    <TableCell className="text-right">{formatCurrency(rates.성수기)}</TableCell>
-                    <TableCell className="text-right">-</TableCell>
+                    <TableCell className="text-right">{formatCurrency(data.rates.최성수기)}</TableCell>
+                    <TableCell className="text-right">{formatCurrency(data.rates.동절기)}</TableCell>
+                    <TableCell className="text-right">{formatCurrency(data.longStayDiscount)}</TableCell>
                   </TableRow>
                 ))}
             </TableBody>
           </Table>
-          <p className="text-right mt-4 text-sm text-gray-600">
-            * 성수기/동절기 연박 시 {formatCurrency(campingRates["연박할인"].성수기)} 할인
-          </p>
+          <div className="text-right mt-4 text-sm text-gray-600">
+            <div className="flex flex-col gap-2">
+              <span>* 최성수기(7~8월), 성수기(3~6월, 9~11월), 동절기(12~2월)</span>
+              <span>* 연박할인: 성수기/동절기</span>
+            </div>
+          </div>
         </section>
         {/* Late Checkout Section */}
         <section className="max-w-4xl mx-auto">

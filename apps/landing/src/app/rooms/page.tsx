@@ -20,7 +20,7 @@ export default function RoomsPage() {
       
       <section className="py-4 md:py-16 px-4 translate-y-[100svh] mb-[100svh] bg-background" suppressHydrationWarning>
         <ScrollReveal side="right" type="h2" className="text-3xl md:text-4xl font-medium text-center mt-8 mb-4 font-serif">Overview</ScrollReveal>
-        <ScrollReveal side="left" type="div" className="text-md md:text-lg font-medium text-center pb-4 md:pb-12 mb-4 md:mb-12 border-b max-w-7xl mx-auto text-foreground/80">전 객실에서 오선뷰를 감상할 수 있으며, 전용 야외 발코니에서 프라이빗 바비큐를 즐길 수 있습니다</ScrollReveal>
+        <ScrollReveal side="left" type="div" className="text-md md:text-lg font-medium text-center pb-4 md:pb-12 mb-4 md:mb-12 border-b max-w-7xl mx-auto text-foreground/80">전 객실에서 오선뷰를 감상할 수 있으며, 전용 야외발코니에서 프라이빗 <span className="text-green-900 font-semibold">요리를 즐길 수 있습니다</span></ScrollReveal>
         <div className="flex flex-col max-w-7xl mx-auto divide-y divide-foreground/30 gap-4 md:gap-8">
           {roomData.map((room, idx) => (
             <ScrollReveal side="left" delay={`${idx * 100}ms`} key={room.slug} revealHeight="10%">

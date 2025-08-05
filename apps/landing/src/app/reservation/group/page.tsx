@@ -5,6 +5,7 @@ import Image from "next/image"
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { generateMetadata } from "@/utils/metadata-generator";
+import { activities, lodgingData, lodgingTotal } from "@/const/group-data";
 
 export const metadata = generateMetadata("SE클럽 | 단체 예약", "SE클럽의 단체 예약 안내 및 문의");
 
@@ -16,42 +17,6 @@ const SectionHeader = ({ title, subtitle, className }: { title: string; subtitle
 )
 
 export default function GroupReservationPage() {
-  const lodgingData = [
-    { name: "풀빌라 단독주택", units: "7개 동", unitCap: "4명 (6명)", totalCap: "28명 (42명)", notes: "침대 2개" },
-    { name: "자쿠지 단독주택", units: "3개 동", unitCap: "4명 (6명)", totalCap: "12명 (18명)", notes: "침대 2개" },
-    { name: "캠핑하우스 스페셜형", units: "2개 동", unitCap: "4명 (6명)", totalCap: "8명 (12명)", notes: "침대 2개" },
-    {
-      name: "호텔형 별장 - 기본형",
-      units: "12개 호실",
-      unitCap: "2명 (4명)",
-      totalCap: "24명 (48명)",
-      notes: "침대 1개",
-    },
-    {
-      name: "호텔형 별장 - 확장형",
-      units: "4개 호실",
-      unitCap: "4명 (6명)",
-      totalCap: "16명 (24명)",
-      notes: "침대 2개",
-    },
-  ]
-  const lodgingTotal = { totalCap: "88명 (144명)" }
-
-  const activities = [
-    { title: "세미나실", description: "워크숍, 회의 등 다양한 목적의 행사를 진행할 수 있습니다.", link: "/wellness/seminar-room" },
-    { title: "해양 액티비티", description: "바로 앞 바다에서 바다생태체험, 독살, 바다 낚시, 해수욕을 즐겨보세요." },
-    {
-      title: "야외 수영장",
-      description: "아름다운 오션뷰와 노을뷰를 감상할 수 있는 공용 야외 수영장이 마련되어 있습니다.",
-    },
-    {
-      title: "트레킹 코스",
-      description: "인접한 '솔향기 길'(10.2km, 약 4시간 소요)을 따라 자연을 만끽할 수 있습니다.",
-    },
-    { title: "해산물 미식", description: "인근 '만대항'에서 신선한 자연산 해산물을 맛볼 수 있습니다." },
-    { title: "조식 서비스", description: "인근 '만대식당(한식)'에서 조식, 중식, 석식을 이용할 수 있습니다." },
-  ]
-
   return (
     <div className="text-gray-800 font-sans">
       <section className="fixed -z-10 top-0 h-svh w-full overflow-x-hidden">
@@ -85,7 +50,7 @@ export default function GroupReservationPage() {
           <div className="max-w-4xl mx-auto">
             <div>
               <div className="mb-4 md:mb-8">
-                <h2 className="text-3xl font-bold text-gray-900">숙박 시설 (펜션)</h2>
+                <h2 className="text-3xl font-bold text-gray-900">숙박 시설</h2>
                 <p className="mt-2 text-sm text-gray-600">* 최대 144명 수용 가능합니다</p>
               </div>
             </div>
@@ -146,7 +111,7 @@ export default function GroupReservationPage() {
         {/* 6. Contact & History */}
         <section className="py-0 md:py-16 px-6 lg:px-8 pb-16">
           <div className="max-w-4xl mx-auto text-center md:text-left">
-            <SectionHeader title="문의 및 연역" />
+            <SectionHeader title="이용현황 및 문의" />
             <div className="grid md:grid-cols-2 gap-4 md:gap-12">
               <div>
                 <h3 className="text-xl font-semibold mb-1.5 md:mb-4">주요 연수 및 행사 현황</h3>

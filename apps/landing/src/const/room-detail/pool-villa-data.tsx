@@ -9,7 +9,7 @@ export const poolVillaData: RoomInfo = {
       海水 <span className="font-pretendard font-thin">풀빌라</span>
     </h1>
   ),
-  subtitle: "101-106 객채",
+  subtitle: "101-106 독채",
   heroImage: "/images/room/pool-villa/hero.jpg",
   mainImages: [
     "/images/room/pool-villa/main-1.jpg", 

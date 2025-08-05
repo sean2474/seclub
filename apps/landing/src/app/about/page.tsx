@@ -70,20 +70,14 @@ export default function AboutPage() {
                 SE클럽 여정
               </ScrollReveal>
               <ScrollReveal type="p" side="bottom" className="text-lg space-y-6 hidden md:block">
-                태안 해안국립공원 꾸지나무골 해안에 자리 잡은 SE클럽은 처음에 자연 속 오토캠핑장으로 여러분께 문을
-                열었습니다. 이후 풀빌라, 단독 주택형, 콘도, 캠핑하우스, 반려견 캠핑장 등 다양한 숙박 옵션을 순차
-                도입하며 ‘복합 힐링클럽’으로 진화했습니다. 관광농원 오솔길, 조각공원, 전망대를 조성해 김영중·김석우·이필언 
-                등 국내 유수 작가 작품을 전시하며 자연과 예술을 결합한 공간으로 자리매김했습니다
+                태안 해안국립공원 꾸지나무골 해안에 자리 잡은 SE클럽은 처음에 자연속 오토캠핑장으로 여러분께 문을 열었습니다. 이후 海水풀빌라, 오션스파빌라, 오션 콘도(스탠다드/디럭스), 선셋 캠핑하우스, 반려견캠핑장등 다양한 숙박 옵션을 순차 도입하며 ‘복합 힐링클럽’으로 진화했습니다. 또 김영중·김석우·이필언 등 국내 유수 작가 작품이 있는조각공원과 그림 전시장은 물론 관광농원, 오솔길, 전망대를 조성해 자연과 예술을 결합한 공간으로 자리 매김했습니다.
               </ScrollReveal>
             </div>
             <ScrollReveal side="right" className="relative h-96 md:h-[500px] overflow-hidden">
               <Image src="/images/about/1.jpg" alt="자연과 예술이 어우러진 조각공원" fill className="object-cover" />
             </ScrollReveal>
             <ScrollReveal type="p" side="bottom" className="text-lg space-y-6 block md:hidden">
-              태안 해안국립공원 꾸지나무골 해안에 자리 잡은 SE클럽은 처음에 자연 속 오토캠핑장으로 여러분께 문을
-              열었습니다. 이후 풀빌라, 단독 주택형, 콘도, 캠핑하우스, 반려견 캠핑장 등 다양한 숙박 옵션을 순차
-              도입하며 ‘복합 힐링클럽’으로 진화했습니다. 관광농원 오솔길, 조각공원, 전망대를 조성해 김영중·김석우·이필언 
-              등 국내 유수 작가 작품을 전시하며 자연과 예술을 결합한 공간으로 자리매김했습니다
+              태안 해안국립공원 꾸지나무골 해안에 자리 잡은 SE클럽은 처음에 자연 속 오토캠핑장으로 여러분께 문을 열었습니다. 이후 풀빌라, 단독 주택형, 콘도, 캠핑하우스, 반려견 캠핑장 등 다양한 숙박 옵션을 순차 도입하며 ‘복합 힐링클럽’으로 진화했습니다. 관광농원 오솔길, 조각공원, 전망대를 조성해 김영중·김석우·이필언 등 국내 유수 작가 작품을 전시하며 자연과 예술을 결합한 공간으로 자리매김했습니다
             </ScrollReveal>
           </div>
         </section>
@@ -109,13 +103,13 @@ export default function AboutPage() {
               <ScrollReveal side="left" delay="100ms" className="text-left">
                 <h3 className="text-xl font-semibold mb-1 md:mb-3">폭넓은 숙박 선택지</h3>
                 <p>
-                  풀빌라, 펜션, 캠핑하우스, 캠핑장(차박·카라반 포함), 반려견 캠핑장 등 취향에 따라 자유롭게 선택하세요.
+                  海水풀빌라, 오션스파빌라, 오션 콘도(스탠다드 / 디럭스), 선셋 캠핑하우스, 캠핑장(차박·캠핑카·카라반포함), 반려견캠핑장 등 취향에 따라 자유롭게 선택하세요.
                 </p>
               </ScrollReveal>
               <ScrollReveal side="left" delay="200ms" className="text-left">
                 <h3 className="text-xl font-semibold mb-1 md:mb-3">차별화된 문화·체험</h3>
                 <p>
-                  바다 생태체험, 갯바위낚시, 해루질부터 조각공원 관람까지, 자연과 예술이 어우러진 액티비티를 제공합니다.
+                  바다생태체험(갯벌, 해루질,독살,갯바위낚시 등)부터 조각공원, 그림 전시장 관람까지, 자연과 예술이 어우러진 액티비티를 제공합니다.
                 </p>
               </ScrollReveal>
             </div>
@@ -138,19 +132,19 @@ export default function AboutPage() {
               <div className="grid grid-cols-1 gap-y-4 md:gap-y-10 text-lg">
                 <ScrollReveal side="left" delay="100ms" className="text-left">
                   <h3 className="text-xl font-semibold mb-1 md:mb-3">휴양별장</h3>
-                  <p>풀빌라형·단독 주택형 (스파·자쿠지), 오션 콘도 (기본형·확장형)</p>
+                  <p>海水풀빌라, 오션스파빌라,오션 콘도(스탠다드 / 디럭스),선셋 캠핑하우스</p>
                 </ScrollReveal>
                 <ScrollReveal side="left" delay="200ms" className="text-left">
                   <h3 className="text-xl font-semibold mb-1 md:mb-3">캠핑장</h3>
-                  <p>차박·카라반 가능 사이트, 반려견 전용 캠핑 사이트</p>
+                  <p>일반및 차박·카라반·캠핑카·루프탑 가능 사이트, 반려견 전용 사이트</p>
                 </ScrollReveal>
                 <ScrollReveal side="left" delay="300ms" className="text-left">
                   <h3 className="text-xl font-semibold mb-1 md:mb-3">부대 시설 및 서비스</h3>
-                  <p>공용 시설, 매점, 카페, 장비 대여, 개별 바베큐 존, 수영장, 산책로</p>
+                  <p>공용시설, 매점, 카페,수영장, 산책로, 전망대</p>
                 </ScrollReveal>
                 <ScrollReveal side="left" delay="400ms" className="text-left">
                   <h3 className="text-xl font-semibold mb-1 md:mb-3">체험 프로그램</h3>
-                  <p>해루질, 갯벌/바다 생태체험, 낚시, 농원/조각공원 관람</p>
+                  <p>바다생태체험(갯벌, 해루질, 독살, 갯바위낚시 등), 농원, 조각공원, 전시장 관람</p>
                 </ScrollReveal>
               </div>
             </div>
