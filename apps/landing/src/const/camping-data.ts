@@ -73,16 +73,17 @@ export const siteData: SiteData[] = [
   {
     id: "K",
     title: "K 사이트",
-    features: ["파쇄석 사이트", "탁트인 오션뷰 & 낙조", "K3 - 5"],
+    features: ["파쇄석 사이트", "탁트인 오션뷰 & 낙조"],
     imageQuery: "simple gravel campsite area with basic amenities",
-    allowed: ["카라반", "캠핑카", "차박", "루프탑"],
+    allowed: ["K3 - 5 카라반, 캠핑카, 차박, 루프탑"],
     image: "/images/site/k.jpg",
   },
   {
     id: "전망",
     title: "전망 사이트",
-    features: ["독립된 파쇄석", "탁 트인 오션뷰 & 낙조", "전망 14 - 17"],
+    features: ["독립된 파쇄석", "탁 트인 오션뷰 & 낙조"],
     imageQuery: "wooden deck campsite with a panoramic ocean sunset view",
+    allowed: ["전망 14 - 17 카라반, 캠핑카, 차박, 루프탑"],
     image: "/images/site/view_site.jpg",
   },
   {
@@ -90,7 +91,7 @@ export const siteData: SiteData[] = [
     title: "반려견 캠핑장",
     features: ["솔숲 파쇄석", "탁트인 오션뷰 & 낙조", "반려견 전용"],
     imageQuery: "happy dog playing at a dedicated pet-friendly campsite",
-    allowed: ["차박", "루프탑"],
+    allowed: ["반려견 1-5, 17 차박 루프탑"],
     image: "/images/site/pet_site.jpg",
   },
 ]
