@@ -81,7 +81,7 @@ export default function CampsiteInfoPage() {
             <Card>
               <CardContent className="p-6 space-y-4">
                 <ul className="list-disc list-inside text-foreground/80 space-y-2">
-                  <li>조기 입장 이용료: 10,000원</li>
+                  <li>조기 입장 이용료: 10,000원 (오후 1시 이전 입장 시)</li>
                   <li>퇴장 연장 이용료: 3시간 연장 20,000원, 6시간 연장 25,000원</li>
                   <li>카라반, 캠핑카, 트레일러 등 동반 이용 시 1박에 10,000원 추가 부과</li>
                   <li>캠핑장 사이트 별 기준인원 초과 시 1인당 1박에 10,000원 추가 부과</li>

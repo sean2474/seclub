@@ -23,6 +23,7 @@ export const lateCheckoutRates = [
   { name: "선셋 캠핑 하우스", "3시간": 50000, "6시간": 65000 },
   { name: "오션 콘도 스탠다드", "3시간": 35000, "6시간": 45000 },
   { name: "오션 콘도 디럭스", "3시간": 45000, "6시간": 60000 },
+  { name: "캠핑장", "3시간": 20000, "6시간": 25000 },
 ]
 
 export const campingRates: LodgingRates = {

@@ -51,9 +51,9 @@ export const wellnessPageData: Record<string, WellnessPageData> = {
   },
   "swimming-pool": {
     header: {
-      title: "객실 전용 수영장",
+      title: "숙박시설 전용 수영장",
       subtitle:
-        "오션콘도와 오션스파빌리지 사이에 위치한 바다 전경의 프라이빗 야외 풀장과 족욕탕을 즐길 수 있습니다.",
+        "오션콘도와 오션스파빌라, 선셋 캠핑하우스 인근에 위치한 바다 전경의 프라이빗 야외 풀장과 족욕탕을 즐길 수 있습니다.",
       type: "수영장",
       location: "오션스파빌라 & 오션 콘도 & 선셋 캠핑하우스 인근",
       hours: "10:00 – 19:00",
@@ -130,7 +130,7 @@ export const wellnessPageData: Record<string, WellnessPageData> = {
       subtitle:
         "캠핑장 구역에 마련된 바닷물 풀장에서 자연 속 해수욕장 같은 물놀이를 즐겨보세요.",
       type: "수영장",
-      location: "캠핑장 B사이트 인근ㅁ",
+      location: "캠핑장 B사이트 인근",
       hours: "10:00 – 19:00",
       image: "/images/wellness/camping-pool/hero.jpg",
     },
