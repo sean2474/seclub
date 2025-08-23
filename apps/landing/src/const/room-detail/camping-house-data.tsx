@@ -16,7 +16,7 @@ export const campingHouseData: RoomInfo = {
     
   ],
   overview: (
-    <p>SE CLUB 캠핑 하우스는 2층 복층형 단독주택과 <span className="text-green-900 font-semibold">캠핑 사이트</span>가 어우러진 공간으로, <span className="text-green-900 font-semibold">실내의 편안함</span>과 <span className="text-green-900 font-semibold">캠핑의 즐거움</span>을 함께 누릴 수 있습니다. 야외 데크에서는 바다와 산, 별빛을 배경으로 <span className="text-green-900 font-semibold">바비큐</span>를 즐기며 낭만적인 시간을 보낼 수 있습니다.
+    <p>SE CLUB 선셋 캠핑 하우스는 2층 복층형 단독주택과 <span className="text-green-900 font-semibold">캠핑 사이트</span>가 어우러진 공간으로, <span className="text-green-900 font-semibold">실내의 편안함</span>과 <span className="text-green-900 font-semibold">캠핑의 즐거움</span>을 함께 누릴 수 있습니다. 야외 데크에서는 바다와 산, 별빛을 배경으로 <span className="text-green-900 font-semibold">바비큐</span>를 즐기며 낭만적인 시간을 보낼 수 있습니다.
 </p>
   ),
   amenities: [
@@ -58,6 +58,7 @@ export const campingHouseData: RoomInfo = {
     {
       title: "시설 이용 안내",
       items: [
+        "- 드실 것과 양념은 제공되지 않으니 개인 준비를 부탁드립니다.",
         "- 정부의 ‘일회용품 사용 자제’ 시책에 따라 치약·칫솔 등 욕실용품은 제공되지 않으니 개인 준비를 부탁드립니다.",
         "- 건강한 생태계에서는 풍뎅이, 나방, 돈 벌래 등 여러 가지 곤충들이 서식하고 있습니다. 절대로 창문이나 출입문을 열어두시면 안됩니다."
       ]

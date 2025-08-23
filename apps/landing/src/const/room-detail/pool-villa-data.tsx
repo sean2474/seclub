@@ -9,7 +9,7 @@ export const poolVillaData: RoomInfo = {
       海水 <span className="font-pretendard font-thin">풀빌라</span>
     </h1>
   ),
-  subtitle: "101-106 독채",
+  subtitle: "1-7 독채",
   heroImage: "/images/room/pool-villa/hero.jpg",
   mainImages: [
     "/images/room/pool-villa/main-1.jpg", 
@@ -79,6 +79,7 @@ export const poolVillaData: RoomInfo = {
     {
       title: "시설 이용 안내",
       items: [
+        "- 드실 것과 양념은 제공되지 않으니 개인 준비를 부탁드립니다.",
         "- 정부의 ‘일회용품 사용 자제’ 시책에 따라 치약·칫솔 등 욕실용품은 제공되지 않으니 개인 준비를 부탁드립니다.",
         "- 스파 설비 고장 위험으로 인해 입욕제 사용은 불가합니다.",
         "- 전기 온수 탱크 특성상, 1회 사용 후에는 최소 4시간이 경과 후에 재사용이 가능합니다. (온수를 틀기 전에 꼭 스파 배수구를 막아 주세요.)",

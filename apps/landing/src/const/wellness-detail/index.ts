@@ -34,7 +34,7 @@ export const wellnessPageData: Record<string, WellnessPageData> = {
       subtitle:
         "국내 정상급 조각가들의 작품을 숲·잔디밭·전망데크에서 만나는 야외 미술관입니다.",
       type: "유명 작품 감상",
-      location: "단지 내 조각공원 구역",
+      location: "단지 입구",
       hours: "09:00 – 18:00",
       image: "/images/wellness/special-activity/hero.jpg",
     },
@@ -51,7 +51,7 @@ export const wellnessPageData: Record<string, WellnessPageData> = {
   },
   "swimming-pool": {
     header: {
-      title: "숙박시설 전용 수영장",
+      title: "공용 인피니티 수영장",
       subtitle:
         "오션콘도와 오션스파빌라, 선셋 캠핑하우스 인근에 위치한 바다 전경의 프라이빗 야외 풀장과 족욕탕을 즐길 수 있습니다.",
       type: "수영장",
@@ -107,9 +107,9 @@ export const wellnessPageData: Record<string, WellnessPageData> = {
       image: "/images/wellness/walk/hero.jpg", // 솔숲과 해안길이 함께 보이는 헤더 배너
     },
     contents: [
-      "솔향기길 1코스: 1해변 → 캠핑하우스. 간조 시 바닷길 진입 가능",
-      "솔향기길 2코스: 오션콘도 → 관리사무소. 초보자는 사목해변 왕복 권장",
-      "SE클럽 3코스: 반려견 캠핑장 → 전망대. 사계절 꽃·과실 관찰 가능",
+      "SE클럽 1코스 : 1해변 → 선셋 캠핑하우스",
+      "SE클럽 2코스 : 오션 콘도 → 관리사무소",
+      "SE클럽 3코스 : 반려견 캠핑장 → 인피니티 풀 (사계절 꽃과 과실 관찰 가능)",
       "안전 팁: 등산화 착용, 물·간식 지참, 물때표 확인, 해안 구간 미끄럼 주의",
     ],
     images: [

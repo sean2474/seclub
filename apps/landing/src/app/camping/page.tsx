@@ -38,7 +38,7 @@ export default function SeclubElegantGuidePage() {
               <div className="flex justify-between items-end mb-8">
                 <ScrollReveal side="left" type="h2" className="font-serif text-3xl md:text-4xl">Site Information</ScrollReveal>
                 <Link href={"/camping/map"}>
-                  <ScrollReveal side="right" type="div" className="flex items-center cursor-pointer group">캠핑장 지도보기 <ArrowRight className="size-8 p-2 ml-2 rounded-full border border-foreground group-hover:bg-foreground group-hover:text-background transition-all duration-300" /></ScrollReveal>
+                  <ScrollReveal side="right" type="div" className="flex items-center cursor-pointer group">SE클럽 제 시설 지도보기<ArrowRight className="size-8 p-2 ml-2 rounded-full border border-foreground group-hover:bg-foreground group-hover:text-background transition-all duration-300" /></ScrollReveal>
                 </Link>
               </div>
 
@@ -143,7 +143,7 @@ export default function SeclubElegantGuidePage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   <div className="absolute bottom-0 left-0 p-6">
                     <h3 className="text-2xl text-white">#여름시즌 #공용수영장</h3>
-                    <p className="text-white/90 mt-1">운영: 6/14 ~ 9/8</p>
+                    <p className="text-white/90 mt-1">운영: 7월 ~ 8월</p>
                   </div>
                   <div className="justify-start h-auto flex items-center absolute bottom-0 right-0 p-6 text-white">
                     자세히 보기 <ArrowRight className="w-4 h-4 ml-2" />
