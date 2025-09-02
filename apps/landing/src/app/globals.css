@@ -88,6 +88,11 @@
     @apply border-border outline-ring/50;
     /* outline: 1px solid red !important; */
   }
+
+  main {
+    @apply scroll-smooth;
+  }
+  
   body {
     @apply bg-background text-foreground text-balance break-keep overscroll-none;
   }

@@ -29,4 +29,10 @@
     50% { scale: 1.5; }
     100% { scale: 1; }
   }
+
+  @keyframes nudge {
+    0% { transform: translate(0) }
+    50% { transform: translate(0, 6px) }
+    100% { transform: translate(0) }
+  }
 }

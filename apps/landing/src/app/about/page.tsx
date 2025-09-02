@@ -8,6 +8,7 @@ import {
 } from "lucide-react"
 import { ScrollReveal } from "@/components/base/scroll-reveal";
 import { generateMetadata } from "@/utils/metadata-generator";
+import { ScrollNudge } from "@/components/ui/scroll-nudge";
 
 export const metadata = generateMetadata("SE클럽 | 소개", "SE클럽(태안둘레길캠핑장)의 역사와 시설, 주변 관광지 정보를 소개합니다.");
 
@@ -48,7 +49,7 @@ export default function AboutPage() {
   return (
     <div className="font-sans text-wrap overflow-hidden">
       {/* Hero Section */}
-      <section className="fixed -z-10 top-0 h-svh w-full overflow-x-hidden text-white">
+      <section className="fixed top-0 h-svh w-full overflow-x-hidden text-white">
         <Image src="/images/about/hero.jpg" alt="태안 꾸지나무골 해안의 아름다운 일몰" fill className="absolute inset-0 z-0 object-cover" priority
         />
         <div className="absolute inset-0 bg-black/60 z-10"></div>
@@ -58,9 +59,10 @@ export default function AboutPage() {
             사람과 자연의 가장 편안한 연결
           </ScrollReveal>
         </div>
+        <ScrollNudge />
       </section>
 
-      <main className="w-full mt-[100svh] bg-background">
+      <main className="w-full translate-y-[100svh] mb-[100svh] bg-background">
         {/* SE Club History */}
         <section className="pt-16 md:pt-32 pb-8 md:pb-16 px-6 lg:px-8">
           <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 md:gap-16 items-center">

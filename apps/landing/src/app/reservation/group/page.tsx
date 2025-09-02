@@ -6,6 +6,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { generateMetadata } from "@/utils/metadata-generator";
 import { activities, lodgingData, lodgingTotal } from "@/const/group-data";
+import { ScrollNudge } from "@/components/ui/scroll-nudge";
 
 export const metadata = generateMetadata("SE클럽 | 단체 예약", "SE클럽의 단체 예약 안내 및 문의");
 
@@ -19,13 +20,14 @@ const SectionHeader = ({ title, subtitle, className }: { title: string; subtitle
 export default function GroupReservationPage() {
   return (
     <div className="text-gray-800 font-sans">
-      <section className="fixed -z-10 top-0 h-svh w-full overflow-x-hidden">
+      <section className="fixed top-0 h-svh w-full overflow-x-hidden">
         <Image src={"/images/reservation/hero.jpg"} sizes="100vw" alt={"SE클럽 객실 전경"} fill className="object-cover object-bottom" />
         <div className="z-10 absolute w-full h-full top-0 left-0 bg-black/30" />
         <div className="z-10 absolute top-1/2 left-1/2 md:left-1/4 transform -translate-x-1/2 -translate-y-1/2 text-background whitespace-nowrap">
           <ScrollReveal side="top" type="h1"> 기업·단체 예약 </ScrollReveal>
           <ScrollReveal side="bottom" type="p" className="text-xl md:text-2xl mt-4"> SE클럽에서 특별한 행사와 휴양을 계획하세요. </ScrollReveal>
         </div>
+        <ScrollNudge />
       </section>
 
       <main className="w-full translate-y-[100svh] mb-[100svh] bg-background">

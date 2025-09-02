@@ -8,6 +8,7 @@ import Link from "next/link"
 import { Modal, ModalBody, ModalTrigger } from "@/components/ui/animated-modal"
 import { ScrollReveal } from "@/components/base/scroll-reveal"
 import { siteCategories, siteData } from "@/const/camping-data"
+import { ScrollNudge } from "@/components/ui/scroll-nudge"
 
 export default function SeclubElegantGuidePage() {
   const [activeCategory, setActiveCategory] = useState("S")
@@ -22,16 +23,16 @@ export default function SeclubElegantGuidePage() {
 
   return (
     <div className="min-h-screen font-sans overflow-x-hidden">
-      <section className="fixed -z-10 top-0 h-svh w-full">
+      <section className="fixed top-0 h-svh w-full overflow-x-hidden">
         <Image src={"/images/site/hero.jpg"} sizes="100vw" alt={"SE클럽 객실 전경"} fill className="object-cover" />
         <div className="z-10 absolute w-full h-full top-0 left-0 bg-black/30" />
-        <div className="z-10 absolute top-1/2 left-1/2 md:left-20 lg:left-1/4 transform -translate-x-1/2 md:-translate-x-0 lg:-translate-x-1/2 -translate-y-1/2 text-background whitespace-nowrap">
+        <div className="z-10 absolute top-1/2 left-1/2 md:left-1/4 transform -translate-x-1/2 -translate-y-1/2 text-background whitespace-nowrap">
           <ScrollReveal side="top" type="h1"> SE클럽 캠핑 사이트 </ScrollReveal>
           <ScrollReveal side="bottom" type="p" className="text-xl md:text-2xl mt-4"> 아름다운 경관과 함께하는 힐링 </ScrollReveal>
         </div>
+        <ScrollNudge />
       </section>
-      <main className="">
-        <div className="h-svh" />
+      <main className="w-full translate-y-[100svh] mb-[100svh] bg-background">
         <Modal>
           <section id="sites" className="w-full pb-12 pt-4 md:pt-12 bg-background px-8 md:px-12">
             <div className="max-w-7xl mx-auto">

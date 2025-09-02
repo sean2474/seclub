@@ -3,19 +3,21 @@ import { RoomsLinkCard } from "@/components/ui/rooms-link-card";
 import { ScrollReveal } from "@/components/base/scroll-reveal";
 import { roomData } from "@/const/room-detail";
 import { generateMetadata } from "@/utils/metadata-generator";
+import { ScrollNudge } from "@/components/ui/scroll-nudge";
 
 export const metadata = generateMetadata("SE클럽 | 객실", "아름다운 경관과 함께하는 힐링");
 
 export default function RoomsPage() {
   return (
     <main>
-      <section className="fixed -z-10 top-0 h-svh w-full overflow-x-hidden">
+      <section className="fixed top-0 h-svh w-full overflow-x-hidden">
         <Image src={"/images/room/hero.jpg"} sizes="100vw" alt={"SE클럽 객실 전경"} fill className="object-cover" />
         <div className="z-10 absolute w-full h-full top-0 left-0 bg-black/30" />
         <div className="z-10 absolute top-1/2 left-1/2 md:left-1/4 transform -translate-x-1/2 -translate-y-1/2 text-background whitespace-nowrap">
           <ScrollReveal side="top" type="h1"> SE클럽 객실 </ScrollReveal>
           <ScrollReveal side="bottom" type="p" className="text-xl md:text-2xl mt-4"> 아름다운 경관과 함께하는 힐링 </ScrollReveal>
         </div>
+        <ScrollNudge />
       </section>
       
       <section className="py-4 md:py-16 px-4 translate-y-[100svh] mb-[100svh] bg-background" suppressHydrationWarning>
