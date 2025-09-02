@@ -16,6 +16,7 @@ export const BlurryImage = ({ src, alt }: { src: string; alt?: string }) => {
         src={src}
         alt={alt ?? ""}
         fill
+        quality={50}
         className={cn(
           "object-cover object-left-top transition-all duration-700 ease-out bg-gray-200",
           loaded
