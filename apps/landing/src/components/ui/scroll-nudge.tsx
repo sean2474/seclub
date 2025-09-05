@@ -11,7 +11,7 @@ type ScrollNudgeProps = {
 };
 
 export function ScrollNudge({
-  delayMs = 3000,
+  delayMs = 0,
   position = "bottom",
   direction = "down",
   className = "",
