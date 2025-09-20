@@ -32,34 +32,34 @@ export default function SeclubElegantGuidePage() {
         </div>
         <ScrollNudge />
       </section>
-      <main className="w-full translate-y-[100svh] mb-[100svh] bg-background">
-        <Modal>
-          <section id="sites" className="w-full pb-12 pt-4 md:pt-12 bg-background px-8 md:px-12">
-            <div className="max-w-7xl mx-auto">
-              <div className="flex justify-between items-end mb-8">
-                <ScrollReveal side="left" type="h2" className="font-serif text-3xl md:text-4xl">Site Information</ScrollReveal>
-                <Link href={"/camping/map"}>
-                  <ScrollReveal side="right" type="div" className="flex items-center cursor-pointer group">SE클럽 제 시설 지도보기<ArrowRight className="size-8 p-2 ml-2 rounded-full border border-foreground group-hover:bg-foreground group-hover:text-background transition-all duration-300" /></ScrollReveal>
-                </Link>
-              </div>
+      <main className="w-full mt-[100svh] bg-background relative">
+        <section id="sites" className="w-full pb-12 pt-4 md:pt-12 bg-background px-8 md:px-12">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex justify-between items-end mb-8">
+              <ScrollReveal side="left" type="h2" className="font-serif text-3xl md:text-4xl">Site Information</ScrollReveal>
+              <Link href={"/camping/map"}>
+                <ScrollReveal side="right" type="div" className="flex items-center cursor-pointer group">SE클럽 제 시설 지도보기<ArrowRight className="size-8 p-2 ml-2 rounded-full border border-foreground group-hover:bg-foreground group-hover:text-background transition-all duration-300" /></ScrollReveal>
+              </Link>
+            </div>
 
-              <div className="flex space-x-2 mb-8 pb-2 -mx-8 px-8 flex-wrap gap-y-2">
-                {siteCategories.map((category) => (
-                  <Button
-                    key={category}
-                    variant="ghost"
-                    onClick={() => setActiveCategory(category)}
-                    className={`rounded-full px-4 py-2 text-sm transition-colors duration-200 whitespace-nowrap ${
-                      activeCategory === category
-                        ? "bg-stone-800 text-white hover:bg-stone-700"
-                        : "bg-white text-stone-600 hover:bg-stone-200"
-                    }`}
-                  >
-                    {category === "반려견" ? "반려견 캠핑장" : category}
-                  </Button>
-                ))}
-              </div>
+            <div className="flex space-x-2 mb-8 pb-2 -mx-8 px-8 flex-wrap gap-y-2">
+              {siteCategories.map((category) => (
+                <Button
+                  key={category}
+                  variant="ghost"
+                  onClick={() => setActiveCategory(category)}
+                  className={`rounded-full px-4 py-2 text-sm transition-colors duration-200 whitespace-nowrap ${
+                    activeCategory === category
+                      ? "bg-stone-800 text-white hover:bg-stone-700"
+                      : "bg-white text-stone-600 hover:bg-stone-200"
+                  }`}
+                >
+                  {category === "반려견" ? "반려견 캠핑장" : category}
+                </Button>
+              ))}
+            </div>
 
+            <Modal>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
                 {filteredSites.map((site) => (
                   <div key={site.id} className="group relative">
@@ -99,13 +99,24 @@ export default function SeclubElegantGuidePage() {
                     </ModalTrigger>
                   </div>
                 ))}
+                <ModalBody className="absolute top-1/2 left-1/2 
+                  transform -translate-x-1/2 -translate-y-1/2 
+                  w-full h-full overflow-auto">
+                  <Image
+                    src={`/images/site/map/${openedSite} site.png`}
+                    alt={openedSite || ""}
+                    width={0}
+                    height={0}
+                    sizes="100vw"
+                    className="my-auto"
+                    style={{ width: "auto", height: "auto" }}
+                  />
+                </ModalBody>
               </div>
-            </div>
-            <ModalBody>
-              <Image src={"/images/site/map/" + openedSite + " site.png"} alt={openedSite || ""} width={800} height={600} />
-            </ModalBody>
-          </section>
-        </Modal>
+            </Modal>
+          </div>
+        </section>
+
         <section id="overview" className="bg-beige px-8 md:px-12 pb-16 md:pb-20 pt-12">
           <div className="max-w-7xl mx-auto">
             <ScrollReveal type="h2" side="left" className="text-3xl md:text-4xl mb-8 font-serif">Overview & Packages</ScrollReveal>
