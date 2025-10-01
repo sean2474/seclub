@@ -16,7 +16,7 @@ export const Footer = () => {
           </div>
           <div className="flex flex-col mt-4 gap-2 py-4">
             <div>
-              <div className="font-bold mb-1">SE클럽(태안둘레길캠핑장)</div>
+              <div className="font-bold mb-1">SE클럽(태안둘레길캠핑장 & 펜션)</div>
               <div className="ml-2">대표자 : 정상은 외 2인</div>
               <div className="ml-2">사업자번호 : 362-13-00683</div>
               <div className="ml-2">통신판매번호 : 제 2017-충남태안-0105 호</div>

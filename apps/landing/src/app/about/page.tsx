@@ -10,7 +10,7 @@ import { ScrollReveal } from "@/components/base/scroll-reveal";
 import { generateMetadata } from "@/utils/metadata-generator";
 import { ScrollNudge } from "@/components/ui/scroll-nudge";
 
-export const metadata = generateMetadata("SE클럽 | 소개", "SE클럽(태안둘레길캠핑장)의 역사와 시설, 주변 관광지 정보를 소개합니다.");
+export const metadata = generateMetadata("SE클럽 | 소개", "SE클럽(태안둘레길캠핑장 & 펜션)의 역사와 시설, 주변 관광지 정보를 소개합니다.");
 
 export default function AboutPage() {
   const coreValues = [
