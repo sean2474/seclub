@@ -20,14 +20,16 @@ export default async function GalleryPage() {
     return <p>이미지 로드에 실패했습니다.</p>;
   }
 
-  const images = files.map(file =>
-    supabase
-      .storage
-      .from("gallery")
-      .getPublicUrl(file.name)
-      .data
-      .publicUrl
-  );
+  const images = files
+    .filter(file => /_small\.(jpg|jpeg|png|gif|webp)$/i.test(file.name))
+    .map(file =>
+      supabase
+        .storage
+        .from("gallery")
+        .getPublicUrl(file.name)
+        .data
+        .publicUrl
+    );
 
   const pageImages = [...images, ...images, ...images, ...images, ...images];
 
