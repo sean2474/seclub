@@ -7,8 +7,69 @@ export interface GalleryItem {
   date: string
   file?: File
   previewUrl?: string
-  originalUrl?: string // 원본 URL 추가
+  originalUrl?: string
   path?: string
+  smallPath?: string
+}
+
+// _small 파일명 생성 헬퍼
+function getSmallFileName(fileName: string): string {
+  const ext = fileName.split('.').pop()?.toLowerCase() || 'jpg'
+  const baseName = fileName.replace(/\.[^.]+$/, '')
+  return `${baseName}_small.${ext}`
+}
+
+// 이미지 리사이즈 (Canvas API 사용)
+async function resizeImage(file: File, maxWidth: number = 800): Promise<Blob> {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    
+    img.onload = () => {
+      let { width, height } = img
+      
+      // 원본이 maxWidth보다 작으면 그대로 반환
+      if (width <= maxWidth) {
+        file.arrayBuffer().then(buffer => {
+          resolve(new Blob([buffer], { type: file.type }))
+        })
+        return
+      }
+      
+      // 비율 유지하며 리사이즈
+      const ratio = maxWidth / width
+      width = maxWidth
+      height = Math.round(height * ratio)
+      
+      canvas.width = width
+      canvas.height = height
+      
+      ctx?.drawImage(img, 0, 0, width, height)
+      
+      canvas.toBlob(
+        (blob) => {
+          if (blob) {
+            // 압축 결과가 원본보다 크면 원본 반환
+            if (blob.size >= file.size) {
+              file.arrayBuffer().then(buffer => {
+                resolve(new Blob([buffer], { type: file.type }))
+              })
+            } else {
+              resolve(blob)
+            }
+          } else {
+            reject(new Error('Failed to create blob'))
+          }
+        },
+        file.type,
+        1.00
+      )
+    }
+    
+    img.onerror = () => reject(new Error('Failed to load image'))
+    img.src = URL.createObjectURL(file)
+  })
 }
 
 /**
@@ -36,18 +97,24 @@ export async function fetchGalleryImages(): Promise<{ items: GalleryItem[], erro
       return { items: [], error: null }
     }
 
+    // _small 파일 제외하고 원본만 필터링
+    const originalFiles = files.filter(file => !/_small\./i.test(file.name))
+    
     // Get public URLs for all files
-    const galleryItems = files.map(file => {
+    const galleryItems = originalFiles.map(file => {
       // Skip folders
       if (file.id.endsWith('/')) return null
       
-      // Get thumbnailUrl with size parameters (작은 썸네일용)
+      const smallFileName = getSmallFileName(file.name)
+      const hasSmall = files.some(f => f.name === smallFileName)
+      
+      // 썸네일용: _small 버전이 있으면 사용, 없으면 원본 사용
       const thumbnailUrl = supabase
         .storage
         .from("gallery")
-        .getPublicUrl(file.name)
+        .getPublicUrl(hasSmall ? smallFileName : file.name)
         .data
-        .publicUrl + '?width=150&height=150&quality=30'
+        .publicUrl
       
       // Get original URL without size parameters (원본 이미지용)
       const originalUrl = supabase
@@ -64,7 +131,8 @@ export async function fetchGalleryImages(): Promise<{ items: GalleryItem[], erro
         date: new Date(file.created_at || Date.now()).toISOString().split('T')[0],
         previewUrl: thumbnailUrl,
         originalUrl: originalUrl,
-        path: file.name
+        path: file.name,
+        smallPath: hasSmall ? smallFileName : undefined
       }
     }).filter(Boolean) as GalleryItem[]
     
@@ -76,11 +144,17 @@ export async function fetchGalleryImages(): Promise<{ items: GalleryItem[], erro
 }
 
 /**
- * Uploads images to the gallery bucket
+ * Uploads images to the gallery bucket (원본 + _small 버전 함께 업로드)
  */
 export async function uploadGalleryImages(images: { file: File, id: string, title: string, date: string }[]): 
   Promise<{ uploadedItems: GalleryItem[], error: Error | null }> {
   try {
+    // _small이 포함된 파일명 체크
+    const invalidFile = images.find(img => img.file && /_small\./i.test(img.file.name))
+    if (invalidFile) {
+      throw new Error(`파일명에 '_small'을 포함할 수 없습니다: ${invalidFile.file?.name}`)
+    }
+    
     const supabase = createClient()
     const uploadedItems: GalleryItem[] = []
     
@@ -89,26 +163,44 @@ export async function uploadGalleryImages(images: { file: File, id: string, titl
       if (!image.file) continue
       
       // Generate unique file name (using timestamp + random)
-      const fileExt = image.file.name.split('.').pop()
+      const fileExt = image.file.name.split('.').pop()?.toLowerCase() || 'jpg'
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 15)}.${fileExt}`
+      const smallFileName = getSmallFileName(fileName)
       
-      // Upload the file
-      const { error } = await supabase
+      // Upload original file
+      const { error: originalError } = await supabase
         .storage
         .from('gallery')
         .upload(fileName, image.file)
         
-      if (error) throw error
+      if (originalError) throw originalError
       
-      // Get thumbnail URL with size parameters
+      // Create and upload _small version
+      try {
+        const smallBlob = await resizeImage(image.file, 800)
+        const { error: smallError } = await supabase
+          .storage
+          .from('gallery')
+          .upload(smallFileName, smallBlob, {
+            contentType: image.file.type
+          })
+        
+        if (smallError) {
+          console.warn('Failed to upload small version:', smallError)
+        }
+      } catch (resizeError) {
+        console.warn('Failed to create small version:', resizeError)
+      }
+      
+      // Get thumbnail URL (_small 버전)
       const thumbnailUrl = supabase
         .storage
         .from('gallery')
-        .getPublicUrl(fileName)
+        .getPublicUrl(smallFileName)
         .data
-        .publicUrl + '?width=150&height=150&quality=30'
+        .publicUrl
       
-      // Get original URL without size parameters
+      // Get original URL
       const originalUrl = supabase
         .storage
         .from('gallery')
@@ -123,7 +215,8 @@ export async function uploadGalleryImages(images: { file: File, id: string, titl
         date: image.date,
         previewUrl: thumbnailUrl,
         originalUrl: originalUrl,
-        path: fileName
+        path: fileName,
+        smallPath: smallFileName
       })
     }
     
@@ -135,7 +228,7 @@ export async function uploadGalleryImages(images: { file: File, id: string, titl
 }
 
 /**
- * Deletes an image from the gallery bucket
+ * Deletes an image from the gallery bucket (원본 + _small 함께 삭제)
  */
 export async function deleteGalleryImage(path: string): Promise<{ success: boolean, error: Error | null }> {
   try {
@@ -144,12 +237,13 @@ export async function deleteGalleryImage(path: string): Promise<{ success: boole
     }
     
     const supabase = createClient()
+    const smallPath = getSmallFileName(path)
     
-    // Delete file from Supabase storage
+    // Delete original and _small files from Supabase storage
     const { error } = await supabase
       .storage
       .from('gallery')
-      .remove([path])
+      .remove([path, smallPath])
       
     if (error) throw error
     
@@ -161,7 +255,7 @@ export async function deleteGalleryImage(path: string): Promise<{ success: boole
 }
 
 /**
- * Deletes multiple images from the gallery bucket
+ * Deletes multiple images from the gallery bucket (원본 + _small 함께 삭제)
  */
 export async function deleteGalleryImages(paths: string[]): Promise<{ success: boolean, error: Error | null }> {
   try {
@@ -171,11 +265,14 @@ export async function deleteGalleryImages(paths: string[]): Promise<{ success: b
     
     const supabase = createClient()
     
+    // 원본과 _small 파일 경로 모두 수집
+    const allPaths = paths.flatMap(path => [path, getSmallFileName(path)])
+    
     // Delete files from Supabase storage
     const { error } = await supabase
       .storage
       .from('gallery')
-      .remove(paths)
+      .remove(allPaths)
       
     if (error) throw error
     
