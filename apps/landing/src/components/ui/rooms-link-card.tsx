@@ -35,7 +35,7 @@ export const RoomsLinkCard = ({slug, title, subtitle, images, features}: CardPro
           ))}
         </div>
         <LinkEventTracker 
-          eventName="reservation" 
+          eventName="reservation_room_list" 
           location={`room-link-card_${slug}_reservation_btn`} 
           href="https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP" 
           target="_blank"

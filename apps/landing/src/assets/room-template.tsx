@@ -76,7 +76,7 @@ export const RoomTemplate = ({ roomInfo }: { roomInfo: RoomInfo }) => {
           <RoomFeatures features={roomInfo.features} />
           <ScrollReveal side="left" className="center mt-2 md:mt-10">
             <LinkEventTracker 
-              eventName="reservation" 
+              eventName="reservation_room_detail" 
               location={`room_${roomInfo.slug}_reservation_btn`}
               href="https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP" 
               target="_blank"

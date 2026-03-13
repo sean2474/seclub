@@ -141,7 +141,7 @@ export const Header = () => {
 
         <LinkEventTracker 
           href={"https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP"} 
-          eventName="reservation" 
+          eventName="reservation_header_desktop" 
           location="header_reservation_btn" 
           target="_blank" 
           className="border border-foreground px-4 py-2 bg-foreground text-background hover:text-foreground hover:bg-transparent hover:font-medium transition-all duration-300 hidden lg:block"
@@ -238,7 +238,7 @@ export const Header = () => {
             </div>
             <LinkEventTracker 
               href={"https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP"} 
-              eventName="reservation" 
+              eventName="reservation_header_mobile" 
               location="header_reservation_btn" 
               target="_blank" 
               className="border border-foreground px-4 py-2 bg-foreground text-background active:text-foreground active:bg-background active:font-medium transition-all duration-300 absolute translate-y-5 left-1/2 -translate-x-1/2"

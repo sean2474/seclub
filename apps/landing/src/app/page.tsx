@@ -45,7 +45,7 @@ export default function Home() {
           <ScrollReveal side="bottom" className="ml-1">
             <LinkEventTracker 
               href={"https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP"} 
-              eventName="reservation"
+              eventName="reservation_main_hero"
               location="landing_hero_section"
               target="_blank" 
               className="border border-background pl-4 pr-1.5 py-2 text-sm md:pl-5 md:pr-2.5 md:py-3 bg-background text-foreground hover:text-background hover:bg-transparent hover:font-medium transition-all duration-300 md:text-md flex items-center gap-2 rounded-xs"
