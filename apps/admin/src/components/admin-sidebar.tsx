@@ -17,10 +17,10 @@ export default function AdminSidebar({ isMobile = false, isCollapsed = false, on
   const pathname = usePathname()
 
   const navItems = [
-    { href: "/", label: "대시보드", icon: LayoutDashboard},
+    // { href: "/", label: "대시보드", icon: LayoutDashboard},
+    { href: "/notices", label: "공지사항 관리", icon: Megaphone },
     { href: "/gallery", label: "갤러리 관리", icon: ImageIcon },
     { href: "/videos", label: "영상 갤러리", icon: Video },
-    { href: "/notices", label: "공지사항 관리", icon: Megaphone },
   ]
 
   const baseClasses = "flex h-full max-h-screen flex-col gap-2"
