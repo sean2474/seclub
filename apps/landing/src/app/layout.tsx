@@ -5,7 +5,7 @@ import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const Head = () => {
-  const baseUrl = "https://seclub.vercel.app";
+  const baseUrl = "https://seclub.kr";
   
   const title = "SE클럽";
   const description = "충청남도 태안군에 위치한 SE클럽(태안둘레길캠핑장 & 펜션)의 공식 웹사이트입니다. 객실 예약, 캠핑장 예약, 시설 안내 등 다양한 정보를 제공합니다.";
@@ -55,7 +55,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="ko" suppressHydrationWarning>
       <Head />
       <body className={`antialiased font-pretendard font-[400]`} suppressHydrationWarning>
         <Header />
