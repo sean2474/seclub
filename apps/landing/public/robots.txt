@@ -1,6 +1,3 @@
-# public/robots.txt
-User-agent: Yeti
-Allow: /
-
 User-agent: *
-Disallow:
+Allow: /
+Sitemap: https://seclub.kr/sitemap.xml
