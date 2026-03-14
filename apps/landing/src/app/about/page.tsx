@@ -68,7 +68,7 @@ export default function AboutPage() {
           <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 md:gap-16 items-center">
             <div>
               <ScrollReveal type="h2" side="top" className="text-sm font-semibold uppercase tracking-wider mb-2 ml-1">Our History</ScrollReveal>
-              <ScrollReveal type="h1" side="left" className="text-3xl md:text-4xl font-medium leading-snug mb-0 md:mb-6">
+              <ScrollReveal type="h2" side="left" className="text-3xl md:text-4xl font-medium leading-snug mb-0 md:mb-6">
                 SE클럽 여정
               </ScrollReveal>
               <ScrollReveal type="p" side="bottom" className="text-lg space-y-6 hidden md:block">
@@ -89,7 +89,7 @@ export default function AboutPage() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-8">
               <ScrollReveal type="h2" side="top" className="text-sm font-semibold uppercase tracking-wider mb-2 md:mb-4">Why SE Club</ScrollReveal>
-              <ScrollReveal type="h1" side="left" className="text-3xl md:text-4xl font-medium">오직 SE클럽에서만 가능한 경험</ScrollReveal>
+              <ScrollReveal type="h2" side="left" className="text-3xl md:text-4xl font-medium">오직 SE클럽에서만 가능한 경험</ScrollReveal>
             </div>
             <ScrollReveal side="right" className="relative w-full h-[300px] md:h-[500px] overflow-hidden mb-8">
               <Image src="/images/about/2.png" alt="SE클럽의 프라이빗 해변" fill className="object-cover" />
@@ -125,7 +125,7 @@ export default function AboutPage() {
               <ScrollReveal side="top" type="h2" className="text-sm font-semibold uppercase tracking-wider mb-2 md:mb-4">
                 Facilities & Services
               </ScrollReveal>
-              <ScrollReveal side="bottom" type="h1" className="text-3xl md:text-4xl font-medium">완벽한 휴식을 위한 모든 것</ScrollReveal>
+              <ScrollReveal side="bottom" type="h2" className="text-3xl md:text-4xl font-medium">완벽한 휴식을 위한 모든 것</ScrollReveal>
             </div>
             <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
               <ScrollReveal side="right" className="relative h-[300px] md:h-[500px] overflow-hidden">
