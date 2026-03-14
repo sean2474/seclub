@@ -4,9 +4,48 @@ import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { NoticeViewCounter } from "@/components/base/notice-view-counter"
+import { ImageGalleryWithModal } from "@/components/ui/image-modal"
 import { generateMetadata } from "@/utils/metadata-generator"
 
 export const metadata = generateMetadata("SE클럽 | 공지사항", "SE클럽 공지사항");
+
+function LinkifyText({ text }: { text: string }) {
+  const urlRegex = /(https?:\/\/[^\s]+?)(?=[)\].,;:!?"'<>]*(?:\s|$)|$)/g;
+  const parts: { type: 'text' | 'link'; content: string }[] = [];
+  let lastIndex = 0;
+  let match;
+
+  while ((match = urlRegex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push({ type: 'text', content: text.slice(lastIndex, match.index) });
+    }
+    parts.push({ type: 'link', content: match[1] });
+    lastIndex = match.index + match[1].length;
+  }
+  if (lastIndex < text.length) {
+    parts.push({ type: 'text', content: text.slice(lastIndex) });
+  }
+
+  return (
+    <>
+      {parts.map((part, i) =>
+        part.type === 'link' ? (
+          <a
+            key={i}
+            href={part.content}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:underline"
+          >
+            {part.content}
+          </a>
+        ) : (
+          <span key={i}>{part.content}</span>
+        )
+      )}
+    </>
+  );
+}
 
 export default async function Page({
   params,
@@ -41,23 +80,12 @@ export default async function Page({
         </div>
 
         <div className="prose max-w-none min-h-[200px] py-6">
-          <p className="whitespace-pre-wrap">{notice.content}</p>
+          <p className="whitespace-pre-wrap"><LinkifyText text={notice.content} /></p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-          {(notice.images && notice.images.length > 0) && (
-            notice.images.map((image, index) => (
-              <div className="relative h-[200px]" key={index}>
-                <Image
-                  src={image}
-                  alt={`image ${index + 1}`}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            ))
-          )}
-        </div>
+        {notice.images && notice.images.length > 0 && (
+          <ImageGalleryWithModal images={notice.images} />
+        )}
 
         <div className="border-t pt-6 mt-6 text-center">
           <Button asChild variant="outline">

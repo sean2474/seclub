@@ -32,7 +32,9 @@ export default async function Page({
 
   const ITEMS_PER_PAGE = 5
 
-  const totalPages = Math.ceil(notices.data?.length || 0 / ITEMS_PER_PAGE)
+  const totalPages = Math.ceil((notices.data?.length || 0) / ITEMS_PER_PAGE)
+
+  console.log(totalPages, notices.data?.length)
 
   return (
     <div className="min-h-screen w-full mt-[var(--header-height-expanded)]">
