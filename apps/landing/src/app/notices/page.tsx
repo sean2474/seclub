@@ -34,8 +34,6 @@ export default async function Page({
 
   const totalPages = Math.ceil((notices.data?.length || 0) / ITEMS_PER_PAGE)
 
-  console.log(totalPages, notices.data?.length)
-
   return (
     <div className="min-h-screen w-full mt-[var(--header-height-expanded)]">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
