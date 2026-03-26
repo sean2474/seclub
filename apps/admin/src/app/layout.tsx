@@ -6,8 +6,8 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 
 export const metadata: Metadata = {
-  title: "SE 클럽 관리자 페이지",
-  description: "SE 클럽 관리자 페이지입니다",
+  title: "SE Club 관리자 페이지",
+  description: "SE Club 관리자 페이지입니다",
   generator: "Sean Park",
 }
 

@@ -141,6 +141,45 @@ export async function getProfile(id: string) {
   return profile;
 }
 
+export async function changePassword(newPassword: string): Promise<{
+  success: boolean;
+  error: string | null;
+}> {
+  try {
+    if (!newPassword || newPassword.length < 6) {
+      return {
+        success: false,
+        error: "비밀번호는 최소 6자 이상이어야 합니다.",
+      };
+    }
+
+    const supabase = await createClient();
+    
+    const { error } = await supabase.auth.updateUser({
+      password: newPassword,
+    });
+
+    if (error) {
+      console.error("Password change error:", error);
+      return {
+        success: false,
+        error: "비밀번호 변경에 실패했습니다.",
+      };
+    }
+
+    return {
+      success: true,
+      error: null,
+    };
+  } catch (error) {
+    console.error("Unexpected password change error:", error);
+    return {
+      success: false,
+      error: "비밀번호 변경 중 오류가 발생했습니다.",
+    };
+  }
+}
+
 export async function registerWithEmail(email: string, password: string): Promise<{
   success: boolean;
   error: string | null;

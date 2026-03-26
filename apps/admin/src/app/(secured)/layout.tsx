@@ -21,11 +21,13 @@ import { redirect } from "next/navigation"
 import { Profile } from "@/types/auth"
 import { User } from "@supabase/supabase-js"
 import { useRouter } from "next/navigation"
+import { AdminSettingDialog } from "@/components/admin-setting"
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
+  const [settingOpen, setSettingOpen] = useState(false);
   const router = useRouter();
 
   const toggleSidebar = () => {
@@ -75,7 +77,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
               </SheetContent>
             </Sheet>
           </Suspense>
-          <div className="w-full flex-1">{/* Search form removed */}</div>
+          <div className="w-full flex-1" />
           <Suspense fallback={<div>Loading...</div>}>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -98,7 +100,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel>내 계정</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>설정</DropdownMenuItem>
+                <DropdownMenuItem onSelect={() => setSettingOpen(true)}>
+                  설정
+                </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={async () => { 
                   const { success, error } = await logout(); 
@@ -111,6 +115,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">{children}</main>
         <Toaster />
       </div>
+      <AdminSettingDialog open={settingOpen} onOpenChange={setSettingOpen} />
     </div>
   )
 }

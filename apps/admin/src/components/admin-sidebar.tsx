@@ -17,10 +17,10 @@ export default function AdminSidebar({ isMobile = false, isCollapsed = false, on
   const pathname = usePathname()
 
   const navItems = [
-    // { href: "/", label: "대시보드", icon: LayoutDashboard},
     { href: "/notices", label: "공지사항 관리", icon: Megaphone },
-    { href: "/gallery", label: "갤러리 관리", icon: ImageIcon },
-    { href: "/videos", label: "영상 갤러리", icon: Video },
+    { href: "/gallery", label: "사진 갤러리 관리", icon: ImageIcon },
+    { href: "/videos", label: "영상 갤러리 관리", icon: Video },
+    // { href: "/infos", label: "객실 정보 관리", icon: Video },
   ]
 
   const baseClasses = "flex h-full max-h-screen flex-col gap-2"
@@ -68,7 +68,7 @@ export default function AdminSidebar({ isMobile = false, isCollapsed = false, on
         >
           <Link href="" className={cn("flex items-center gap-2 font-semibold", isCollapsed ? "pl-3.5" : "")}>
             <Image src="/logo.png" alt="logo" width={24} height={24} quality={100} />
-            {!isCollapsed && <span className="whitespace-nowrap overflow-hidden">SECLUB 관리자</span>}
+            {!isCollapsed && <span className="whitespace-nowrap overflow-hidden">SE Club 관리자</span>}
           </Link>
         </div>
         <div className="flex-1 overflow-auto py-2">
