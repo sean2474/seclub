@@ -8,7 +8,7 @@ import { generateMetadata } from "@/utils/metadata-generator";
 import { activities, lodgingData, lodgingTotal } from "@/const/group-data";
 import { ScrollNudge } from "@/components/ui/scroll-nudge";
 
-export const metadata = generateMetadata("SE클럽 | 단체 예약", "SE클럽의 단체 예약 안내 및 문의");
+export const metadata = generateMetadata("SE Club | 단체 예약", "SE Club의 단체 예약 안내 및 문의");
 
 const SectionHeader = ({ title, subtitle, className }: { title: string; subtitle?: string; className?: string }) => (
   <div className={cn("mb-4 md:mb-8", className)}>
@@ -21,11 +21,11 @@ export default function GroupReservationPage() {
   return (
     <div className="text-gray-800 font-sans">
       <section className="fixed top-0 h-svh w-full overflow-x-hidden">
-        <Image src={"/images/reservation/hero.jpg"} sizes="100vw" alt={"SE클럽 객실 전경"} fill className="object-cover object-bottom" />
+        <Image src={"/images/reservation/hero.jpg"} sizes="100vw" alt={"SE Club 객실 전경"} fill className="object-cover object-bottom" />
         <div className="z-10 absolute w-full h-full top-0 left-0 bg-black/30" />
         <div className="z-10 absolute top-1/2 left-1/2 md:left-1/4 transform -translate-x-1/2 -translate-y-1/2 text-background whitespace-nowrap">
           <ScrollReveal side="top" type="h1"> 기업·단체 예약 </ScrollReveal>
-          <ScrollReveal side="bottom" type="p" className="text-xl md:text-2xl mt-4"> SE클럽에서 특별한 행사와 휴양을 계획하세요. </ScrollReveal>
+          <ScrollReveal side="bottom" type="p" className="text-xl md:text-2xl mt-4"> SE Club에서 특별한 행사와 휴양을 계획하세요. </ScrollReveal>
         </div>
         <ScrollNudge />
       </section>
@@ -37,13 +37,13 @@ export default function GroupReservationPage() {
             <div>
               <h2 className="text-3xl md:text-4xl font-medium leading-snug mb-0 md:mb-6"> 최적의 연수 및 휴양 장소 </h2>
               <p>
-                SE클럽은 3만 3천 평의 넓은 대지와 외부인 출입이 제한된 전용 해변을 보유하여, 프라이버시를 보호받으며
+                SE Club은 3만 3천 평의 넓은 대지와 외부인 출입이 제한된 전용 해변을 보유하여, 프라이버시를 보호받으며
                 연수·휴양할 수 있는 최적의 장소입니다. 우거진 숲과 청정한 바다에서 기업(단체) 연수, 휴양, 단합 수련회 등
                 성공적인 행사를 개최해 보세요.
               </p>
             </div>
             <div className="relative h-96 md:h-[500px]">
-              <Image src={"/images/reservation/1.jpg"} alt="SE클럽 소개" fill className="object-cover" />
+              <Image src={"/images/reservation/1.jpg"} alt="SE Club 소개" fill className="object-cover" />
             </div>
           </div>
         </section>

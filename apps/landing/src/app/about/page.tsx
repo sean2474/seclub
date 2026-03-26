@@ -10,7 +10,7 @@ import { ScrollReveal } from "@/components/base/scroll-reveal";
 import { generateMetadata } from "@/utils/metadata-generator";
 import { ScrollNudge } from "@/components/ui/scroll-nudge";
 
-export const metadata = generateMetadata("SE클럽 | 소개", "SE클럽(태안둘레길캠핑장 & 펜션)의 역사와 시설, 주변 관광지 정보를 소개합니다.");
+export const metadata = generateMetadata("SE Club | 소개", "SE Club(태안둘레길캠핑장 & 펜션)의 역사와 시설, 주변 관광지 정보를 소개합니다.");
 
 export default function AboutPage() {
   const coreValues = [
@@ -69,17 +69,17 @@ export default function AboutPage() {
             <div>
               <ScrollReveal type="h2" side="top" className="text-sm font-semibold uppercase tracking-wider mb-2 ml-1">Our History</ScrollReveal>
               <ScrollReveal type="h2" side="left" className="text-3xl md:text-4xl font-medium leading-snug mb-0 md:mb-6">
-                SE클럽 여정
+                SE Club 여정
               </ScrollReveal>
               <ScrollReveal type="p" side="bottom" className="text-lg space-y-6 hidden md:block">
-                태안 해안국립공원 꾸지나무골 해안에 자리 잡은 SE클럽은 처음에 자연속 오토캠핑장으로 여러분께 문을 열었습니다. 이후 海水풀빌라, 오션스파빌라, 오션 콘도(스탠다드/디럭스), 선셋 캠핑하우스, 반려견캠핑장등 다양한 숙박 옵션을 순차 도입하며 ‘복합 힐링클럽’으로 진화했습니다. 또 김영중·김석우·이필언 등 국내 유수 작가 작품이 있는조각공원과 그림 전시장은 물론 관광농원, 오솔길, 전망대를 조성해 자연과 예술을 결합한 공간으로 자리 매김했습니다.
+                태안 해안국립공원 꾸지나무골 해안에 자리 잡은 SE Club은 처음에 자연속 오토캠핑장으로 여러분께 문을 열었습니다. 이후 해수풀빌라, 오션스파빌라, 오션 콘도(스탠다드/디럭스), 선셋 캠핑하우스, 반려견캠핑장등 다양한 숙박 옵션을 순차 도입하며 ‘복합 힐링클럽’으로 진화했습니다. 또 김영중·김석우·이필언 등 국내 유수 작가 작품이 있는조각공원과 그림 전시장은 물론 관광농원, 오솔길, 전망대를 조성해 자연과 예술을 결합한 공간으로 자리 매김했습니다.
               </ScrollReveal>
             </div>
             <ScrollReveal side="right" className="relative h-96 md:h-[500px] overflow-hidden">
               <Image src="/images/about/1.jpg" alt="자연과 예술이 어우러진 조각공원" fill className="object-cover" />
             </ScrollReveal>
             <ScrollReveal type="p" side="bottom" className="text-lg space-y-6 block md:hidden">
-              태안 해안국립공원 꾸지나무골 해안에 자리 잡은 SE클럽은 처음에 자연 속 오토캠핑장으로 여러분께 문을 열었습니다. 이후 풀빌라, 단독 주택형, 콘도, 캠핑하우스, 반려견 캠핑장 등 다양한 숙박 옵션을 순차 도입하며 ‘복합 힐링클럽’으로 진화했습니다. 관광농원 오솔길, 조각공원, 전망대를 조성해 김영중·김석우·이필언 등 국내 유수 작가 작품을 전시하며 자연과 예술을 결합한 공간으로 자리매김했습니다
+              태안 해안국립공원 꾸지나무골 해안에 자리 잡은 SE Club은 처음에 자연 속 오토캠핑장으로 여러분께 문을 열었습니다. 이후 풀빌라, 단독 주택형, 콘도, 캠핑하우스, 반려견 캠핑장 등 다양한 숙박 옵션을 순차 도입하며 ‘복합 힐링클럽’으로 진화했습니다. 관광농원 오솔길, 조각공원, 전망대를 조성해 김영중·김석우·이필언 등 국내 유수 작가 작품을 전시하며 자연과 예술을 결합한 공간으로 자리매김했습니다
             </ScrollReveal>
           </div>
         </section>
@@ -89,10 +89,10 @@ export default function AboutPage() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-8">
               <ScrollReveal type="h2" side="top" className="text-sm font-semibold uppercase tracking-wider mb-2 md:mb-4">Why SE Club</ScrollReveal>
-              <ScrollReveal type="h2" side="left" className="text-3xl md:text-4xl font-medium">오직 SE클럽에서만 가능한 경험</ScrollReveal>
+              <ScrollReveal type="h2" side="left" className="text-3xl md:text-4xl font-medium">오직 SE Club에서만 가능한 경험</ScrollReveal>
             </div>
             <ScrollReveal side="right" className="relative w-full h-[300px] md:h-[500px] overflow-hidden mb-8">
-              <Image src="/images/about/2.png" alt="SE클럽의 프라이빗 해변" fill className="object-cover" />
+              <Image src="/images/about/2.png" alt="SE Club의 프라이빗 해변" fill className="object-cover" />
             </ScrollReveal>
             <div className="grid md:grid-cols-3 gap-4 md:gap-12">
               <ScrollReveal side="left" className="text-left">
@@ -105,7 +105,7 @@ export default function AboutPage() {
               <ScrollReveal side="left" delay="100ms" className="text-left">
                 <h3 className="text-xl font-semibold mb-1 md:mb-3">폭넓은 숙박 선택지</h3>
                 <p>
-                  海水풀빌라, 오션스파빌라, 오션 콘도(스탠다드 / 디럭스), 선셋 캠핑하우스, 캠핑장(차박·캠핑카·카라반포함), 반려견캠핑장 등 취향에 따라 자유롭게 선택하세요.
+                  해수풀빌라, 오션스파빌라, 오션 콘도(스탠다드 / 디럭스), 선셋 캠핑하우스, 캠핑장(차박·캠핑카·카라반포함), 반려견캠핑장 등 취향에 따라 자유롭게 선택하세요.
                 </p>
               </ScrollReveal>
               <ScrollReveal side="left" delay="200ms" className="text-left">
@@ -134,7 +134,7 @@ export default function AboutPage() {
               <div className="grid grid-cols-1 gap-y-4 md:gap-y-10 text-lg">
                 <ScrollReveal side="left" delay="100ms" className="text-left">
                   <h3 className="text-xl font-semibold mb-1 md:mb-3">휴양별장</h3>
-                  <p>海水풀빌라, 오션스파빌라,오션 콘도(스탠다드 / 디럭스),선셋 캠핑하우스</p>
+                  <p>해수풀빌라, 오션스파빌라,오션 콘도(스탠다드 / 디럭스),선셋 캠핑하우스</p>
                 </ScrollReveal>
                 <ScrollReveal side="left" delay="200ms" className="text-left">
                   <h3 className="text-xl font-semibold mb-1 md:mb-3">캠핑장</h3>

@@ -5,15 +5,15 @@ import Image from "next/image"
 import Link from "next/link"
 import { generateMetadata } from "@/utils/metadata-generator";
 
-export const metadata = generateMetadata("SE클럽 | 캠핑장 배치도", "SE클럽 캠핑장의 종합 배치도 및 안내");
+export const metadata = generateMetadata("SE Club | 캠핑장 배치도", "SE Club 캠핑장의 종합 배치도 및 안내");
 
 export default function Page() {
   return (
     <main className="mt-[var(--header-height-expanded)] flex flex-col items-center gap-4">
-      <h2 className="mt-4">SE클럽 제 시설 종합 배치도</h2>
+      <h2 className="mt-4">SE Club 제 시설 종합 배치도</h2>
       <Modal>
         <div className="relative h-[50svh] w-full p-2">
-          <Image src="/images/about/map.png" alt="SE클럽 제 시설 종합 배치도" fill className="object-contain" />
+          <Image src="/images/about/map.png" alt="SE Club 제 시설 종합 배치도" fill className="object-contain" />
         </div>
         <div className="flex gap-4">
           <Link href="/images/about/map.png" download="seclub-map.png">
@@ -23,7 +23,7 @@ export default function Page() {
         </div>
         <ModalBody className="w-svw h-svh">
           <div className="relative w-full h-full">
-            <Image src="/images/about/map.png" alt="SE클럽 제 시설 종합 배치도" fill className="object-contain" />
+            <Image src="/images/about/map.png" alt="SE Club 제 시설 종합 배치도" fill className="object-contain" />
           </div>
         </ModalBody>
       </Modal>

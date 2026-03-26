@@ -7,8 +7,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 const Head = () => {
   const baseUrl = "https://seclub.kr";
   
-  const title = "SE클럽";
-  const description = "충청남도 태안군에 위치한 SE클럽(태안둘레길캠핑장 & 펜션)의 공식 웹사이트입니다.";
+  const title = "SE Club";
+  const description = "충청남도 태안군에 위치한 SE Club(태안둘레길캠핑장 & 펜션)의 공식 웹사이트입니다.";
   
   const imagePath = "/logos/og_logo.png";
   const imageWidth = "1200";

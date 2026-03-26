@@ -2,7 +2,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { campingRates, discounts, lateCheckoutRates, lodgingRates } from "@/const/pricing"
 import { generateMetadata } from "@/utils/metadata-generator"
 
-export const metadata = generateMetadata("SE클럽 | 요금 안내", "SE클럽의 객실 및 캠핑장 요금 안내")
+export const metadata = generateMetadata("SE Club | 요금 안내", "SE Club의 객실 및 캠핑장 요금 안내")
 
 const formatCurrency = (value?: number) => {
   if (value === undefined) return "-"
@@ -22,7 +22,7 @@ export default function PricingPage() {
       <section className="relative flex items-center justify-center text-center mt-[var(--header-height-expanded)] pt-10">
         <div className="relative z-20 p-6">
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight">요금 안내</h1>
-          <p className="text-lg md:text-xl font-light mt-2">SE클럽의 다양한 숙소와 캠핑장 요금을 확인하세요.</p>
+          <p className="text-lg md:text-xl font-light mt-2">SE Club의 다양한 숙소와 캠핑장 요금을 확인하세요.</p>
         </div>
       </section>
 

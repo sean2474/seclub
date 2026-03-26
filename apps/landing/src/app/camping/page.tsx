@@ -24,10 +24,10 @@ export default function SeclubElegantGuidePage() {
   return (
     <div className="min-h-screen font-sans overflow-x-hidden">
       <section className="fixed top-0 h-svh w-full overflow-x-hidden">
-        <Image src={"/images/site/hero.jpg"} sizes="100vw" alt={"SE클럽 객실 전경"} fill className="object-cover" />
+        <Image src={"/images/site/hero.jpg"} sizes="100vw" alt={"SE Club 객실 전경"} fill className="object-cover" />
         <div className="z-10 absolute w-full h-full top-0 left-0 bg-black/30" />
         <div className="z-10 absolute top-1/2 left-1/2 md:left-1/4 transform -translate-x-1/2 -translate-y-1/2 text-background whitespace-nowrap">
-          <ScrollReveal side="top" type="h1"> SE클럽 캠핑 사이트 </ScrollReveal>
+          <ScrollReveal side="top" type="h1"> SE Club 캠핑 사이트 </ScrollReveal>
           <ScrollReveal side="bottom" type="p" className="text-xl md:text-2xl mt-4"> 아름다운 경관과 함께하는 힐링 </ScrollReveal>
         </div>
         <ScrollNudge />
@@ -38,7 +38,7 @@ export default function SeclubElegantGuidePage() {
             <div className="flex justify-between items-end mb-8">
               <ScrollReveal side="left" type="h2" className="font-serif text-3xl md:text-4xl">Site Information</ScrollReveal>
               <Link href={"/camping/map"}>
-                <ScrollReveal side="right" type="div" className="flex items-center cursor-pointer group">SE클럽 제 시설 지도보기<ArrowRight className="size-8 p-2 ml-2 rounded-full border border-foreground group-hover:bg-foreground group-hover:text-background transition-all duration-300" /></ScrollReveal>
+                <ScrollReveal side="right" type="div" className="flex items-center cursor-pointer group">SE Club 제 시설 지도보기<ArrowRight className="size-8 p-2 ml-2 rounded-full border border-foreground group-hover:bg-foreground group-hover:text-background transition-all duration-300" /></ScrollReveal>
               </Link>
             </div>
 

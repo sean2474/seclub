@@ -130,7 +130,7 @@ export function NaverMap({
         new window.naver.maps.Marker({
           position: new window.naver.maps.LatLng(36.9319955987042, 126.293749897582),
           map,
-          title: "SECLUB",
+          title: "SE Club",
           icon: {
             url: "/logos/map_pin.png",
             size: new window.naver.maps.Size(50, 50),

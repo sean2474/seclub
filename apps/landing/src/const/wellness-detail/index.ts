@@ -107,9 +107,9 @@ export const wellnessPageData: Record<string, WellnessPageData> = {
       image: "/images/wellness/walk/hero.jpg", // 솔숲과 해안길이 함께 보이는 헤더 배너
     },
     contents: [
-      "SE클럽 1코스 : 1해변 → 선셋 캠핑하우스",
-      "SE클럽 2코스 : 오션 콘도 → 관리사무소",
-      "SE클럽 3코스 : 반려견 캠핑장 → 인피니티 풀 (사계절 꽃과 과실 관찰 가능)",
+      "SE Club 1코스 : 1해변 → 선셋 캠핑하우스",
+      "SE Club 2코스 : 오션 콘도 → 관리사무소",
+      "SE Club 3코스 : 반려견 캠핑장 → 인피니티 풀 (사계절 꽃과 과실 관찰 가능)",
       "안전 팁: 등산화 착용, 물·간식 지참, 물때표 확인, 해안 구간 미끄럼 주의",
     ],
     images: [

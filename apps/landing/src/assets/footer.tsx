@@ -16,7 +16,7 @@ export const Footer = () => {
           </div>
           <div className="flex flex-col mt-4 gap-2 py-4">
             <div>
-              <div className="font-bold mb-1">SE클럽(태안둘레길캠핑장 & 펜션)</div>
+              <div className="font-bold mb-1">SE Club(태안둘레길캠핑장 & 펜션)</div>
               <div className="ml-2">대표자 : 정상은 외 2인</div>
               <div className="ml-2">사업자번호 : 362-13-00683</div>
               <div className="ml-2">통신판매번호 : 제 2017-충남태안-0105 호</div>
@@ -37,10 +37,10 @@ export const Footer = () => {
         </div>
         <div className="flex flex-col items-center order-1 md:order-2">
           <div className="w-full max-w-[500px] md:max-w-[320px] text-7xl font-medium">
-            SECLUB
+            SE Club
           </div>
           <div className="hidden md:block md:text-lg lg:text-xl mt-5">
-            &copy; {new Date().getFullYear()} SECLUB. All rights reserved.
+            &copy; {new Date().getFullYear()} SE Club. All rights reserved.
           </div>
         </div>
         <div className="flex flex-col gap-5 relative z-20 justify-start w-full md:w-auto md:h-1/2 mt-1 order-3 text-sm md:text-base">
@@ -65,7 +65,7 @@ export const Footer = () => {
             </div>
           </div> */}
           <div className="md:hidden text-xs mb-10">
-            &copy; {new Date().getFullYear()} SECLUB. All rights reserved.
+            &copy; {new Date().getFullYear()} SE Club. All rights reserved.
           </div>
         </div>
       </div>

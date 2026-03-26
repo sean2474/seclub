@@ -2,7 +2,7 @@ import { Clock, ListChecks, Info, PlusCircle, PawPrint } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { generateMetadata } from "@/utils/metadata-generator";
 
-export const metadata = generateMetadata("SE클럽 | 캠핑장 이용 안내", "SE클럽 캠핑장의 이용 안내 및 시설 정보");
+export const metadata = generateMetadata("SE Club | 캠핑장 이용 안내", "SE Club 캠핑장의 이용 안내 및 시설 정보");
 
 export default function CampsiteInfoPage() {
   return (

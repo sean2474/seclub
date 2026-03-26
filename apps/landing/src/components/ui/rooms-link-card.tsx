@@ -18,12 +18,7 @@ export const RoomsLinkCard = ({slug, title, subtitle, images, features}: CardPro
       <div className="p-3 relative">
         <p className="mb-2">{subtitle}</p>
         <Link className="text-2xl md:text-3xl font-medium flex items-center mb-4" href={`/rooms/${slug}`}>
-          {
-            slug === "pool-villa" 
-              ? <div className="font-mono font-medium">海水<span className="font-pretendard font-medium">풀빌라</span></div> 
-              : title
-          }
-          <ChevronRightIcon className="w-6 h-6" />
+          {title}<ChevronRightIcon className="w-6 h-6" />
         </Link>
         <div className="flex flex-col gap-1 text-xs">
           {features.map((feature, idx) => (

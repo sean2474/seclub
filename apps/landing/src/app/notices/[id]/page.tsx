@@ -2,12 +2,11 @@ import { Button } from "@/components/ui/button"
 import { getNoticeById } from "@/lib/actions/notice"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
-import Image from "next/image"
 import { NoticeViewCounter } from "@/components/base/notice-view-counter"
 import { ImageGalleryWithModal } from "@/components/ui/image-modal"
 import { generateMetadata } from "@/utils/metadata-generator"
 
-export const metadata = generateMetadata("SE클럽 | 공지사항", "SE클럽 공지사항");
+export const metadata = generateMetadata("SE Club | 공지사항", "SE Club 공지사항");
 
 function LinkifyText({ text }: { text: string }) {
   const urlRegex = /(https?:\/\/[^\s]+?)(?=[)\].,;:!?"'<>]*(?:\s|$)|$)/g;

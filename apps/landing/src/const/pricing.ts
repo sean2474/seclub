@@ -18,7 +18,7 @@ export const discounts: Discounts = {
 }
 
 export const lateCheckoutRates = [
-  { name: "海水풀빌라", "3시간": 55000, "6시간": 70000 },
+  { name: "해수풀빌라", "3시간": 55000, "6시간": 70000 },
   { name: "오션스파빌라", "3시간": 60000, "6시간": 75000 },
   { name: "선셋 캠핑 하우스", "3시간": 50000, "6시간": 65000 },
   { name: "오션 콘도 스탠다드", "3시간": 35000, "6시간": 45000 },
@@ -44,7 +44,7 @@ export const campingRates: LodgingRates = {
 }
 
 export const lodgingRates: LodgingRates = {
-  "海水풀빌라": {
+  "해수풀빌라": {
     rates: {
       최성수기: 359_000,
       동절기: 289_000,

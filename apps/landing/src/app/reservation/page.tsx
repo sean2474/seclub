@@ -3,7 +3,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { generateMetadata } from "@/utils/metadata-generator"
 
-export const metadata = generateMetadata("SE클럽 | 예약 안내", "SE클럽 이용을 위한 예약 규정을 안내합니다.")
+export const metadata = generateMetadata("SE Club | 예약 안내", "SE Club 이용을 위한 예약 규정을 안내합니다.")
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <AccordionItem value={title}>
@@ -34,7 +34,7 @@ export default function ReservationPage() {
       <section className="relative flex items-center justify-center text-center mt-[var(--header-height-expanded)] pt-10">
         <div className="relative z-20 p-6">
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight">예약 안내</h1>
-          <p className="text-lg md:text-xl font-light mt-2">SE클럽 이용을 위한 예약 규정을 안내해 드립니다.</p>
+          <p className="text-lg md:text-xl font-light mt-2">SE Club 이용을 위한 예약 규정을 안내해 드립니다.</p>
         </div>
       </section>
 
@@ -43,7 +43,7 @@ export default function ReservationPage() {
           <Section title="1. 예약 시스템">
             <InfoList
               items={[
-                "SE클럽의 모든 시설은 지정 예약제로 24시간 실시간 예약이 가능합니다.",
+                "SE Club의 모든 시설은 지정 예약제로 24시간 실시간 예약이 가능합니다.",
                 <span key="reservation-period">
                   <strong>예약 가능 기간:</strong> 현재 월을 포함하여 최대 3개월 말일까지 예약할 수 있습니다. (예: 7월
                   중 예약 시 10월 31일까지 가능)

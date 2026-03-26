@@ -14,7 +14,7 @@ import { getNoticeCategories, getNotices } from "@/lib/actions/notice"
 import { generateMetadata } from "@/utils/metadata-generator"
 
 export const dynamic = "force-dynamic";
-export const metadata = generateMetadata("SE클럽 | 공지사항", "SE클럽 공지사항");
+export const metadata = generateMetadata("SE Club | 공지사항", "SE Club 공지사항");
 
 export default async function Page({
   searchParams,

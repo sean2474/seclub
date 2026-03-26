@@ -32,7 +32,7 @@ export const menuItems: HeaderMenuType[] = [
         href: "/camping/rule"
       },
       {
-        name: "SE클럽 제 시설 종합 배치도",
+        name: "SE Club 제 시설 종합 배치도",
         href: "/camping/map"
       },
     ]

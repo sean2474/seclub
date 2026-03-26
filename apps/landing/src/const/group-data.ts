@@ -1,5 +1,5 @@
 export const lodgingData = [
-  { name: "海水풀빌라", units: "7개 동", unitCap: "4명 (6명)", totalCap: "28명 (42명)", notes: "침대 2개" },
+  { name: "해수풀빌라", units: "7개 동", unitCap: "4명 (6명)", totalCap: "28명 (42명)", notes: "침대 2개" },
   { name: "오션스파빌라", units: "3개 동", unitCap: "4명 (6명)", totalCap: "12명 (18명)", notes: "침대 2개" },
   { name: "선셋 캠핑 하우스", units: "2개 동", unitCap: "4명 (6명)", totalCap: "8명 (12명)", notes: "침대 2개" },
   {

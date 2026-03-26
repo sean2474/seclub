@@ -26,7 +26,7 @@ export default function VideoGalleryPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         <header className="text-center mb-12">
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">영상 갤러리</h1>
-          <p className="mt-4 text-lg text-foreground/80">SE클럽의 다채로운 순간들을 영상으로 만나보세요.</p>
+          <p className="mt-4 text-lg text-foreground/80">SE Club의 다채로운 순간들을 영상으로 만나보세요.</p>
         </header>
 
         <Dialog open={!!selectedVideoId} onOpenChange={(isOpen) => !isOpen && setSelectedVideoId(null)}>

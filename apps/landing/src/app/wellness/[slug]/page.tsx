@@ -4,7 +4,7 @@ import { wellnessPageData } from "@/const/wellness-detail";
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params
     return {
-        title: `SE클럽 | ${wellnessPageData[slug].header.title}`,
+        title: `SE Club | ${wellnessPageData[slug].header.title}`,
         description: wellnessPageData[slug].header.subtitle,
     }
 }

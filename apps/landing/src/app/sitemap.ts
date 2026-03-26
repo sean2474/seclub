@@ -3,7 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import type { MetadataRoute } from 'next'
 import { wellnessData } from '@/const/wellness-detail'
-import { roomData } from '@/const/room-detail'
+import { getRoomCards } from '@/lib/rooms'
 
 const SITE_URL = 'https://seclub.kr'
 
@@ -64,6 +64,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   })
   
   // Add room pages to sitemap
+  const roomData = await getRoomCards()
   roomData.forEach((room) => {
     urls.push({
       url: `${SITE_URL}/rooms/${room.slug}`,

@@ -2,7 +2,7 @@ import HeroImage from "@/assets/hero-image";
 import { ScrollReveal } from "@/components/base/scroll-reveal";
 import { ImageSlider } from "@/components/ui/image-slider";
 import { NaverMap } from "@/components/ui/naver-map";
-import { roomData } from "@/const/room-detail";
+import { getRoomCards } from "@/lib/rooms";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,9 +11,10 @@ import { generateMetadata } from "@/utils/metadata-generator";
 import { LinkEventTracker } from "@/components/base/link-event-tracker";
 import { ScrollNudge } from "@/components/ui/scroll-nudge";
 
-export const metadata = generateMetadata("SE클럽 (태안둘레길캠핑장 & 펜션)", "충청남도 태안군에 위치한 SE클럽(태안둘레길캠핑장 & 펜션)의 공식 웹사이트입니다.");
+export const metadata = generateMetadata("SE Club (태안둘레길캠핑장 & 펜션)", "충청남도 태안군에 위치한 SE Club(태안둘레길캠핑장 & 펜션)의 공식 웹사이트입니다.");
 
-export default function Home() {
+export default async function Home() {
+  const roomData = await getRoomCards();
   return (
     <div>
       {/* 히어로 섹션 */}
@@ -39,7 +40,7 @@ export default function Home() {
             당신만의 힐링
           </ScrollReveal>
           <ScrollReveal side="top" type="h1" className="mb-4 md:mb-6 font-medium">
-            <span className="font-thin">SE클럽에서 누리는</span><br />
+            <span className="font-thin">SE Club에서 누리는</span><br />
             완벽한 휴식
           </ScrollReveal>
           <ScrollReveal side="bottom" className="ml-1">
@@ -68,7 +69,7 @@ export default function Home() {
                 당신만을 위한 특별한 공간
               </ScrollReveal>
               <ScrollReveal side="left" delay="100ms" type="p" className="mt-6">
-                33,000평의 드넓은 부지 위에 자리한 SE 클럽은 외부인의 출입이 제한된 전용 해변과 눈부신 백사장을 갖춘 프라이빗한 공간입니다.
+                33,000평의 드넓은 부지 위에 자리한 SE Club은 외부인의 출입이 제한된 전용 해변과 눈부신 백사장을 갖춘 프라이빗한 공간입니다.
               </ScrollReveal>
               <ScrollReveal side="left" delay="200ms" type="p" className="">
                 타인의 시선을 걱정하지 않고, 오직 당신만의 속도로 휴식을 만끽할 수 있습니다.
@@ -82,7 +83,7 @@ export default function Home() {
                 <div className="relative aspect-square overflow-hidden mx-auto max-w-[200px] md:max-w-5xl">
                   <Image 
                     src="/images/landing/section-1.jpg" 
-                    alt="SE클럽 전경" 
+                    alt="SE Club 전경" 
                     fill 
                     className="object-cover"
                   />
@@ -139,7 +140,7 @@ export default function Home() {
             <ScrollReveal side="right" className="center order-1 md:order-2">
               <div className="center flex-col md:absolute md:top-1/2 md:-translate-y-1/2 md:left-3/4 md:-translate-x-1/2">
                 <h3 className="text-3xl md:text-5xl font-serif">Wellness</h3>
-                <h4 className="mt-2">SECLUB</h4>
+                <h4 className="mt-2">SE Club</h4>
               </div>
             </ScrollReveal>
           </div>
@@ -156,11 +157,7 @@ export default function Home() {
                     </div>
                     <div className="absolute w-full h-full top-0 left-0 flex justify-between items-center group-hover:text-white group-active:text-white p-4 md:p-10">
                       <div>
-                        {
-                          room.slug === "pool-villa" 
-                            ? <div className="font-mono font-bold text-lg md:text-xl">海水<h3 className="text-xl font-semibold group-hover:text-2xl inline">풀빌라</h3></div> 
-                            : <h3 className="text-xl font-semibold group-hover:text-2xl">{room.title}</h3>
-                        }
+                        <h3 className="text-xl font-semibold group-hover:text-2xl">{room.title}</h3>
                         <p className="text-sm group-hover:text-base group-active:text-base">{room.subtitle}</p>
                       </div>
                       <div className="flex items-center gap-2">
@@ -177,7 +174,7 @@ export default function Home() {
           <div className="w-full p-5 md:p-0 lg:w-1/2 h-full center">
             <div>
               <ScrollReveal side="left" className="text-3xl md:text-5xl font-serif">Location</ScrollReveal>
-              <ScrollReveal side="left" delay="100ms" className="mt-12 text-xl md:text-3xl font-light border-b border-black pb-2 mb-2">SECLUB</ScrollReveal> 
+              <ScrollReveal side="left" delay="100ms" className="mt-12 text-xl md:text-3xl font-light border-b border-black pb-2 mb-2">SE Club</ScrollReveal> 
               <ScrollReveal side="left" delay="200ms" className="grid grid-cols-2 gap-y-2 md:gap-y-1">
                 <p>주소</p> <p className="justify-self-end text-end">충청남도 태안군 이원면 내리 503</p>
                 <p>전화번호</p> <p className="justify-self-end text-end">010-9703-1711 / 010-4668-1704</p>
