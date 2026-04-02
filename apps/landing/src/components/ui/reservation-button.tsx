@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { ReservationModal } from "@/components/ui/reservation-modal"
-import { ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface ReservationButtonProps {
