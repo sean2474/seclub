@@ -102,7 +102,7 @@ export default async function Page({
             <LinkEventTracker 
               eventName={`reservation_room_detail_${roomInfo.slug}`}
               location={`room_${roomInfo.slug}_reservation_btn`}
-              href="https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP" 
+              href="https://m.thankqcamping.com/resv/view.hbb?cseq=20061&go_main=Y&path=RP"
               target="_blank"
             >
               <Button variant={"primary"} size={"xl"} className="text-white">예약하기</Button>

@@ -1,9 +1,15 @@
+"use client"
+
+import { useState } from "react"
 import { Arrow } from "@/components/icon/arrow"
-// import Image from "next/image"
 import Link from "next/link"
+import { ReservationModal } from "@/components/ui/reservation-modal"
 
 export const Footer = () => {
+  const [reservationOpen, setReservationOpen] = useState(false)
+
   return (
+    <>
     <footer className="p-4 md:p-10 bg-[#111] text-white relative">
       {/* <div className="z-10 absolute -top-32 left-0 w-full h-32 bg-gradient-to-b from-transparent to-background pointer-events-none" /> */}
       <div className="flex flex-col items-center md:flex-row md:items-start justify-between h-full mt-8 gap-2">
@@ -45,8 +51,7 @@ export const Footer = () => {
         </div>
         <div className="flex flex-col gap-5 relative z-20 justify-start w-full md:w-auto md:h-1/2 mt-1 order-3 text-sm md:text-base">
           <Link href="/about/location" className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">찾아오시는 길 <Arrow side="right" size={5} /> </Link>
-          <Link href="https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP" target="_blank" className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">캠핑장 예약 <Arrow side="right" size={5} /> </Link>
-          <Link href="https://m.thankqcamping.com/resv/view.hbb?cseq=20061&go_main=Y&path=RP" target="_blank" className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">풀빌라&펜션 예약 <Arrow side="right" size={5} /> </Link>
+          <button onClick={() => setReservationOpen(true)} className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">예약하기 <Arrow side="right" size={5} /> </button>
           <Link href="/reservation/pricing" className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">요금안내 <Arrow side="right" size={5} /> </Link>
           {/* <Link href="/privacy-policy.html" className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">개인정보처리방침 <Arrow side="right" size={5} /> </Link> */}
           {/* <div className="mt-3 md:mt-10">
@@ -71,5 +76,7 @@ export const Footer = () => {
         </div>
       </div>
     </footer>
+    <ReservationModal open={reservationOpen} onOpenChange={setReservationOpen} />
+    </>
   )
 }

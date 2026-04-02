@@ -32,7 +32,7 @@ export const RoomsLinkCard = ({slug, title, subtitle, images, features}: CardPro
         <LinkEventTracker 
           eventName={`reservation_room_list_${slug}`} 
           location={`room-link-card_${slug}_reservation_btn`} 
-          href="https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP" 
+          href="https://m.thankqcamping.com/resv/view.hbb?cseq=20061&go_main=Y&path=RP"
           target="_blank"
         >
           <Button className="mt-4 md:absolute md:bottom-3 md:right-3 text-white" size={"lg"} variant="primary">예약하기</Button>

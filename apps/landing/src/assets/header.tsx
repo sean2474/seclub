@@ -7,11 +7,12 @@ import { HamburgerIcon } from "@/components/icon/hamburger";
 import { PlusMinusIcon } from "@/components/icon/plusminus";
 import Link from "next/link";
 import { desktopMenu, menuItems } from "@/const/header-items";
-import { LinkEventTracker } from "@/components/base/link-event-tracker";
+import { ReservationModal } from "@/components/ui/reservation-modal";
 
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [reservationOpen, setReservationOpen] = useState(false);
 
   // 모바일 아코디언 (열려있는 섹션)
   const [prevOpenSection, setPrevOpenSection] = useState<number | null>(null);
@@ -54,6 +55,7 @@ export const Header = () => {
   if (pathname.includes("/auth")) return <></>;
   
   return (
+    <>
     <header
       className={`fixed inset-x-0 top-0 z-40 px-2 lg:pr-12 transition-all duration-300 ease-in text-font backdrop-blur-xl bg-white/50 h-[var(--header-height)] overscroll-none border-b-[0.5px] border-gray-300/30 font-light
         ${!scrolled && "h-[var(--header-height-expanded)]"}
@@ -139,26 +141,12 @@ export const Header = () => {
           </div>
         </div>
 
-        <div className="hidden lg:flex gap-2">
-          <LinkEventTracker
-            href={"https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP"}
-            eventName="reservation_header_desktop_camping"
-            location="header_reservation_btn"
-            target="_blank"
-            className="border border-foreground px-3 py-2 bg-foreground text-background hover:text-foreground hover:bg-transparent hover:font-medium transition-all duration-300 text-sm whitespace-nowrap"
-          >
-            캠핑장 예약
-          </LinkEventTracker>
-          <LinkEventTracker
-            href={"https://m.thankqcamping.com/resv/view.hbb?cseq=20061&go_main=Y&path=RP"}
-            eventName="reservation_header_desktop"
-            location="header_reservation_btn"
-            target="_blank"
-            className="border border-foreground px-3 py-2 bg-foreground text-background hover:text-foreground hover:bg-transparent hover:font-medium transition-all duration-300 text-sm whitespace-nowrap"
-          >
-            풀빌라&펜션 예약
-          </LinkEventTracker>
-        </div>
+        <button
+          onClick={() => setReservationOpen(true)}
+          className="border border-foreground px-4 py-2 bg-foreground text-background hover:text-foreground hover:bg-transparent hover:font-medium transition-all duration-300 hidden lg:block cursor-pointer"
+        >
+          예약하기
+        </button>
 
         {/* -------------- 모바일 햄버거 버튼 -------------- */}
         <div className="flex lg:hidden">
@@ -247,29 +235,17 @@ export const Header = () => {
                 )}
               )}
             </div>
-            <div className="flex flex-col gap-2 absolute translate-y-5 left-1/2 -translate-x-1/2">
-              <LinkEventTracker
-                href={"https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP"}
-                eventName="reservation_header_mobile_camping"
-                location="header_reservation_btn"
-                target="_blank"
-                className="border border-foreground px-4 py-2 bg-foreground text-background active:text-foreground active:bg-background active:font-medium transition-all duration-300 text-center"
-              >
-                캠핑장 예약
-              </LinkEventTracker>
-              <LinkEventTracker
-                href={"https://m.thankqcamping.com/resv/view.hbb?cseq=20061&go_main=Y&path=RP"}
-                eventName="reservation_header_mobile"
-                location="header_reservation_btn"
-                target="_blank"
-                className="border border-foreground px-4 py-2 bg-foreground text-background active:text-foreground active:bg-background active:font-medium transition-all duration-300 text-center"
-              >
-                풀빌라&펜션 예약
-              </LinkEventTracker>
-            </div>
+            <button
+              onClick={() => { setReservationOpen(true); setMobileMenuOpen(false); }}
+              className="border border-foreground px-4 py-2 bg-foreground text-background active:text-foreground active:bg-background active:font-medium transition-all duration-300 absolute translate-y-5 left-1/2 -translate-x-1/2 cursor-pointer"
+            >
+              예약하기
+            </button>
           </div>
         </nav>
       </div>
     </header>
+    <ReservationModal open={reservationOpen} onOpenChange={setReservationOpen} />
+    </>
   );
 };
