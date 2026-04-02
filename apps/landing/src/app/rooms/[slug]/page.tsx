@@ -6,7 +6,7 @@ import { ImageSlider } from "@/components/ui/image-slider";
 import { RoomFeatures } from "@/components/ui/room-features";
 import { MainImageSlider } from "@/components/ui/main-image-slider";
 
-import { getRoomBySlug, getRoomCards } from "@/lib/rooms"
+import { getRoomBySlug, getRoomCards } from "@/lib/room-infos"
 import { notFound } from "next/navigation"
 import { ScrollReveal } from "@/components/base/scroll-reveal";
 import { LinkEventTracker } from "@/components/base/link-event-tracker";

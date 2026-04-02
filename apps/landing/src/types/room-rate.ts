@@ -13,8 +13,8 @@ export interface LodgingRates {
 export interface Discounts {
   /** 성수기(3-6월,9-11월) 장박 특별할인 */
   highSeason: {
-    camping: Record<number, number>
-    lodging: Record<number, number>
+    camping: Record<string, number>
+    lodging: Record<string, number>
   }
   /** 동절기(12-2월) 장박 특별할인 */
   winterSeason: Record<string, number>

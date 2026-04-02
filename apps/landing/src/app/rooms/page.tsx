@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { RoomsLinkCard } from "@/components/ui/rooms-link-card";
 import { ScrollReveal } from "@/components/base/scroll-reveal";
-import { getRoomCards } from "@/lib/rooms";
+import { getRoomCards } from "@/lib/room-infos";
 import { generateMetadata } from "@/utils/metadata-generator";
 import { ScrollNudge } from "@/components/ui/scroll-nudge";
 

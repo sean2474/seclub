@@ -3,7 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import type { MetadataRoute } from 'next'
 import { wellnessData } from '@/const/wellness-detail'
-import { getRoomCards } from '@/lib/rooms'
+import { getRoomCards } from '@/lib/room-infos'
 
 const SITE_URL = 'https://seclub.kr'
 

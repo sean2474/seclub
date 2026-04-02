@@ -139,15 +139,26 @@ export const Header = () => {
           </div>
         </div>
 
-        <LinkEventTracker 
-          href={"https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP"} 
-          eventName="reservation_header_desktop" 
-          location="header_reservation_btn" 
-          target="_blank" 
-          className="border border-foreground px-4 py-2 bg-foreground text-background hover:text-foreground hover:bg-transparent hover:font-medium transition-all duration-300 hidden lg:block"
-        >
-          예약하기
-        </LinkEventTracker>
+        <div className="hidden lg:flex gap-2">
+          <LinkEventTracker
+            href={"https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP"}
+            eventName="reservation_header_desktop_camping"
+            location="header_reservation_btn"
+            target="_blank"
+            className="border border-foreground px-3 py-2 bg-foreground text-background hover:text-foreground hover:bg-transparent hover:font-medium transition-all duration-300 text-sm whitespace-nowrap"
+          >
+            캠핑장 예약
+          </LinkEventTracker>
+          <LinkEventTracker
+            href={"https://m.thankqcamping.com/resv/view.hbb?cseq=20061&go_main=Y&path=RP"}
+            eventName="reservation_header_desktop"
+            location="header_reservation_btn"
+            target="_blank"
+            className="border border-foreground px-3 py-2 bg-foreground text-background hover:text-foreground hover:bg-transparent hover:font-medium transition-all duration-300 text-sm whitespace-nowrap"
+          >
+            풀빌라&펜션 예약
+          </LinkEventTracker>
+        </div>
 
         {/* -------------- 모바일 햄버거 버튼 -------------- */}
         <div className="flex lg:hidden">
@@ -236,15 +247,26 @@ export const Header = () => {
                 )}
               )}
             </div>
-            <LinkEventTracker 
-              href={"https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP"} 
-              eventName="reservation_header_mobile" 
-              location="header_reservation_btn" 
-              target="_blank" 
-              className="border border-foreground px-4 py-2 bg-foreground text-background active:text-foreground active:bg-background active:font-medium transition-all duration-300 absolute translate-y-5 left-1/2 -translate-x-1/2"
-            >
-              예약하기
-            </LinkEventTracker>
+            <div className="flex flex-col gap-2 absolute translate-y-5 left-1/2 -translate-x-1/2">
+              <LinkEventTracker
+                href={"https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP"}
+                eventName="reservation_header_mobile_camping"
+                location="header_reservation_btn"
+                target="_blank"
+                className="border border-foreground px-4 py-2 bg-foreground text-background active:text-foreground active:bg-background active:font-medium transition-all duration-300 text-center"
+              >
+                캠핑장 예약
+              </LinkEventTracker>
+              <LinkEventTracker
+                href={"https://m.thankqcamping.com/resv/view.hbb?cseq=20061&go_main=Y&path=RP"}
+                eventName="reservation_header_mobile"
+                location="header_reservation_btn"
+                target="_blank"
+                className="border border-foreground px-4 py-2 bg-foreground text-background active:text-foreground active:bg-background active:font-medium transition-all duration-300 text-center"
+              >
+                풀빌라&펜션 예약
+              </LinkEventTracker>
+            </div>
           </div>
         </nav>
       </div>

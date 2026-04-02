@@ -45,7 +45,8 @@ export const Footer = () => {
         </div>
         <div className="flex flex-col gap-5 relative z-20 justify-start w-full md:w-auto md:h-1/2 mt-1 order-3 text-sm md:text-base">
           <Link href="/about/location" className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">찾아오시는 길 <Arrow side="right" size={5} /> </Link>
-          <Link href="/reservation" className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">예약안내 <Arrow side="right" size={5} /> </Link>
+          <Link href="https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP" target="_blank" className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">캠핑장 예약 <Arrow side="right" size={5} /> </Link>
+          <Link href="https://m.thankqcamping.com/resv/view.hbb?cseq=20061&go_main=Y&path=RP" target="_blank" className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">풀빌라&펜션 예약 <Arrow side="right" size={5} /> </Link>
           <Link href="/reservation/pricing" className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">요금안내 <Arrow side="right" size={5} /> </Link>
           {/* <Link href="/privacy-policy.html" className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">개인정보처리방침 <Arrow side="right" size={5} /> </Link> */}
           {/* <div className="mt-3 md:mt-10">

@@ -11,7 +11,7 @@ import { siteCategories, siteData } from "@/const/camping-data"
 import { ScrollNudge } from "@/components/ui/scroll-nudge"
 
 export default function SeclubElegantGuidePage() {
-  const [activeCategory, setActiveCategory] = useState("S")
+  const [activeCategory, setActiveCategory] = useState("All")
   const [openedSite, setOpenedSite] = useState<string | null>(null)
 
   const filteredSites =

@@ -2,7 +2,7 @@ import HeroImage from "@/assets/hero-image";
 import { ScrollReveal } from "@/components/base/scroll-reveal";
 import { ImageSlider } from "@/components/ui/image-slider";
 import { NaverMap } from "@/components/ui/naver-map";
-import { getRoomCards } from "@/lib/rooms";
+import { getRoomCards } from "@/lib/room-infos";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -43,15 +43,24 @@ export default async function Home() {
             <span className="font-thin">SE Club에서 누리는</span><br />
             완벽한 휴식
           </ScrollReveal>
-          <ScrollReveal side="bottom" className="ml-1">
-            <LinkEventTracker 
-              href={"https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP"} 
-              eventName="reservation_main_hero"
+          <ScrollReveal side="bottom" className="ml-1 flex flex-col gap-2">
+            <LinkEventTracker
+              href={"https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP"}
+              eventName="reservation_main_hero_camping"
               location="landing_hero_section"
-              target="_blank" 
+              target="_blank"
               className="border border-background pl-4 pr-1.5 py-2 text-sm md:pl-5 md:pr-2.5 md:py-3 bg-background text-foreground hover:text-background hover:bg-transparent hover:font-medium transition-all duration-300 md:text-md flex items-center gap-2 rounded-xs"
             >
-              지금 예약하기 <ChevronRight strokeWidth={1} />
+              캠핑장 예약하기 <ChevronRight strokeWidth={1} />
+            </LinkEventTracker>
+            <LinkEventTracker
+              href={"https://m.thankqcamping.com/resv/view.hbb?cseq=20061&go_main=Y&path=RP"}
+              eventName="reservation_main_hero"
+              location="landing_hero_section"
+              target="_blank"
+              className="border border-background pl-4 pr-1.5 py-2 text-sm md:pl-5 md:pr-2.5 md:py-3 bg-background text-foreground hover:text-background hover:bg-transparent hover:font-medium transition-all duration-300 md:text-md flex items-center gap-2 rounded-xs"
+            >
+              풀빌라&펜션 예약하기 <ChevronRight strokeWidth={1} />
             </LinkEventTracker>
           </ScrollReveal>
         </div>

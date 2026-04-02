@@ -1,5 +1,5 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { campingRates, discounts, lateCheckoutRates, lodgingRates } from "@/const/pricing"
+import { getAllPricing } from "@/lib/room-rates"
 import { generateMetadata } from "@/utils/metadata-generator"
 
 export const metadata = generateMetadata("SE Club | 요금 안내", "SE Club의 객실 및 캠핑장 요금 안내")
@@ -16,7 +16,8 @@ const SectionTitle = ({ title, subtitle }: { title: string; subtitle: string }) 
   </div>
 )
 
-export default function PricingPage() {
+export default async function PricingPage() {
+  const { lodgingRates, campingRates, lateCheckoutRates, discounts } = await getAllPricing()
   return (
     <div className="text-gray-800 font-sans">
       <section className="relative flex items-center justify-center text-center mt-[var(--header-height-expanded)] pt-10">
@@ -130,14 +131,12 @@ export default function PricingPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {Object.entries(discounts.highSeason.camping).map(([nights]) => (
+                  {Object.entries(discounts.highSeason.camping).map(([nights, rate]) => (
                     <TableRow key={nights}>
-                      <TableCell>{nights}박 이상</TableCell>
+                      <TableCell>{nights}</TableCell>
+                      <TableCell className="text-right">{rate}%</TableCell>
                       <TableCell className="text-right">
-                        {discounts.highSeason.camping[nights as unknown as keyof typeof discounts.highSeason.camping]}%
-                      </TableCell>
-                      <TableCell className="text-right">
-                        {discounts.highSeason.lodging[nights as unknown as keyof typeof discounts.highSeason.lodging]}%
+                        {discounts.highSeason.lodging[nights]}%
                       </TableCell>
                     </TableRow>
                   ))}

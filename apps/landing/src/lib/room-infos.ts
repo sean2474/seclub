@@ -8,7 +8,7 @@ export async function getRoomBySlug(slug: string): Promise<RoomInfo | null> {
   const supabase = await createClient();
   
   const { data, error } = await supabase
-    .from("rooms")
+    .from("room_infos")
     .select("slug, data")
     .eq("slug", slug)
     .eq("is_active", true)
@@ -27,7 +27,7 @@ export async function getAllRooms(): Promise<RoomInfo[]> {
   const supabase = await createClient();
   
   const { data, error } = await supabase
-    .from("rooms")
+    .from("room_infos")
     .select("slug, data")
     .eq("is_active", true);
 
