@@ -8,7 +8,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog"
 import { Badge } from "@/components/ui/badge"
-import { MoreHorizontal, PlusCircle, FileEdit, Trash2, Paperclip } from "lucide-react"
+import { MoreHorizontal, PlusCircle, FileEdit, Trash2, Paperclip, Pin } from "lucide-react"
 
 import { Switch } from "@/components/ui/switch"
 import { useToast } from "@/hooks/use-toast"
@@ -43,6 +43,7 @@ export function NoticesContent() {
     content: string
     active: boolean
     category: string
+    pinned: boolean
     images?: string[]
   }) => {
     toast({
@@ -60,7 +61,7 @@ export function NoticesContent() {
             content: formData.content,
             category: formData.category,
             active: formData.active,
-            images: formData.images || [],
+            pinned: formData.pinned,
           }
         )
         
@@ -86,7 +87,7 @@ export function NoticesContent() {
           content: formData.content,
           category: formData.category,
           active: formData.active,
-          images: formData.images || []
+          pinned: formData.pinned,
         })
         
         if (success) {
@@ -201,6 +202,7 @@ export function NoticesContent() {
                   <TableRow key={item.id}>
                     <TableCell className="font-medium">
                       <div className="flex items-center gap-2">
+                        {item.pinned && <Pin className="h-4 w-4 text-primary" />}
                         <span>{item.title}</span>
                         {item.images && item.images.length > 0 && (
                           <Paperclip className="h-4 w-4 text-muted-foreground" />

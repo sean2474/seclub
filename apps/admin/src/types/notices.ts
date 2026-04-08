@@ -8,4 +8,5 @@ export interface Notice {
   images: string[] | null;
   category: string;
   view: number;
+  pinned: boolean;
 }

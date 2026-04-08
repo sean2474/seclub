@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Tent, LayoutDashboard, ImageIcon, Megaphone, ChevronRight, Video } from "lucide-react"
+import { Tent, ImageIcon, Megaphone, ChevronRight, Video, BedDouble, LayoutDashboard } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import Image from "next/image"
@@ -20,7 +20,8 @@ export default function AdminSidebar({ isMobile = false, isCollapsed = false, on
     { href: "/notices", label: "공지사항 관리", icon: Megaphone },
     { href: "/gallery", label: "사진 갤러리 관리", icon: ImageIcon },
     { href: "/videos", label: "영상 갤러리 관리", icon: Video },
-    // { href: "/infos", label: "객실 정보 관리", icon: Video },
+    { href: "/infos", label: "객실 정보 관리", icon: BedDouble },
+    { href: "/infos/main", label: "메인페이지 관리", icon: LayoutDashboard },
   ]
 
   const baseClasses = "flex h-full max-h-screen flex-col gap-2"

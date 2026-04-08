@@ -7,16 +7,14 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import Image from "next/image"
+import { TiptapEditor } from "@/components/ui/tiptap-editor"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useCategories } from "@/hooks/use-category"
 import { addCategory, updateCategory, deleteCategory } from "@/lib/action/category"
 import { Notice } from "@/types/notices"
 import { useToast } from "@/hooks/use-toast"
 import { Button } from "@/components/ui/button"
-import { Trash2 } from "lucide-react"
 import { Switch } from "@/components/ui/switch"
 import { PlusCircle, Trash2Icon } from "lucide-react"
 
@@ -29,6 +27,7 @@ export interface NoticeFormModalProps {
     content: string
     active: boolean
     category: string
+    pinned: boolean
     images?: string[]
   }) => void
   notice: Notice | null
@@ -39,8 +38,8 @@ export function NoticeFormModal({ isOpen, onOpenChange, onSave, notice }: Notice
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
   const [active, setActive] = useState<boolean>(true)
-  const [category, setCategory] = useState<string>("") 
-  const [imagePreviews, setImagePreviews] = useState<string[]>([])
+  const [pinned, setPinned] = useState<boolean>(false)
+  const [category, setCategory] = useState<string>("")
   const [newCategory, setNewCategory] = useState<string>("") 
   const [isAddingCategory, setIsAddingCategory] = useState<boolean>(false)
   const [editCategoryName, setEditCategoryName] = useState<string>("") 
@@ -55,37 +54,20 @@ export function NoticeFormModal({ isOpen, onOpenChange, onSave, notice }: Notice
         setTitle(notice.title)
         setContent(notice.content || "")
         setActive(notice.active)
+        setPinned(notice.pinned || false)
         setCategory(notice.category)
-        setImagePreviews(notice.images || [])
       } else {
         setTitle("")
         setContent("")
         setActive(true)
-        setCategory("") // Will be set to first category when categories are loaded
-        setImagePreviews([])
+        setPinned(false)
+        setCategory("")
       }
     }
   }, [notice, isOpen])
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files
-    if (files) {
-      Array.from(files).forEach((file) => {
-        const reader = new FileReader()
-        reader.onloadend = () => {
-          setImagePreviews((prev) => [...prev, reader.result as string])
-        }
-        reader.readAsDataURL(file)
-      })
-    }
-  }
-
-  const handleRemoveImage = (indexToRemove: number) => {
-    setImagePreviews((prev) => prev.filter((_, index) => index !== indexToRemove))
-  }
-
   const handleSubmit = () => {
-    if (title === "" || content === "" || category === "") {
+    if (title === "" || content === "" || content === "<p></p>" || category === "") {
       toast({
         title: "❌ 오류 발생",
         description: "카테고리, 제목, 내용은 필수입니다.",
@@ -93,7 +75,7 @@ export function NoticeFormModal({ isOpen, onOpenChange, onSave, notice }: Notice
       })
       return
     }
-    onSave({ title, content, active, category, images: imagePreviews }) 
+    onSave({ title, content, active, pinned, category })
   }
   
   const handleAddCategory = async () => {
@@ -234,7 +216,7 @@ export function NoticeFormModal({ isOpen, onOpenChange, onSave, notice }: Notice
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-2xl">
+      <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{notice ? "공지 수정" : "새 공지 작성"}</DialogTitle>
           <DialogDescription>{notice ? "공지사항을 수정합니다." : "새로운 공지사항을 등록합니다."}</DialogDescription>
@@ -245,43 +227,8 @@ export function NoticeFormModal({ isOpen, onOpenChange, onSave, notice }: Notice
             <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="content">내용</Label>
-            <Textarea id="content" value={content} onChange={(e) => setContent(e.target.value)} rows={5} />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="image-upload">첨부 이미지</Label>
-            <Input
-              id="image-upload"
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="w-full"
-              multiple
-            />
-            {imagePreviews.length > 0 && (
-              <div className="mt-2 flex flex-wrap gap-2">
-                {imagePreviews.map((src, index) => (
-                  <div key={index} className="relative w-fit">
-                    <Image
-                      src={src || "/placeholder.svg"}
-                      alt={`미리보기 ${index + 1}`}
-                      width={120}
-                      height={67.5}
-                      className="rounded-md object-cover aspect-video"
-                    />
-                    <Button
-                      variant="destructive"
-                      size="icon"
-                      className="absolute -top-2 -right-2 h-6 w-6 rounded-full"
-                      onClick={() => handleRemoveImage(index)}
-                    >
-                      <Trash2 className="h-3 w-3" />
-                      <span className="sr-only">{`이미지 ${index + 1} 제거`}</span>
-                    </Button>
-                  </div>
-                ))}
-              </div>
-            )}
+            <Label>내용</Label>
+            <TiptapEditor content={content} onChange={setContent} />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="grid gap-2">
@@ -409,6 +356,14 @@ export function NoticeFormModal({ isOpen, onOpenChange, onSave, notice }: Notice
                   onCheckedChange={(checked) => setActive(checked)}
                 />
                 <Label htmlFor="status">{active ? "게시 중" : "비게시"}</Label>
+              </div>
+              <div className="flex items-center space-x-2 pt-1">
+                <Switch
+                  id="pinned"
+                  checked={pinned}
+                  onCheckedChange={(checked) => setPinned(checked)}
+                />
+                <Label htmlFor="pinned">{pinned ? "상단 고정" : "일반"}</Label>
               </div>
             </div>
           </div>
