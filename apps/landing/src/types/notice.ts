@@ -4,6 +4,7 @@ export interface Notice {
     title: string;
     created_at: string;
     view: number;
+    pinned: boolean;
 }
 
 export interface NoticeDetail extends Notice {

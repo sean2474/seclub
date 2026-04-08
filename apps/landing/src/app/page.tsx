@@ -3,6 +3,9 @@ import { ScrollReveal } from "@/components/base/scroll-reveal";
 import { ImageSlider } from "@/components/ui/image-slider";
 import { NaverMap } from "@/components/ui/naver-map";
 import { getRoomCards } from "@/lib/room-infos";
+import { getHeroText } from "@/lib/hero-text";
+import { getActivePopups } from "@/lib/popups";
+import { PopupBanner } from "@/components/ui/popup-banner";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,8 +18,11 @@ export const metadata = generateMetadata("SE Club (태안둘레길캠핑장 & �
 
 export default async function Home() {
   const roomData = await getRoomCards();
+  const heroText = await getHeroText();
+  const activePopups = await getActivePopups();
   return (
     <div>
+      {activePopups.length > 0 && <PopupBanner popups={activePopups} />}
       {/* 히어로 섹션 */}
       <section className="fixed top-0 h-svh w-full overflow-x-hidden text-background" suppressHydrationWarning>
         <HeroImage 
@@ -37,17 +43,17 @@ export default async function Home() {
         />
         <div className="absolute z-20 inset-0 bg-black/30 flex flex-col items-start md:items-start md:pl-24 lg:pl-48 justify-center text-start p-4">
           <ScrollReveal side="top" type="p" className="mb-1 md:mb-2 ml-1.5 font-medium">
-            당신만의 힐링
+            {heroText.tagline}
           </ScrollReveal>
           <ScrollReveal side="top" type="h1" className="mb-4 md:mb-6 font-medium">
-            <span className="font-thin">SE Club에서 누리는</span><br />
-            완벽한 휴식
+            <span className="font-thin">{heroText.heading_line1}</span><br />
+            {heroText.heading_line2}
           </ScrollReveal>
           <ScrollReveal side="bottom" className="ml-1">
             <ReservationButton
               className="border border-background pl-4 pr-1.5 py-2 text-sm md:pl-5 md:pr-2.5 md:py-3 bg-background text-foreground hover:text-background hover:bg-transparent hover:font-medium transition-all duration-300 md:text-md flex items-center gap-2 rounded-xs cursor-pointer"
             >
-              지금 예약하기 <ChevronRight strokeWidth={1} />
+              {heroText.button_text} <ChevronRight strokeWidth={1} />
             </ReservationButton>
           </ScrollReveal>
         </div>

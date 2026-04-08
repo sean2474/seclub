@@ -16,8 +16,9 @@ export async function getNotices(): Promise<{
     
     const { data, error } = await supabase
       .from("notice")
-      .select("id, category, title, created_at, view")
+      .select("id, category, title, created_at, view, pinned")
       .eq("active", true)
+      .order("pinned", { ascending: false })
       .order("created_at", { ascending: false });
     
     if (error) {
@@ -57,11 +58,14 @@ export const getNoticeById = async (id: string) : Promise<NoticeDetail | null> =
     .eq("id", id)
     .single()
 
-  data.content = data.content.replace(/\\n/g, "\n")
-    
   if (error) {
     console.error("Error fetching notice:", error);
     return null;
+  }
+
+  // 기존 plain text 호환: HTML이 아닌 경우만 \n 변환
+  if (data.content && !data.content.startsWith("<")) {
+    data.content = data.content.replace(/\\n/g, "\n");
   }
 
   return data;

@@ -79,7 +79,11 @@ export default async function Page({
         </div>
 
         <div className="prose max-w-none min-h-[200px] py-6">
-          <p className="whitespace-pre-wrap"><LinkifyText text={notice.content} /></p>
+          {notice.content.startsWith("<") ? (
+            <div dangerouslySetInnerHTML={{ __html: notice.content }} />
+          ) : (
+            <p className="whitespace-pre-wrap"><LinkifyText text={notice.content} /></p>
+          )}
         </div>
 
         {notice.images && notice.images.length > 0 && (

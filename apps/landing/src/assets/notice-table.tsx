@@ -36,7 +36,10 @@ export const NoticeTable = ({
           <div key={notice.id} className="pb-2 relative">
             <Link href={`/notices/${notice.id}`}>
               <p className="text-sm text-foreground/80">{notice.category}</p>
-              <h4>{notice.title}</h4>
+              <h4 className="flex items-center gap-1.5">
+                {notice.pinned && <span className="text-xs bg-foreground text-background px-1.5 py-0.5 shrink-0">고정</span>}
+                {notice.title}
+              </h4>
               <div className="flex gap-2">
                 <p className="text-sm text-foreground/80">작성일: {notice.created_at}</p>
                 <p className="text-sm text-foreground/80">조회수: {notice.view}</p>
@@ -60,7 +63,8 @@ export const NoticeTable = ({
             <TableRow key={item.id} className="cursor-pointer hover:bg-secondary/10" onClick={() => router.push(`/notices/${item.id}`)}>
               <TableCell className="text-center text-foreground/80">{item.category}</TableCell>
               <TableCell className="font-medium text-foreground">
-                <div className="block w-full h-full">
+                <div className="flex items-center gap-2">
+                  {item.pinned && <span className="text-xs bg-foreground text-background px-1.5 py-0.5 shrink-0">고정</span>}
                   {item.title}
                 </div>
               </TableCell>
