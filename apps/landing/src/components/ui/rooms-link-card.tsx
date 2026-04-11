@@ -4,6 +4,7 @@ import { RoomCardProps } from "@/types";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Button } from "./button";
 import { LinkEventTracker } from "../base/link-event-tracker";
+import { VILLA_URL } from "@/const/urls";
 
 interface CardProps extends RoomCardProps {
   className?: string;
@@ -32,7 +33,7 @@ export const RoomsLinkCard = ({slug, title, subtitle, images, features}: CardPro
         <LinkEventTracker 
           eventName={`reservation_room_list_${slug}`} 
           location={`room-link-card_${slug}_reservation_btn`} 
-          href="https://m.thankqcamping.com/resv/view.hbb?cseq=20061&go_main=Y&path=RP"
+          href={VILLA_URL}
           target="_blank"
         >
           <Button className="mt-4 md:absolute md:bottom-3 md:right-3 text-white" size={"lg"} variant="primary">예약하기</Button>

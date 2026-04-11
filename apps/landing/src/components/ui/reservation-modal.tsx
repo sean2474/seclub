@@ -5,16 +5,14 @@ import { createPortal } from "react-dom"
 import Image from "next/image"
 import { X, ChevronRight } from "lucide-react"
 import { track } from "@vercel/analytics"
-
-const CAMPING_URL = "https://m.thankqcamping.com/resv/view.hbb?cseq=1537&path=RP"
-const VILLA_URL = "https://m.thankqcamping.com/resv/view.hbb?cseq=20061&go_main=Y&path=RP"
+import { CAMPING_URL, VILLA_URL } from "@/const/urls"
 
 const options = [
   {
     type: "camping" as const,
     title: "캠핑장",
     subtitle: "태안둘레길캠핑장",
-    image: "/images/landing/hero-2.jpg",
+    image: "/images/site/hero.jpg",
     url: CAMPING_URL,
   },
   {
