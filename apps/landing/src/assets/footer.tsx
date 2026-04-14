@@ -14,30 +14,30 @@ export const Footer = () => {
       {/* <div className="z-10 absolute -top-32 left-0 w-full h-32 bg-gradient-to-b from-transparent to-background pointer-events-none" /> */}
       <div className="flex flex-col items-center md:flex-row md:items-start justify-between h-full mt-8 gap-2">
         <div className="order-2 md:order-1 w-full md:w-auto mt-5 md:mt-0 text-xs md:text-sm">
-          <div className="ml-1">
-            주소 <b className="ml-2">충청남도 태안군 이원면 내리 503 - 8 번지</b>
-          </div>
           <div className="mt-2 ml-1">
             문의 <b className="ml-2">010-9703-1711, 010-4668-1704</b>
           </div>
           <div className="flex flex-col mt-4 gap-2 py-4">
             <div>
-              <div className="font-bold mb-1">SE Club(태안둘레길캠핑장 & 펜션)</div>
+              <div className="font-bold mb-1">SE클럽 태안풀빌라펜션</div>
               <div className="ml-2">대표자 : 정상은 외 2인</div>
               <div className="ml-2">사업자번호 : 362-13-00683</div>
               <div className="ml-2">통신판매번호 : 제 2017-충남태안-0105 호</div>
+              <div className="ml-2">주소: 충남 태안군 이원면 꾸지나무길 37-37</div>
             </div>
             <div>
               <div className="font-bold mb-1">에스이(SE)클럽 관광농원</div>
               <div className="ml-2">대표자 : 정상은</div>
               <div className="ml-2">사업자번호 : 272-29-00682</div>
               <div className="ml-2">통신판매번호 : 제 2022-충남태안-0058 호</div>
+              <div className="ml-2">주소: 충남 태안군 이원면 꾸지나무길 37-99</div>
             </div>
             <div>
               <div className="font-bold mb-1">담은</div>
               <div className="ml-2">대표자 : 정재원</div>
               <div className="ml-2">사업자번호 : 316-04-46248</div>
               <div className="ml-2">통신판매번호 : 제 2022-충남태안-0061 호</div>
+              <div className="ml-2">주소: 충남 태안군 이원면 꾸지나무길 37-22</div>
             </div>
           </div>
         </div>
