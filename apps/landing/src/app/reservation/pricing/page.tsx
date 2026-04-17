@@ -44,15 +44,22 @@ export default async function PricingPage() {
               {Object.entries(lodgingRates).map(([name, data]) => (
                 <TableRow key={name}>
                   <TableCell className="font-medium">{name}</TableCell>
-                  <TableCell className="text-right">{formatCurrency(data.rates.최성수기)}</TableCell>
-                  <TableCell className="text-right">{formatCurrency(data.rates.동절기)}</TableCell>
-                  <TableCell className="text-right">{formatCurrency(data.longStayDiscount)}</TableCell>
+                  {name === "프리미엄 빌라" ? (
+                    <TableCell colSpan={3} className="text-right">별도문의</TableCell>
+                  ) : (
+                    <>
+                      <TableCell className="text-right">{formatCurrency(data.rates.최성수기)}</TableCell>
+                      <TableCell className="text-right">{formatCurrency(data.rates.동절기)}</TableCell>
+                      <TableCell className="text-right">{formatCurrency(data.longStayDiscount)}</TableCell>
+                    </>
+                  )}
                 </TableRow>
               ))}
             </TableBody>
           </Table>
           <div className="text-right mt-4 text-sm text-gray-600">
             <div className="flex flex-col gap-2">
+              <span>* 별도문의 : 010-9703-1711</span>
               <span>* 최성수기(7~8월), 성수기(3~6월, 9~11월), 동절기(12~2월)</span>
               <span>* 연박할인: 성수기/동절기</span>
               <span>* 시설별 기준인원 초과시 1인당 1박에 20,000원 추가 부과</span>

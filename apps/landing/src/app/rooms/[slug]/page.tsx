@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Phone } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { ImageSlider } from "@/components/ui/image-slider";
@@ -11,6 +12,8 @@ import { notFound } from "next/navigation"
 import { ScrollReveal } from "@/components/base/scroll-reveal";
 import { LinkEventTracker } from "@/components/base/link-event-tracker";
 import { VILLA_URL } from "@/const/urls";
+
+const PREMIUM_VILLA_INQUIRY_PHONE = "010-9703-1711";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -40,6 +43,14 @@ export default async function Page({
   if (!roomInfo) {
     notFound()
   }
+
+  const isPremiumVilla = roomInfo.slug === "premium-villa"
+  const features = isPremiumVilla
+    ? [
+        ...roomInfo.features,
+        { icon: Phone, label: "별도문의", value: PREMIUM_VILLA_INQUIRY_PHONE },
+      ]
+    : roomInfo.features
 
   return (
     <>
@@ -98,16 +109,26 @@ export default async function Page({
           </div>
         </section>
         <section className="bg-background py-4 md:py-16">
-          <RoomFeatures features={roomInfo.features} />
+          <RoomFeatures features={features} />
           <ScrollReveal side="left" className="center mt-2 md:mt-10">
-            <LinkEventTracker 
-              eventName={`reservation_room_detail_${roomInfo.slug}`}
-              location={`room_${roomInfo.slug}_reservation_btn`}
-              href={VILLA_URL}
-              target="_blank"
-            >
-              <Button variant={"primary"} size={"xl"} className="text-white">예약하기</Button>
-            </LinkEventTracker>
+            {isPremiumVilla ? (
+              <LinkEventTracker
+                eventName={`reservation_room_detail_${roomInfo.slug}`}
+                location={`room_${roomInfo.slug}_reservation_btn`}
+                href={`tel:${PREMIUM_VILLA_INQUIRY_PHONE}`}
+              >
+                <Button variant={"primary"} size={"xl"} className="text-white">별도문의</Button>
+              </LinkEventTracker>
+            ) : (
+              <LinkEventTracker
+                eventName={`reservation_room_detail_${roomInfo.slug}`}
+                location={`room_${roomInfo.slug}_reservation_btn`}
+                href={VILLA_URL}
+                target="_blank"
+              >
+                <Button variant={"primary"} size={"xl"} className="text-white">예약하기</Button>
+              </LinkEventTracker>
+            )}
           </ScrollReveal>
         </section>
         <section>
