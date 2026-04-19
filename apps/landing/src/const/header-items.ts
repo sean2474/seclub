@@ -32,7 +32,7 @@ export const menuItems: HeaderMenuType[] = [
         href: "/camping/rule"
       },
       {
-        name: "SE Club 제 시설 종합 배치도",
+        name: "전체 시설 배치도",
         href: "/camping/map"
       },
     ]
@@ -48,6 +48,10 @@ export const menuItems: HeaderMenuType[] = [
       {
         name: "사진 갤러리",
         href: "/about/gallery"
+      },
+      {
+        name: "환생 갤러리",
+        href: "/about/gallery-reborn"
       },
       {
         name: "영상 갤러리",
