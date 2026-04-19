@@ -75,12 +75,13 @@ export function RebornPiece({
           transition={{
             clipPath: {
               duration: 1.8,
-              delay: 0.25 + 0.5 * index,
+              // 6번째 카드까지만 stagger, 이후는 같은 타이밍에 reveal (스케일 대응)
+              delay: 0.25 + 0.5 * Math.min(index, 5),
               ease: [0.22, 0.88, 0.24, 1],
             },
             filter: {
               duration: 3.2,
-              delay: 0.7 + 0.5 * index,
+              delay: 0.7 + 0.5 * Math.min(index, 5),
               ease: "easeOut",
             },
           }}

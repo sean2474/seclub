@@ -22,14 +22,26 @@ type PieceLayout = {
   aspect: string
 }
 
+/**
+ * 스케일링 가능한 레이아웃 패턴.
+ * - 2열 그리드 규칙: 각 row 는 (2col) 또는 (1col + 1col) 로만 구성되어야 빈 칸이 안 생김
+ * - full-width(col-span-2) feature 가 주기적으로 끼어 리듬/호흡 제공
+ * - 13-cycle (prime) 로 사진이 많아져도 7-cycle 단조 반복 피함
+ */
 const PIECE_LAYOUT: PieceLayout[] = [
-  { colSpanClass: "col-span-2", span: 2, aspect: "aspect-[16/9]" },   // 0: 가로 와이드 feature
-  { colSpanClass: "col-span-1", span: 1, aspect: "aspect-[3/4]" },    // 1: 세로
-  { colSpanClass: "col-span-1", span: 1, aspect: "aspect-[4/5]" },    // 2: 세로 약간
-  { colSpanClass: "col-span-2", span: 2, aspect: "aspect-[5/3]" },    // 3: 가로 (quote 인용)
-  { colSpanClass: "col-span-1", span: 1, aspect: "aspect-[1/1]" },    // 4: 정사각
-  { colSpanClass: "col-span-1", span: 1, aspect: "aspect-[3/4]" },    // 5: 세로
-  { colSpanClass: "col-span-2", span: 2, aspect: "aspect-[21/9]" },   // 6: 파노라마 피날레
+  { colSpanClass: "col-span-2", span: 2, aspect: "aspect-[16/9]" },   // 0  가로 와이드
+  { colSpanClass: "col-span-1", span: 1, aspect: "aspect-[3/4]" },    // 1  세로
+  { colSpanClass: "col-span-1", span: 1, aspect: "aspect-[4/5]" },    // 2  세로 약간
+  { colSpanClass: "col-span-1", span: 1, aspect: "aspect-[1/1]" },    // 3  정사각
+  { colSpanClass: "col-span-1", span: 1, aspect: "aspect-[3/4]" },    // 4  세로
+  { colSpanClass: "col-span-2", span: 2, aspect: "aspect-[5/3]" },    // 5  가로
+  { colSpanClass: "col-span-1", span: 1, aspect: "aspect-[4/5]" },    // 6
+  { colSpanClass: "col-span-1", span: 1, aspect: "aspect-[3/4]" },    // 7
+  { colSpanClass: "col-span-1", span: 1, aspect: "aspect-[1/1]" },    // 8
+  { colSpanClass: "col-span-1", span: 1, aspect: "aspect-[3/4]" },    // 9
+  { colSpanClass: "col-span-2", span: 2, aspect: "aspect-[21/9]" },   // 10 파노라마
+  { colSpanClass: "col-span-1", span: 1, aspect: "aspect-[4/5]" },    // 11
+  { colSpanClass: "col-span-1", span: 1, aspect: "aspect-[3/4]" },    // 12
 ]
 
 function layoutFor(index: number): PieceLayout {
