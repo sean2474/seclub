@@ -11,13 +11,28 @@ interface RebornWallProps {
 }
 
 /**
- * 작품 인덱스별 그리드 colSpan 패턴.
+ * 작품 인덱스별 그리드 colSpan + aspect 패턴.
  * 7장 기준 큐레이션된 에디토리얼 레이아웃 — 단조로운 2열 그리드 회피.
+ * 가로(full-width) 와 세로(tall) 를 교차하여 리듬감.
  */
-const SPAN_PATTERN = ["col-span-2", "col-span-1", "col-span-1", "col-span-2", "col-span-1", "col-span-1", "col-span-2"]
+type PieceLayout = {
+  colSpanClass: string
+  span: 1 | 2
+  aspect: string
+}
 
-function spanFor(index: number) {
-  return SPAN_PATTERN[index % SPAN_PATTERN.length]
+const PIECE_LAYOUT: PieceLayout[] = [
+  { colSpanClass: "col-span-2", span: 2, aspect: "aspect-[16/9]" },   // 0: 가로 와이드 feature
+  { colSpanClass: "col-span-1", span: 1, aspect: "aspect-[3/4]" },    // 1: 세로
+  { colSpanClass: "col-span-1", span: 1, aspect: "aspect-[4/5]" },    // 2: 세로 약간
+  { colSpanClass: "col-span-2", span: 2, aspect: "aspect-[5/3]" },    // 3: 가로 (quote 인용)
+  { colSpanClass: "col-span-1", span: 1, aspect: "aspect-[1/1]" },    // 4: 정사각
+  { colSpanClass: "col-span-1", span: 1, aspect: "aspect-[3/4]" },    // 5: 세로
+  { colSpanClass: "col-span-2", span: 2, aspect: "aspect-[21/9]" },   // 6: 파노라마 피날레
+]
+
+function layoutFor(index: number): PieceLayout {
+  return PIECE_LAYOUT[index % PIECE_LAYOUT.length]
 }
 
 export function RebornWall({ items }: RebornWallProps) {
@@ -45,13 +60,18 @@ export function RebornWall({ items }: RebornWallProps) {
       >
         <Intro total={items.length} />
 
-        <div className="mt-20 md:mt-32 grid grid-cols-2 gap-6 md:gap-12">
+        <div className="mt-20 md:mt-32 grid grid-cols-2 gap-6 md:gap-x-10 md:gap-y-16">
           {items.map((item, i) => {
-            const cls = spanFor(i)
-            const span = cls === "col-span-2" ? 2 : 1
+            const { colSpanClass, span, aspect } = layoutFor(i)
             return (
-              <div key={item.id} className={cls}>
-                <RebornPiece item={item} index={i} onOpen={onOpen} span={span} />
+              <div key={item.id} className={colSpanClass}>
+                <RebornPiece
+                  item={item}
+                  index={i}
+                  onOpen={onOpen}
+                  span={span}
+                  aspectClass={aspect}
+                />
               </div>
             )
           })}
