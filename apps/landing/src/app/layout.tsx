@@ -3,6 +3,7 @@ import { Header } from "@/assets/header";
 import { Footer } from "@/assets/footer";
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { getHeroText } from "@/lib/hero-text";
 
 const Head = () => {
   const baseUrl = "https://seclub.kr";
@@ -49,16 +50,17 @@ const Head = () => {
   );
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const heroText = await getHeroText();
   return (
     <html lang="ko" suppressHydrationWarning>
       <Head />
       <body className={`antialiased font-pretendard font-[400]`} suppressHydrationWarning>
-        <Header />
+        <Header showNoticesBadge={heroText.notices_new_badge} />
         {children}
         <Footer />
         <Analytics />

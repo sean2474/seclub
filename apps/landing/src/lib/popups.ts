@@ -11,10 +11,13 @@ export interface PopupData {
 export async function getActivePopups(): Promise<PopupData[]> {
   try {
     const supabase = await createClient();
+    const today = new Date().toISOString().split("T")[0];
     const { data, error } = await supabase
       .from("popups")
       .select("id, title, content, image_url, link_url")
       .eq("active", true)
+      .or(`start_date.is.null,start_date.lte.${today}`)
+      .or(`end_date.is.null,end_date.gte.${today}`)
       .order("priority", { ascending: false })
       .limit(5);
 

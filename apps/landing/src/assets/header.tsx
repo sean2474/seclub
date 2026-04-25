@@ -9,7 +9,11 @@ import Link from "next/link";
 import { desktopMenu, menuItems } from "@/const/header-items";
 import { ReservationModal } from "@/components/ui/reservation-modal";
 
-export const Header = () => {
+interface HeaderProps {
+  showNoticesBadge?: boolean;
+}
+
+export const Header = ({ showNoticesBadge = true }: HeaderProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [reservationOpen, setReservationOpen] = useState(false);
@@ -134,7 +138,7 @@ export const Header = () => {
                   className="leading-6 px-3 py-2 hover:text-primary relative"
                 >
                   {item.name}
-                  {item.href === "/notices" && <div className="opacity-90 absolute rounded-full bg-primary text-white w-5 h-5 text-xs flex center top-1/2 -right-3 -translate-y-1/2">N</div>}
+                  {item.href === "/notices" && showNoticesBadge && <div className="opacity-90 absolute rounded-full bg-primary text-white w-5 h-5 text-xs flex center top-1/2 -right-3 -translate-y-1/2">N</div>}
                 </Link>
               )
             )}
@@ -208,7 +212,7 @@ export const Header = () => {
                     >
                       {section.title}
                       {section.items && <PlusMinusIcon open={openSection === index} size={0.5} />}
-                      {section.href === "/notices" && <div className="opacity-90 absolute rounded-full bg-primary text-white w-5 h-5 text-xs flex center top-1/2 left-26 -translate-y-1/2">N</div>}
+                      {section.href === "/notices" && showNoticesBadge && <div className="opacity-90 absolute rounded-full bg-primary text-white w-5 h-5 text-xs flex center top-1/2 left-26 -translate-y-1/2">N</div>}
                     </button>
 
                     {/* 아코디언 영역 */}

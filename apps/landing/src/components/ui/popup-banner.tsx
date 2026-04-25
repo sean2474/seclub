@@ -112,10 +112,9 @@ export function PopupBanner({ popups }: PopupBannerProps) {
         {/* 텍스트 영역 */}
         <div className={hasImage ? "px-6 py-5" : "px-6 pt-8 pb-6"}>
           <h3
-            className={`text-lg font-medium tracking-tight text-gray-900 ${
+            className={`font-nanum-square text-lg font-medium tracking-tight text-gray-900 ${
               hasLink ? "cursor-pointer hover:text-gray-600 transition-colors" : ""
             }`}
-            style={{ fontFamily: "serif" }}
             onClick={hasLink ? handleLinkClick : undefined}
           >
             {currentPopup.title}
