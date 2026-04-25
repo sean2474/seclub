@@ -38,7 +38,7 @@ export default function SeclubElegantGuidePage() {
             <div className="flex justify-between items-end mb-8">
               <ScrollReveal side="left" type="h2" className="font-serif text-3xl md:text-4xl">Site Information</ScrollReveal>
               <Link href={"/camping/map"}>
-                <ScrollReveal side="right" type="div" className="flex items-center cursor-pointer group">SE Club 제 시설 지도보기<ArrowRight className="size-8 p-2 ml-2 rounded-full border border-foreground group-hover:bg-foreground group-hover:text-background transition-all duration-300" /></ScrollReveal>
+                <ScrollReveal side="right" type="div" className="flex items-center cursor-pointer group">SE Club 전체 시설 보기<ArrowRight className="size-8 p-2 ml-2 rounded-full border border-foreground group-hover:bg-foreground group-hover:text-background transition-all duration-300" /></ScrollReveal>
               </Link>
             </div>
 
