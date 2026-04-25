@@ -69,39 +69,33 @@ export function PopupSection() {
       description: editingPopup ? "팝업을 수정하는 중입니다." : "팝업을 등록하는 중입니다.",
     })
 
+    const basePopupData = {
+      title: formData.title,
+      content: formData.content || null,
+      link_url: formData.link_url || null,
+      active: formData.active,
+      priority: formData.priority,
+      start_date: formData.start_date || null,
+      end_date: formData.end_date || null,
+    }
+
     try {
-      let imageUrl: string | null = formData.existingImageUrl
-
-      // 새 이미지가 업로드된 경우
-      if (formData.imageBase64 && formData.imageContentType) {
-        const popupId = editingPopup?.id || crypto.randomUUID()
-        const { success: uploadSuccess, data: uploadedUrl, error: uploadError } =
-          await uploadPopupImage(popupId, formData.imageBase64, formData.imageContentType)
-
-        if (!uploadSuccess) {
-          toast({
-            title: "이미지 업로드 실패",
-            description: uploadError || "이미지 업로드 중 오류가 발생했습니다.",
-            variant: "destructive",
-          })
-          return
-        }
-        imageUrl = uploadedUrl
-      }
-
-      const popupData = {
-        title: formData.title,
-        content: formData.content || undefined,
-        image_url: imageUrl || undefined,
-        link_url: formData.link_url || undefined,
-        active: formData.active,
-        priority: formData.priority,
-        start_date: formData.start_date || undefined,
-        end_date: formData.end_date || undefined,
-      }
-
       if (editingPopup) {
-        const { success, error } = await updatePopup(editingPopup.id, popupData)
+        // 수정: 이미지 교체가 있으면 기존 id 폴더에 업로드. updatePopup이 이전 파일 정리.
+        let imageUrl: string | null = formData.existingImageUrl
+        if (formData.imageBase64 && formData.imageContentType) {
+          const up = await uploadPopupImage(editingPopup.id, formData.imageBase64, formData.imageContentType)
+          if (!up.success) {
+            toast({
+              title: "이미지 업로드 실패",
+              description: up.error || "이미지 업로드 중 오류가 발생했습니다.",
+              variant: "destructive",
+            })
+            return
+          }
+          imageUrl = up.data
+        }
+        const { success, error } = await updatePopup(editingPopup.id, { ...basePopupData, image_url: imageUrl })
         if (success) {
           const { data } = await getPopups()
           if (data) setPopups(data)
@@ -110,14 +104,30 @@ export function PopupSection() {
           toast({ title: "수정 실패", description: error || "팝업 수정 중 오류가 발생했습니다.", variant: "destructive" })
         }
       } else {
-        const { success, error } = await createPopup(popupData)
-        if (success) {
-          const { data } = await getPopups()
-          if (data) setPopups(data)
-          toast({ title: "등록 완료", description: "새로운 팝업이 등록되었습니다." })
-        } else {
-          toast({ title: "등록 실패", description: error || "팝업 등록 중 오류가 발생했습니다.", variant: "destructive" })
+        // 신규: popup row 먼저 생성 → 실제 DB id 폴더로 이미지 업로드 → image_url 갱신
+        const { success: createSuccess, data: created, error: createError } = await createPopup({
+          ...basePopupData,
+          image_url: null,
+        })
+        if (!createSuccess || !created) {
+          toast({ title: "등록 실패", description: createError || "팝업 등록 중 오류가 발생했습니다.", variant: "destructive" })
+          return
         }
+        if (formData.imageBase64 && formData.imageContentType) {
+          const up = await uploadPopupImage(created.id, formData.imageBase64, formData.imageContentType)
+          if (up.success && up.data) {
+            await updatePopup(created.id, { image_url: up.data })
+          } else {
+            toast({
+              title: "이미지 업로드 실패",
+              description: up.error || "팝업은 등록됐지만 이미지 업로드에 실패했습니다.",
+              variant: "destructive",
+            })
+          }
+        }
+        const { data } = await getPopups()
+        if (data) setPopups(data)
+        toast({ title: "등록 완료", description: "새로운 팝업이 등록되었습니다." })
       }
     } catch (error) {
       console.error("Popup save error:", error)
@@ -279,7 +289,7 @@ export function PopupSection() {
               />
             )}
             <div className="p-5">
-              <h3 className="text-lg font-serif font-medium text-gray-900">
+              <h3 className="text-lg font-medium text-gray-900">
                 {previewPopup?.title}
               </h3>
               {previewPopup?.content && (

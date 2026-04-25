@@ -31,13 +31,13 @@ export async function getPopups(): Promise<{
 
 export async function createPopup(popupData: {
   title: string;
-  content?: string;
-  image_url?: string;
-  link_url?: string;
+  content?: string | null;
+  image_url?: string | null;
+  link_url?: string | null;
   active: boolean;
   priority: number;
-  start_date?: string;
-  end_date?: string;
+  start_date?: string | null;
+  end_date?: string | null;
 }): Promise<{
   success: boolean;
   data: Popup | null;
@@ -73,6 +73,16 @@ export async function createPopup(popupData: {
   }
 }
 
+function extractPopupStoragePath(publicUrl: string): string | null {
+  try {
+    const url = new URL(publicUrl);
+    const m = url.pathname.match(/\/storage\/v1\/object\/public\/popups\/(.+)/);
+    return m ? m[1] : null;
+  } catch {
+    return null;
+  }
+}
+
 export async function updatePopup(
   id: string,
   updates: Partial<{
@@ -93,6 +103,19 @@ export async function updatePopup(
   try {
     const supabase = await createClient();
 
+    // image_url이 바뀌는 경우 이전 파일을 cleanup 대상으로 식별
+    let orphanedPath: string | null = null;
+    if ("image_url" in updates) {
+      const { data: existing } = await supabase
+        .from("popups")
+        .select("image_url")
+        .eq("id", id)
+        .single();
+      if (existing?.image_url && existing.image_url !== updates.image_url) {
+        orphanedPath = extractPopupStoragePath(existing.image_url);
+      }
+    }
+
     const { data, error } = await supabase
       .from("popups")
       .update({
@@ -106,6 +129,13 @@ export async function updatePopup(
     if (error) {
       console.error("Error updating popup:", error);
       return { success: false, data: null, error: "팝업 수정 중 오류가 발생했습니다." };
+    }
+
+    if (orphanedPath) {
+      const { error: removeError } = await supabase.storage.from("popups").remove([orphanedPath]);
+      if (removeError) {
+        console.warn("Failed to cleanup orphaned popup image:", orphanedPath, removeError);
+      }
     }
 
     return { success: true, data: data as Popup, error: null };
@@ -130,11 +160,9 @@ export async function deletePopup(id: string): Promise<{
       .single();
 
     if (popup?.image_url) {
-      // public URL에서 스토리지 경로 추출
-      const url = new URL(popup.image_url);
-      const pathMatch = url.pathname.match(/\/storage\/v1\/object\/public\/popups\/(.+)/);
-      if (pathMatch) {
-        await supabase.storage.from("popups").remove([pathMatch[1]]);
+      const path = extractPopupStoragePath(popup.image_url);
+      if (path) {
+        await supabase.storage.from("popups").remove([path]);
       }
     }
 

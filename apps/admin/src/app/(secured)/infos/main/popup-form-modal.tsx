@@ -251,7 +251,7 @@ export function PopupFormModal({ isOpen, onOpenChange, onSave, popup }: PopupFor
                   />
                 )}
                 <div className={imagePreview ? "p-5" : "px-5 pt-7 pb-5"}>
-                  <h3 className="text-lg font-serif font-medium text-gray-900">
+                  <h3 className="text-lg font-medium text-gray-900">
                     {title || "팝업 제목"}
                   </h3>
                   {(content || !title) && (

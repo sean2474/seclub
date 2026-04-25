@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/client"
+import { getSmallFileName, resizeImage } from "@/lib/util/image"
 
 // Define the GalleryItem type
 export interface GalleryItem {
@@ -10,66 +11,6 @@ export interface GalleryItem {
   originalUrl?: string
   path?: string
   smallPath?: string
-}
-
-// _small 파일명 생성 헬퍼
-function getSmallFileName(fileName: string): string {
-  const ext = fileName.split('.').pop()?.toLowerCase() || 'jpg'
-  const baseName = fileName.replace(/\.[^.]+$/, '')
-  return `${baseName}_small.${ext}`
-}
-
-// 이미지 리사이즈 (Canvas API 사용)
-async function resizeImage(file: File, maxWidth: number = 800): Promise<Blob> {
-  return new Promise((resolve, reject) => {
-    const img = new Image()
-    const canvas = document.createElement('canvas')
-    const ctx = canvas.getContext('2d')
-    
-    img.onload = () => {
-      let { width, height } = img
-      
-      // 원본이 maxWidth보다 작으면 그대로 반환
-      if (width <= maxWidth) {
-        file.arrayBuffer().then(buffer => {
-          resolve(new Blob([buffer], { type: file.type }))
-        })
-        return
-      }
-      
-      // 비율 유지하며 리사이즈
-      const ratio = maxWidth / width
-      width = maxWidth
-      height = Math.round(height * ratio)
-      
-      canvas.width = width
-      canvas.height = height
-      
-      ctx?.drawImage(img, 0, 0, width, height)
-      
-      canvas.toBlob(
-        (blob) => {
-          if (blob) {
-            // 압축 결과가 원본보다 크면 원본 반환
-            if (blob.size >= file.size) {
-              file.arrayBuffer().then(buffer => {
-                resolve(new Blob([buffer], { type: file.type }))
-              })
-            } else {
-              resolve(blob)
-            }
-          } else {
-            reject(new Error('Failed to create blob'))
-          }
-        },
-        file.type,
-        1.00
-      )
-    }
-    
-    img.onerror = () => reject(new Error('Failed to load image'))
-    img.src = URL.createObjectURL(file)
-  })
 }
 
 /**
