@@ -16,7 +16,7 @@ const categoryLabel: Record<string, string> = { camping: "캠핑", lodging: "숙
 export function DiscountSection() {
   const { toast } = useToast()
   const [rates, setRates] = useState<DiscountRate[]>([])
-  const [editingId, setEditingId] = useState<string | null>(null)
+  const [editingId, setEditingId] = useState<number | null>(null)
   const [editValue, setEditValue] = useState(0)
   const [saving, setSaving] = useState(false)
 
@@ -29,7 +29,7 @@ export function DiscountSection() {
     fetch()
   }, [])
 
-  const handleSave = async (id: string) => {
+  const handleSave = async (id: number) => {
     setSaving(true)
     const { success, error } = await updateDiscountRate(id, { discount_percent: editValue })
     if (success) {

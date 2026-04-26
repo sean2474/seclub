@@ -1,5 +1,5 @@
 export interface RoomRate {
-  id: string;
+  id: number;
   name: string;
   type: "lodging" | "camping";
   peak_rate: number;
@@ -9,15 +9,15 @@ export interface RoomRate {
 }
 
 export interface LateCheckoutRate {
-  id: string;
-  room_rates_id: string;
+  id: number;
+  room_id: number;
   hours_3: number;
   hours_6: number;
   room_name?: string;
 }
 
 export interface DiscountRate {
-  id: string;
+  id: number;
   season: string;
   category: string;
   nights: string;

@@ -13,7 +13,7 @@ import { Save } from "lucide-react"
 export function LateCheckoutSection() {
   const { toast } = useToast()
   const [rates, setRates] = useState<LateCheckoutRate[]>([])
-  const [editingId, setEditingId] = useState<string | null>(null)
+  const [editingId, setEditingId] = useState<number | null>(null)
   const [editValues, setEditValues] = useState<{ hours_3: number; hours_6: number }>({ hours_3: 0, hours_6: 0 })
   const [saving, setSaving] = useState(false)
 
@@ -31,7 +31,7 @@ export function LateCheckoutSection() {
     setEditValues({ hours_3: rate.hours_3, hours_6: rate.hours_6 })
   }
 
-  const handleSave = async (id: string) => {
+  const handleSave = async (id: number) => {
     setSaving(true)
     const { success, error } = await updateLateCheckoutRate(id, editValues)
     if (success) {

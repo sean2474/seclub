@@ -14,7 +14,7 @@ import { Save } from "lucide-react"
 export function RoomRatesSection() {
   const { toast } = useToast()
   const [rates, setRates] = useState<RoomRate[]>([])
-  const [editingId, setEditingId] = useState<string | null>(null)
+  const [editingId, setEditingId] = useState<number | null>(null)
   const [editValues, setEditValues] = useState<Partial<RoomRate>>({})
   const [saving, setSaving] = useState(false)
 
@@ -37,7 +37,7 @@ export function RoomRatesSection() {
     setEditValues({})
   }
 
-  const handleSave = async (id: string) => {
+  const handleSave = async (id: number) => {
     setSaving(true)
     const { success, error } = await updateRoomRate(id, {
       peak_rate: editValues.peak_rate,
@@ -96,7 +96,7 @@ export function RoomRatesSection() {
                   {editingId === rate.id ? (
                     <Input type="number" className="w-20" value={editValues.long_stay_discount ?? ""} onChange={e => setEditValues({ ...editValues, long_stay_discount: Number(e.target.value) })} />
                   ) : (
-                    rate.long_stay_discount + "%"
+                    rate.long_stay_discount.toLocaleString() + "원"
                   )}
                 </TableCell>
                 <TableCell>
