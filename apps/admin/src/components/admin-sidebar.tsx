@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Tent, ImageIcon, Megaphone, ChevronRight, Video, BedDouble, LayoutDashboard, DollarSign, BookOpen, TreePine, Recycle } from "lucide-react"
+import { Tent, ImageIcon, Megaphone, ChevronRight, Video, LayoutDashboard, DollarSign, BookOpen, TreePine, Recycle } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import Image from "next/image"
@@ -21,7 +21,6 @@ export default function AdminSidebar({ isMobile = false, isCollapsed = false, on
     { href: "/gallery", label: "사진 갤러리 관리", icon: ImageIcon },
     { href: "/gallery-reborn", label: "환생 갤러리 관리", icon: Recycle },
     { href: "/videos", label: "영상 갤러리 관리", icon: Video },
-    { href: "/infos", label: "객실 정보 관리", icon: BedDouble },
     { href: "/infos/main", label: "메인페이지 관리", icon: LayoutDashboard },
     { href: "/infos/rates", label: "객실/요금 관리", icon: DollarSign },
     { href: "/infos/guide", label: "이용 가이드 관리", icon: BookOpen },
