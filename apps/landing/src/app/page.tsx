@@ -60,7 +60,7 @@ export default async function Home() {
               eventName="reservation_group_main_btn"
               location="hero_group_reservation_btn"
               href="/reservation/group"
-              className="border border-background/70 pl-4 pr-1.5 py-2 text-sm md:pl-5 md:pr-2.5 md:py-3 bg-transparent text-background/90 hover:border-background hover:text-background hover:bg-background/10 transition-all duration-300 md:text-md flex items-center gap-2 rounded-xs cursor-pointer"
+              className="border border-secondary pl-4 pr-1.5 py-2 text-sm md:pl-5 md:pr-2.5 md:py-3 bg-secondary text-background hover:bg-secondary/85 hover:border-secondary/85 transition-all duration-300 md:text-md flex items-center gap-2 rounded-xs cursor-pointer"
             >
               단체 예약 <ChevronRight strokeWidth={1} />
             </LinkEventTracker>
