@@ -1,12 +1,59 @@
 "use client"
 
-import { useEditor, EditorContent } from "@tiptap/react"
+import { useEditor, EditorContent, type Editor } from "@tiptap/react"
 import StarterKit from "@tiptap/starter-kit"
+import { Extension } from "@tiptap/core"
 import { ResizableImage } from "./resizable-image"
 import TextAlign from "@tiptap/extension-text-align"
-import Underline from "@tiptap/extension-underline"
 import Placeholder from "@tiptap/extension-placeholder"
-import { useRef } from "react"
+import { TextStyle } from "@tiptap/extension-text-style"
+import { useMemo, useRef } from "react"
+
+const FontSize = Extension.create({
+  name: "fontSize",
+  addOptions() {
+    return { types: ["textStyle"] as string[] }
+  },
+  addGlobalAttributes() {
+    return [
+      {
+        types: this.options.types as string[],
+        attributes: {
+          fontSize: {
+            default: null,
+            parseHTML: (element: HTMLElement) => element.style.fontSize || null,
+            renderHTML: (attrs: { fontSize: string | null }) => {
+              if (!attrs.fontSize) return {}
+              return { style: `font-size: ${attrs.fontSize}` }
+            },
+          },
+        },
+      },
+    ] as unknown as never
+  },
+  addCommands() {
+    return {
+      setFontSize:
+        (size: string) =>
+        ({ chain }: { chain: () => { setMark: (name: string, attrs: Record<string, unknown>) => { run: () => boolean }; focus: () => { setMark: (name: string, attrs: Record<string, unknown>) => { run: () => boolean } } } }) =>
+          chain().setMark("textStyle", { fontSize: size }).run(),
+      unsetFontSize:
+        () =>
+        ({ chain }: { chain: () => { setMark: (name: string, attrs: Record<string, unknown>) => { run: () => boolean }; focus: () => { setMark: (name: string, attrs: Record<string, unknown>) => { run: () => boolean } } } }) =>
+          chain().setMark("textStyle", { fontSize: null }).run(),
+    } as Record<string, (...args: unknown[]) => unknown>
+  },
+})
+
+const FONT_SIZE_OPTIONS: { label: string; value: string }[] = [
+  { label: "기본", value: "" },
+  { label: "아주 작게 (12)", value: "12px" },
+  { label: "작게 (14)", value: "14px" },
+  { label: "보통 (16)", value: "16px" },
+  { label: "크게 (20)", value: "20px" },
+  { label: "아주 크게 (24)", value: "24px" },
+  { label: "초대형 (32)", value: "32px" },
+]
 import {
   Bold,
   Italic,
@@ -56,22 +103,20 @@ function ToolbarButton({
 }
 
 export function TiptapEditor({ content, onChange }: TiptapEditorProps) {
-  const fileInputRef = useRef<HTMLInputElement>(null)
+  const extensions = useMemo(
+    () => [
+      StarterKit.configure({ heading: { levels: [2, 3] } }),
+      ResizableImage,
+      TextAlign.configure({ types: ["heading", "paragraph"] }),
+      TextStyle,
+      FontSize,
+      Placeholder.configure({ placeholder: "내용을 입력하세요..." }),
+    ],
+    []
+  )
 
   const editor = useEditor({
-    extensions: [
-      StarterKit.configure({
-        heading: { levels: [2, 3] },
-      }),
-      ResizableImage,
-      TextAlign.configure({
-        types: ["heading", "paragraph"],
-      }),
-      Underline,
-      Placeholder.configure({
-        placeholder: "내용을 입력하세요...",
-      }),
-    ],
+    extensions,
     content,
     immediatelyRender: false,
     onUpdate: ({ editor }) => {
@@ -84,7 +129,17 @@ export function TiptapEditor({ content, onChange }: TiptapEditorProps) {
     },
   })
 
-  if (!editor) return null
+  if (!editor) {
+    return (
+      <div className="border rounded-md min-h-[340px] bg-muted/30 animate-pulse" aria-hidden />
+    )
+  }
+
+  return <EditorBody editor={editor} />
+}
+
+function EditorBody({ editor }: { editor: Editor }) {
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleImageUpload = () => {
     fileInputRef.current?.click()
@@ -94,7 +149,16 @@ export function TiptapEditor({ content, onChange }: TiptapEditorProps) {
     const files = e.target.files
     if (!files) return
 
-    Array.from(files).forEach((file) => {
+    const MAX_BYTES = 5 * 1024 * 1024 // 5MB
+    const accepted = Array.from(files).filter((file) => {
+      if (file.size > MAX_BYTES) {
+        alert(`'${file.name}'은(는) 5MB를 초과하여 업로드할 수 없습니다.`)
+        return false
+      }
+      return true
+    })
+
+    accepted.forEach((file) => {
       const reader = new FileReader()
       reader.onloadend = () => {
         editor.chain().focus().insertContent({
@@ -152,6 +216,27 @@ export function TiptapEditor({ content, onChange }: TiptapEditorProps) {
         >
           <Heading3 size={iconSize} />
         </ToolbarButton>
+
+        <select
+          value={(editor.getAttributes("textStyle").fontSize as string) || ""}
+          onChange={(e) => {
+            const v = e.target.value
+            const chain = editor.chain().focus()
+            if (!v) {
+              ;(chain as unknown as { unsetFontSize: () => { run: () => boolean } }).unsetFontSize().run()
+            } else {
+              ;(chain as unknown as { setFontSize: (s: string) => { run: () => boolean } }).setFontSize(v).run()
+            }
+          }}
+          className="ml-1 h-7 text-xs border rounded px-1 bg-background"
+          title="글자 크기"
+        >
+          {FONT_SIZE_OPTIONS.map((opt) => (
+            <option key={opt.value || "default"} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
+        </select>
 
         <div className="w-px h-5 bg-border mx-1" />
 

@@ -107,7 +107,7 @@ export function PopupFormModal({ isOpen, onOpenChange, onSave, popup }: PopupFor
   }, [startDate, endDate])
 
   const handleSubmit = () => {
-    if (!title.trim() || dateError) return
+    if (dateError) return
     onSave({
       title: title.trim(),
       content: content.trim(),
@@ -131,12 +131,12 @@ export function PopupFormModal({ isOpen, onOpenChange, onSave, popup }: PopupFor
 
         <div className="space-y-4 mt-4">
           <div className="space-y-2">
-            <Label htmlFor="popup-title">제목 *</Label>
+            <Label htmlFor="popup-title">제목</Label>
             <Input
               id="popup-title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="팝업 제목"
+              placeholder="팝업 제목 (선택)"
             />
           </div>
 
@@ -247,22 +247,26 @@ export function PopupFormModal({ isOpen, onOpenChange, onSave, popup }: PopupFor
                   <img
                     src={imagePreview}
                     alt="미리보기"
-                    className="w-full aspect-[4/3] object-cover"
+                    className="w-full h-auto block"
                   />
                 )}
-                <div className={imagePreview ? "p-5" : "px-5 pt-7 pb-5"}>
-                  <h3 className="text-lg font-medium text-gray-900">
-                    {title || "팝업 제목"}
-                  </h3>
-                  {(content || !title) && (
-                    <p className="mt-2 text-sm text-gray-600 leading-relaxed">
-                      {content || "팝업 내용이 여기에 표시됩니다."}
-                    </p>
-                  )}
-                  {linkUrl && (
-                    <p className="mt-3 text-sm text-gray-900 font-medium">자세히 보기 →</p>
-                  )}
-                </div>
+                {(title || content || linkUrl) && (
+                  <div className={imagePreview ? "p-5" : "px-5 pt-7 pb-5"}>
+                    {title && (
+                      <h3 className="text-lg font-medium text-gray-900">
+                        {title}
+                      </h3>
+                    )}
+                    {content && (
+                      <p className={`${title ? "mt-2 " : ""}text-sm text-gray-600 leading-relaxed`}>
+                        {content}
+                      </p>
+                    )}
+                    {linkUrl && (
+                      <p className={`${title || content ? "mt-3 " : ""}text-sm text-gray-900 font-medium`}>자세히 보기 →</p>
+                    )}
+                  </div>
+                )}
                 <div className="flex border-t text-sm">
                   <button className="flex-1 py-3 text-gray-500 hover:bg-gray-50 transition-colors">
                     오늘 하루 보지 않기
@@ -279,7 +283,7 @@ export function PopupFormModal({ isOpen, onOpenChange, onSave, popup }: PopupFor
             <Button variant="outline" onClick={() => onOpenChange(false)}>
               취소
             </Button>
-            <Button onClick={handleSubmit} disabled={!title.trim() || !!dateError}>
+            <Button onClick={handleSubmit} disabled={!!dateError}>
               {popup ? "수정" : "등록"}
             </Button>
           </div>

@@ -66,8 +66,18 @@ export function NoticeFormModal({ isOpen, onOpenChange, onSave, notice }: Notice
     }
   }, [notice, isOpen])
 
+  const isContentEmpty = (html: string) => {
+    if (!html) return true
+    const stripped = html
+      .replace(/<br\s*\/?\s*>/gi, "")
+      .replace(/&nbsp;/gi, " ")
+      .replace(/<[^>]+>/g, "")
+      .trim()
+    return stripped.length === 0
+  }
+
   const handleSubmit = () => {
-    if (title === "" || content === "" || content === "<p></p>" || category === "") {
+    if (title === "" || isContentEmpty(content) || category === "") {
       toast({
         title: "❌ 오류 발생",
         description: "카테고리, 제목, 내용은 필수입니다.",
@@ -221,6 +231,36 @@ export function NoticeFormModal({ isOpen, onOpenChange, onSave, notice }: Notice
           <DialogTitle>{notice ? "공지 수정" : "새 공지 작성"}</DialogTitle>
           <DialogDescription>{notice ? "공지사항을 수정합니다." : "새로운 공지사항을 등록합니다."}</DialogDescription>
         </DialogHeader>
+        <Tabs defaultValue="write" className="w-full">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="write">작성</TabsTrigger>
+            <TabsTrigger value="preview">미리보기</TabsTrigger>
+          </TabsList>
+          <TabsContent value="preview" className="mt-4">
+            <div className="border rounded-md p-6 min-h-[300px]">
+              <div className="border-b border-foreground pb-4 mb-4">
+                <p className="text-sm text-foreground/80 mb-1">{category || "(카테고리 미선택)"}</p>
+                <h1 className="text-2xl font-bold text-foreground">
+                  {pinned && (
+                    <span className="text-xs bg-foreground text-background px-1.5 py-0.5 mr-2 align-middle">고정</span>
+                  )}
+                  {title || "(제목 없음)"}
+                </h1>
+                <div className="flex items-center gap-3 text-xs text-foreground/60 mt-2">
+                  <span>상태: {active ? "게시 중" : "비게시"}</span>
+                </div>
+              </div>
+              {content && content !== "<p></p>" ? (
+                <div
+                  className="prose max-w-none [&_img]:max-w-full [&_img]:h-auto"
+                  dangerouslySetInnerHTML={{ __html: content }}
+                />
+              ) : (
+                <p className="text-sm text-muted-foreground italic">(내용이 비어있습니다)</p>
+              )}
+            </div>
+          </TabsContent>
+          <TabsContent value="write" className="mt-4">
         <div className="grid gap-4 py-4">
           <div className="grid gap-2">
             <Label htmlFor="title">제목</Label>
@@ -334,16 +374,12 @@ export function NoticeFormModal({ isOpen, onOpenChange, onSave, notice }: Notice
               </div>
               <Select value={category} onValueChange={(value: string) => setCategory(value)}>
                 <SelectTrigger id="category">
-                  <SelectValue placeholder="카테고리 선택" />
+                  <SelectValue placeholder={categories.length > 0 ? "카테고리 선택" : "먼저 '카테고리 관리'에서 카테고리를 추가하세요"} />
                 </SelectTrigger>
                 <SelectContent>
-                  {categories.length > 0 ? (
-                    categories.map((cat) => (
-                      <SelectItem key={cat} value={cat}>{cat}</SelectItem>
-                    ))
-                  ) : (
-                    <SelectItem value="no-category">카테고리 없음</SelectItem>
-                  )}
+                  {categories.map((cat) => (
+                    <SelectItem key={cat} value={cat}>{cat}</SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
@@ -368,6 +404,8 @@ export function NoticeFormModal({ isOpen, onOpenChange, onSave, notice }: Notice
             </div>
           </div>
         </div>
+          </TabsContent>
+        </Tabs>
         <DialogFooter>
           <Button type="button" onClick={handleSubmit}>
             저장

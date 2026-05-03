@@ -221,7 +221,7 @@ export function PopupSection() {
                       </TableCell>
                       <TableCell>{item.created_at.split("T")[0]}</TableCell>
                       <TableCell>
-                        <DropdownMenu>
+                        <DropdownMenu modal={false}>
                           <DropdownMenuTrigger asChild>
                             <Button variant="ghost" className="h-8 w-8 p-0">
                               <MoreHorizontal className="h-4 w-4" />
@@ -285,19 +285,23 @@ export function PopupSection() {
               <img
                 src={previewPopup.image_url}
                 alt={previewPopup.title}
-                className="w-full aspect-[4/3] object-cover"
+                className="w-full h-auto block"
               />
             )}
-            <div className="p-5">
-              <h3 className="text-lg font-medium text-gray-900">
-                {previewPopup?.title}
-              </h3>
-              {previewPopup?.content && (
-                <p className="mt-2 text-sm text-gray-600 leading-relaxed">
-                  {previewPopup.content}
-                </p>
-              )}
-            </div>
+            {(previewPopup?.title || previewPopup?.content) && (
+              <div className="p-5">
+                {previewPopup?.title && (
+                  <h3 className="text-lg font-medium text-gray-900">
+                    {previewPopup.title}
+                  </h3>
+                )}
+                {previewPopup?.content && (
+                  <p className={`${previewPopup?.title ? "mt-2 " : ""}text-sm text-gray-600 leading-relaxed`}>
+                    {previewPopup.content}
+                  </p>
+                )}
+              </div>
+            )}
             <div className="flex border-t text-sm">
               <button
                 className="flex-1 py-3 text-gray-500 hover:bg-gray-50 transition-colors"

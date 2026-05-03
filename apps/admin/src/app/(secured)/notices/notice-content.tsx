@@ -161,10 +161,25 @@ export function NoticesContent() {
     }
   }
 
-  const handleToggleStatus = (id: string, currentStatus: boolean) => {
-    const newStatus: boolean = !currentStatus
+  const handleToggleStatus = async (id: string, currentStatus: boolean) => {
+    const newStatus = !currentStatus
+    // optimistic update
     setNotices(notices.map((n) => (n.id === id ? { ...n, active: newStatus } : n)))
-    toast({ title: "상태 변경", description: `공지 상태가 '${newStatus}'(으)로 변경되었습니다.` })
+    const { success, error } = await updateNotice(id, { active: newStatus })
+    if (!success) {
+      // rollback
+      setNotices(notices.map((n) => (n.id === id ? { ...n, active: currentStatus } : n)))
+      toast({
+        title: "❌ 상태 변경 실패",
+        description: error || "상태를 변경하지 못했습니다.",
+        variant: "destructive",
+      })
+      return
+    }
+    toast({
+      title: "✅ 상태 변경",
+      description: `공지가 ${newStatus ? "게시 중" : "비게시"} 상태로 변경되었습니다.`,
+    })
   }
 
   return (

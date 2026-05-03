@@ -197,7 +197,8 @@ export async function deleteCategory(type: string): Promise<{
 }
 
 /**
- * Fetch all categories from the database
+ * Fetch all categories. Falls back to categories used in existing notices
+ * when the `category` table is empty (recovers gracefully from missing seed).
  */
 export async function getCategories(): Promise<{
   success: boolean;
@@ -206,12 +207,12 @@ export async function getCategories(): Promise<{
 }> {
   try {
     const supabase = await createClient();
-    
+
     const { data, error } = await supabase
       .from("category")
-      .select("*")
+      .select("type")
       .order("type", { ascending: true });
-    
+
     if (error) {
       console.error("Error fetching categories:", error);
       return {
@@ -221,11 +222,19 @@ export async function getCategories(): Promise<{
       };
     }
 
-    const categories = data.map((category: { type: string }) => category.type);
-    
+    const tableCats = data.map((c: { type: string }) => c.type);
+
+    // notice 테이블에서 실제로 사용 중인 카테고리도 포함하여 누락 방지
+    const { data: noticeData } = await supabase.from("notice").select("category");
+    const noticeCats = (noticeData || [])
+      .map((n: { category: string }) => n.category)
+      .filter(Boolean);
+
+    const merged = Array.from(new Set([...tableCats, ...noticeCats])).sort();
+
     return {
       success: true,
-      data: categories,
+      data: merged,
       error: null,
     };
   } catch (error) {
