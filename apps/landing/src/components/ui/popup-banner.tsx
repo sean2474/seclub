@@ -142,13 +142,13 @@ export function PopupBanner({ popups }: PopupBannerProps) {
         {/* 하단 버튼 */}
         <div className="flex border-t border-gray-100 text-sm">
           <button
-            className="flex-1 py-3.5 text-gray-400 hover:text-gray-600 hover:bg-gray-50/50 transition-colors tracking-tight"
+            className="flex-1 py-3.5 text-gray-400 hover:text-gray-600 hover:bg-gray-50/50 transition-colors tracking-tight cursor-pointer"
             onClick={handleDismissToday}
           >
             오늘 하루 보지 않기
           </button>
           <button
-            className="flex-1 py-3.5 border-l border-gray-100 text-gray-900 font-medium hover:bg-gray-50/50 transition-colors tracking-tight"
+            className="flex-1 py-3.5 border-l border-gray-100 text-gray-900 font-medium hover:bg-gray-50/50 transition-colors tracking-tight cursor-pointer"
             onClick={handleClose}
           >
             닫기
