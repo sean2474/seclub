@@ -27,4 +27,13 @@ yarn-error.log*
 next-env.d.ts
 
 .claude
+.claude/
 playwright.config.ts
+test-results/
+tests/
+
+# AI
+CLAUDE.md
+HANDOFF.md
+TIMELINE.md
+eval-screenshots/
