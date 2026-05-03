@@ -3,6 +3,8 @@
 @import "../styles/fonts.css";
 @import "../styles/animations.css";
 
+@plugin "@tailwindcss/typography";
+
 @font-face {
   .font-pretendard {
     font-family: var(--font-pretendard);
