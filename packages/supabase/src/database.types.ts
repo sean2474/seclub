@@ -408,6 +408,11 @@ export type Database = {
         Args: { p_notice_id: string }
         Returns: undefined
       }
+      reorder_gallery_reborn_items: {
+        Args: { p_orders: Json }
+        Returns: undefined
+      }
+      reorder_videos: { Args: { p_orders: Json }; Returns: undefined }
     }
     Enums: {
       role: "admin" | "reservation_manager" | "gallery_manager" | "user"
