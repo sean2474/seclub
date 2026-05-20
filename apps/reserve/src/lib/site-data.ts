@@ -1,0 +1,331 @@
+export type SiteNumber = {
+  id: string;
+  maxNights: number;
+}
+
+export type SiteData = {
+  id: string;
+  title: string;
+  features: string[];
+  imageQuery?: string;
+  image?: string;
+  disallowed?: string[];
+  allowed?: string[];
+  petAllowed?: boolean;
+  siteNumbers?: SiteNumber[]; // 사이트별 번호 목록
+  // 사이트 크기 정보
+  siteSize?: string; // 예: "10m X 7m"
+  // 가격 정보
+  price: number;
+  weekendPrice: number;
+  peakPrice: number;
+  baseGuests: number;
+  maxGuests: number;
+  extraPersonFee?: number;
+  petFee?: number;
+  maxPets?: number;
+  checkIn: string;
+  checkOut: string;
+}
+
+export const siteData: SiteData[] = [
+  {
+    id: "S",
+    title: "S 사이트",
+    features: ["바다 바로 앞 데크", "최적의오션뷰", "반려동물 가능(S1 & S2)"],
+    disallowed: ["차박", "카라반", "캠핑카", "루프탑"],
+    image: "/images/site/s.jpg",
+    petAllowed: true,
+    siteNumbers: [
+      { id: "S1", maxNights: 7 },
+      { id: "S2", maxNights: 7 },
+      { id: "S3", maxNights: 5 },
+      { id: "S4", maxNights: 5 },
+      { id: "S5", maxNights: 3 },
+    ],
+    siteSize: "10m X 7m",
+    price: 50000,
+    weekendPrice: 70000,
+    peakPrice: 90000,
+    baseGuests: 4,
+    maxGuests: 6,
+    extraPersonFee: 10000,
+    petFee: 10000,
+    maxPets: 2,
+    checkIn: "14:00",
+    checkOut: "12:00",
+  },
+  {
+    id: "A",
+    title: "A 사이트",
+    features: ["바닷가 솔숲 평지 데크 or 파쇄석", "2해변 인접", "반려동물 동반 가능"],
+    disallowed: ["차박", "카라반", "캠핑카", "루프탑"],
+    image: "/images/site/a.jpg",
+    petAllowed: true,
+    siteNumbers: [
+      { id: "A1", maxNights: 7 },
+      { id: "A2", maxNights: 7 },
+      { id: "A3", maxNights: 5 },
+      { id: "A4", maxNights: 5 },
+      { id: "A5", maxNights: 5 },
+      { id: "A6", maxNights: 3 },
+      { id: "A7", maxNights: 3 },
+      { id: "A8", maxNights: 3 },
+    ],
+    siteSize: "10m X 7m",
+    price: 45000,
+    weekendPrice: 65000,
+    peakPrice: 85000,
+    baseGuests: 4,
+    maxGuests: 6,
+    extraPersonFee: 10000,
+    petFee: 10000,
+    maxPets: 2,
+    checkIn: "14:00",
+    checkOut: "12:00",
+  },
+  {
+    id: "B",
+    title: "B 사이트",
+    features: ["해변 평지 파쇄석", "2해변 & 공용수영장 인접"],
+    allowed: ["카라반", "캠핑카", "차박", "루프탑"],
+    image: "/images/site/b.jpg",
+    siteNumbers: [
+      { id: "B1", maxNights: 7 },
+      { id: "B2", maxNights: 7 },
+      { id: "B3", maxNights: 5 },
+      { id: "B4", maxNights: 5 },
+      { id: "B5", maxNights: 3 },
+      { id: "B6", maxNights: 3 },
+    ],
+    siteSize: "10m X 8m",
+    price: 40000,
+    weekendPrice: 60000,
+    peakPrice: 80000,
+    baseGuests: 4,
+    maxGuests: 6,
+    extraPersonFee: 10000,
+    checkIn: "14:00",
+    checkOut: "12:00",
+  },
+  {
+    id: "C",
+    title: "C 사이트",
+    features: ["해변 평지 파쇄석", "1해변 & 독살체험장 인접"],
+    allowed: ["카라반", "캠핑카", "차박", "루프탑"],
+    image: "/images/site/c.jpg",
+    siteNumbers: [
+      { id: "C1", maxNights: 7 },
+      { id: "C2", maxNights: 7 },
+      { id: "C3", maxNights: 5 },
+      { id: "C4", maxNights: 5 },
+      { id: "C5", maxNights: 5 },
+      { id: "C6", maxNights: 3 },
+      { id: "C7", maxNights: 3 },
+      { id: "C8", maxNights: 3 },
+    ],
+    siteSize: "10m X 8m",
+    price: 40000,
+    weekendPrice: 60000,
+    peakPrice: 80000,
+    baseGuests: 4,
+    maxGuests: 6,
+    extraPersonFee: 10000,
+    checkIn: "14:00",
+    checkOut: "12:00",
+  },
+  {
+    id: "D",
+    title: "D 사이트",
+    features: ["중앙 평지 파쇄석", "영유아 & 어르신 추천"],
+    allowed: ["카라반", "캠핑카", "차박", "루프탑"],
+    image: "/images/site/d.jpg",
+    siteNumbers: [
+      { id: "D1", maxNights: 7 },
+      { id: "D2", maxNights: 7 },
+      { id: "D3", maxNights: 5 },
+      { id: "D4", maxNights: 5 },
+      { id: "D5", maxNights: 3 },
+      { id: "D6", maxNights: 3 },
+    ],
+    siteSize: "9m X 7m",
+    price: 35000,
+    weekendPrice: 55000,
+    peakPrice: 75000,
+    baseGuests: 4,
+    maxGuests: 6,
+    extraPersonFee: 10000,
+    checkIn: "14:00",
+    checkOut: "12:00",
+  },
+  {
+    id: "E",
+    title: "E 사이트",
+    features: ["중앙 평지 파쇄석", "영유아 & 어르신 추천"],
+    allowed: ["카라반", "캠핑카", "차박", "루프탑"],
+    image: "/images/site/e.jpg",
+    siteNumbers: [
+      { id: "E1", maxNights: 7 },
+      { id: "E2", maxNights: 7 },
+      { id: "E3", maxNights: 5 },
+      { id: "E4", maxNights: 3 },
+      { id: "E5", maxNights: 3 },
+    ],
+    siteSize: "9m X 7m",
+    price: 35000,
+    weekendPrice: 55000,
+    peakPrice: 75000,
+    baseGuests: 4,
+    maxGuests: 6,
+    extraPersonFee: 10000,
+    checkIn: "14:00",
+    checkOut: "12:00",
+  },
+  {
+    id: "F",
+    title: "F 사이트",
+    features: ["바닷가 솔숲 데크", "1해변 & 독살체험장 인접"],
+    image: "/images/site/f.jpg",
+    siteNumbers: [
+      { id: "F1", maxNights: 7 },
+      { id: "F2", maxNights: 7 },
+      { id: "F3", maxNights: 5 },
+      { id: "F4", maxNights: 5 },
+      { id: "F5", maxNights: 3 },
+      { id: "F6", maxNights: 3 },
+    ],
+    siteSize: "8m X 6m",
+    price: 45000,
+    weekendPrice: 65000,
+    peakPrice: 85000,
+    baseGuests: 4,
+    maxGuests: 6,
+    extraPersonFee: 10000,
+    checkIn: "14:00",
+    checkOut: "12:00",
+  },
+  {
+    id: "G",
+    title: "G 사이트",
+    features: ["바닷가 솔숲 데크", "1해변 & 독살체험장 인접"],
+    image: "/images/site/g.jpg",
+    siteNumbers: [
+      { id: "G1", maxNights: 7 },
+      { id: "G2", maxNights: 7 },
+      { id: "G3", maxNights: 5 },
+      { id: "G4", maxNights: 3 },
+      { id: "G5", maxNights: 3 },
+    ],
+    siteSize: "8m X 6m",
+    price: 45000,
+    weekendPrice: 65000,
+    peakPrice: 85000,
+    baseGuests: 4,
+    maxGuests: 6,
+    extraPersonFee: 10000,
+    checkIn: "14:00",
+    checkOut: "12:00",
+  },
+  {
+    id: "H",
+    title: "H 사이트",
+    features: ["중앙 평지 파쇄석", "2가족 이용 추천"],
+    image: "/images/site/h.jpg",
+    siteNumbers: [
+      { id: "H1", maxNights: 7 },
+      { id: "H2", maxNights: 7 },
+      { id: "H3", maxNights: 5 },
+      { id: "H4", maxNights: 5 },
+    ],
+    siteSize: "15m X 10m",
+    price: 60000,
+    weekendPrice: 80000,
+    peakPrice: 100000,
+    baseGuests: 6,
+    maxGuests: 10,
+    extraPersonFee: 10000,
+    checkIn: "14:00",
+    checkOut: "12:00",
+  },
+  {
+    id: "K",
+    title: "K 사이트",
+    features: ["파쇄석 사이트", "탁트인 오션뷰 & 낙조"],
+    allowed: ["K3 - 5 카라반, 캠핑카, 차박, 루프탑"],
+    image: "/images/site/k.jpg",
+    siteNumbers: [
+      { id: "K1", maxNights: 7 },
+      { id: "K2", maxNights: 7 },
+      { id: "K3", maxNights: 5 },
+      { id: "K4", maxNights: 5 },
+      { id: "K5", maxNights: 3 },
+    ],
+    siteSize: "10m X 8m",
+    price: 50000,
+    weekendPrice: 70000,
+    peakPrice: 90000,
+    baseGuests: 4,
+    maxGuests: 6,
+    extraPersonFee: 10000,
+    checkIn: "14:00",
+    checkOut: "12:00",
+  },
+  {
+    id: "전망",
+    title: "전망 사이트",
+    features: ["독립된 파쇄석", "탁 트인 오션뷰 & 낙조"],
+    allowed: ["전망 14 - 17 카라반, 캠핑카, 차박, 루프탑"],
+    image: "/images/site/view_site.jpg",
+    siteNumbers: [
+      { id: "전망14", maxNights: 7 },
+      { id: "전망15", maxNights: 7 },
+      { id: "전망16", maxNights: 5 },
+      { id: "전망17", maxNights: 5 },
+    ],
+    siteSize: "12m X 8m",
+    price: 55000,
+    weekendPrice: 75000,
+    peakPrice: 95000,
+    baseGuests: 4,
+    maxGuests: 6,
+    extraPersonFee: 10000,
+    checkIn: "14:00",
+    checkOut: "12:00",
+  },
+  {
+    id: "반려동물",
+    title: "반려동물 캠핑장",
+    features: ["솔숲 파쇄석", "탁트인 오션뷰 & 낙조", "반려동물 전용"],
+    allowed: ["반려동물 1-5, 17 차박 루프탑"],
+    image: "/images/site/pet_site.jpg",
+    petAllowed: true,
+    siteNumbers: [
+      { id: "반려동물1", maxNights: 7 },
+      { id: "반려동물2", maxNights: 7 },
+      { id: "반려동물3", maxNights: 5 },
+      { id: "반려동물4", maxNights: 5 },
+      { id: "반려동물5", maxNights: 3 },
+      { id: "반려동물17", maxNights: 3 },
+    ],
+    siteSize: "10m X 7m",
+    price: 45000,
+    weekendPrice: 65000,
+    peakPrice: 85000,
+    baseGuests: 4,
+    maxGuests: 6,
+    extraPersonFee: 10000,
+    petFee: 10000,
+    maxPets: 3,
+    checkIn: "14:00",
+    checkOut: "12:00",
+  },
+]
+
+export const siteCategories = ["All", "S", "A", "B", "C", "D", "E", "F", "G", "H", "K", "전망", "반려동물"]
+
+export function getSiteById(id: string): SiteData | undefined {
+  return siteData.find(site => site.id === id);
+}
+
+// 차량 대수 옵션
+export const vehicleCounts = [0, 1, 2, 3, 4, 5] as const;
