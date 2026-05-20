@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@seclub/supabase/server";
+import type { TablesUpdate } from "@seclub/supabase/types";
 import type { Notice } from "@/types/notices";
 import crypto from "crypto";
 
@@ -219,7 +220,7 @@ export async function updateNotice(
       processedContent = await uploadHtmlImages(processedContent, id, supabase);
     }
 
-    const updateData: Record<string, unknown> = {};
+    const updateData: TablesUpdate<"notice"> = {};
     if (noticeData.title !== undefined) updateData.title = noticeData.title;
     if (processedContent !== undefined) updateData.content = processedContent;
     if (noticeData.category !== undefined) updateData.category = noticeData.category;

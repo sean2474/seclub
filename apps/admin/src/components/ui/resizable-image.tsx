@@ -105,7 +105,7 @@ export const ResizableImage = Node.create({
   },
 
   addNodeView() {
-    return ReactNodeViewRenderer(ResizableImageComponent)
+    return ReactNodeViewRenderer(ResizableImageComponent as unknown as Parameters<typeof ReactNodeViewRenderer>[0])
   },
 
   addCommands() {

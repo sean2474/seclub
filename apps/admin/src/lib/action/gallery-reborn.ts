@@ -1,4 +1,5 @@
 import { createClient } from "@seclub/supabase/client"
+import type { TablesUpdate } from "@seclub/supabase/types"
 import { getSmallFileName, resizeImage } from "@/lib/util/image"
 import type {
   GalleryRebornItem,
@@ -155,7 +156,7 @@ export async function updateGalleryRebornItem(
       throw new Error(`Invalid layoutType: ${patch.layoutType}`)
     }
     const supabase = createClient()
-    const updates: Record<string, unknown> = {}
+    const updates: TablesUpdate<"gallery_reborn_items"> = {}
     if (patch.title !== undefined) updates.title = patch.title
     if (patch.description !== undefined) updates.description = patch.description
     if (patch.captionEn !== undefined) updates.caption_en = patch.captionEn

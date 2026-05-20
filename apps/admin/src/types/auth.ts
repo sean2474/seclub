@@ -1,10 +1,4 @@
-export type Role = "admin" | "user" | "gallery_manager" | "reservation_manager"
+import type { Tables, Enums } from "@seclub/supabase/types";
 
-export interface Profile {
-  created_at: string
-  id: string
-  image_path?: string
-  name?: string
-  role: Role
-  updated_at: string
-}
+export type Role = Enums<"role">;
+export type Profile = Tables<"profile">;

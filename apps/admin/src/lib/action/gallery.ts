@@ -44,7 +44,7 @@ export async function fetchGalleryImages(): Promise<{ items: GalleryItem[], erro
     // Get public URLs for all files
     const galleryItems = originalFiles.map(file => {
       // Skip folders
-      if (file.id.endsWith('/')) return null
+      if (file.id?.endsWith('/')) return null
       
       const smallFileName = getSmallFileName(file.name)
       const hasSmall = files.some(f => f.name === smallFileName)

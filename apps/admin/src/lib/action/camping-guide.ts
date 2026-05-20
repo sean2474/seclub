@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@seclub/supabase/server";
+import type { Json } from "@seclub/supabase/types";
 
 export interface CampingGuideSection {
   key: string;
@@ -30,7 +31,7 @@ export async function getCampingGuide(): Promise<{
       .limit(1)
       .single();
     if (error) return { success: false, data: null, error: "이용 가이드를 불러오는 중 오류가 발생했습니다." };
-    return { success: true, data: { id: data.id, sections: data.sections as CampingGuideSection[] }, error: null };
+    return { success: true, data: { id: data.id, sections: data.sections as unknown as CampingGuideSection[] }, error: null };
   } catch {
     return { success: false, data: null, error: "이용 가이드를 불러오는 중 오류가 발생했습니다." };
   }
@@ -44,7 +45,7 @@ export async function updateCampingGuide(
     const supabase = await createClient();
     const { error } = await supabase
       .from("camping_guide")
-      .update({ sections, updated_at: new Date().toISOString() })
+      .update({ sections: sections as unknown as Json, updated_at: new Date().toISOString() })
       .eq("id", id);
     if (error) return { success: false, error: "이용 가이드 수정 중 오류가 발생했습니다." };
     return { success: true, error: null };

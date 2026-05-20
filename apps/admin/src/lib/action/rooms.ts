@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@seclub/supabase/server";
+import type { TablesUpdate } from "@seclub/supabase/types";
 import type { RoomRate, LateCheckoutRate, DiscountRate, RoomInfo } from "@/types/rooms";
 
 // ===== Room Rates =====
@@ -117,7 +118,7 @@ export async function updateRoomInfo(
 ): Promise<{ success: boolean; error: string | null }> {
   try {
     const supabase = await createClient();
-    const { error } = await supabase.from("room_infos").update(updates).eq("slug", slug);
+    const { error } = await supabase.from("room_infos").update(updates as unknown as TablesUpdate<"room_infos">).eq("slug", slug);
     if (error) return { success: false, error: "객실 정보 수정 중 오류가 발생했습니다." };
     return { success: true, error: null };
   } catch {
