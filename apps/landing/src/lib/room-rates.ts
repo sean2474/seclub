@@ -1,23 +1,31 @@
 import { createClient } from "@seclub/supabase/server";
 import { Discounts, LodgingRates } from "@/types/room-rate";
 
-// DB에서 숙박 요금 조회
-export async function getLodgingRates(): Promise<LodgingRates> {
-  const supabase = await createClient();
+type RoomRateRow = {
+  name: string;
+  type: string;
+  peak_rate: number;
+  winter_rate: number;
+  long_stay_discount: number | null;
+};
 
+async function fetchRoomRates(): Promise<RoomRateRow[]> {
+  const supabase = await createClient();
   const { data, error } = await supabase
     .from("room_rates")
-    .select("name, peak_rate, winter_rate, long_stay_discount")
-    .eq("type", "lodging")
+    .select("name, type, peak_rate, winter_rate, long_stay_discount")
     .order("display_order");
 
   if (error || !data) {
-    console.error("Lodging rates fetch error:", error);
-    return {};
+    console.error("Room rates fetch error:", error);
+    return [];
   }
+  return data as RoomRateRow[];
+}
 
+function toLodgingRates(rows: RoomRateRow[]): LodgingRates {
   const result: LodgingRates = {};
-  data.forEach((row) => {
+  rows.forEach((row) => {
     result[row.name] = {
       rates: {
         "최성수기": row.peak_rate,
@@ -26,37 +34,19 @@ export async function getLodgingRates(): Promise<LodgingRates> {
       longStayDiscount: row.long_stay_discount ?? undefined,
     };
   });
-
   return result;
+}
+
+// DB에서 숙박 요금 조회
+export async function getLodgingRates(): Promise<LodgingRates> {
+  const rows = await fetchRoomRates();
+  return toLodgingRates(rows.filter((r) => r.type === "lodging"));
 }
 
 // DB에서 캠핑 요금 조회
 export async function getCampingRates(): Promise<LodgingRates> {
-  const supabase = await createClient();
-
-  const { data, error } = await supabase
-    .from("room_rates")
-    .select("name, peak_rate, winter_rate, long_stay_discount")
-    .eq("type", "camping")
-    .order("display_order");
-
-  if (error || !data) {
-    console.error("Camping rates fetch error:", error);
-    return {};
-  }
-
-  const result: LodgingRates = {};
-  data.forEach((row) => {
-    result[row.name] = {
-      rates: {
-        "최성수기": row.peak_rate,
-        "동절기": row.winter_rate,
-      },
-      longStayDiscount: row.long_stay_discount ?? undefined,
-    };
-  });
-
-  return result;
+  const rows = await fetchRoomRates();
+  return toLodgingRates(rows.filter((r) => r.type === "camping"));
 }
 
 // DB에서 레이트체크아웃 요금 조회
@@ -121,17 +111,15 @@ export async function getDiscounts(): Promise<Discounts> {
 
 // 전체 요금 정보 한번에 조회
 export async function getAllPricing() {
-  const [lodgingRates, campingRates, lateCheckoutRates, discounts] =
-    await Promise.all([
-      getLodgingRates(),
-      getCampingRates(),
-      getLateCheckoutRates(),
-      getDiscounts(),
-    ]);
+  const [roomRows, lateCheckoutRates, discounts] = await Promise.all([
+    fetchRoomRates(),
+    getLateCheckoutRates(),
+    getDiscounts(),
+  ]);
 
   return {
-    lodgingRates,
-    campingRates,
+    lodgingRates: toLodgingRates(roomRows.filter((r) => r.type === "lodging")),
+    campingRates: toLodgingRates(roomRows.filter((r) => r.type === "camping")),
     lateCheckoutRates,
     discounts,
   };

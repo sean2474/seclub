@@ -1,5 +1,12 @@
 import { createClient } from "@seclub/supabase/client"
-import { getSmallFileName, resizeImage } from "@/lib/util/image"
+import { getSmallFileName } from "@/lib/util/image"
+import {
+  assertNoSmallSuffix,
+  removeOriginalAndSmall,
+  uploadOriginalAndSmall,
+} from "@/lib/util/storage-image"
+
+const BUCKET = "gallery"
 
 // Define the GalleryItem type
 export interface GalleryItem {
@@ -87,80 +94,38 @@ export async function fetchGalleryImages(): Promise<{ items: GalleryItem[], erro
 /**
  * Uploads images to the gallery bucket (원본 + _small 버전 함께 업로드)
  */
-export async function uploadGalleryImages(images: { file: File, id: string, title: string, date: string }[]): 
+export async function uploadGalleryImages(images: { file: File, id: string, title: string, date: string }[]):
   Promise<{ uploadedItems: GalleryItem[], error: Error | null }> {
   try {
-    // _small이 포함된 파일명 체크
-    const invalidFile = images.find(img => img.file && /_small\./i.test(img.file.name))
-    if (invalidFile) {
-      throw new Error(`파일명에 '_small'을 포함할 수 없습니다: ${invalidFile.file?.name}`)
-    }
-    
+    assertNoSmallSuffix(images.map((i) => i.file).filter((f): f is File => !!f))
+
     const supabase = createClient()
     const uploadedItems: GalleryItem[] = []
-    
-    // Upload each file to Supabase storage
+
     for (const image of images) {
       if (!image.file) continue
-      
-      // Generate unique file name (using timestamp + random)
+
       const fileExt = image.file.name.split('.').pop()?.toLowerCase() || 'jpg'
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 15)}.${fileExt}`
-      const smallFileName = getSmallFileName(fileName)
-      
-      // Upload original file
-      const { error: originalError } = await supabase
-        .storage
-        .from('gallery')
-        .upload(fileName, image.file)
-        
-      if (originalError) throw originalError
-      
-      // Create and upload _small version
-      try {
-        const smallBlob = await resizeImage(image.file, 800)
-        const { error: smallError } = await supabase
-          .storage
-          .from('gallery')
-          .upload(smallFileName, smallBlob, {
-            contentType: image.file.type
-          })
-        
-        if (smallError) {
-          console.warn('Failed to upload small version:', smallError)
-        }
-      } catch (resizeError) {
-        console.warn('Failed to create small version:', resizeError)
-      }
-      
-      // Get thumbnail URL (_small 버전)
-      const thumbnailUrl = supabase
-        .storage
-        .from('gallery')
-        .getPublicUrl(smallFileName)
-        .data
-        .publicUrl
-      
-      // Get original URL
-      const originalUrl = supabase
-        .storage
-        .from('gallery')
-        .getPublicUrl(fileName)
-        .data
-        .publicUrl
-      
-      // Add to uploaded items
+
+      const { smallPath } = await uploadOriginalAndSmall(supabase, BUCKET, fileName, image.file)
+
+      const thumbnailUrl = supabase.storage
+        .from(BUCKET)
+        .getPublicUrl(smallPath ?? fileName).data.publicUrl
+      const originalUrl = supabase.storage.from(BUCKET).getPublicUrl(fileName).data.publicUrl
+
       uploadedItems.push({
         id: image.id,
         title: image.title,
         date: image.date,
         previewUrl: thumbnailUrl,
-        originalUrl: originalUrl,
+        originalUrl,
         path: fileName,
-        smallPath: smallFileName
+        smallPath: smallPath ?? undefined,
       })
     }
-    
+
     return { uploadedItems, error: null }
   } catch (error) {
     console.error('Error uploading images:', error)
@@ -176,18 +141,11 @@ export async function deleteGalleryImage(path: string): Promise<{ success: boole
     if (!path) {
       throw new Error('Path is required for deletion')
     }
-    
     const supabase = createClient()
-    const smallPath = getSmallFileName(path)
-    
-    // Delete original and _small files from Supabase storage
-    const { error } = await supabase
-      .storage
-      .from('gallery')
-      .remove([path, smallPath])
-      
+    const { error } = await removeOriginalAndSmall(supabase, BUCKET, [
+      { path, smallPath: getSmallFileName(path) },
+    ])
     if (error) throw error
-    
     return { success: true, error: null }
   } catch (error) {
     console.error('Error deleting image:', error)
@@ -203,20 +161,13 @@ export async function deleteGalleryImages(paths: string[]): Promise<{ success: b
     if (!paths.length) {
       throw new Error('No paths provided for deletion')
     }
-    
     const supabase = createClient()
-    
-    // 원본과 _small 파일 경로 모두 수집
-    const allPaths = paths.flatMap(path => [path, getSmallFileName(path)])
-    
-    // Delete files from Supabase storage
-    const { error } = await supabase
-      .storage
-      .from('gallery')
-      .remove(allPaths)
-      
+    const { error } = await removeOriginalAndSmall(
+      supabase,
+      BUCKET,
+      paths.map((p) => ({ path: p, smallPath: getSmallFileName(p) })),
+    )
     if (error) throw error
-    
     return { success: true, error: null }
   } catch (error) {
     console.error('Error bulk deleting images:', error)

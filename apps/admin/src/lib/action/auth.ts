@@ -1,6 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import type { User } from "@supabase/supabase-js";
 import { createClient } from "@seclub/supabase/server";
 
 /**
@@ -79,7 +80,7 @@ export async function logout(): Promise<{
  */
 export async function checkAuth(): Promise<{
   isAuthenticated: boolean;
-  user: any | null;
+  user: User | null;
 }> {
   try {
     const supabase = await createClient();

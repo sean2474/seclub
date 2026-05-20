@@ -224,17 +224,20 @@ export async function getCategories(): Promise<{
 
     const tableCats = data.map((c: { type: string }) => c.type);
 
-    // notice 테이블에서 실제로 사용 중인 카테고리도 포함하여 누락 방지
-    const { data: noticeData } = await supabase.from("notice").select("category");
-    const noticeCats = (noticeData || [])
-      .map((n: { category: string }) => n.category)
-      .filter(Boolean);
-
-    const merged = Array.from(new Set([...tableCats, ...noticeCats])).sort();
+    // category 테이블이 비어 있을 때만 notice 사용 카테고리로 fallback
+    if (tableCats.length === 0) {
+      const { data: noticeData } = await supabase.from("notice").select("category");
+      const noticeCats = Array.from(
+        new Set((noticeData ?? [])
+          .map((n: { category: string }) => n.category)
+          .filter(Boolean)),
+      ).sort();
+      return { success: true, data: noticeCats, error: null };
+    }
 
     return {
       success: true,
-      data: merged,
+      data: tableCats,
       error: null,
     };
   } catch (error) {

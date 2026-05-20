@@ -151,38 +151,22 @@ export async function deleteVideo(id: string): Promise<{ success: boolean, error
   }
 }
 
-// 비디오 순서 업데이트
+// 비디오 순서 업데이트 (단일 RPC 호출)
 export async function updateVideoOrder(videos: { id: string, order: number }[]): Promise<{ success: boolean, error: Error | null }> {
   try {
+    if (videos.length === 0) return { success: true, error: null };
     const supabase = createClient();
-    
-    // unique 제약 조건을 피하기 위한 방법 적용
-    // 1. 먼저 모든 관련 비디오에 임시(음수) order 값 할당
-    for (let i = 0; i < videos.length; i++) {
-      const { error } = await supabase
-        .from("videos")
-        .update({ order: -9999 - i }) // 임시 음수 값 사용
-        .eq("id", videos[i].id);
-        
-      if (error) {
-        console.error(`Error setting temporary order for video ${videos[i].id}:`, error);
-        throw error;
-      }
-    }
-    
-    // 2. 그 다음 원하는 최종 order 값 설정
-    for (const video of videos) {
-      const { error } = await supabase
-        .from("videos")
-        .update({ order: video.order })
-        .eq("id", video.id);
-      
-      if (error) {
-        console.error(`Error setting final order for video ${video.id}:`, error);
-        throw error;
-      }
-    }
-    
+
+    // NOTE: Run `pnpm --filter @seclub/supabase gen:types` after applying the
+    // migration so the generated Database type includes these RPCs.
+    const { error } = await (supabase.rpc as unknown as (
+      fn: string,
+      args: Record<string, unknown>,
+    ) => Promise<{ error: Error | null }>)("reorder_videos", {
+      p_orders: videos.map(({ id, order }) => ({ id, order })),
+    });
+
+    if (error) throw error;
     return { success: true, error: null };
   } catch (error) {
     console.error("Error updating video order:", error);

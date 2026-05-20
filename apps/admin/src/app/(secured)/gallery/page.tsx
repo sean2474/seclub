@@ -34,7 +34,7 @@ import {
   deleteGalleryImage,
   deleteGalleryImages,
   type GalleryItem
-} from "@/lib/action/gallery"
+} from "@/lib/client/gallery"
 
 export default function GalleryPage() {
   const { toast } = useToast()

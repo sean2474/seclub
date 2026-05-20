@@ -32,9 +32,12 @@ export const BlurryImage = ({ src, alt }: { src: string; alt?: string }) => {
 export const ParallaxScroll = ({
   images,
   className,
+  repeat = 1,
 }: {
   images: string[];
   className?: string;
+  /** Render the images list `repeat` times to fill the scroll surface. */
+  repeat?: number;
 }) => {
   const { scrollYProgress } = useScroll();
 
@@ -44,11 +47,17 @@ export const ParallaxScroll = ({
   const translateSecond = useTransform(scrollYProgress, [0, 1], [0, 0]);
   const translateThird = useTransform(scrollYProgress, [0, 1], [0, -300]);
 
-  const third = Math.floor(images.length / 3);
-  const half = Math.floor(images.length / 2);
-  const firstPart = isMobile ? images.slice(0, half) : images.slice(0, third);
-  const secondPart = isMobile ? images.slice(half, images.length) : images.slice(third, 2 * third);
-  const thirdPart = isMobile ? [] : images.slice(2 * third);
+  const expanded = repeat > 1
+    ? Array.from({ length: repeat }, () => images).flat()
+    : images;
+
+  const third = Math.floor(expanded.length / 3);
+  const half = Math.floor(expanded.length / 2);
+  const firstPart = isMobile ? expanded.slice(0, half) : expanded.slice(0, third);
+  const secondPart = isMobile
+    ? expanded.slice(half, expanded.length)
+    : expanded.slice(third, 2 * third);
+  const thirdPart = isMobile ? [] : expanded.slice(2 * third);
 
   return (
     <div className={cn("overflow-y-auto w-full", className)}>

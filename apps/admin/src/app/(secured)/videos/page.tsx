@@ -35,8 +35,8 @@ import { PlusCircle, Trash2, ExternalLink, PlayCircle, Grip, Edit, Check, X, Che
 import { useToast } from "@seclub/ui/use-toast"
 import { cn } from "@seclub/utils"
 import { Label } from "@seclub/ui/label"
-import { fetchVideos, addVideo, updateVideo, deleteVideo, updateVideoOrder, getLastVideoOrder, extractYouTubeId } from "@/lib/action/video"
-import { Video } from "@/lib/action/video"
+import { fetchVideos, addVideo, updateVideo, deleteVideo, updateVideoOrder, getLastVideoOrder, extractYouTubeId } from "@/lib/client/video"
+import { Video } from "@/lib/client/video"
 
 // YouTube 비디오 ID가 유효한지 확인하는 함수
 async function validateYouTubeId(videoId: string): Promise<boolean> {

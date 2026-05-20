@@ -50,7 +50,7 @@ export function RoomInfoSection() {
   const handleSave = async () => {
     if (!editingRoom || !formData) return
     setSaving(true)
-    const { success, error } = await updateRoomInfo(editingRoom.slug, { data: formData as unknown as Record<string, unknown> })
+    const { success, error } = await updateRoomInfo(editingRoom.slug, { data: formData })
     if (success) {
       setRooms(rooms.map(r => r.slug === editingRoom.slug ? { ...r, data: formData } : r))
       toast({ title: "저장 완료", description: "객실 정보가 수정되었습니다." })

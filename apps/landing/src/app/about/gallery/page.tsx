@@ -31,11 +31,9 @@ export default async function GalleryPage() {
         .publicUrl
     );
 
-  const pageImages = [...images, ...images, ...images, ...images, ...images];
-
   return (
     <main className="pb-20">
-      <ParallaxScroll images={pageImages} />
+      <ParallaxScroll images={images} repeat={5} />
     </main>
   );
 }

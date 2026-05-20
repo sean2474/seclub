@@ -18,6 +18,20 @@ export interface CampingGuideSection {
   }[];
 }
 
+function parseCampingGuideSections(raw: Json): CampingGuideSection[] {
+  if (!Array.isArray(raw)) return [];
+  const valid = raw.filter(
+    (s) =>
+      s !== null &&
+      typeof s === "object" &&
+      !Array.isArray(s) &&
+      typeof (s as { key?: unknown }).key === "string" &&
+      typeof (s as { title?: unknown }).title === "string" &&
+      typeof (s as { icon?: unknown }).icon === "string",
+  );
+  return valid as unknown as CampingGuideSection[];
+}
+
 export async function getCampingGuide(): Promise<{
   success: boolean;
   data: { id: string; sections: CampingGuideSection[] } | null;
@@ -31,7 +45,11 @@ export async function getCampingGuide(): Promise<{
       .limit(1)
       .single();
     if (error) return { success: false, data: null, error: "이용 가이드를 불러오는 중 오류가 발생했습니다." };
-    return { success: true, data: { id: data.id, sections: data.sections as unknown as CampingGuideSection[] }, error: null };
+    return {
+      success: true,
+      data: { id: data.id, sections: parseCampingGuideSections(data.sections) },
+      error: null,
+    };
   } catch {
     return { success: false, data: null, error: "이용 가이드를 불러오는 중 오류가 발생했습니다." };
   }

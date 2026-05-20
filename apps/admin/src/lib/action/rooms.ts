@@ -1,7 +1,7 @@
 "use server";
 
 import { createClient } from "@seclub/supabase/server";
-import type { TablesUpdate } from "@seclub/supabase/types";
+import type { Json } from "@seclub/supabase/types";
 import type { RoomRate, LateCheckoutRate, DiscountRate, RoomInfo } from "@/types/rooms";
 
 // ===== Room Rates =====
@@ -114,11 +114,14 @@ export async function getRoomInfos(): Promise<{ success: boolean; data: RoomInfo
 
 export async function updateRoomInfo(
   slug: string,
-  updates: { data?: Record<string, unknown>; is_active?: boolean }
+  updates: { data?: RoomInfo["data"]; is_active?: boolean }
 ): Promise<{ success: boolean; error: string | null }> {
   try {
     const supabase = await createClient();
-    const { error } = await supabase.from("room_infos").update(updates as unknown as TablesUpdate<"room_infos">).eq("slug", slug);
+    const payload: { data?: Json; is_active?: boolean } = {};
+    if (updates.data !== undefined) payload.data = updates.data as unknown as Json;
+    if (updates.is_active !== undefined) payload.is_active = updates.is_active;
+    const { error } = await supabase.from("room_infos").update(payload).eq("slug", slug);
     if (error) return { success: false, error: "객실 정보 수정 중 오류가 발생했습니다." };
     return { success: true, error: null };
   } catch {

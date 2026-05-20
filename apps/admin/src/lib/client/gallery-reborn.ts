@@ -1,6 +1,10 @@
 import { createClient } from "@seclub/supabase/client"
 import type { TablesUpdate } from "@seclub/supabase/types"
-import { getSmallFileName, resizeImage } from "@/lib/util/image"
+import {
+  assertNoSmallSuffix,
+  removeOriginalAndSmall,
+  uploadOriginalAndSmall,
+} from "@/lib/util/storage-image"
 import type {
   GalleryRebornItem,
   GalleryRebornUpdatePatch,
@@ -73,10 +77,7 @@ export async function uploadGalleryRebornItems(inputs: GalleryRebornUploadInput[
 }> {
   const uploaded: GalleryRebornItem[] = []
   try {
-    const invalid = inputs.find((i) => /_small\./i.test(i.file.name))
-    if (invalid) {
-      throw new Error(`파일명에 '_small'을 포함할 수 없습니다: ${invalid.file.name}`)
-    }
+    assertNoSmallSuffix(inputs.map((i) => i.file))
 
     const supabase = createClient()
 
@@ -94,24 +95,8 @@ export async function uploadGalleryRebornItems(inputs: GalleryRebornUploadInput[
       const fileExt = input.file.name.split(".").pop()?.toLowerCase() || "jpg"
       const folder = crypto.randomUUID()
       const fileName = `${folder}/original.${fileExt}`
-      const smallFileName = getSmallFileName(fileName)
 
-      const { error: originalError } = await supabase.storage
-        .from(BUCKET)
-        .upload(fileName, input.file, { contentType: input.file.type })
-      if (originalError) throw originalError
-
-      let smallPath: string | null = null
-      try {
-        const smallBlob = await resizeImage(input.file, 800)
-        const { error: smallError } = await supabase.storage
-          .from(BUCKET)
-          .upload(smallFileName, smallBlob, { contentType: input.file.type })
-        if (!smallError) smallPath = smallFileName
-        else console.warn("small upload failed:", smallError)
-      } catch (e) {
-        console.warn("resize failed:", e)
-      }
+      const { smallPath } = await uploadOriginalAndSmall(supabase, BUCKET, fileName, input.file)
 
       const layoutType: LayoutType = input.layoutType ?? "centered"
       if (!LAYOUT_TYPES.includes(layoutType)) {
@@ -175,9 +160,11 @@ async function removeStorageObjects(
   supabase: ReturnType<typeof createClient>,
   rows: Pick<DbRow, "image_path" | "small_path">[],
 ) {
-  const paths = rows.flatMap((r) => (r.small_path ? [r.image_path, r.small_path] : [r.image_path]))
-  if (paths.length === 0) return
-  const { error } = await supabase.storage.from(BUCKET).remove(paths)
+  const { error } = await removeOriginalAndSmall(
+    supabase,
+    BUCKET,
+    rows.map((r) => ({ path: r.image_path, smallPath: r.small_path })),
+  )
   if (error) console.warn("Storage cleanup warning:", error)
 }
 
@@ -231,13 +218,17 @@ export async function reorderGalleryRebornItems(
   orderedIds: string[],
 ): Promise<{ success: boolean; error: Error | null }> {
   try {
+    if (orderedIds.length === 0) return { success: true, error: null }
     const supabase = createClient()
-    const updates = orderedIds.map((id, index) =>
-      supabase.from(TABLE).update({ display_order: index }).eq("id", id),
-    )
-    const results = await Promise.all(updates)
-    const failed = results.find((r) => r.error)
-    if (failed?.error) throw failed.error
+    // NOTE: Run `pnpm --filter @seclub/supabase gen:types` after applying the
+    // migration so the generated Database type includes these RPCs.
+    const { error } = await (supabase.rpc as unknown as (
+      fn: string,
+      args: Record<string, unknown>,
+    ) => Promise<{ error: Error | null }>)("reorder_gallery_reborn_items", {
+      p_orders: orderedIds.map((id, index) => ({ id, order: index })),
+    })
+    if (error) throw error
     return { success: true, error: null }
   } catch (error) {
     console.error("Error reordering gallery_reborn_items:", error)

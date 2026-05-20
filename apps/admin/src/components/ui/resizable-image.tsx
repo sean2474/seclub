@@ -1,15 +1,12 @@
 "use client"
 
 import { Node, mergeAttributes } from "@tiptap/core"
-import { NodeViewWrapper, ReactNodeViewRenderer } from "@tiptap/react"
+import { NodeViewWrapper, ReactNodeViewRenderer, type NodeViewProps } from "@tiptap/react"
 import { useCallback, useEffect, useRef, useState } from "react"
 
 // ===== NodeView Component =====
-function ResizableImageComponent({ node, updateAttributes, selected }: {
-  node: { attrs: { src: string; width: number | null; alt: string | null } }
-  updateAttributes: (attrs: Record<string, unknown>) => void
-  selected: boolean
-}) {
+function ResizableImageComponent({ node, updateAttributes, selected }: NodeViewProps) {
+  const attrs = node.attrs as { src: string; width: number | null; alt: string | null }
   const imgRef = useRef<HTMLImageElement>(null)
   const [resizing, setResizing] = useState(false)
   const startX = useRef(0)
@@ -49,9 +46,9 @@ function ResizableImageComponent({ node, updateAttributes, selected }: {
       <div className={`relative inline-block ${selected ? "ring-2 ring-primary ring-offset-2" : ""}`}>
         <img
           ref={imgRef}
-          src={node.attrs.src}
-          alt={node.attrs.alt || ""}
-          style={{ width: node.attrs.width ? `${node.attrs.width}px` : "auto" }}
+          src={attrs.src}
+          alt={attrs.alt || ""}
+          style={{ width: attrs.width ? `${attrs.width}px` : "auto" }}
           className="max-w-full h-auto rounded block"
           draggable={false}
         />
@@ -65,7 +62,7 @@ function ResizableImageComponent({ node, updateAttributes, selected }: {
             />
             {/* 사이즈 표시 */}
             <div className="absolute top-1 left-1 bg-black/60 text-white text-[10px] px-1.5 py-0.5 rounded">
-              {node.attrs.width ? `${Math.round(node.attrs.width)}px` : "auto"}
+              {attrs.width ? `${Math.round(attrs.width)}px` : "auto"}
             </div>
           </>
         )}
@@ -105,7 +102,7 @@ export const ResizableImage = Node.create({
   },
 
   addNodeView() {
-    return ReactNodeViewRenderer(ResizableImageComponent as unknown as Parameters<typeof ReactNodeViewRenderer>[0])
+    return ReactNodeViewRenderer(ResizableImageComponent)
   },
 
   addCommands() {

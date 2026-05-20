@@ -39,7 +39,7 @@ import {
   reorderGalleryRebornItems,
   updateGalleryRebornItem,
   uploadGalleryRebornItems,
-} from "@/lib/action/gallery-reborn"
+} from "@/lib/client/gallery-reborn"
 import type {
   GalleryRebornItem,
   GalleryRebornUpdatePatch,

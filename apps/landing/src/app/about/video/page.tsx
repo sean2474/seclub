@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { PlayCircle } from "lucide-react"
-import { Dialog, DialogContent } from "@seclub/ui/dialog"
-import { DialogTitle } from "@radix-ui/react-dialog"
+import { Dialog, DialogContent, DialogTitle } from "@seclub/ui/dialog"
 import Image from "next/image"
 import { getVideos } from "@/lib/actions/video"
 import { Video } from "@/types/video"
