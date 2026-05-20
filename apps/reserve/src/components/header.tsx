@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { HamburgerIcon } from "@/components/icon/hamburger";
-import { PlusMinusIcon } from "@/components/icon/plusminus";
+import { HamburgerIcon } from "@seclub/ui/hamburger";
+import { PlusMinusIcon } from "@seclub/ui/plusminus";
 import Link from "next/link";
 import { desktopMenu, menuItems } from "@/const/header-items";
-import { LinkEventTracker } from "@/components/base/link-event-tracker";
+import { LinkEventTracker } from "@seclub/ui/link-event-tracker";
 
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

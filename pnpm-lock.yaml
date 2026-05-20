@@ -772,6 +772,9 @@ importers:
       '@seclub/utils':
         specifier: workspace:*
         version: link:../utils
+      '@vercel/analytics':
+        specifier: ^1.5.0
+        version: 1.6.1(next@16.2.6(@playwright/test@1.60.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react@19.2.6)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1

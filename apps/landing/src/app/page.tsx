@@ -13,7 +13,7 @@ import Link from "next/link";
 import { generateMetadata } from "@/utils/metadata-generator";
 import { ScrollNudge } from "@/components/ui/scroll-nudge";
 import { ReservationButton } from "@/components/ui/reservation-button";
-import { LinkEventTracker } from "@/components/base/link-event-tracker";
+import { LinkEventTracker } from "@seclub/ui/link-event-tracker";
 
 export const metadata = generateMetadata("SE Club (태안둘레길캠핑장 & 펜션)", "충청남도 태안군에 위치한 SE Club(태안둘레길캠핑장 & 펜션)의 공식 웹사이트입니다.");
 

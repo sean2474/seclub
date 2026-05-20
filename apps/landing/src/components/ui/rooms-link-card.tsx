@@ -3,7 +3,7 @@ import Image from "next/image";
 import { RoomCardProps } from "@/types";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Button } from "@seclub/ui/button";
-import { LinkEventTracker } from "../base/link-event-tracker";
+import { LinkEventTracker } from "@seclub/ui/link-event-tracker";
 import { VILLA_URL } from "@/const/urls";
 
 interface CardProps extends RoomCardProps {

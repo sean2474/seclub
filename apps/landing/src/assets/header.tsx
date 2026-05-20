@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
-import { HamburgerIcon } from "@/components/icon/hamburger";
-import { PlusMinusIcon } from "@/components/icon/plusminus";
+import { HamburgerIcon } from "@seclub/ui/hamburger";
+import { PlusMinusIcon } from "@seclub/ui/plusminus";
 import Link from "next/link";
 import { desktopMenu, menuItems } from "@/const/header-items";
 import { ReservationModal } from "@/components/ui/reservation-modal";

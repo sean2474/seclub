@@ -10,7 +10,7 @@ import { MainImageSlider } from "@/components/ui/main-image-slider";
 import { getRoomBySlug, getRoomCards } from "@/lib/room-infos"
 import { notFound } from "next/navigation"
 import { ScrollReveal } from "@/components/base/scroll-reveal";
-import { LinkEventTracker } from "@/components/base/link-event-tracker";
+import { LinkEventTracker } from "@seclub/ui/link-event-tracker";
 import { VILLA_URL } from "@/const/urls";
 
 const PREMIUM_VILLA_INQUIRY_PHONE = "010-9703-1711";
