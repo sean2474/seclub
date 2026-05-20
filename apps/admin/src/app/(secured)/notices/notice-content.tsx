@@ -258,7 +258,7 @@ export function NoticesContent() {
                     </TableCell>
                     <TableCell className="whitespace-nowrap">{item.created_at.split("T")[0]}</TableCell>
                     <TableCell className="whitespace-nowrap">
-                      <Badge variant={item.active ? "default" : "secondary"} className="whitespace-nowrap">{item.active ? "게시 중" : "비게시"}</Badge>
+                      <Badge variant={item.active ? "default" : "secondary"} className={item.active ? "text-black" : ""}>{item.active ? "게시 중" : "비게시"}</Badge>
                     </TableCell>
                     <TableCell className="text-right whitespace-nowrap">{item.view.toLocaleString()}</TableCell>
                     <TableCell>
