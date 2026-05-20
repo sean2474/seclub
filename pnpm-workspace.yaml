@@ -18,3 +18,4 @@ catalog:
 allowBuilds:
   sharp: false
   '@tailwindcss/oxide': false
+  unrs-resolver: true
