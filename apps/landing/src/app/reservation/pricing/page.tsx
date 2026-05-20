@@ -31,32 +31,34 @@ export default async function PricingPage() {
         {/* Lodging Section */}
         <section className="max-w-4xl mx-auto">
           <SectionTitle title="프리미엄 숙박 시설" subtitle="Premium Lodging" />
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>시설</TableHead>
-                <TableHead className="text-right">최성수기</TableHead>
-                <TableHead className="text-right">성수기/동절기</TableHead>
-                <TableHead className="text-right">연박할인</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {Object.entries(lodgingRates).map(([name, data]) => (
-                <TableRow key={name}>
-                  <TableCell className="font-medium">{name}</TableCell>
-                  {name === "프리미엄 빌라" ? (
-                    <TableCell colSpan={3} className="text-right">별도문의</TableCell>
-                  ) : (
-                    <>
-                      <TableCell className="text-right">{formatCurrency(data.rates.최성수기)}</TableCell>
-                      <TableCell className="text-right">{formatCurrency(data.rates.동절기)}</TableCell>
-                      <TableCell className="text-right">{formatCurrency(data.longStayDiscount)}</TableCell>
-                    </>
-                  )}
+          <div className="w-full overflow-x-auto">
+            <Table className="min-w-[600px]">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>시설</TableHead>
+                  <TableHead className="text-right">최성수기</TableHead>
+                  <TableHead className="text-right">성수기/동절기</TableHead>
+                  <TableHead className="text-right">연박할인</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {Object.entries(lodgingRates).map(([name, data]) => (
+                  <TableRow key={name}>
+                    <TableCell className="font-medium">{name}</TableCell>
+                    {name === "프리미엄 빌라" ? (
+                      <TableCell colSpan={3} className="text-right">별도문의</TableCell>
+                    ) : (
+                      <>
+                        <TableCell className="text-right">{formatCurrency(data.rates.최성수기)}</TableCell>
+                        <TableCell className="text-right">{formatCurrency(data.rates.동절기)}</TableCell>
+                        <TableCell className="text-right">{formatCurrency(data.longStayDiscount)}</TableCell>
+                      </>
+                    )}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
           <div className="text-right mt-4 text-sm text-gray-600">
             <div className="flex flex-col gap-2">
               <span>* 별도문의 : 010-9703-1711</span>
@@ -71,28 +73,30 @@ export default async function PricingPage() {
         {/* Condo & Camping Section */}
         <section className="max-w-4xl mx-auto">
           <SectionTitle title="캠핑장" subtitle="Campsite" />
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>사이트</TableHead>
-                <TableHead className="text-right">최성수기</TableHead>
-                <TableHead className="text-right">성수기/동절기</TableHead>
-                <TableHead className="text-right">연박할인</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {Object.entries(campingRates)
-                .filter(([site]) => site !== "연박할인")
-                .map(([site, data]) => (
-                  <TableRow key={site}>
-                    <TableCell className="font-medium">{site}</TableCell>
-                    <TableCell className="text-right">{formatCurrency(data.rates.최성수기)}</TableCell>
-                    <TableCell className="text-right">{formatCurrency(data.rates.동절기)}</TableCell>
-                    <TableCell className="text-right">{formatCurrency(data.longStayDiscount)}</TableCell>
-                  </TableRow>
-                ))}
-            </TableBody>
-          </Table>
+          <div className="w-full overflow-x-auto">
+            <Table className="min-w-[600px]">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>사이트</TableHead>
+                  <TableHead className="text-right">최성수기</TableHead>
+                  <TableHead className="text-right">성수기/동절기</TableHead>
+                  <TableHead className="text-right">연박할인</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {Object.entries(campingRates)
+                  .filter(([site]) => site !== "연박할인")
+                  .map(([site, data]) => (
+                    <TableRow key={site}>
+                      <TableCell className="font-medium">{site}</TableCell>
+                      <TableCell className="text-right">{formatCurrency(data.rates.최성수기)}</TableCell>
+                      <TableCell className="text-right">{formatCurrency(data.rates.동절기)}</TableCell>
+                      <TableCell className="text-right">{formatCurrency(data.longStayDiscount)}</TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </div>
           <div className="text-right mt-4 text-sm text-gray-600">
             <div className="flex flex-col gap-2">
               <span>* 최성수기(7~8월), 성수기(3~6월, 9~11월), 동절기(12~2월)</span>

@@ -62,3 +62,11 @@ node_modules/
 playwright.config.ts
 test-results/
 tests
+
+# AI / Claude
+.claude
+.claude/
+CLAUDE.md
+HANDOFF.md
+TIMELINE.md
+eval-screenshots/

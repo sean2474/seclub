@@ -12,8 +12,8 @@ export const Footer = () => {
     <>
     <footer className="p-4 md:p-10 bg-[#111] text-white relative">
       {/* <div className="z-10 absolute -top-32 left-0 w-full h-32 bg-gradient-to-b from-transparent to-background pointer-events-none" /> */}
-      <div className="flex flex-col items-center md:flex-row md:items-start justify-between h-full mt-8 gap-2">
-        <div className="order-2 md:order-1 w-full md:w-auto mt-5 md:mt-0 text-xs md:text-sm">
+      <div className="flex flex-col items-center md:grid md:grid-cols-3 md:items-start h-full mt-8 gap-2">
+        <div className="order-2 md:order-1 w-full md:w-auto mt-5 md:mt-0 text-xs md:text-sm justify-self-start">
           <div className="mt-2 ml-1">
             문의 <b className="ml-2">010-9703-1711, 010-4668-1704</b>
           </div>
@@ -41,15 +41,15 @@ export const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center order-1 md:order-2">
-          <div className="w-full max-w-[500px] md:max-w-[320px] text-7xl font-medium">
+        <div className="flex flex-col items-center order-1 md:order-2 md:justify-self-center">
+          <div className="w-full max-w-[500px] md:max-w-[320px] text-7xl font-medium text-center">
             SE Club
           </div>
-          <div className="hidden md:block md:text-lg lg:text-xl mt-5">
+          <div className="hidden md:block md:text-lg lg:text-xl mt-5 text-center">
             &copy; {new Date().getFullYear()} SE Club. All rights reserved.
           </div>
         </div>
-        <div className="flex flex-col gap-5 relative z-20 justify-start w-full md:w-auto md:h-1/2 mt-1 order-3 text-sm md:text-base">
+        <div className="flex flex-col gap-5 relative z-20 justify-start w-full md:w-auto md:h-1/2 mt-1 order-3 text-sm md:text-base md:justify-self-end">
           <Link href="/about/location" className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">찾아오시는 길 <Arrow side="right" size={5} /> </Link>
           <button onClick={() => setReservationOpen(true)} className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">예약하기 <Arrow side="right" size={5} /> </button>
           <Link href="/reservation/pricing" className="flex items-center justify-start md:justify-end gap-2 cursor-pointer group">요금안내 <Arrow side="right" size={5} /> </Link>

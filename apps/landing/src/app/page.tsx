@@ -13,6 +13,7 @@ import Link from "next/link";
 import { generateMetadata } from "@/utils/metadata-generator";
 import { ScrollNudge } from "@/components/ui/scroll-nudge";
 import { ReservationButton } from "@/components/ui/reservation-button";
+import { LinkEventTracker } from "@/components/base/link-event-tracker";
 
 export const metadata = generateMetadata("SE Club (태안둘레길캠핑장 & 펜션)", "충청남도 태안군에 위치한 SE Club(태안둘레길캠핑장 & 펜션)의 공식 웹사이트입니다.");
 
@@ -49,12 +50,20 @@ export default async function Home() {
             <span className="font-thin">{heroText.heading_line1}</span><br />
             {heroText.heading_line2}
           </ScrollReveal>
-          <ScrollReveal side="bottom" className="ml-1">
+          <ScrollReveal side="bottom" className="ml-1 flex flex-col items-start gap-2 md:flex-row md:items-center md:gap-3">
             <ReservationButton
               className="border border-background pl-4 pr-1.5 py-2 text-sm md:pl-5 md:pr-2.5 md:py-3 bg-background text-foreground hover:text-background hover:bg-transparent hover:font-medium transition-all duration-300 md:text-md flex items-center gap-2 rounded-xs cursor-pointer"
             >
               {heroText.button_text} <ChevronRight strokeWidth={1} />
             </ReservationButton>
+            <LinkEventTracker
+              eventName="reservation_group_main_btn"
+              location="hero_group_reservation_btn"
+              href="/reservation/group"
+              className="border border-secondary pl-4 pr-1.5 py-2 text-sm md:pl-5 md:pr-2.5 md:py-3 bg-secondary text-background hover:bg-transparent hover:text-background transition-all duration-300 md:text-md flex items-center gap-2 rounded-xs cursor-pointer"
+            >
+              단체 예약 <ChevronRight strokeWidth={1} />
+            </LinkEventTracker>
           </ScrollReveal>
         </div>
         <ScrollNudge />

@@ -46,7 +46,23 @@ export async function getNotices(): Promise<{
 }
 
 export const getNoticeCategories = async () : Promise<string[]> => {
-    return [ "수상", "이벤트", "공지" ]
+  try {
+    const supabase = await createClient();
+
+    const [{ data: catData }, { data: noticeData }] = await Promise.all([
+      supabase.from("category").select("type"),
+      supabase.from("notice").select("category").eq("active", true),
+    ]);
+
+    const tableCats = (catData || []).map((c: { type: string }) => c.type);
+    const noticeCats = (noticeData || [])
+      .map((n: { category: string }) => n.category)
+      .filter(Boolean);
+
+    return Array.from(new Set([...tableCats, ...noticeCats])).sort();
+  } catch {
+    return [];
+  }
 }
 
 export const getNoticeById = async (id: string) : Promise<NoticeDetail | null> => {
