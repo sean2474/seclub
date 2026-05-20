@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@seclub/supabase/server";
 
 /**
  * Add a new category to the database

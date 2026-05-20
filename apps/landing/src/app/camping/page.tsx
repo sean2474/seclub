@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
+import { Button } from "@seclub/ui/button"
 import { ArrowRight, Check, Ban } from "lucide-react"
 import Link from "next/link"
 import { Modal, ModalBody, ModalTrigger } from "@/components/ui/animated-modal"

@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@seclub/supabase/server";
 import type { Popup } from "@/types/popup";
 
 export async function getPopups(): Promise<{

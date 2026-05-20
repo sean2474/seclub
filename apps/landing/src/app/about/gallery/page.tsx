@@ -1,5 +1,5 @@
 import { ParallaxScroll } from "@/components/ui/parallax-scroll";
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@seclub/supabase/server";
 import { generateMetadata } from "@/utils/metadata-generator";
 
 export const metadata = generateMetadata("SE Club | 갤러리", "SE Club의 다양한 모습을 확인할 수 있는 갤러리입니다.");

@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@seclub/supabase/server";
 import type { HeroText } from "@/types/hero-text";
 
 export async function getHeroText(): Promise<{

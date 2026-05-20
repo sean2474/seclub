@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@seclub/supabase/server";
 import { RoomData, RoomInfo, RoomCardProps } from "@/types";
 import { getIcon } from "./icon-map";
 import { parseOverview } from "./parse-highlight";

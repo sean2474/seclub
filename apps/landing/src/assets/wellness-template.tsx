@@ -1,5 +1,5 @@
 import { ScrollReveal } from "@/components/base/scroll-reveal";
-import { Button } from "@/components/ui/button";
+import { Button } from "@seclub/ui/button";
 import { MainImageSlider } from "@/components/ui/main-image-slider";
 import { WellnessPageData } from "@/types";
 import { BuildingLibraryIcon, ClockIcon } from "@heroicons/react/24/outline";

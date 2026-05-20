@@ -1,7 +1,7 @@
 "use client"
 
 import { Suspense } from "react"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@seclub/ui/tabs"
 import { RoomRatesSection } from "./room-rates-section"
 import { LateCheckoutSection } from "./late-checkout-section"
 import { DiscountSection } from "./discount-section"

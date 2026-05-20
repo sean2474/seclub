@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/client";
+import { createClient } from "@seclub/supabase/client";
 
 // Video 타입 정의
 export interface Video {

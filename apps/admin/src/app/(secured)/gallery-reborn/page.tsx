@@ -16,10 +16,10 @@ import {
   rectSortingStrategy,
   sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Label } from "@/components/ui/label"
+import { Button } from "@seclub/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@seclub/ui/card"
+import { Checkbox } from "@seclub/ui/checkbox"
+import { Label } from "@seclub/ui/label"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -29,8 +29,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog"
-import { useToast } from "@/components/ui/use-toast"
+} from "@seclub/ui/alert-dialog"
+import { useToast } from "@seclub/ui/use-toast"
 import { PlusCircle, Trash2 } from "lucide-react"
 import {
   deleteGalleryRebornItem,

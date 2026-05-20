@@ -3,19 +3,19 @@
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
 import Image from "next/image"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
+import { Badge } from "@seclub/ui/badge"
+import { Button } from "@seclub/ui/button"
+import { Checkbox } from "@seclub/ui/checkbox"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@seclub/ui/dropdown-menu"
 import { GripVertical, MoreHorizontal, Pencil, Trash2 } from "lucide-react"
 import { LAYOUT_TYPE_LABELS, type GalleryRebornItem } from "@/types/gallery-reborn"
-import { cn } from "@/lib/utils"
+import { cn } from "@seclub/utils"
 
 interface SortableCardProps {
   item: GalleryRebornItem

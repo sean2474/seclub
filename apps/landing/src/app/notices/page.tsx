@@ -1,4 +1,4 @@
-import { Input } from "@/components/ui/input"
+import { Input } from "@seclub/ui/input"
 import { Search } from "lucide-react"
 import { NoticeTable } from "@/assets/notice-table"
 import {
@@ -8,7 +8,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination"
+} from "@seclub/ui/pagination"
 import Link from "next/link"
 import { getNoticeCategories, getNotices } from "@/lib/actions/notice"
 import { generateMetadata } from "@/utils/metadata-generator"

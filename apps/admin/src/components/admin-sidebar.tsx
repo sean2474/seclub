@@ -3,8 +3,8 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Tent, ImageIcon, Megaphone, ChevronRight, Video, LayoutDashboard, DollarSign, BookOpen, TreePine, Recycle } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { cn } from "@seclub/utils"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@seclub/ui/tooltip"
 import Image from "next/image"
 
 interface AdminSidebarProps {

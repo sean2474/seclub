@@ -1,12 +1,12 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
-import { useToast } from "@/hooks/use-toast"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@seclub/ui/card"
+import { Input } from "@seclub/ui/input"
+import { Label } from "@seclub/ui/label"
+import { Textarea } from "@seclub/ui/textarea"
+import { Button } from "@seclub/ui/button"
+import { useToast } from "@seclub/ui/use-toast"
 import { getCampingGuide, updateCampingGuide, type CampingGuideSection } from "@/lib/action/camping-guide"
 import { Save, Plus, Trash2 } from "lucide-react"
 

@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@seclub/supabase/server";
 
 export interface PopupData {
   id: string;

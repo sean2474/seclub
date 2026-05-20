@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button"
+import { Button } from "@seclub/ui/button"
 import { getNoticeById } from "@/lib/actions/notice"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"

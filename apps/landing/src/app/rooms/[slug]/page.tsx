@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Phone } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@seclub/ui/button";
 import { ImageSlider } from "@/components/ui/image-slider";
 import { RoomFeatures } from "@/components/ui/room-features";
 import { MainImageSlider } from "@/components/ui/main-image-slider";

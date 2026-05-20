@@ -2,8 +2,8 @@
 
 import { useState, type ReactNode, Suspense, useEffect } from "react"
 import AdminSidebar from "@/components/admin-sidebar"
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Button } from "@seclub/ui/button"
+import { Sheet, SheetContent, SheetTrigger } from "@seclub/ui/sheet"
 import { LockKeyhole, Menu } from "lucide-react"
 import {
   DropdownMenu,
@@ -12,10 +12,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuItem,
-} from "@/components/ui/dropdown-menu"
+} from "@seclub/ui/dropdown-menu"
 import Image from "next/image"
-import { Toaster } from "@/components/ui/toaster"
-import { cn } from "@/lib/utils"
+import { Toaster } from "@seclub/ui/toaster"
+import { cn } from "@seclub/utils"
 import { getProfile, getUser, logout } from "@/lib/action/auth"
 import { redirect } from "next/navigation"
 import { Profile } from "@/types/auth"

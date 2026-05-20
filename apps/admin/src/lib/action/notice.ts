@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@seclub/supabase/server";
 import type { Notice } from "@/types/notices";
 import crypto from "crypto";
 

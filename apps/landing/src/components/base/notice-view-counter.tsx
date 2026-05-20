@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
-import { createClient } from "@/lib/supabase/client"
+import { createClient } from "@seclub/supabase/client"
 
 export const NoticeViewCounter = ({noticeId}: {noticeId: string}) => {
   const supabase = createClient()

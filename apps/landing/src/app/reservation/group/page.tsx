@@ -1,9 +1,9 @@
 import { ScrollReveal } from "@/components/base/scroll-reveal";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@seclub/ui/table"
 import { ChevronRightIcon } from "lucide-react";
 import Image from "next/image"
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn } from "@seclub/utils";
 import { generateMetadata } from "@/utils/metadata-generator";
 import { activities, lodgingData, lodgingTotal } from "@/const/group-data";
 import { ScrollNudge } from "@/components/ui/scroll-nudge";

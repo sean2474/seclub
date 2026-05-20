@@ -1,15 +1,15 @@
 "use client"
 
 import { useState, type ChangeEvent, useEffect, useRef } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@seclub/ui/card"
+import { Button } from "@seclub/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@seclub/ui/dropdown-menu"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -19,14 +19,14 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog"
-import { Checkbox } from "@/components/ui/checkbox"
+} from "@seclub/ui/alert-dialog"
+import { Checkbox } from "@seclub/ui/checkbox"
 import { MoreHorizontal, PlusCircle, Upload, Trash2 } from "lucide-react"
 import Image from "next/image"
-import { Progress } from "@/components/ui/progress"
-import { useToast } from "@/components/ui/use-toast"
-import { cn } from "@/lib/utils"
-import { Label } from "@/components/ui/label"
+import { Progress } from "@seclub/ui/progress"
+import { useToast } from "@seclub/ui/use-toast"
+import { cn } from "@seclub/utils"
+import { Label } from "@seclub/ui/label"
 
 import {
   fetchGalleryImages,

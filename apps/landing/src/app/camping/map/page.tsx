@@ -1,5 +1,5 @@
 import { Modal, ModalBody, ModalTrigger } from "@/components/ui/animated-modal"
-import { Button } from "@/components/ui/button"
+import { Button } from "@seclub/ui/button"
 import { Download, Map } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"

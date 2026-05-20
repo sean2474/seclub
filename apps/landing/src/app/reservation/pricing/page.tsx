@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@seclub/ui/table"
 import { getAllPricing } from "@/lib/room-rates"
 import { generateMetadata } from "@/utils/metadata-generator"
 

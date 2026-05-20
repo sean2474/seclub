@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/client"
+import { createClient } from "@seclub/supabase/client"
 import { getSmallFileName, resizeImage } from "@/lib/util/image"
 import type {
   GalleryRebornItem,

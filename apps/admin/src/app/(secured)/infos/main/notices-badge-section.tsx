@@ -1,10 +1,10 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Switch } from "@/components/ui/switch"
-import { Label } from "@/components/ui/label"
-import { useToast } from "@/hooks/use-toast"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@seclub/ui/card"
+import { Switch } from "@seclub/ui/switch"
+import { Label } from "@seclub/ui/label"
+import { useToast } from "@seclub/ui/use-toast"
 import { useHeroText } from "@/hooks/use-hero-text"
 import { updateHeroText } from "@/lib/action/hero-text"
 

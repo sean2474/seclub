@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@seclub/supabase/server";
 import { Discounts, LodgingRates } from "@/types/room-rate";
 
 // DB에서 숙박 요금 조회

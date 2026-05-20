@@ -1,7 +1,7 @@
 "use server"
 
 import { Notice, NoticeDetail } from "@/types"
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@seclub/supabase/server";
 
 /**
  * Fetch all notices from the database

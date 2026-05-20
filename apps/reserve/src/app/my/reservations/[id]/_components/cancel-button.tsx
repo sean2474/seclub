@@ -12,7 +12,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+} from "@seclub/ui/alert-dialog";
 
 interface CancelButtonProps {
   reservationId: string;

@@ -6,6 +6,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  transpilePackages: ["@seclub/ui", "@seclub/utils", "@seclub/supabase"],
 }
 
 export default nextConfig

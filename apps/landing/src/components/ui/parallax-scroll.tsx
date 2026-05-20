@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useScroll, useTransform, motion } from "motion/react";
 import Image from "next/image";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@seclub/utils";
 import { useMediaQuery } from "react-responsive";
 
 export const BlurryImage = ({ src, alt }: { src: string; alt?: string }) => {

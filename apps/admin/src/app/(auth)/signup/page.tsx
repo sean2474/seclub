@@ -4,10 +4,10 @@ import { useState, FormEvent, useEffect } from "react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { useToast } from "@/components/ui/use-toast"
+import { Button } from "@seclub/ui/button"
+import { Input } from "@seclub/ui/input"
+import { Label } from "@seclub/ui/label"
+import { useToast } from "@seclub/ui/use-toast"
 
 import { redirectIfAuthenticated, registerWithEmail } from "@/lib/action/auth"
 

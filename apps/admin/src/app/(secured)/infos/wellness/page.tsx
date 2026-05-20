@@ -1,11 +1,11 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
-import { useToast } from "@/hooks/use-toast"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@seclub/ui/card"
+import { Input } from "@seclub/ui/input"
+import { Label } from "@seclub/ui/label"
+import { Button } from "@seclub/ui/button"
+import { useToast } from "@seclub/ui/use-toast"
 import { getWellnessPrograms, upsertWellnessProgram, type WellnessProgram } from "@/lib/action/wellness"
 import { Save, Plus, Trash2, ChevronDown } from "lucide-react"
 

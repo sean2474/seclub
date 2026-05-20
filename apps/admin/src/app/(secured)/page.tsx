@@ -4,12 +4,12 @@ export default function DashboardPage() {
   redirect("/notices")
 }
 
-// import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-// import { Button } from "@/components/ui/button"
+// import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@seclub/ui/card"
+// import { Button } from "@seclub/ui/button"
 // import { BookCheck, CalendarPlus, XCircle, BedDouble, Tent, ArrowUpRight, PlusCircle, ImageIcon } from "lucide-react"
 // import Link from "next/link"
 // import { BookingChart } from "@/components/charts"
-// import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+// import { Avatar, AvatarFallback, AvatarImage } from "@seclub/ui/avatar"
 
 // export default function DashboardPage() {
 //   return (

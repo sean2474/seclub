@@ -8,18 +8,18 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
+} from "@seclub/ui/dialog"
+import { Button } from "@seclub/ui/button"
+import { Input } from "@seclub/ui/input"
+import { Textarea } from "@seclub/ui/textarea"
+import { Label } from "@seclub/ui/label"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@seclub/ui/select"
 import {
   LAYOUT_TYPES,
   LAYOUT_TYPE_LABELS,

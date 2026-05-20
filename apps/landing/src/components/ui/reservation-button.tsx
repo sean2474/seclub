@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { ReservationModal } from "@/components/ui/reservation-modal"
-import { cn } from "@/lib/utils"
+import { cn } from "@seclub/utils"
 
 interface ReservationButtonProps {
   children: React.ReactNode

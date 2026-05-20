@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { RoomCardProps } from "@/types";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
-import { Button } from "./button";
+import { Button } from "@seclub/ui/button";
 import { LinkEventTracker } from "../base/link-event-tracker";
 import { VILLA_URL } from "@/const/urls";
 

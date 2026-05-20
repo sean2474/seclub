@@ -1,12 +1,12 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Switch } from "@/components/ui/switch"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@seclub/ui/dialog"
+import { Button } from "@seclub/ui/button"
+import { Input } from "@seclub/ui/input"
+import { Label } from "@seclub/ui/label"
+import { Textarea } from "@seclub/ui/textarea"
+import { Switch } from "@seclub/ui/switch"
 import { Popup } from "@/types/popup"
 import { Upload, X, ImageIcon } from "lucide-react"
 

@@ -3,19 +3,19 @@
 
 import { useEffect, useState } from "react"
 
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@seclub/ui/dialog"
+import { Popover, PopoverContent, PopoverTrigger } from "@seclub/ui/popover"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@seclub/ui/tabs"
+import { Input } from "@seclub/ui/input"
+import { Label } from "@seclub/ui/label"
 import { TiptapEditor } from "@/components/ui/tiptap-editor"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@seclub/ui/select"
 import { useCategories } from "@/hooks/use-category"
 import { addCategory, updateCategory, deleteCategory } from "@/lib/action/category"
 import { Notice } from "@/types/notices"
-import { useToast } from "@/hooks/use-toast"
-import { Button } from "@/components/ui/button"
-import { Switch } from "@/components/ui/switch"
+import { useToast } from "@seclub/ui/use-toast"
+import { Button } from "@seclub/ui/button"
+import { Switch } from "@seclub/ui/switch"
 import { PlusCircle, Trash2Icon } from "lucide-react"
 
 

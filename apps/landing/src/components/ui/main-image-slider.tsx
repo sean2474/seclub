@@ -6,7 +6,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from '@heroicons/react/24/solid';
-import { cn } from '@/lib/utils';
+import { cn } from '@seclub/utils';
 
 interface ImageSliderProps {
   images: string[];

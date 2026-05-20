@@ -1,6 +1,6 @@
 import type React from "react"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@seclub/ui/accordion"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@seclub/ui/table"
 import { generateMetadata } from "@/utils/metadata-generator"
 
 export const metadata = generateMetadata("SE Club | 예약 안내", "SE Club 이용을 위한 예약 규정을 안내합니다.")

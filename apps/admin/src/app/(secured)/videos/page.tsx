@@ -1,8 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@seclub/ui/card"
+import { Button } from "@seclub/ui/button"
 import {
   Dialog,
   DialogContent,
@@ -11,14 +11,14 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@seclub/ui/dialog"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@seclub/ui/dropdown-menu"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -28,13 +28,13 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Input } from "@/components/ui/input"
+} from "@seclub/ui/alert-dialog"
+import { Checkbox } from "@seclub/ui/checkbox"
+import { Input } from "@seclub/ui/input"
 import { PlusCircle, Trash2, ExternalLink, PlayCircle, Grip, Edit, Check, X, ChevronUp, ChevronDown, Loader2, VideoIcon } from "lucide-react"
-import { useToast } from "@/components/ui/use-toast"
-import { cn } from "@/lib/utils"
-import { Label } from "@/components/ui/label"
+import { useToast } from "@seclub/ui/use-toast"
+import { cn } from "@seclub/utils"
+import { Label } from "@seclub/ui/label"
 import { fetchVideos, addVideo, updateVideo, deleteVideo, updateVideoOrder, getLastVideoOrder, extractYouTubeId } from "@/lib/action/video"
 import { Video } from "@/lib/action/video"
 

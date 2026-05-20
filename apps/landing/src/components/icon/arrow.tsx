@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@seclub/utils";
 
 export const Arrow = ({ side, size = 6, className }: { side: "left" | "right"; size: number; className?: string }) => {
   return (
