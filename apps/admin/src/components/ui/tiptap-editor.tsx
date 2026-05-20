@@ -7,7 +7,8 @@ import { ResizableImage } from "./resizable-image"
 import TextAlign from "@tiptap/extension-text-align"
 import Placeholder from "@tiptap/extension-placeholder"
 import { TextStyle } from "@tiptap/extension-text-style"
-import { useMemo, useRef } from "react"
+import Underline from "@tiptap/extension-underline"
+import { useEffect, useMemo, useRef } from "react"
 
 const FontSize = Extension.create({
   name: "fontSize",
@@ -45,15 +46,10 @@ const FontSize = Extension.create({
   },
 })
 
-const FONT_SIZE_OPTIONS: { label: string; value: string }[] = [
-  { label: "기본", value: "" },
-  { label: "아주 작게 (12)", value: "12px" },
-  { label: "작게 (14)", value: "14px" },
-  { label: "보통 (16)", value: "16px" },
-  { label: "크게 (20)", value: "20px" },
-  { label: "아주 크게 (24)", value: "24px" },
-  { label: "초대형 (32)", value: "32px" },
-]
+const FONT_SIZE_MIN = 6
+const FONT_SIZE_MAX = 96
+const FONT_SIZE_DEFAULT = 16
+
 import {
   Bold,
   Italic,
@@ -68,6 +64,8 @@ import {
   ImagePlus,
   Undo,
   Redo,
+  Plus,
+  Minus,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -90,6 +88,9 @@ function ToolbarButton({
   return (
     <button
       type="button"
+      // 버튼이 mousedown으로 포커스를 가져가면 editor selection이 사라져
+      // toggleBold 등이 적용될 selection이 없어진다. 표준 TipTap 툴바 패턴으로 막는다.
+      onMouseDown={(e) => e.preventDefault()}
       onClick={onClick}
       title={title}
       className={cn(
@@ -106,6 +107,7 @@ export function TiptapEditor({ content, onChange }: TiptapEditorProps) {
   const extensions = useMemo(
     () => [
       StarterKit.configure({ heading: { levels: [2, 3] } }),
+      Underline,
       ResizableImage,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
       TextStyle,
@@ -124,10 +126,18 @@ export function TiptapEditor({ content, onChange }: TiptapEditorProps) {
     },
     editorProps: {
       attributes: {
-        class: "prose prose-sm max-w-none min-h-[300px] p-4 focus:outline-none",
+        class: "tiptap prose prose-sm max-w-none min-h-[300px] p-4 bg-[#FAF5E9] text-[#020E1B] focus:outline-none [&_strong]:font-bold [&_em]:italic [&_u]:underline",
       },
     },
   })
+
+  useEffect(() => {
+    if (!editor) return
+    if (content !== editor.getHTML()) {
+      editor.commands.setContent(content || "", { emitUpdate: false })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [content, editor])
 
   if (!editor) {
     return (

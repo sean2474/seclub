@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -34,9 +34,38 @@ export function NoticesContent() {
   }, [searchParams, router])
 
   const handleOpenModal = (notice: Notice | null) => {
-    setEditingNotice(notice)
-    setIsModalOpen(true)
+    // Dropdown이 unmount되며 body에 남기는 pointer-events:none이
+    // Dialog 위에 그대로 적용되는 Radix UI 버그 회피용 미세 지연
+    setTimeout(() => {
+      setEditingNotice(notice)
+      setIsModalOpen(true)
+    }, 0)
   }
+
+  // Dialog/Dropdown/Popover가 닫힐 때 body에 잔여로 남는 pointer-events:none 제거
+  const handleModalOpenChange = useCallback((open: boolean) => {
+    setIsModalOpen(open)
+    if (!open) {
+      setEditingNotice(null)
+      setTimeout(() => {
+        if (typeof document !== "undefined") {
+          document.body.style.pointerEvents = ""
+        }
+      }, 100)
+    }
+  }, [])
+
+  // Alert dialog 닫힐 때도 동일 처리
+  const handleDeleteDialogOpenChange = useCallback((open: boolean) => {
+    if (!open) {
+      setDeletingId(null)
+      setTimeout(() => {
+        if (typeof document !== "undefined") {
+          document.body.style.pointerEvents = ""
+        }
+      }, 100)
+    }
+  }, [])
 
   const handleSaveNotice = async (formData: {
     title: string
@@ -203,11 +232,11 @@ export function NoticesContent() {
               <TableHeader>
                 <TableRow>
                   <TableHead>제목</TableHead>
-                  <TableHead>카테고리</TableHead>
-                  <TableHead>게시일</TableHead>
-                  <TableHead>상태</TableHead>
-                  <TableHead className="text-right">조회수</TableHead>
-                  <TableHead>
+                  <TableHead className="w-[110px] whitespace-nowrap">카테고리</TableHead>
+                  <TableHead className="w-[110px] whitespace-nowrap">게시일</TableHead>
+                  <TableHead className="w-[90px] whitespace-nowrap">상태</TableHead>
+                  <TableHead className="w-[80px] text-right whitespace-nowrap">조회수</TableHead>
+                  <TableHead className="w-[60px]">
                     <span className="sr-only">Actions</span>
                   </TableHead>
                 </TableRow>
@@ -215,23 +244,23 @@ export function NoticesContent() {
               <TableBody>
                 {notices.map((item) => (
                   <TableRow key={item.id}>
-                    <TableCell className="font-medium">
-                      <div className="flex items-center gap-2">
-                        {item.pinned && <Pin className="h-4 w-4 text-primary" />}
-                        <span>{item.title}</span>
+                    <TableCell className="font-medium max-w-0">
+                      <div className="flex items-center gap-2 min-w-0">
+                        {item.pinned && <Pin className="h-4 w-4 text-primary shrink-0" />}
+                        <span className="truncate" title={item.title}>{item.title}</span>
                         {item.images && item.images.length > 0 && (
-                          <Paperclip className="h-4 w-4 text-muted-foreground" />
+                          <Paperclip className="h-4 w-4 text-muted-foreground shrink-0" />
                         )}
                       </div>
                     </TableCell>
-                    <TableCell>
-                      <Badge variant={item.category === "중요" ? "destructive" : "outline"}>{item.category}</Badge>
+                    <TableCell className="whitespace-nowrap">
+                      <Badge variant={item.category === "중요" ? "destructive" : "outline"} className="whitespace-nowrap">{item.category}</Badge>
                     </TableCell>
-                    <TableCell>{item.created_at.split("T")[0]}</TableCell>
-                    <TableCell>
-                      <Badge variant={item.active ? "default" : "secondary"}>{item.active ? "게시 중" : "비게시"}</Badge>
+                    <TableCell className="whitespace-nowrap">{item.created_at.split("T")[0]}</TableCell>
+                    <TableCell className="whitespace-nowrap">
+                      <Badge variant={item.active ? "default" : "secondary"} className="whitespace-nowrap">{item.active ? "게시 중" : "비게시"}</Badge>
                     </TableCell>
-                    <TableCell className="text-right">{item.view.toLocaleString()}</TableCell>
+                    <TableCell className="text-right whitespace-nowrap">{item.view.toLocaleString()}</TableCell>
                     <TableCell>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
@@ -241,19 +270,38 @@ export function NoticesContent() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                           <DropdownMenuLabel>작업</DropdownMenuLabel>
-                          <DropdownMenuItem onClick={() => handleOpenModal(item)}>
+                          <DropdownMenuItem
+                            onSelect={(e) => {
+                              e.preventDefault()
+                              handleOpenModal(item)
+                            }}
+                          >
                             <FileEdit className="mr-2 h-4 w-4" />
                             편집
                           </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => handleToggleStatus(item.id, item.active)}>
+                          <DropdownMenuItem
+                            onSelect={(e) => {
+                              e.preventDefault()
+                              handleToggleStatus(item.id, item.active)
+                            }}
+                            className="flex items-center gap-2"
+                          >
                             <Switch
-                              className="mr-2 h-4 w-4 data-[state=checked]:bg-primary"
+                              className="data-[state=checked]:bg-primary scale-75 origin-left"
                               checked={item.active}
+                              tabIndex={-1}
+                              onClick={(e) => e.stopPropagation()}
                             />
-                            상태 변경
+                            <span className="whitespace-nowrap">{item.active ? "비게시로 변경" : "게시로 변경"}</span>
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
-                          <DropdownMenuItem className="text-red-500" onClick={() => setDeletingId(item.id)}>
+                          <DropdownMenuItem
+                            className="text-red-500"
+                            onSelect={(e) => {
+                              e.preventDefault()
+                              setTimeout(() => setDeletingId(item.id), 0)
+                            }}
+                          >
                             <Trash2 className="mr-2 h-4 w-4" />
                             삭제
                           </DropdownMenuItem>
@@ -270,12 +318,12 @@ export function NoticesContent() {
 
       <NoticeFormModal
         isOpen={isModalOpen}
-        onOpenChange={setIsModalOpen}
+        onOpenChange={handleModalOpenChange}
         onSave={handleSaveNotice}
         notice={editingNotice}
       />
 
-      <AlertDialog open={!!deletingId} onOpenChange={() => setDeletingId(null)}>
+      <AlertDialog open={!!deletingId} onOpenChange={handleDeleteDialogOpenChange}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>정말로 삭제하시겠습니까?</AlertDialogTitle>

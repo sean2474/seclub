@@ -68,6 +68,8 @@ export function NoticeFormModal({ isOpen, onOpenChange, onSave, notice }: Notice
 
   const isContentEmpty = (html: string) => {
     if (!html) return true
+    // 미디어가 하나라도 있으면 본문이 비어있다고 보지 않는다
+    if (/<(img|video|audio|iframe|embed|svg)[\s>]/i.test(html)) return false
     const stripped = html
       .replace(/<br\s*\/?\s*>/gi, "")
       .replace(/&nbsp;/gi, " ")
@@ -226,7 +228,7 @@ export function NoticeFormModal({ isOpen, onOpenChange, onSave, notice }: Notice
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto flex flex-col gap-4">
         <DialogHeader>
           <DialogTitle>{notice ? "공지 수정" : "새 공지 작성"}</DialogTitle>
           <DialogDescription>{notice ? "공지사항을 수정합니다." : "새로운 공지사항을 등록합니다."}</DialogDescription>
@@ -236,44 +238,20 @@ export function NoticeFormModal({ isOpen, onOpenChange, onSave, notice }: Notice
             <TabsTrigger value="write">작성</TabsTrigger>
             <TabsTrigger value="preview">미리보기</TabsTrigger>
           </TabsList>
-          <TabsContent value="preview" className="mt-4">
-            <div className="border rounded-md p-6 min-h-[300px]">
-              <div className="border-b border-foreground pb-4 mb-4">
-                <p className="text-sm text-foreground/80 mb-1">{category || "(카테고리 미선택)"}</p>
-                <h1 className="text-2xl font-bold text-foreground">
-                  {pinned && (
-                    <span className="text-xs bg-foreground text-background px-1.5 py-0.5 mr-2 align-middle">고정</span>
-                  )}
-                  {title || "(제목 없음)"}
-                </h1>
-                <div className="flex items-center gap-3 text-xs text-foreground/60 mt-2">
-                  <span>상태: {active ? "게시 중" : "비게시"}</span>
-                </div>
-              </div>
-              {content && content !== "<p></p>" ? (
-                <div
-                  className="prose max-w-none [&_img]:max-w-full [&_img]:h-auto"
-                  dangerouslySetInnerHTML={{ __html: content }}
-                />
-              ) : (
-                <p className="text-sm text-muted-foreground italic">(내용이 비어있습니다)</p>
-              )}
-            </div>
-          </TabsContent>
           <TabsContent value="write" className="mt-4">
-        <div className="grid gap-4 py-4">
-          <div className="grid gap-2">
-            <Label htmlFor="title">제목</Label>
-            <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
-          </div>
-          <div className="grid gap-2">
-            <Label>내용</Label>
-            <TiptapEditor content={content} onChange={setContent} />
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="grid gap-2">
-              <div className="flex justify-between items-center">
-                <Label htmlFor="category">카테고리</Label>
+            <div className="grid gap-4 py-2">
+              <div className="grid gap-2">
+                <Label htmlFor="title">제목</Label>
+                <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+              </div>
+              <div className="grid gap-2">
+                <Label>내용</Label>
+                <TiptapEditor content={content} onChange={setContent} />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid gap-2">
+                  <div className="flex justify-between items-center gap-2">
+                    <Label htmlFor="category">카테고리</Label>
                 <Popover open={isAddingCategory} onOpenChange={setIsAddingCategory}>
                   <PopoverTrigger asChild>
                     <Button variant="outline" size="sm" className="h-8 px-2">
@@ -400,10 +378,34 @@ export function NoticeFormModal({ isOpen, onOpenChange, onSave, notice }: Notice
                   onCheckedChange={(checked) => setPinned(checked)}
                 />
                 <Label htmlFor="pinned">{pinned ? "상단 고정" : "일반"}</Label>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+          </TabsContent>
+          <TabsContent value="preview" className="mt-4">
+            <div className="border rounded-md p-6 min-h-[300px]">
+              <div className="border-b border-foreground pb-4 mb-4">
+                <p className="text-sm text-foreground/80 mb-1">{category || "(카테고리 미선택)"}</p>
+                <h1 className="text-2xl font-bold text-foreground flex items-center gap-2 flex-wrap">
+                  {pinned && (
+                    <span className="text-xs bg-foreground text-background px-1.5 py-0.5 align-middle">고정</span>
+                  )}
+                  <span>{title || "(제목 없음)"}</span>
+                </h1>
+                <div className="flex items-center gap-3 text-xs text-foreground/60 mt-2">
+                  <span>상태: {active ? "게시 중" : "비게시"}</span>
+                </div>
+              </div>
+              {content && !isContentEmpty(content) ? (
+                <div
+                  className="prose max-w-none [&_img]:max-w-full [&_img]:h-auto [&_strong]:font-bold [&_em]:italic [&_u]:underline"
+                  dangerouslySetInnerHTML={{ __html: content }}
+                />
+              ) : (
+                <p className="text-sm text-muted-foreground italic">(내용이 비어있습니다)</p>
+              )}
+            </div>
           </TabsContent>
         </Tabs>
         <DialogFooter>
