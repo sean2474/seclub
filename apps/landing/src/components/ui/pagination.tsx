@@ -1,4 +1,5 @@
 import * as React from "react"
+import Link from "next/link"
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -36,28 +37,49 @@ PaginationItem.displayName = "PaginationItem"
 
 type PaginationLinkProps = {
   isActive?: boolean
+  href?: string
 } & Pick<ButtonProps, "size"> &
-  React.ComponentProps<"a">
+  Omit<React.ComponentProps<typeof Link>, "href">
 
 const PaginationLink = ({
   className,
   isActive,
   size = "icon",
+  href,
   ...props
-}: PaginationLinkProps) => (
-  <a
-    aria-current={isActive ? "page" : undefined}
-    className={cn(
-      buttonVariants({
-        variant: isActive ? "outline" : "ghost",
-        size,
-      }),
-      "cursor-pointer",
-      className
-    )}
-    {...props}
-  />
-)
+}: PaginationLinkProps) => {
+  const classes = cn(
+    buttonVariants({
+      variant: isActive ? "outline" : "ghost",
+      size,
+    }),
+    "cursor-pointer",
+    className,
+  )
+
+  // href가 없거나 비활성화된 경우엔 그냥 span으로 fallback (route 푸시 방지)
+  if (!href) {
+    return (
+      <span
+        aria-current={isActive ? "page" : undefined}
+        className={classes}
+        {...(props as React.HTMLAttributes<HTMLSpanElement>)}
+      />
+    )
+  }
+
+  return (
+    <Link
+      aria-current={isActive ? "page" : undefined}
+      href={href}
+      className={classes}
+      // 같은 페이지(다른 쿼리)로 navigation 시 scroll이 reset되어
+      // 사용자가 페이지 새로고침처럼 느끼는 문제를 방지
+      scroll={false}
+      {...props}
+    />
+  )
+}
 PaginationLink.displayName = "PaginationLink"
 
 const PaginationPrevious = ({

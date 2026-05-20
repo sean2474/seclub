@@ -47,8 +47,10 @@ function LinkifyText({ text }: { text: string }) {
 }
 
 // HTML 콘텐츠가 시각적으로 비어있는지 (빈 <p>, <li>, <br> 만 있는 경우 포함)
+// 단, img/video/iframe/embed 등 미디어가 하나라도 있으면 비어있지 않다고 판정한다.
 function isHtmlContentEmpty(html: string): boolean {
   if (!html) return true
+  if (/<(img|video|audio|iframe|embed|svg)[\s>]/i.test(html)) return false
   const stripped = html
     .replace(/<br\s*\/?\s*>/gi, "")
     .replace(/&nbsp;/gi, " ")

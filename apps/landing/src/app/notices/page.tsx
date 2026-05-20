@@ -23,11 +23,12 @@ export default async function Page({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
-  const notices = await getNotices()
-  const categories = await getNoticeCategories();
-  categories.unshift("전체")
-
-  const params = await searchParams;
+  const [notices, categoriesRaw, params] = await Promise.all([
+    getNotices(),
+    getNoticeCategories(),
+    searchParams,
+  ])
+  const categories = ["전체", ...categoriesRaw]
   const c = (params.category as string) || "전체"
   const searchTerm = (params.searchTerm as string) || ""
   const requestedPageRaw = Number(params.currentPage)
@@ -39,6 +40,9 @@ export default async function Page({
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / ITEMS_PER_PAGE))
   const currentPage = Math.min(Math.max(1, requestedPage), totalPages)
+
+  // 페이지에 보일 데이터만 클라이언트로 전송 (hydration 비용 절감)
+  const paginated = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE)
 
   const buildHref = (overrides: { category?: string; searchTerm?: string; currentPage?: number }) => {
     const next = {
@@ -69,6 +73,8 @@ export default async function Page({
                 <Link
                   key={category}
                   href={buildHref({ category, currentPage: 1 })}
+                  scroll={false}
+                  prefetch={false}
                   className={`relative px-4 py-2 ${category === c ? "border border-foreground after:w-full after:h-[10px] after:bg-background after:absolute after:-bottom-1 after:left-0" : ""}`}
                 >
                   {category}
@@ -102,9 +108,7 @@ export default async function Page({
           </div>
           {notices.data && (
             <NoticeTable
-              notices={filtered}
-              currentPage={currentPage}
-              itemsPerPage={ITEMS_PER_PAGE}
+              notices={paginated}
               hasFilter={c !== "전체" || searchTerm.length > 0}
             />
           )}

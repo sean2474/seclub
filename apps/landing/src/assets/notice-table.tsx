@@ -4,32 +4,35 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Notice } from "@/types";
 import { ChevronRight } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useCallback } from "react";
 
 export const NoticeTable = ({
   notices,
-  currentPage,
-  itemsPerPage,
   hasFilter,
 }: {
   notices: Notice[];
-  currentPage: number;
-  itemsPerPage: number;
   hasFilter: boolean;
 }) => {
   const router = useRouter();
   const params = useSearchParams();
 
-  const buildDetailHref = (id: string | number) => {
-    const qs = params.toString()
-    return qs ? `/notices/${id}?${qs}` : `/notices/${id}`
-  }
-
-  const paginatedNotices = notices.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
+  const buildDetailHref = useCallback(
+    (id: string | number) => {
+      const qs = params.toString()
+      return qs ? `/notices/${id}?${qs}` : `/notices/${id}`
+    },
+    [params],
   )
 
-  if (paginatedNotices.length === 0) {
+  // hover/touch 시 detail 페이지를 미리 prefetch해서 클릭 시 즉시 전환되도록 함
+  const handlePrefetch = useCallback(
+    (id: string | number) => {
+      router.prefetch(buildDetailHref(id))
+    },
+    [router, buildDetailHref],
+  )
+
+  if (notices.length === 0) {
     return (
       <div className="py-16 text-center text-foreground/60">
         {hasFilter
@@ -42,11 +45,13 @@ export const NoticeTable = ({
   return (
     <div className="">
       <div className="md:hidden space-y-2 divide-y divide-foreground/30 mt-2">
-        {paginatedNotices.map((notice) => (
+        {notices.map((notice) => (
           <div
             key={notice.id}
             className="pb-2 relative cursor-pointer"
             onClick={() => router.push(buildDetailHref(notice.id))}
+            onMouseEnter={() => handlePrefetch(notice.id)}
+            onTouchStart={() => handlePrefetch(notice.id)}
           >
             <p className="text-sm text-foreground/80">{notice.category}</p>
             <h4 className="flex items-center gap-1.5">
@@ -71,8 +76,13 @@ export const NoticeTable = ({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {paginatedNotices.map((item) => (
-            <TableRow key={item.id} className="cursor-pointer hover:bg-secondary/10" onClick={() => router.push(buildDetailHref(item.id))}>
+          {notices.map((item) => (
+            <TableRow
+              key={item.id}
+              className="cursor-pointer hover:bg-secondary/10"
+              onClick={() => router.push(buildDetailHref(item.id))}
+              onMouseEnter={() => handlePrefetch(item.id)}
+            >
               <TableCell className="text-center text-foreground/80">{item.category}</TableCell>
               <TableCell className="font-medium text-foreground">
                 <div className="flex items-center gap-2">
