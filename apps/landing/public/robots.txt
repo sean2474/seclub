@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://seclub.kr/sitemap.xml

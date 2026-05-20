@@ -1,0 +1,151 @@
+import { ScrollReveal } from "@/components/base/scroll-reveal";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { ChevronRightIcon } from "lucide-react";
+import Image from "next/image"
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { generateMetadata } from "@/utils/metadata-generator";
+import { activities, lodgingData, lodgingTotal } from "@/const/group-data";
+import { ScrollNudge } from "@/components/ui/scroll-nudge";
+
+export const metadata = generateMetadata("SE Club | 단체 예약", "SE Club의 단체 예약 안내 및 문의");
+
+const SectionHeader = ({ title, subtitle, className }: { title: string; subtitle?: string; className?: string }) => (
+  <div className={cn("mb-4 md:mb-8", className)}>
+    <h2 className="text-3xl font-bold text-gray-900">{title}</h2>
+    {subtitle && <p className="mt-2 text-lg text-gray-600">{subtitle}</p>}
+  </div>
+)
+
+export default function GroupReservationPage() {
+  return (
+    <div className="text-gray-800 font-sans">
+      <section className="fixed top-0 h-svh w-full overflow-x-hidden">
+        <Image src={"/images/reservation/hero.jpg"} sizes="100vw" alt={"SE Club 객실 전경"} fill className="object-cover object-bottom" />
+        <div className="z-10 absolute w-full h-full top-0 left-0 bg-black/30" />
+        <div className="z-10 absolute top-1/2 left-1/2 md:left-1/4 transform -translate-x-1/2 -translate-y-1/2 text-background whitespace-nowrap">
+          <ScrollReveal side="top" type="h1"> 기업·단체 예약 </ScrollReveal>
+          <ScrollReveal side="bottom" type="p" className="text-xl md:text-2xl mt-4"> SE Club에서 특별한 행사와 휴양을 계획하세요. </ScrollReveal>
+        </div>
+        <ScrollNudge />
+      </section>
+
+      <main className="w-full translate-y-[100svh] mb-[100svh] bg-background">
+        {/* 1. Introduction */}
+        <section className="pt-16 md:pt-32 pb-8 md:pb-16 px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 md:gap-16 items-center">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-medium leading-snug mb-0 md:mb-6"> 최적의 연수 및 휴양 장소 </h2>
+              <p>
+                SE Club은 3만 3천 평의 넓은 대지와 외부인 출입이 제한된 전용 해변을 보유하여, 프라이버시를 보호받으며
+                연수·휴양할 수 있는 최적의 장소입니다. 우거진 숲과 청정한 바다에서 기업(단체) 연수, 휴양, 단합 수련회 등
+                성공적인 행사를 개최해 보세요.
+              </p>
+            </div>
+            <div className="relative h-96 md:h-[500px]">
+              <Image src={"/images/reservation/1.jpg"} alt="SE Club 소개" fill className="object-cover" />
+            </div>
+          </div>
+        </section>
+        {/* 3. Lodging Facilities */}
+        <section className="py-8 md:py-16 px-6 lg:px-8 whitespace-nowrap">
+          <div className="max-w-4xl mx-auto">
+            <div>
+              <div className="mb-4 md:mb-8">
+                <h2 className="text-3xl font-bold text-gray-900">숙박 시설</h2>
+                <p className="mt-2 text-sm text-gray-600">* 최대 144명 수용 가능합니다</p>
+              </div>
+            </div>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>단지명</TableHead>
+                  <TableHead>동(호실) 수</TableHead>
+                  <TableHead>동별 인원(최대)</TableHead>
+                  <TableHead>시설별 인원(최대)</TableHead>
+                  <TableHead>비고</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {lodgingData.map((item) => (
+                  <TableRow key={item.name}>
+                    <TableCell className="font-medium">{item.name}</TableCell>
+                    <TableCell>{item.units}</TableCell>
+                    <TableCell>{item.unitCap}</TableCell>
+                    <TableCell>{item.totalCap}</TableCell>
+                    <TableCell>{item.notes}</TableCell>
+                  </TableRow>
+                ))}
+                <TableRow className="font-bold">
+                  <TableCell colSpan={3}>총계</TableCell>
+                  <TableCell>{lodgingTotal.totalCap}</TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+            <p className="text-sm text-gray-600 md:mt-2 text-right">
+              * 동(호실)별 최대 인원 이용 시 침구류 등은 추가로 세팅됩니다.
+            </p>
+          </div>
+        </section>
+        {/* 4. Activities */}
+        <section className="py-8 md:py-16 px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <SectionHeader title="부대시설 & 액티비티" />
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+              {activities.map((activity) => (
+                <div key={activity.title} className="border p-6">
+                  <div className="flex justify-between items-center mb-2">
+                    <h3 className="text-xl font-semibold">{activity.title}</h3>
+                    {activity.link && (<Link href={activity.link} className="flex items-center gap-2 group">자세히보기 <ChevronRightIcon className="w-4 h-4 group-hover:translate-x-2 transition-all duration-300 ease-in-out" /></Link>)}
+                  </div>
+
+                  <p className="text-gray-600">{activity.description}</p>
+                </div>
+              ))}
+            </div>
+            <p className="text-center mt-0 md:mt-8 text-md p-4">
+              * <strong>전체 대관:</strong> 전체 시설 이용 시, 이용일정 3개월 전 신청이 필수입니다.
+            </p>
+          </div>
+        </section>
+
+        {/* 6. Contact & History */}
+        <section className="py-0 md:py-16 px-6 lg:px-8 pb-16">
+          <div className="max-w-4xl mx-auto text-center md:text-left">
+            <SectionHeader title="이용현황 및 문의" />
+            <div className="grid md:grid-cols-2 gap-4 md:gap-12">
+              <div>
+                <h3 className="text-xl font-semibold mb-1.5 md:mb-4">주요 연수 및 행사 현황</h3>
+                <ul className="list-disc list-inside text-gray-700 space-y-1">
+                  <li>헬스포츠 인비테이션</li>
+                  <li>뮤직카우 임·직원 연중 휴양</li>
+                  <li>현대 그린파워 직원 하계 휴양</li>
+                  <li>한맥 문학 정기 연수</li>
+                  <li>도요타 자동차 RV4 런칭 행사 등</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold mb-1.5 md:mb-4">문의 안내</h3>
+                <div className="space-y-1 md:space-y-3 text-lg">
+                  <p>
+                    <span className="font-medium">전화:</span>{" "}
+                    <a href="tel:010-9703-1711" className="hover:underline font-semibold">
+                      010-9703-1711
+                    </a>
+                  </p>
+                  <p>
+                    <span className="font-medium">이메일:</span>{" "}
+                    <a href="mailto:taean2015@naver.com" className="hover:underline font-semibold">
+                      taean2015@naver.com
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  )
+}

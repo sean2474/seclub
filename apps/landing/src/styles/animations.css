@@ -1,0 +1,38 @@
+@theme {
+  @keyframes noise {
+    0%   { transform: translate(0); }
+    10%  { transform: translate(-7%, -7%); }
+    20%  { transform: translate(-9%, 7%); }
+    30%  { transform: translate(7%, -9%); }
+    40%  { transform: translate(-7%, 12%); }
+    50%  { transform: translate(-9%, 7%); }
+    60%  { transform: translate(12%); }
+    70%  { transform: translateY(9%); }
+    80%  { transform: translate(-17%); }
+    90%  { transform: translate(9%, 7%); }
+    100% { transform: translate(7%); }
+  }
+
+  @keyframes arrow-rotate {
+    0% { rotate: 0deg; }
+    100% { rotate: 3600deg; }
+  }
+
+  @keyframes arrow-translate {
+    0% { translate: 0px; }
+    50% { translate: 8px; }
+    100% { translate: 0px; }
+  }
+
+  @keyframes arrow-grow {
+    0% { scale: 1; }
+    50% { scale: 1.5; }
+    100% { scale: 1; }
+  }
+
+  @keyframes nudge {
+    0% { transform: translate(0) }
+    50% { transform: translate(0, 6px) }
+    100% { transform: translate(0) }
+  }
+}
