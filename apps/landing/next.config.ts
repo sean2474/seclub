@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["@seclub/utils", "@seclub/supabase"],
+  transpilePackages: ["@seclub/utils", "@seclub/supabase", "@seclub/ui"],
   images: {
     unoptimized: true,
     remotePatterns: [
