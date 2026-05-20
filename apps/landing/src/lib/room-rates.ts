@@ -23,7 +23,7 @@ export async function getLodgingRates(): Promise<LodgingRates> {
         "최성수기": row.peak_rate,
         "동절기": row.winter_rate,
       },
-      longStayDiscount: row.long_stay_discount,
+      longStayDiscount: row.long_stay_discount ?? undefined,
     };
   });
 
@@ -52,7 +52,7 @@ export async function getCampingRates(): Promise<LodgingRates> {
         "최성수기": row.peak_rate,
         "동절기": row.winter_rate,
       },
-      longStayDiscount: row.long_stay_discount,
+      longStayDiscount: row.long_stay_discount ?? undefined,
     };
   });
 

@@ -1,13 +1,12 @@
-export interface Notice {
-    id: string;
-    category: string;
-    title: string;
-    created_at: string;
-    view: number;
-    pinned: boolean;
-}
+import type { Tables } from "@seclub/supabase/types";
 
-export interface NoticeDetail extends Notice {
-    content: string;
-    images?: string[];
-}
+type NoticeRow = Tables<"notice">;
+
+// 랜딩 목록·카드용 (가벼움)
+export type Notice = Pick<
+  NoticeRow,
+  "id" | "category" | "title" | "created_at" | "view" | "pinned"
+>;
+
+// 랜딩 상세 페이지용
+export type NoticeDetail = Notice & Pick<NoticeRow, "content" | "images">;

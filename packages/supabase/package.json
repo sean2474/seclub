@@ -6,7 +6,11 @@
   "exports": {
     "./client": "./src/client.ts",
     "./server": "./src/server.ts",
-    "./middleware": "./src/middleware.ts"
+    "./middleware": "./src/middleware.ts",
+    "./types": "./src/database.types.ts"
+  },
+  "scripts": {
+    "gen:types": "npx -y supabase gen types typescript --project-id nqsogxcasyjauqgwmrxi > src/database.types.ts && echo '✓ packages/supabase/src/database.types.ts 갱신됨'"
   },
   "dependencies": {
     "@supabase/ssr": "catalog:",

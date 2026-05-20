@@ -19,7 +19,7 @@ export async function getRoomBySlug(slug: string): Promise<RoomInfo | null> {
     return null;
   }
 
-  return transformRoomData(data.slug, data.data as RoomData);
+  return transformRoomData(data.slug, data.data as unknown as RoomData);
 }
 
 // DB에서 모든 객실 정보 조회
@@ -36,7 +36,7 @@ export async function getAllRooms(): Promise<RoomInfo[]> {
     return [];
   }
 
-  return data.map((room) => transformRoomData(room.slug, room.data as RoomData));
+  return data.map((room) => transformRoomData(room.slug, room.data as unknown as RoomData));
 }
 
 // 카드 목록용 데이터 조회
