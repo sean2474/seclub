@@ -48,25 +48,6 @@ export async function fetchVideos(): Promise<{ videos: Video[], error: Error | n
   }
 }
 
-// 특정 ID의 비디오 가져오기
-export async function fetchVideoById(id: string): Promise<{ video: Video | null, error: Error | null }> {
-  try {
-    const supabase = createClient();
-    
-    const { data, error } = await supabase
-      .from("videos")
-      .select("*")
-      .eq("id", id)
-      .single();
-    
-    if (error) throw error;
-    
-    return { video: data || null, error: null };
-  } catch (error) {
-    console.error(`Error fetching video with ID ${id}:`, error);
-    return { video: null, error: error as Error };
-  }
-}
 
 // 새 비디오 추가
 export async function addVideo(video: Omit<Video, "id" | "created_at">): Promise<{ video: Video | null, error: Error | null }> {
@@ -157,12 +138,7 @@ export async function updateVideoOrder(videos: { id: string, order: number }[]):
     if (videos.length === 0) return { success: true, error: null };
     const supabase = createClient();
 
-    // NOTE: Run `pnpm --filter @seclub/supabase gen:types` after applying the
-    // migration so the generated Database type includes these RPCs.
-    const { error } = await (supabase.rpc as unknown as (
-      fn: string,
-      args: Record<string, unknown>,
-    ) => Promise<{ error: Error | null }>)("reorder_videos", {
+    const { error } = await supabase.rpc("reorder_videos", {
       p_orders: videos.map(({ id, order }) => ({ id, order })),
     });
 

@@ -107,17 +107,6 @@ export async function checkAuth(): Promise<{
 }
 
 /**
- * Middleware to require authentication
- */
-export async function requireAuth() {
-  const { isAuthenticated } = await checkAuth();
-  
-  if (!isAuthenticated) {
-    redirect("/login");
-  }
-}
-
-/**
  * Middleware to redirect authenticated users
  */
 export async function redirectIfAuthenticated(redirectTo: string = "/") {
@@ -195,12 +184,13 @@ export async function registerWithEmail(email: string, password: string): Promis
 
     const supabase = await createClient();
     
+    const emailRedirectTo =
+      process.env.NEXT_PUBLIC_ADMIN_URL ||
+      (typeof window !== "undefined" ? window.location.origin : undefined);
     const { error } = await supabase.auth.signUp({
       email,
       password,
-      options: {
-        emailRedirectTo: "https://admin.seclub.kr",
-      },
+      options: emailRedirectTo ? { emailRedirectTo } : undefined,
     });
 
     if (error) {

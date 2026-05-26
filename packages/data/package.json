@@ -1,0 +1,17 @@
+{
+  "name": "@seclub/data",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./notice": "./src/notice.ts",
+    "./hero-text": "./src/hero-text.ts",
+    "./pricing": "./src/pricing.ts",
+    "./category": "./src/category.ts"
+  },
+  "dependencies": {
+    "@seclub/supabase": "workspace:*",
+    "@supabase/ssr": "catalog:",
+    "@supabase/supabase-js": "catalog:"
+  }
+}

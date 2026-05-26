@@ -10,7 +10,7 @@ import { Textarea } from "@seclub/ui/textarea"
 import { Button } from "@seclub/ui/button"
 import { Switch } from "@seclub/ui/switch"
 import { useToast } from "@seclub/ui/use-toast"
-import { getRoomInfos, updateRoomInfo } from "@/lib/action/rooms"
+import { getRoomInfos, updateRoomInfo } from "@/lib/action/room-info"
 import type { RoomInfo } from "@/types/rooms"
 import { FileEdit, Plus, Trash2 } from "lucide-react"
 

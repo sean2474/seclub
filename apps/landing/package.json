@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "@seclub/data": "workspace:*",
     "@seclub/supabase": "workspace:*",
     "@seclub/ui": "workspace:*",
     "@seclub/utils": "workspace:*",

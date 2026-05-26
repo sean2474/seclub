@@ -27,7 +27,6 @@ const getPagePaths = (directoryPath: string, basePath = ''): string[] => {
     if (fs.statSync(itemPath).isDirectory()) {
       // 제외 패턴에 해당하는 디렉토리는 건너뛰기
       if (excludePatterns.some((pattern) => item.includes(pattern))) {
-        console.log("exclude", itemPath, item)
         return
       }
       

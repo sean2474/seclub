@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@seclub/supabase/server";
+import { fetchCategoryNames } from "@seclub/data/category";
 
 /**
  * Add a new category to the database
@@ -197,8 +198,8 @@ export async function deleteCategory(type: string): Promise<{
 }
 
 /**
- * Fetch all categories. Falls back to categories used in existing notices
- * when the `category` table is empty (recovers gracefully from missing seed).
+ * Fetch all categories via the shared `@seclub/data` reader (falls back to
+ * notice categories when the `category` table is empty).
  */
 export async function getCategories(): Promise<{
   success: boolean;
@@ -206,40 +207,8 @@ export async function getCategories(): Promise<{
   error: string | null;
 }> {
   try {
-    const supabase = await createClient();
-
-    const { data, error } = await supabase
-      .from("category")
-      .select("type")
-      .order("type", { ascending: true });
-
-    if (error) {
-      console.error("Error fetching categories:", error);
-      return {
-        success: false,
-        data: null,
-        error: "카테고리를 불러오는 중 오류가 발생했습니다.",
-      };
-    }
-
-    const tableCats = data.map((c: { type: string }) => c.type);
-
-    // category 테이블이 비어 있을 때만 notice 사용 카테고리로 fallback
-    if (tableCats.length === 0) {
-      const { data: noticeData } = await supabase.from("notice").select("category");
-      const noticeCats = Array.from(
-        new Set((noticeData ?? [])
-          .map((n: { category: string }) => n.category)
-          .filter(Boolean)),
-      ).sort();
-      return { success: true, data: noticeCats, error: null };
-    }
-
-    return {
-      success: true,
-      data: tableCats,
-      error: null,
-    };
+    const data = await fetchCategoryNames();
+    return { success: true, data, error: null };
   } catch (error) {
     console.error("Unexpected error fetching categories:", error);
     return {

@@ -220,12 +220,7 @@ export async function reorderGalleryRebornItems(
   try {
     if (orderedIds.length === 0) return { success: true, error: null }
     const supabase = createClient()
-    // NOTE: Run `pnpm --filter @seclub/supabase gen:types` after applying the
-    // migration so the generated Database type includes these RPCs.
-    const { error } = await (supabase.rpc as unknown as (
-      fn: string,
-      args: Record<string, unknown>,
-    ) => Promise<{ error: Error | null }>)("reorder_gallery_reborn_items", {
+    const { error } = await supabase.rpc("reorder_gallery_reborn_items", {
       p_orders: orderedIds.map((id, index) => ({ id, order: index })),
     })
     if (error) throw error
