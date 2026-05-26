@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Lock } from "lucide-react";
 import { useAuth } from "@/lib/mock-auth";
 import { Button } from "@/components/ui/button";
+import { currentUrl, loginUrl, signupUrl } from "@/lib/auth-urls";
 
 interface RequireAuthProps {
   children: React.ReactNode;
@@ -27,10 +28,10 @@ export function RequireAuth({ children, title }: RequireAuthProps) {
         </p>
         <div className="flex gap-3">
           <Button asChild className="bg-foreground text-background hover:bg-foreground/90">
-            <Link href="/my/login">로그인</Link>
+            <a href={loginUrl(currentUrl())}>로그인</a>
           </Button>
           <Button asChild variant="outline">
-            <Link href="/my/signup">회원가입</Link>
+            <a href={signupUrl(currentUrl())}>회원가입</a>
           </Button>
         </div>
         <Link

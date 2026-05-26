@@ -1,8 +1,84 @@
-export default function AuthLandingPage() {
+import Link from "next/link"
+import { redirect } from "next/navigation"
+import { createClient } from "@seclub/supabase/server"
+import { AuthShell } from "@/components/auth-shell"
+import { IS_AUTH_MOCK } from "@/lib/auth-mode"
+
+/**
+ * Root of the SSO app. In production, visitors normally never see this page
+ * — they arrive at /login or /signup with `?next=<calling-app>`. But once a
+ * session exists, the login page redirects here on `next=/`, and we need to
+ * (a) terminate the loop and (b) give the user an obvious "sign out" exit.
+ *
+ * Flow:
+ *   - signed in (or mock mode) → "로그인 완료" landing with sign-out
+ *   - signed out and live mode → /login
+ */
+export default async function AuthRootPage() {
+  let signedIn = IS_AUTH_MOCK
+  let displayName: string | null = null
+  if (!IS_AUTH_MOCK) {
+    const supabase = await createClient()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
+    if (!user) redirect("/login")
+    signedIn = true
+    displayName =
+      (typeof user.user_metadata?.name === "string" && user.user_metadata.name) ||
+      user.email ||
+      null
+  }
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-2 p-8">
-      <h1 className="text-2xl font-semibold">Auth · seclub</h1>
-      <p className="text-sm text-gray-500">SSO 인증 (auth.seclub.kr)</p>
-    </main>
-  );
+    <AuthShell
+      title="로그인 완료"
+      subtitle={
+        signedIn && displayName
+          ? `${displayName}님으로 로그인되어 있습니다.`
+          : "SSO 흐름이 정상적으로 마무리되었습니다."
+      }
+      footer={
+        <form action="/signout" method="post">
+          <button
+            type="submit"
+            className="cursor-pointer font-medium text-gold-soft underline decoration-gold-soft/40 transition-colors hover:text-ink"
+            style={{ textUnderlineOffset: "5px", textDecorationThickness: "1px" }}
+          >
+            로그아웃
+          </button>
+        </form>
+      }
+    >
+      <div className="flex flex-col gap-4 text-[13.5px] leading-[1.6] text-body">
+        <p>
+          실제 환경에서는 호출한 앱(예: reserve, landing)으로 자동 리다이렉트됩니다.
+          호출 앱이 없을 때만 이 페이지가 표시됩니다.
+        </p>
+        <ul className="ml-3 list-disc space-y-1 text-body/90">
+          <li>
+            <Link href="/login" className="underline decoration-gold-soft/40 hover:text-ink">
+              로그인
+            </Link>{" "}
+            (이메일 / 휴대폰 / 카카오 / Google)
+          </li>
+          <li>
+            <Link href="/signup" className="underline decoration-gold-soft/40 hover:text-ink">
+              회원가입
+            </Link>{" "}
+            4가지 진입 → 프로필 단계
+          </li>
+          <li>
+            <Link
+              href="/forgot-password"
+              className="underline decoration-gold-soft/40 hover:text-ink"
+            >
+              비밀번호 찾기
+            </Link>{" "}
+            → 메일 발송 → 재설정
+          </li>
+        </ul>
+      </div>
+    </AuthShell>
+  )
 }

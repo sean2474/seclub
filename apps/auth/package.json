@@ -10,11 +10,16 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@seclub/data": "workspace:*",
+    "@seclub/supabase": "workspace:*",
+    "@seclub/ui": "workspace:*",
+    "@seclub/utils": "workspace:*",
+    "@supabase/ssr": "catalog:",
+    "@supabase/supabase-js": "catalog:",
+    "lucide-react": "^0.454.0",
     "next": "catalog:",
     "react": "catalog:",
-    "react-dom": "catalog:",
-    "@supabase/ssr": "catalog:",
-    "@supabase/supabase-js": "catalog:"
+    "react-dom": "catalog:"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "catalog:",
@@ -22,6 +27,7 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "tailwindcss": "catalog:",
+    "tw-animate-css": "^1.3.3",
     "typescript": "catalog:"
   }
 }

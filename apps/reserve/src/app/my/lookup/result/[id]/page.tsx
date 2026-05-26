@@ -5,6 +5,7 @@ import { ko } from "date-fns/locale";
 import { ChevronLeft, Home, Tent, Calendar, Users, Car, Phone, Mail, CreditCard, Clock, AlertTriangle } from "lucide-react";
 import { getReservationById } from "@/lib/api";
 import { getStatusLabel, getStatusColor, getRefundRate, REFUND_POLICIES } from "@/types/reservation";
+import { loginUrl, signupUrl } from "@/lib/auth-urls";
 
 interface LookupResultPageProps {
   params: Promise<{ id: string }>;
@@ -218,18 +219,18 @@ export default async function LookupResultPage({ params, searchParams }: LookupR
           예약 내역 자동 관리, 포인트 적립, 멤버십 혜택까지
         </p>
         <div className="mt-4 flex justify-center gap-2">
-          <Link
-            href="/my/signup"
+          <a
+            href={signupUrl()}
             className="rounded-lg bg-foreground px-4 py-2 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
           >
             회원가입
-          </Link>
-          <Link
-            href="/my/login"
+          </a>
+          <a
+            href={loginUrl()}
             className="rounded-lg border border-foreground/20 px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-foreground/40"
           >
             로그인
-          </Link>
+          </a>
         </div>
       </div>
     </div>

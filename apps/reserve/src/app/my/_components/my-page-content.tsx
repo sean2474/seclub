@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Calendar, Heart, CreditCard, Award, Search, ArrowRight } from "lucide-react";
 import { useAuth } from "@/lib/mock-auth";
+import { currentUrl, loginUrl, signupUrl } from "@/lib/auth-urls";
 import { getReservationCounts, getMembershipInfo, type MembershipInfo } from "@/lib/api";
 import type { ReservationStatus } from "@/types/reservation";
 
@@ -115,18 +116,18 @@ export function MyPageContent() {
             </div>
 
             <div className="mt-6 flex justify-center gap-3">
-              <Link
-                href="/my/login"
+              <a
+                href={loginUrl(currentUrl())}
                 className="rounded-lg bg-foreground px-6 py-2.5 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
               >
                 로그인
-              </Link>
-              <Link
-                href="/my/signup"
+              </a>
+              <a
+                href={signupUrl(currentUrl())}
                 className="rounded-lg border border-foreground/20 bg-white px-6 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-foreground/40"
               >
                 회원가입
-              </Link>
+              </a>
             </div>
           </div>
         </section>

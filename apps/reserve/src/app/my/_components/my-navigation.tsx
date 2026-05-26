@@ -12,6 +12,7 @@ import {
   Search,
 } from "lucide-react";
 import { useAuth } from "@/lib/mock-auth";
+import { currentUrl, loginUrl, signupUrl } from "@/lib/auth-urls";
 
 const navItems = [
   {
@@ -90,18 +91,18 @@ export function MyNavigation() {
               </div>
             </div>
             <div className="mt-4 flex gap-2">
-              <Link
-                href="/my/login"
+              <a
+                href={loginUrl(currentUrl())}
                 className="flex-1 rounded-lg bg-foreground py-2 text-center text-sm font-medium text-background transition-colors hover:bg-foreground/90"
               >
                 로그인
-              </Link>
-              <Link
-                href="/my/signup"
+              </a>
+              <a
+                href={signupUrl(currentUrl())}
                 className="flex-1 rounded-lg border border-foreground/20 py-2 text-center text-sm font-medium text-foreground transition-colors hover:border-foreground/40"
               >
                 회원가입
-              </Link>
+              </a>
             </div>
           </>
         )}
