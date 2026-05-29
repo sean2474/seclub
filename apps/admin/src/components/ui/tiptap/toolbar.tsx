@@ -87,16 +87,10 @@ function FontSizeStepper({ editor }: { editor: Editor }) {
 
   const apply = (size: number) => {
     const clamped = round1(Math.max(MIN_FONT_SIZE, Math.min(MAX_FONT_SIZE, size)))
-    const { empty, from } = editor.state.selection
-    // With a collapsed cursor, setMark only stores the size for the *next*
-    // typed text — existing text doesn't change, which reads as "broken". So
-    // when nothing is selected we apply to the whole doc, then restore the
-    // caret. An explicit selection still scopes the change to that range.
-    if (empty) {
-      editor.chain().focus().selectAll().setFontSize(`${clamped}px`).setTextSelection(from).run()
-    } else {
-      editor.chain().focus().setFontSize(`${clamped}px`).run()
-    }
+    // Google Docs semantics: apply only to the selected range. With a collapsed
+    // cursor this sets a stored mark so the next typed text uses the size —
+    // existing text is left untouched.
+    editor.chain().focus().setFontSize(`${clamped}px`).run()
   }
 
   const startEditing = () => {
