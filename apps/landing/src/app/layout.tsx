@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Header } from "@/assets/header";
 import { Footer } from "@/assets/footer";
+import { ChatbotWidget } from "@/components/ui/chatbot-widget";
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { getHeroText } from "@/lib/hero-text";
@@ -86,6 +87,7 @@ export default async function RootLayout({
         <Header showNoticesBadge={heroText.notices_new_badge} />
         {children}
         <Footer />
+        <ChatbotWidget />
         <Analytics />
         <SpeedInsights />
       </body>
