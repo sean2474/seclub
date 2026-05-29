@@ -128,3 +128,8 @@
     @apply w-[180%] h-[180%] fixed left-[-40%] top-[-40%] z-[99999999] opacity-30 pointer-events-none mix-blend-overlay bg-[url('/images/noise.webp')] bg-repeat content-[""] animate-[noise_3s_steps(4)_infinite];
   } */
 }
+
+
+* {
+  /* outline: solid 1px red; */
+}

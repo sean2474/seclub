@@ -1,4 +1,8 @@
 import { createClient } from "@seclub/supabase/server";
+import type { SupabaseClient } from "@supabase/supabase-js";
+import type { Database } from "@seclub/supabase/types";
+
+type PricingClient = SupabaseClient<Database>;
 
 type RoomRateRow = {
   name: string
@@ -29,8 +33,8 @@ export interface Discounts {
   winterSeason: Record<string, number>
 }
 
-async function fetchRoomRateRows(): Promise<RoomRateRow[]> {
-  const supabase = await createClient()
+async function fetchRoomRateRows(client?: PricingClient): Promise<RoomRateRow[]> {
+  const supabase = client ?? (await createClient())
   const { data, error } = await supabase
     .from("room_rates")
     .select("name, type, peak_rate, winter_rate, long_stay_discount")
@@ -54,18 +58,18 @@ function rowsToRatesByName(rows: RoomRateRow[]): RatesByName {
   return result
 }
 
-export async function fetchLodgingRates(): Promise<RatesByName> {
-  const rows = await fetchRoomRateRows()
+export async function fetchLodgingRates(client?: PricingClient): Promise<RatesByName> {
+  const rows = await fetchRoomRateRows(client)
   return rowsToRatesByName(rows.filter((r) => r.type === "lodging"))
 }
 
-export async function fetchCampingRates(): Promise<RatesByName> {
-  const rows = await fetchRoomRateRows()
+export async function fetchCampingRates(client?: PricingClient): Promise<RatesByName> {
+  const rows = await fetchRoomRateRows(client)
   return rowsToRatesByName(rows.filter((r) => r.type === "camping"))
 }
 
-export async function fetchLateCheckoutRates(): Promise<LateCheckoutRate[]> {
-  const supabase = await createClient()
+export async function fetchLateCheckoutRates(client?: PricingClient): Promise<LateCheckoutRate[]> {
+  const supabase = client ?? (await createClient())
   const { data, error } = await supabase
     .from("late_checkout_rates")
     .select("hours_3, hours_6, room_rates(name)")
@@ -84,8 +88,8 @@ export async function fetchLateCheckoutRates(): Promise<LateCheckoutRate[]> {
     }))
 }
 
-export async function fetchDiscounts(): Promise<Discounts> {
-  const supabase = await createClient()
+export async function fetchDiscounts(client?: PricingClient): Promise<Discounts> {
+  const supabase = client ?? (await createClient())
   const { data, error } = await supabase
     .from("discount_rates")
     .select("season, category, nights, discount_percent")
@@ -116,11 +120,11 @@ export async function fetchDiscounts(): Promise<Discounts> {
  * One-shot loader that hits `room_rates` exactly once and partitions in
  * memory, then fans out to `late_checkout` and `discount_rates` in parallel.
  */
-export async function fetchAllPricing() {
+export async function fetchAllPricing(client?: PricingClient) {
   const [roomRows, lateCheckoutRates, discounts] = await Promise.all([
-    fetchRoomRateRows(),
-    fetchLateCheckoutRates(),
-    fetchDiscounts(),
+    fetchRoomRateRows(client),
+    fetchLateCheckoutRates(client),
+    fetchDiscounts(client),
   ])
   return {
     lodgingRates: rowsToRatesByName(roomRows.filter((r) => r.type === "lodging")),

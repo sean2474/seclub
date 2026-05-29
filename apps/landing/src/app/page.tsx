@@ -15,6 +15,7 @@ import { ScrollNudge } from "@/components/ui/scroll-nudge";
 import { ReservationButton } from "@/components/ui/reservation-button";
 import { LinkEventTracker } from "@seclub/ui/link-event-tracker";
 
+export const revalidate = 3600
 export const metadata = generateMetadata("SE Club (태안둘레길캠핑장 & 펜션)", "충청남도 태안군에 위치한 SE Club(태안둘레길캠핑장 & 펜션)의 공식 웹사이트입니다.");
 
 export default async function Home() {

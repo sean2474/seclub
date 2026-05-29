@@ -1,4 +1,8 @@
 import { createClient } from "@seclub/supabase/server";
+import type { SupabaseClient } from "@supabase/supabase-js";
+import type { Database } from "@seclub/supabase/types";
+
+type CategoryClient = SupabaseClient<Database>;
 
 /**
  * Returns the union of categories from the `category` seed table and any
@@ -7,9 +11,12 @@ import { createClient } from "@seclub/supabase/server";
  *
  * @param activeOnly  when true, only consider active notices for the fallback.
  */
-export async function fetchCategoryNames(activeOnly = false): Promise<string[]> {
+export async function fetchCategoryNames(
+  activeOnly = false,
+  client?: CategoryClient,
+): Promise<string[]> {
   try {
-    const supabase = await createClient()
+    const supabase = client ?? (await createClient())
 
     const { data: catData } = await supabase.from("category").select("type").order("type")
     const tableCats = (catData ?? []).map((c: { type: string }) => c.type)

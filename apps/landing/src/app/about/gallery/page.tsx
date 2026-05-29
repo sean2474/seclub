@@ -1,11 +1,12 @@
 import { ParallaxScroll } from "@/components/ui/parallax-scroll";
-import { createClient } from "@seclub/supabase/server";
+import { createClient } from "@seclub/supabase/public";
 import { generateMetadata } from "@/utils/metadata-generator";
 
+export const revalidate = 3600;
 export const metadata = generateMetadata("SE Club | 갤러리", "SE Club의 다양한 모습을 확인할 수 있는 갤러리입니다.");
 
 export default async function GalleryPage() {
-  const supabase = await createClient()
+  const supabase = createClient()
 
   const { data: files, error } = await supabase
     .storage

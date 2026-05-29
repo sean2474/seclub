@@ -2,6 +2,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { getAllPricing } from "@/lib/room-rates"
 import { generateMetadata } from "@/utils/metadata-generator"
 
+export const revalidate = 3600
 export const metadata = generateMetadata("SE Club | 요금 안내", "SE Club의 객실 및 캠핑장 요금 안내")
 
 const formatCurrency = (value?: number) => {

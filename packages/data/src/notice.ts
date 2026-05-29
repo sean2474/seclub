@@ -1,5 +1,9 @@
 import { createClient } from "@seclub/supabase/server";
-import type { Tables } from "@seclub/supabase/types";
+import type { SupabaseClient } from "@supabase/supabase-js";
+import type { Database, Tables } from "@seclub/supabase/types";
+
+/** Either the cookie-based server client or the cookie-less public client. */
+type NoticeClient = SupabaseClient<Database>;
 
 export type NoticeRow = Tables<"notice">;
 
@@ -34,9 +38,10 @@ interface FetchNoticesOptions {
  */
 export async function fetchNotices<T = NoticeRow>(
   options: FetchNoticesOptions = {},
+  client?: NoticeClient,
 ): Promise<{ data: T[] | null; error: string | null }> {
   try {
-    const supabase = await createClient()
+    const supabase = client ?? (await createClient())
     let query = supabase
       .from("notice")
       .select(options.columns ?? "*")
@@ -64,9 +69,10 @@ export async function fetchNotices<T = NoticeRow>(
  */
 export async function fetchNoticeById(
   id: string,
+  client?: NoticeClient,
 ): Promise<{ data: NoticeRow | null; error: string | null }> {
   try {
-    const supabase = await createClient()
+    const supabase = client ?? (await createClient())
     const { data, error } = await supabase
       .from("notice")
       .select("*")

@@ -5,9 +5,10 @@ import {
   fetchLateCheckoutRates,
   fetchLodgingRates,
 } from "@seclub/data/pricing"
+import { createClient as createPublicClient } from "@seclub/supabase/public"
 
-export const getLodgingRates = fetchLodgingRates
-export const getCampingRates = fetchCampingRates
-export const getLateCheckoutRates = fetchLateCheckoutRates
-export const getDiscounts = fetchDiscounts
-export const getAllPricing = fetchAllPricing
+export const getLodgingRates = () => fetchLodgingRates(createPublicClient())
+export const getCampingRates = () => fetchCampingRates(createPublicClient())
+export const getLateCheckoutRates = () => fetchLateCheckoutRates(createPublicClient())
+export const getDiscounts = () => fetchDiscounts(createPublicClient())
+export const getAllPricing = () => fetchAllPricing(createPublicClient())

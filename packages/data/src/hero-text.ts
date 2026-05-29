@@ -1,5 +1,8 @@
 import { createClient } from "@seclub/supabase/server";
-import type { Tables } from "@seclub/supabase/types";
+import type { SupabaseClient } from "@supabase/supabase-js";
+import type { Database, Tables } from "@seclub/supabase/types";
+
+type HeroClient = SupabaseClient<Database>;
 
 export type HeroText = Pick<
   Tables<"main_hero_text">,
@@ -18,9 +21,9 @@ export const HERO_TEXT_DEFAULTS: HeroText = {
  * Read the single hero-text row. Returns `HERO_TEXT_DEFAULTS` when the row is
  * missing or fetching fails — callers should not treat this as an error path.
  */
-export async function fetchHeroText(): Promise<HeroText> {
+export async function fetchHeroText(client?: HeroClient): Promise<HeroText> {
   try {
-    const supabase = await createClient()
+    const supabase = client ?? (await createClient())
     const { data, error } = await supabase
       .from("main_hero_text")
       .select("tagline, heading_line1, heading_line2, button_text, notices_new_badge")

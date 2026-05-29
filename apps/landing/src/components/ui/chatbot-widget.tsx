@@ -10,7 +10,7 @@ const LOAD_TIMEOUT_MS = 12_000;
 // 그리팅 말풍선이 뜨기까지 지연.
 const TEASER_DELAY_MS = 2_200;
 
-export function ChatbotWidget() {
+export function ChatbotWidget({ liftPx = 0 }: { liftPx?: number }) {
   const [open, setOpen] = useState(false);
   // iframe 은 처음 열 때만 마운트. 세션 유지를 위해 이후 닫아도 unmount 하지 않음
   // (재방문 시 대화 이어짐). 트레이드오프: 백그라운드 iframe 1개 상주.
@@ -80,7 +80,7 @@ export function ChatbotWidget() {
           open
             ? "opacity-100 translate-y-0"
             : "pointer-events-none translate-y-4 opacity-0"
-        } inset-x-2 bottom-2 top-2 sm:inset-x-auto sm:bottom-24 sm:right-6 sm:top-auto sm:h-[min(660px,calc(100svh-7.5rem))] sm:w-[396px]`}
+        } inset-x-2 bottom-2 top-2 sm:inset-x-auto sm:bottom-5 sm:right-20 sm:top-auto sm:h-[min(660px,calc(100svh-7.5rem))] sm:w-[396px]`}
       >
         <div className="flex h-full w-full flex-col overflow-hidden rounded-[1.75rem] border border-black/5 bg-background shadow-[0_24px_60px_-12px_rgba(13,84,43,0.45),0_8px_24px_-8px_rgba(0,0,0,0.25)] ring-1 ring-black/5">
           {/* 헤더 */}
@@ -151,13 +151,13 @@ export function ChatbotWidget() {
         </div>
       </div>
 
-      {/* 그리팅 말풍선 — 데스크탑에서 패널 닫혀있고 아직 안 열어봤을 때 */}
+      {/* 그리팅 말풍선 — 데스크탑에서 패널 닫혀있고 아직 안 열어봤을 때.
+          SNS 가 열리면 FAB 와 함께 위로 올라간다 (liftPx). */}
       <div
         inert={!teaser || open}
-        className={`fixed bottom-[5.75rem] right-6 z-50 hidden transition-all duration-300 ease-out motion-reduce:transition-none sm:block ${
-          teaser && !open
-            ? "translate-y-0 opacity-100"
-            : "pointer-events-none translate-y-2 opacity-0"
+        style={{ transform: `translateY(${-liftPx}px)` }}
+        className={`fixed bottom-[5.75rem] right-6 z-50 hidden transition-[transform,opacity] duration-300 ease-out motion-reduce:transition-none sm:block ${
+          teaser && !open ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
         <div className="relative flex max-w-[248px] items-start gap-2 rounded-2xl rounded-br-md border border-black/5 bg-background py-3 pl-4 pr-9 shadow-[0_16px_40px_-12px_rgba(13,84,43,0.4)] ring-1 ring-black/5">
@@ -175,40 +175,47 @@ export function ChatbotWidget() {
             type="button"
             onClick={() => setTeaser(false)}
             aria-label="안내 닫기"
-            className="absolute right-1.5 top-1.5 flex h-6 w-6 items-center justify-center rounded-full text-foreground/40 transition-colors hover:bg-foreground/5 hover:text-foreground/70 motion-reduce:transition-none"
+            className="absolute cursor-pointer right-1.5 top-1.5 flex h-6 w-6 items-center justify-center rounded-full text-foreground/40 transition-colors hover:bg-foreground/5 hover:text-foreground/70 motion-reduce:transition-none"
           >
             <X className="h-3.5 w-3.5" strokeWidth={2.5} aria-hidden />
           </button>
         </div>
       </div>
 
-      {/* 플로팅 버튼 — 모바일에서 패널 열리면 숨김 (패널 헤더의 X 로 닫음) */}
-      <button
-        ref={fabRef}
-        type="button"
-        onClick={toggle}
-        aria-expanded={open}
-        aria-controls="chatbot-panel"
-        aria-label={open ? "챗봇 닫기" : "챗봇 열기"}
-        className={`group fixed bottom-5 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[#0d542b] to-[#08381c] text-[#FAF5E9] shadow-[0_10px_30px_-8px_rgba(13,84,43,0.65)] ring-1 ring-white/10 transition-[transform,box-shadow] duration-200 hover:scale-105 hover:shadow-[0_14px_36px_-8px_rgba(13,84,43,0.75)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 motion-reduce:transition-none motion-reduce:hover:scale-100 ${
-          open ? "max-sm:hidden" : ""
-        }`}
+      {/* 플로팅 버튼 — 모바일에서 패널 열리면 숨김 (패널 헤더의 X 로 닫음).
+          위치 이동(SNS 열림 시 위로)은 래퍼의 translateY 로 처리해 버튼 자체의
+          hover scale 변환과 충돌하지 않게 한다. */}
+      <div
+        className="fixed bottom-5 right-5 z-50 transition-transform duration-300 ease-out motion-reduce:transition-none"
+        style={{ transform: `translateY(${-liftPx}px)` }}
       >
-        {/* idle 어텐션 펄스 (열기 전, 모션 허용 시) */}
-        {!open && !mounted && (
-          <span
-            aria-hidden
-            className="absolute inset-0 rounded-full bg-primary/30 motion-safe:animate-ping"
-          />
-        )}
-        <span className="relative">
-          {open ? (
-            <X className="h-6 w-6" strokeWidth={2} aria-hidden />
-          ) : (
-            <MessageCircle className="h-6 w-6" strokeWidth={1.9} aria-hidden />
+        <button
+          ref={fabRef}
+          type="button"
+          onClick={toggle}
+          aria-expanded={open}
+          aria-controls="chatbot-panel"
+          aria-label={open ? "챗봇 닫기" : "챗봇 열기"}
+          className={`cursor-pointer group relative flex h-12 w-12 items-center justify-center rounded-full bg-linear-to-br from-[#0d542b] to-[#08381c] text-[#FAF5E9] shadow-[0_10px_30px_-8px_rgba(13,84,43,0.65)] ring-1 ring-white/10 transition-[transform,box-shadow] duration-200 hover:scale-105 hover:shadow-[0_14px_36px_-8px_rgba(13,84,43,0.75)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 motion-reduce:transition-none motion-reduce:hover:scale-100 ${
+            open ? "max-sm:hidden" : ""
+          }`}
+        >
+          {/* idle 어텐션 펄스 (열기 전, 모션 허용 시) */}
+          {!open && !mounted && (
+            <span
+              aria-hidden
+              className="absolute inset-0 rounded-full bg-primary/30 motion-safe:animate-ping"
+            />
           )}
-        </span>
-      </button>
+          <span className="relative">
+            {open ? (
+              <X className="h-6 w-6" strokeWidth={2} aria-hidden />
+            ) : (
+              <MessageCircle className="h-6 w-6" strokeWidth={1.9} aria-hidden />
+            )}
+          </span>
+        </button>
+      </div>
     </>
   );
 }

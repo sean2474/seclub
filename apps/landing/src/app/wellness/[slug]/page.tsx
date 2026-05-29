@@ -1,6 +1,10 @@
 import { WellnessTemplate } from "@/assets/wellness-template";
 import { wellnessPageData } from "@/const/wellness-detail";
 
+export function generateStaticParams() {
+  return Object.keys(wellnessPageData).map((slug) => ({ slug }))
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params
     return {

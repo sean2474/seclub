@@ -3,7 +3,7 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@seclub/ui/table"
 import { Notice } from "@/types";
 import { ChevronRight } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 
 export const NoticeTable = ({
@@ -14,14 +14,10 @@ export const NoticeTable = ({
   hasFilter: boolean;
 }) => {
   const router = useRouter();
-  const params = useSearchParams();
 
   const buildDetailHref = useCallback(
-    (id: string | number) => {
-      const qs = params.toString()
-      return qs ? `/notices/${id}?${qs}` : `/notices/${id}`
-    },
-    [params],
+    (id: string | number) => `/notices/${id}`,
+    [],
   )
 
   // hover/touch 시 detail 페이지를 미리 prefetch해서 클릭 시 즉시 전환되도록 함

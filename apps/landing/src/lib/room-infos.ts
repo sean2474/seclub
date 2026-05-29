@@ -1,4 +1,4 @@
-import { createClient } from "@seclub/supabase/server";
+import { createClient } from "@seclub/supabase/public";
 import { RoomData, RoomInfo, RoomCardProps } from "@/types";
 import { getIcon } from "./icon-map";
 import { parseOverview } from "./parse-highlight";
@@ -26,7 +26,7 @@ function parseRoomData(slug: string, raw: unknown): RoomData | null {
 
 // DB에서 단일 객실 정보 조회
 export async function getRoomBySlug(slug: string): Promise<RoomInfo | null> {
-  const supabase = await createClient();
+  const supabase = createClient();
 
   const { data, error } = await supabase
     .from("room_infos")
@@ -46,7 +46,7 @@ export async function getRoomBySlug(slug: string): Promise<RoomInfo | null> {
 
 // DB에서 모든 객실 정보 조회
 export async function getAllRooms(): Promise<RoomInfo[]> {
-  const supabase = await createClient();
+  const supabase = createClient();
 
   const { data, error } = await supabase
     .from("room_infos")

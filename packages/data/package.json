@@ -7,7 +7,8 @@
     "./notice": "./src/notice.ts",
     "./hero-text": "./src/hero-text.ts",
     "./pricing": "./src/pricing.ts",
-    "./category": "./src/category.ts"
+    "./category": "./src/category.ts",
+    "./sns-links": "./src/sns-links.ts"
   },
   "dependencies": {
     "@seclub/supabase": "workspace:*",

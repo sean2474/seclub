@@ -1,12 +1,18 @@
 import { Button } from "@seclub/ui/button"
-import { getNoticeById } from "@/lib/actions/notice"
+import { getNoticeById, getNotices } from "@/lib/actions/notice"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { NoticeViewCounter } from "@/components/base/notice-view-counter"
 import { ImageGalleryWithModal } from "@/components/ui/image-modal"
 import { generateMetadata } from "@/utils/metadata-generator"
 
+export const revalidate = 3600
 export const metadata = generateMetadata("SE Club | 공지사항", "SE Club 공지사항");
+
+export async function generateStaticParams() {
+  const { data } = await getNotices()
+  return (data ?? []).map((n) => ({ id: String(n.id) }))
+}
 
 function LinkifyText({ text }: { text: string }) {
   const urlRegex = /(https?:\/\/[^\s]+?)(?=[)\].,;:!?"'<>]*(?:\s|$)|$)/g;
@@ -59,28 +65,14 @@ function isHtmlContentEmpty(html: string): boolean {
   return stripped.length === 0
 }
 
-function buildBackHref(searchParams: { [key: string]: string | string[] | undefined }) {
-  const sp = new URLSearchParams()
-  const keys = ["category", "searchTerm", "currentPage"] as const
-  for (const k of keys) {
-    const v = searchParams[k]
-    if (typeof v === "string" && v.length > 0) sp.set(k, v)
-  }
-  const qs = sp.toString()
-  return qs ? `/notices?${qs}` : "/notices"
-}
-
 export default async function Page({
   params,
-  searchParams,
 }: {
   params: Promise<{ id: string }>
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
   const { id } = await params
-  const sp = await searchParams
   const notice = await getNoticeById(id)
-  const backHref = buildBackHref(sp)
+  const backHref = "/notices"
 
   if (!notice) {
     return (

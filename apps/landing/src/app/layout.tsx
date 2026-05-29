@@ -1,10 +1,11 @@
 import "./globals.css";
 import { Header } from "@/assets/header";
 import { Footer } from "@/assets/footer";
-import { ChatbotWidget } from "@/components/ui/chatbot-widget";
+import { FloatingWidgets } from "@/components/ui/floating-widgets";
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { getHeroText } from "@/lib/hero-text";
+import { getSnsLinks } from "@/lib/sns-links";
 
 const Head = () => {
   const baseUrl = "https://seclub.kr";
@@ -68,7 +69,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const heroText = await getHeroText();
+  const [heroText, snsLinks] = await Promise.all([getHeroText(), getSnsLinks()]);
   return (
     <html lang="ko" suppressHydrationWarning>
       <Head />
@@ -87,7 +88,7 @@ export default async function RootLayout({
         <Header showNoticesBadge={heroText.notices_new_badge} />
         {children}
         <Footer />
-        <ChatbotWidget />
+        <FloatingWidgets links={snsLinks} />
         <Analytics />
         <SpeedInsights />
       </body>

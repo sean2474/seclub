@@ -15,6 +15,13 @@ import { VILLA_URL } from "@/const/urls";
 
 const PREMIUM_VILLA_INQUIRY_PHONE = "010-9703-1711";
 
+export const revalidate = 3600
+
+export async function generateStaticParams() {
+  const rooms = await getRoomCards()
+  return rooms.map((room) => ({ slug: room.slug }))
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const room = await getRoomBySlug(slug)

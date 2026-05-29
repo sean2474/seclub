@@ -351,6 +351,36 @@ export type Database = {
         }
         Relationships: []
       }
+      sns_links: {
+        Row: {
+          active: boolean
+          id: string
+          label: string
+          platform: string
+          sort_order: number
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          active?: boolean
+          id?: string
+          label: string
+          platform: string
+          sort_order?: number
+          updated_at?: string
+          url?: string
+        }
+        Update: {
+          active?: boolean
+          id?: string
+          label?: string
+          platform?: string
+          sort_order?: number
+          updated_at?: string
+          url?: string
+        }
+        Relationships: []
+      }
       videos: {
         Row: {
           created_at: string
@@ -412,6 +442,7 @@ export type Database = {
         Args: { p_orders: Json }
         Returns: undefined
       }
+      reorder_sns_links: { Args: { p_orders: Json }; Returns: undefined }
       reorder_videos: { Args: { p_orders: Json }; Returns: undefined }
     }
     Enums: {

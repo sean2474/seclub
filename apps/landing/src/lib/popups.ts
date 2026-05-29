@@ -1,4 +1,4 @@
-import { createClient } from "@seclub/supabase/server";
+import { createClient } from "@seclub/supabase/public";
 
 export interface PopupData {
   id: string;
@@ -10,7 +10,7 @@ export interface PopupData {
 
 export async function getActivePopups(): Promise<PopupData[]> {
   try {
-    const supabase = await createClient();
+    const supabase = createClient();
     const today = new Date().toISOString().split("T")[0];
     const { data, error } = await supabase
       .from("popups")

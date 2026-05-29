@@ -44,7 +44,7 @@ export const DotToXIcon = ({
               translate(-50%, -50%)
             `,
           }}
-          className={`bg-font border border-font duration-300 ease-in-out ${!open && 'delay-150'}`}
+          className={`bg-foreground border border-foreground duration-300 ease-in-out ${!open && 'delay-150'}`}
         />
         {/* --- 점(가운데) --- */}
         <li
@@ -59,7 +59,7 @@ export const DotToXIcon = ({
               translate(-50%, -50%)
             `,
           }}
-          className={`bg-font border border-font duration-300 ease-in-out ${!open && 'delay-150'}`}
+          className={`bg-foreground border border-foreground duration-300 ease-in-out ${!open && 'delay-150'}`}
         />
         {/* --- 점(오른쪽) --- */}
         <li
@@ -74,7 +74,7 @@ export const DotToXIcon = ({
               translate(-50%, -50%)
             `,
           }}
-          className={`bg-font border border-font duration-300 ease-in-out ${!open && 'delay-150'}`}
+          className={`bg-foreground border border-foreground duration-300 ease-in-out ${!open && 'delay-150'}`}
         />
 
         {/* --- X 선(우상향 ↘︎) --- */}
@@ -92,7 +92,7 @@ export const DotToXIcon = ({
               scale(${open ? 1 : 0})
             `,
           }}
-          className={`bg-font border border-font rounded duration-300 ease-in-out ${open && 'delay-150'}`}
+          className={`bg-foreground border border-foreground rounded duration-300 ease-in-out ${open && 'delay-150'}`}
         />
 
         {/* --- X 선(우하향 ↗) --- */}
@@ -110,7 +110,7 @@ export const DotToXIcon = ({
               scale(${open ? 1 : 0})
             `,
           }}
-          className={`bg-font border border-font rounded duration-300 ease-in-out ${open && 'delay-150'}`}
+          className={`bg-foreground border border-foreground rounded duration-300 ease-in-out ${open && 'delay-150'}`}
         />
       </ul>
     </div>

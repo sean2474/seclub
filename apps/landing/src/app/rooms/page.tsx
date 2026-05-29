@@ -5,6 +5,7 @@ import { getRoomCards } from "@/lib/room-infos";
 import { generateMetadata } from "@/utils/metadata-generator";
 import { ScrollNudge } from "@/components/ui/scroll-nudge";
 
+export const revalidate = 3600
 export const metadata = generateMetadata("SE Club | 객실", "아름다운 경관과 함께하는 힐링");
 
 export default async function RoomsPage() {
