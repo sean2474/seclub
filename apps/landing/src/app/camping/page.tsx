@@ -9,6 +9,8 @@ import { Modal, ModalBody, ModalTrigger } from "@/components/ui/animated-modal"
 import { ScrollReveal } from "@/components/base/scroll-reveal"
 import { siteCategories, siteData } from "@/const/camping-data"
 import { ScrollNudge } from "@/components/ui/scroll-nudge"
+import { LinkEventTracker } from "@seclub/ui/link-event-tracker"
+import { CAMPING_URL } from "@/const/urls"
 
 export default function SeclubElegantGuidePage() {
   const [activeCategory, setActiveCategory] = useState("All")
@@ -64,13 +66,15 @@ export default function SeclubElegantGuidePage() {
                 {filteredSites.map((site) => (
                   <div key={site.id} className="group relative">
                     <div className="overflow-hidden mb-4">
-                      <Image
-                        src={site.image}
-                        alt={site.title}
-                        width={300}
-                        height={200}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
+                      <LinkEventTracker href={CAMPING_URL} eventName={`camping_site_${site.id}`} location="camping_page" target="_blank">
+                        <Image
+                          src={site.image}
+                          alt={site.title}
+                          width={300}
+                          height={200}
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                      </LinkEventTracker>
                     </div>
                     <h3 className="text-2xl">{site.title}</h3>
                     <p className="mt-1 mb-3">{site.features.join(" · ")}</p>
