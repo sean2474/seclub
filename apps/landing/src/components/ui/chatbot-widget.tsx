@@ -84,13 +84,13 @@ export function ChatbotWidget() {
       >
         <div className="flex h-full w-full flex-col overflow-hidden rounded-[1.75rem] border border-black/5 bg-background shadow-[0_24px_60px_-12px_rgba(13,84,43,0.45),0_8px_24px_-8px_rgba(0,0,0,0.25)] ring-1 ring-black/5">
           {/* 헤더 */}
-          <div className="relative flex items-center gap-3 bg-gradient-to-br from-[#0d542b] to-[#08381c] px-4 py-3.5 text-primary-foreground">
+          <div className="relative flex items-center gap-3 bg-gradient-to-br from-[#0d542b] to-[#08381c] px-4 py-3.5 text-[#FAF5E9]">
             <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-background/15 ring-1 ring-white/20 backdrop-blur-sm">
               <Leaf className="h-[18px] w-[18px]" strokeWidth={1.8} aria-hidden />
             </span>
             <div className="min-w-0 leading-tight">
               <p className="font-semibold tracking-tight">SE CLUB</p>
-              <p className="flex items-center gap-1.5 text-xs text-primary-foreground/70">
+              <p className="flex items-center gap-1.5 text-xs text-[#FAF5E9]/70">
                 <span
                   aria-hidden
                   className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-300"
@@ -141,7 +141,7 @@ export function ChatbotWidget() {
                   href={CHATBOT_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full bg-primary px-4 py-2 text-sm text-primary-foreground"
+                  className="rounded-full bg-primary px-4 py-2 text-sm text-[#FAF5E9]"
                 >
                   새 탭에서 열기
                 </a>
@@ -190,7 +190,7 @@ export function ChatbotWidget() {
         aria-expanded={open}
         aria-controls="chatbot-panel"
         aria-label={open ? "챗봇 닫기" : "챗봇 열기"}
-        className={`group fixed bottom-5 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[#0d542b] to-[#08381c] text-primary-foreground shadow-[0_10px_30px_-8px_rgba(13,84,43,0.65)] ring-1 ring-white/10 transition-[transform,box-shadow] duration-200 hover:scale-105 hover:shadow-[0_14px_36px_-8px_rgba(13,84,43,0.75)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 motion-reduce:transition-none motion-reduce:hover:scale-100 ${
+        className={`group fixed bottom-5 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[#0d542b] to-[#08381c] text-[#FAF5E9] shadow-[0_10px_30px_-8px_rgba(13,84,43,0.65)] ring-1 ring-white/10 transition-[transform,box-shadow] duration-200 hover:scale-105 hover:shadow-[0_14px_36px_-8px_rgba(13,84,43,0.75)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 motion-reduce:transition-none motion-reduce:hover:scale-100 ${
           open ? "max-sm:hidden" : ""
         }`}
       >
