@@ -175,6 +175,25 @@ function FontSizeStepper({ editor }: { editor: Editor }) {
 export function EditorToolbar({ editor }: { editor: Editor }) {
   const fileInputRef = useRef<HTMLInputElement>(null)
 
+  // Subscribe to transactions so toggle buttons reflect the live state — incl.
+  // stored marks on a collapsed cursor. Without this, clicking Italic with no
+  // selection gave no visible feedback until you typed.
+  const active = useEditorState({
+    editor,
+    selector: ({ editor }) => ({
+      bold: editor.isActive("bold"),
+      italic: editor.isActive("italic"),
+      underline: editor.isActive("underline"),
+      h2: editor.isActive("heading", { level: 2 }),
+      h3: editor.isActive("heading", { level: 3 }),
+      bullet: editor.isActive("bulletList"),
+      ordered: editor.isActive("orderedList"),
+      alignLeft: editor.isActive({ textAlign: "left" }),
+      alignCenter: editor.isActive({ textAlign: "center" }),
+      alignRight: editor.isActive({ textAlign: "right" }),
+    }),
+  })
+
   const handleImageUpload = () => {
     fileInputRef.current?.click()
   }
@@ -213,21 +232,21 @@ export function EditorToolbar({ editor }: { editor: Editor }) {
     <div className="flex flex-wrap items-center gap-0.5 p-1.5 border-b bg-muted/30">
       <ToolbarButton
         onClick={() => editor.chain().focus().toggleBold().run()}
-        active={editor.isActive("bold")}
+        active={active.bold}
         title="볼드"
       >
         <Bold size={ICON_SIZE} />
       </ToolbarButton>
       <ToolbarButton
         onClick={() => editor.chain().focus().toggleItalic().run()}
-        active={editor.isActive("italic")}
+        active={active.italic}
         title="이탤릭"
       >
         <Italic size={ICON_SIZE} />
       </ToolbarButton>
       <ToolbarButton
         onClick={() => editor.chain().focus().toggleUnderline().run()}
-        active={editor.isActive("underline")}
+        active={active.underline}
         title="밑줄"
       >
         <UnderlineIcon size={ICON_SIZE} />
@@ -237,14 +256,14 @@ export function EditorToolbar({ editor }: { editor: Editor }) {
 
       <ToolbarButton
         onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-        active={editor.isActive("heading", { level: 2 })}
+        active={active.h2}
         title="제목 (H2)"
       >
         <Heading2 size={ICON_SIZE} />
       </ToolbarButton>
       <ToolbarButton
         onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-        active={editor.isActive("heading", { level: 3 })}
+        active={active.h3}
         title="소제목 (H3)"
       >
         <Heading3 size={ICON_SIZE} />
@@ -256,14 +275,14 @@ export function EditorToolbar({ editor }: { editor: Editor }) {
 
       <ToolbarButton
         onClick={() => editor.chain().focus().toggleBulletList().run()}
-        active={editor.isActive("bulletList")}
+        active={active.bullet}
         title="글머리 기호"
       >
         <List size={ICON_SIZE} />
       </ToolbarButton>
       <ToolbarButton
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
-        active={editor.isActive("orderedList")}
+        active={active.ordered}
         title="번호 목록"
       >
         <ListOrdered size={ICON_SIZE} />
@@ -273,21 +292,21 @@ export function EditorToolbar({ editor }: { editor: Editor }) {
 
       <ToolbarButton
         onClick={() => editor.chain().focus().setTextAlign("left").run()}
-        active={editor.isActive({ textAlign: "left" })}
+        active={active.alignLeft}
         title="왼쪽 정렬"
       >
         <AlignLeft size={ICON_SIZE} />
       </ToolbarButton>
       <ToolbarButton
         onClick={() => editor.chain().focus().setTextAlign("center").run()}
-        active={editor.isActive({ textAlign: "center" })}
+        active={active.alignCenter}
         title="가운데 정렬"
       >
         <AlignCenter size={ICON_SIZE} />
       </ToolbarButton>
       <ToolbarButton
         onClick={() => editor.chain().focus().setTextAlign("right").run()}
-        active={editor.isActive({ textAlign: "right" })}
+        active={active.alignRight}
         title="오른쪽 정렬"
       >
         <AlignRight size={ICON_SIZE} />

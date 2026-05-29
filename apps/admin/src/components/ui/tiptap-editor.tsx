@@ -40,7 +40,7 @@ export function TiptapEditor({ content, onChange }: TiptapEditorProps) {
     editorProps: {
       attributes: {
         class:
-          "tiptap prose prose-sm max-w-none min-h-[300px] p-4 bg-[#FAF5E9] text-[#020E1B] focus:outline-none [&_strong]:font-bold [&_em]:italic [&_u]:underline",
+          "tiptap prose prose-sm max-w-none min-h-[300px] p-4 bg-[#FAF5E9] text-[#020E1B] focus:outline-none [&_strong]:font-semibold [&_em]:italic [&_u]:underline",
       },
     },
   })
