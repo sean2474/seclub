@@ -1,7 +1,7 @@
 "use client"
 
 import { type Editor } from "@tiptap/react"
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import {
   AlignCenter,
   AlignLeft,
@@ -13,12 +13,19 @@ import {
   Italic,
   List,
   ListOrdered,
+  Minus,
+  Plus,
   Redo,
   Underline as UnderlineIcon,
   Undo,
 } from "lucide-react"
 import { cn } from "@seclub/utils"
-import { FONT_SIZE_OPTIONS } from "./font-size-extension"
+import {
+  DEFAULT_FONT_SIZE,
+  FONT_SIZE_STEP,
+  MAX_FONT_SIZE,
+  MIN_FONT_SIZE,
+} from "./font-size-extension"
 
 const ICON_SIZE = 16
 const MAX_IMAGE_BYTES = 5 * 1024 * 1024 // 5MB
@@ -49,6 +56,107 @@ function ToolbarButton({
     >
       {children}
     </button>
+  )
+}
+
+/** Round to one decimal so 0.1 steps don't accumulate float noise (14.0000001). */
+function round1(n: number) {
+  return Math.round(n * 10) / 10
+}
+
+/** "14" for integers, "14.5" otherwise — no trailing ".0". */
+function formatSize(n: number) {
+  return Number.isInteger(n) ? String(n) : n.toFixed(1)
+}
+
+/**
+ * Font-size control: − [14px] + . The middle shows the current size and turns
+ * into a number input on click for direct entry. Steps by 0.1px, clamped to
+ * [MIN_FONT_SIZE, MAX_FONT_SIZE]. When no fontSize mark is set we treat the
+ * editor's body size (DEFAULT_FONT_SIZE) as the starting point.
+ */
+function FontSizeStepper({ editor }: { editor: Editor }) {
+  const [editing, setEditing] = useState(false)
+  const [draft, setDraft] = useState("")
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const raw = (editor.getAttributes("textStyle").fontSize as string) || ""
+  const parsed = raw ? parseFloat(raw) : NaN
+  const current = Number.isFinite(parsed) ? parsed : DEFAULT_FONT_SIZE
+
+  const apply = (size: number) => {
+    const clamped = round1(Math.max(MIN_FONT_SIZE, Math.min(MAX_FONT_SIZE, size)))
+    editor.chain().focus().setFontSize(`${clamped}px`).run()
+  }
+
+  const startEditing = () => {
+    setDraft(formatSize(current))
+    setEditing(true)
+  }
+
+  useEffect(() => {
+    if (editing) inputRef.current?.select()
+  }, [editing])
+
+  const commit = () => {
+    const n = parseFloat(draft)
+    if (Number.isFinite(n)) apply(n)
+    setEditing(false)
+  }
+
+  return (
+    <div className="ml-1 flex items-center rounded border bg-background" title="글자 크기">
+      <button
+        type="button"
+        onMouseDown={(e) => e.preventDefault()}
+        onClick={() => apply(current - FONT_SIZE_STEP)}
+        className="grid h-7 w-6 place-items-center rounded-l hover:bg-accent transition-colors"
+        title="작게"
+      >
+        <Minus size={12} />
+      </button>
+      {editing ? (
+        <input
+          ref={inputRef}
+          type="number"
+          inputMode="decimal"
+          step={FONT_SIZE_STEP}
+          min={MIN_FONT_SIZE}
+          max={MAX_FONT_SIZE}
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+          onBlur={commit}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault()
+              commit()
+            } else if (e.key === "Escape") {
+              setEditing(false)
+            }
+          }}
+          className="h-7 w-12 border-x text-center text-xs tabular-nums outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none"
+        />
+      ) : (
+        <button
+          type="button"
+          onMouseDown={(e) => e.preventDefault()}
+          onClick={startEditing}
+          className="h-7 w-12 border-x text-center text-xs tabular-nums hover:bg-accent transition-colors"
+          title="클릭하여 직접 입력"
+        >
+          {formatSize(current)}px
+        </button>
+      )}
+      <button
+        type="button"
+        onMouseDown={(e) => e.preventDefault()}
+        onClick={() => apply(current + FONT_SIZE_STEP)}
+        className="grid h-7 w-6 place-items-center rounded-r hover:bg-accent transition-colors"
+        title="크게"
+      >
+        <Plus size={12} />
+      </button>
+    </div>
   )
 }
 
@@ -130,22 +238,7 @@ export function EditorToolbar({ editor }: { editor: Editor }) {
         <Heading3 size={ICON_SIZE} />
       </ToolbarButton>
 
-      <select
-        value={(editor.getAttributes("textStyle").fontSize as string) || ""}
-        onChange={(e) => {
-          const v = e.target.value
-          if (!v) editor.chain().focus().unsetFontSize().run()
-          else editor.chain().focus().setFontSize(v).run()
-        }}
-        className="ml-1 h-7 text-xs border rounded px-1 bg-background"
-        title="글자 크기"
-      >
-        {FONT_SIZE_OPTIONS.map((opt) => (
-          <option key={opt.value || "default"} value={opt.value}>
-            {opt.label}
-          </option>
-        ))}
-      </select>
+      <FontSizeStepper editor={editor} />
 
       <div className="w-px h-5 bg-border mx-1" />
 
