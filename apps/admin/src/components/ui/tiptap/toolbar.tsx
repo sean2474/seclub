@@ -1,6 +1,6 @@
 "use client"
 
-import { type Editor } from "@tiptap/react"
+import { type Editor, useEditorState } from "@tiptap/react"
 import { useEffect, useRef, useState } from "react"
 import {
   AlignCenter,
@@ -81,9 +81,17 @@ function FontSizeStepper({ editor }: { editor: Editor }) {
   const [draft, setDraft] = useState("")
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const raw = (editor.getAttributes("textStyle").fontSize as string) || ""
-  const parsed = raw ? parseFloat(raw) : NaN
-  const current = Number.isFinite(parsed) ? parsed : DEFAULT_FONT_SIZE
+  // Subscribe to editor transactions so the displayed size tracks the current
+  // selection AND the stored mark (collapsed cursor) — without this the number
+  // wouldn't update when you change size with nothing selected.
+  const current = useEditorState({
+    editor,
+    selector: ({ editor }) => {
+      const raw = editor.getAttributes("textStyle").fontSize as string | undefined
+      const parsed = raw ? parseFloat(raw) : NaN
+      return Number.isFinite(parsed) ? parsed : DEFAULT_FONT_SIZE
+    },
+  })
 
   const apply = (size: number) => {
     const clamped = round1(Math.max(MIN_FONT_SIZE, Math.min(MAX_FONT_SIZE, size)))
