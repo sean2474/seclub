@@ -2,14 +2,18 @@ import { redirect } from "next/navigation"
 import { LockKeyhole } from "lucide-react"
 import type { ReactNode } from "react"
 import { getProfile, getUser } from "@/lib/action/auth"
+import { adminBaseUrl, loginUrl } from "@/lib/auth-urls"
 import { SecuredShell } from "./_components/secured-shell"
 
 export default async function AdminLayout({ children }: { children: ReactNode }) {
+  // Auth is delegated to the shared SSO app. Unauthenticated visitors are sent
+  // there with ?next= pointing back to admin; the session cookie is shared
+  // across *.seclub.local / .seclub.kr so we read it here after they return.
   const user = await getUser()
-  if (!user) redirect("/login")
+  if (!user) redirect(loginUrl(adminBaseUrl()))
 
   const profile = await getProfile(user.id)
-  if (!profile) redirect("/login")
+  if (!profile) redirect(loginUrl(adminBaseUrl()))
 
   if (profile.role !== "admin") {
     return (

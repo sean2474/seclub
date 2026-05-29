@@ -1,51 +1,9 @@
 "use server";
 
-import { redirect } from "next/navigation";
-import type { User } from "@supabase/supabase-js";
 import { createClient } from "@seclub/supabase/server";
 
-/**
- * Login with email and password
- */
-export async function loginWithEmail(email: string, password: string): Promise<{
-  success: boolean;
-  error: string | null;
-}> {
-  try {
-    if (!email || !password) {
-      return {
-        success: false,
-        error: "이메일과 비밀번호를 모두 입력해주세요.",
-      };
-    }
-
-    const supabase = await createClient();
-    
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
-      console.error("Login error:", error);
-      return {
-        success: false,
-        error: "로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.",
-      };
-    }
-
-    return {
-      success: true,
-      error: null,
-    };
-  } catch (error) {
-    console.error("Unexpected login error:", error);
-    return {
-      success: false,
-      error: "로그인 중 오류가 발생했습니다. 다시 시도해주세요.",
-    };
-  }
-}
+// NOTE: Email/password login + signup now live in the shared @seclub/auth SSO
+// app. Admin only reads the (shared-cookie) session here and gates by role.
 
 /**
  * Logout the current user
@@ -72,48 +30,6 @@ export async function logout(): Promise<{
       success: false,
       error: "로그아웃 중 오류가 발생했습니다.",
     };
-  }
-}
-
-/**
- * Check if the user is authenticated
- */
-export async function checkAuth(): Promise<{
-  isAuthenticated: boolean;
-  user: User | null;
-}> {
-  try {
-    const supabase = await createClient();
-    const { data: { session } } = await supabase.auth.getSession();
-
-    if (!session) {
-      return {
-        isAuthenticated: false,
-        user: null,
-      };
-    }
-
-    return {
-      isAuthenticated: true,
-      user: session.user,
-    };
-  } catch (error) {
-    console.error("Auth check error:", error);
-    return {
-      isAuthenticated: false,
-      user: null,
-    };
-  }
-}
-
-/**
- * Middleware to redirect authenticated users
- */
-export async function redirectIfAuthenticated(redirectTo: string = "/") {
-  const { isAuthenticated } = await checkAuth();
-  
-  if (isAuthenticated) {
-    redirect(redirectTo);
   }
 }
 
@@ -166,50 +82,6 @@ export async function changePassword(newPassword: string): Promise<{
     return {
       success: false,
       error: "비밀번호 변경 중 오류가 발생했습니다.",
-    };
-  }
-}
-
-export async function registerWithEmail(email: string, password: string): Promise<{
-  success: boolean;
-  error: string | null;
-}> {
-  try {
-    if (!email || !password) {
-      return {
-        success: false,
-        error: "이메일과 비밀번호를 모두 입력해주세요.",
-      };
-    }
-
-    const supabase = await createClient();
-    
-    const emailRedirectTo =
-      process.env.NEXT_PUBLIC_ADMIN_URL ||
-      (typeof window !== "undefined" ? window.location.origin : undefined);
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: emailRedirectTo ? { emailRedirectTo } : undefined,
-    });
-
-    if (error) {
-      console.error("Register error:", error);
-      return {
-        success: false,
-        error: "가입에 실패했습니다. 이메일과 비밀번호를 확인해주세요.",
-      };
-    }
-
-    return {
-      success: true,
-      error: null,
-    };
-  } catch (error) {
-    console.error("Unexpected register error:", error);
-    return {
-      success: false,
-      error: "가입 중 오류가 발생했습니다. 다시 시도해주세요.",
     };
   }
 }

@@ -2,6 +2,9 @@ import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
 import type { Database } from "./database.types";
 
+// Parent-domain cookie so the session is shared across SSO subdomains.
+const cookieDomain = process.env.NEXT_PUBLIC_COOKIE_DOMAIN || undefined;
+
 export type UpdateSessionOptions = {
   /**
    * Path prefix that requires an authenticated user. When unauthenticated and
@@ -50,7 +53,10 @@ export const updateSession = async (
               request,
             });
             cookiesToSet.forEach(({ name, value, options }) =>
-              response.cookies.set(name, value, options),
+              response.cookies.set(name, value, {
+                ...options,
+                ...(cookieDomain ? { domain: cookieDomain } : {}),
+              }),
             );
           },
         },
