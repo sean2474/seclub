@@ -165,7 +165,7 @@ export function NoticeFormModal({ isOpen, onOpenChange, onSave, notice }: Notice
               </div>
               {content && !isContentEmpty(content) ? (
                 <div
-                  className="prose max-w-none [&_img]:max-w-full [&_img]:h-auto [&_strong]:font-semibold [&_em]:italic [&_u]:underline"
+                  className="prose max-w-none [&_img]:max-w-full [&_img]:h-auto [&_strong]:font-extrabold [&_em]:italic [&_u]:underline"
                   dangerouslySetInnerHTML={{ __html: content }}
                 />
               ) : (
