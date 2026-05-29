@@ -22,6 +22,7 @@ import {
 import { cn } from "@seclub/utils"
 import {
   DEFAULT_FONT_SIZE,
+  FONT_SIZE_PRECISION,
   FONT_SIZE_STEP,
   MAX_FONT_SIZE,
   MIN_FONT_SIZE,
@@ -129,7 +130,7 @@ function FontSizeStepper({ editor }: { editor: Editor }) {
           ref={inputRef}
           type="number"
           inputMode="decimal"
-          step={FONT_SIZE_STEP}
+          step={FONT_SIZE_PRECISION}
           min={MIN_FONT_SIZE}
           max={MAX_FONT_SIZE}
           value={draft}

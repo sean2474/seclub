@@ -53,4 +53,7 @@ export const FontSize = Extension.create<FontSizeOptions>({
 export const DEFAULT_FONT_SIZE = 14
 export const MIN_FONT_SIZE = 1
 export const MAX_FONT_SIZE = 200
-export const FONT_SIZE_STEP = 0.1
+/** −/+ buttons step by 1px (visible change); 0.1 fine-tuning via direct input. */
+export const FONT_SIZE_STEP = 1
+/** Smallest increment accepted by the direct-entry input. */
+export const FONT_SIZE_PRECISION = 0.1
