@@ -4,6 +4,7 @@ import { Suspense } from "react"
 import { HeroTextSection } from "./hero-text-section"
 import { NoticesBadgeSection } from "./notices-badge-section"
 import { PopupSection } from "./popup-section"
+import { SnsSection } from "./sns-section"
 
 export default function MainPageManagement() {
   return (
@@ -17,6 +18,9 @@ export default function MainPageManagement() {
       </Suspense>
       <Suspense fallback={<div>로딩 중...</div>}>
         <PopupSection />
+      </Suspense>
+      <Suspense fallback={<div>로딩 중...</div>}>
+        <SnsSection />
       </Suspense>
     </div>
   )

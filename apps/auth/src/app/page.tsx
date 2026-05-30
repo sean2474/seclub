@@ -5,14 +5,16 @@ import { AuthShell } from "@/components/auth-shell"
 import { IS_AUTH_MOCK } from "@/lib/auth-mode"
 
 /**
- * Root of the SSO app. In production, visitors normally never see this page
- * — they arrive at /login or /signup with `?next=<calling-app>`. But once a
- * session exists, the login page redirects here on `next=/`, and we need to
- * (a) terminate the loop and (b) give the user an obvious "sign out" exit.
+ * Root of the SSO app. Visitors normally arrive at /login or /signup with
+ * `?next=<calling-app>` and are sent straight back there. They only land here
+ * when there's no `next` (e.g. they opened the auth app directly).
  *
  * Flow:
- *   - signed in (or mock mode) → "로그인 완료" landing with sign-out
- *   - signed out and live mode → /login
+ *   - mock mode → "로그인 완료" demo landing with sign-out
+ *   - live, signed out → /login
+ *   - live, signed in, no next → role-based home: admin → admin app,
+ *     everyone else → member (mypage) app. Falls back to the demo landing
+ *     only when the destination env vars aren't configured.
  */
 export default async function AuthRootPage() {
   let signedIn = IS_AUTH_MOCK
@@ -23,6 +25,17 @@ export default async function AuthRootPage() {
       data: { user },
     } = await supabase.auth.getUser()
     if (!user) redirect("/login")
+
+    const { data: profile } = await supabase
+      .from("profile")
+      .select("role")
+      .eq("id", user.id)
+      .single()
+    const adminUrl = process.env.NEXT_PUBLIC_ADMIN_URL
+    const memberUrl = process.env.NEXT_PUBLIC_MEMBER_URL
+    if (profile?.role === "admin" && adminUrl) redirect(adminUrl)
+    if (memberUrl) redirect(memberUrl)
+
     signedIn = true
     displayName =
       (typeof user.user_metadata?.name === "string" && user.user_metadata.name) ||

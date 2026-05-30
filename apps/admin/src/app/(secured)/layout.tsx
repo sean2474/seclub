@@ -16,6 +16,10 @@ export default async function AdminLayout({ children }: { children: ReactNode })
   if (!profile) redirect(loginUrl(adminBaseUrl()))
 
   if (profile.role !== "admin") {
+    // Authenticated but not an admin → send them to their member area instead
+    // of a dead-end screen. Fall back to a notice only if mypage isn't set.
+    const memberUrl = process.env.NEXT_PUBLIC_MEMBER_URL
+    if (memberUrl) redirect(memberUrl)
     return (
       <h1 className="flex items-center justify-center h-screen text-2xl">
         <LockKeyhole className="mr-2 h-8 w-8" strokeWidth={1.5} /> 접근 권한이 없습니다.
