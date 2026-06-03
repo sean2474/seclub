@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, type ReactNode, Suspense } from "react"
-import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { Menu } from "lucide-react"
 import type { User } from "@supabase/supabase-js"
@@ -22,6 +21,7 @@ import { Toaster } from "@seclub/ui/toaster"
 import { toast } from "@seclub/ui/use-toast"
 import { cn } from "@seclub/utils"
 import { logout } from "@/lib/action/auth"
+import { adminBaseUrl, loginUrl } from "@/lib/auth-urls"
 import type { Profile } from "@/types/auth"
 
 interface SecuredShellProps {
@@ -33,7 +33,6 @@ interface SecuredShellProps {
 export function SecuredShell({ user, profile, children }: SecuredShellProps) {
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [settingOpen, setSettingOpen] = useState(false)
-  const router = useRouter()
 
   return (
     <div className="min-h-screen w-full bg-background">
@@ -86,7 +85,10 @@ export function SecuredShell({ user, profile, children }: SecuredShellProps) {
                   onClick={async () => {
                     const { success, error } = await logout()
                     if (success) {
-                      router.push("/login")
+                      // Hand off to the shared SSO sign-in (cross-origin), so
+                      // router.push won't work. Full reload also drops the
+                      // RSC cache that thinks we're still authenticated.
+                      window.location.href = loginUrl(adminBaseUrl())
                     } else {
                       toast({
                         title: "로그아웃 실패",
