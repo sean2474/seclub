@@ -14,9 +14,11 @@ import { EditorToolbar } from "./tiptap/toolbar"
 interface TiptapEditorProps {
   content: string
   onChange: (html: string) => void
+  /** notice id — passed to the toolbar so pasted/selected images upload under it. */
+  uploadFolder: string
 }
 
-export function TiptapEditor({ content, onChange }: TiptapEditorProps) {
+export function TiptapEditor({ content, onChange, uploadFolder }: TiptapEditorProps) {
   const extensions = useMemo(
     () => [
       StarterKit.configure({ heading: { levels: [2, 3] } }),
@@ -59,7 +61,7 @@ export function TiptapEditor({ content, onChange }: TiptapEditorProps) {
 
   return (
     <div className="border rounded-md overflow-hidden">
-      <EditorToolbar editor={editor} />
+      <EditorToolbar editor={editor} uploadFolder={uploadFolder} />
       <EditorContent editor={editor} />
     </div>
   )

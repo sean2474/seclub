@@ -64,6 +64,7 @@ export function NoticesContent() {
   )
 
   const handleSaveNotice = async (formData: {
+    id: string
     title: string
     content: string
     active: boolean

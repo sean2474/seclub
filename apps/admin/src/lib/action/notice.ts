@@ -147,6 +147,9 @@ export async function getNoticeById(id: string): Promise<{
  * Create a new notice with HTML content
  */
 export async function createNotice(noticeData: {
+  // 클라이언트가 미리 생성해 전달한 id. 에디터 이미지가 이미 이 id 폴더로
+  // 업로드돼 있으므로 row id와 일치시켜야 deleteNotice 정리가 동작한다.
+  id?: string;
   title: string;
   content: string;
   category: string;
@@ -159,7 +162,7 @@ export async function createNotice(noticeData: {
 }> {
   try {
     const supabase = await createClient();
-    const noticeUuid = crypto.randomUUID();
+    const noticeUuid = noticeData.id || crypto.randomUUID();
 
     // HTML 내 base64 이미지 → Supabase Storage 업로드
     const processedContent = await uploadHtmlImages(

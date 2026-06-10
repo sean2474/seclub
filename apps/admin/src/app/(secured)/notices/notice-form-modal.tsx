@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@seclub/ui/tabs"
 import { Input } from "@seclub/ui/input"
 import { Label } from "@seclub/ui/label"
 import { TiptapEditor } from "@/components/ui/tiptap-editor"
+import { safeUuid } from "@/lib/client/notice-image"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@seclub/ui/select"
 import { useCategories } from "@/hooks/use-category"
 import { Notice } from "@/types/notices"
@@ -19,6 +20,7 @@ export interface NoticeFormModalProps {
   isOpen: boolean
   onOpenChange: (isOpen: boolean) => void
   onSave: (data: {
+    id: string
     title: string
     content: string
     active: boolean
@@ -42,6 +44,9 @@ function isContentEmpty(html: string) {
 
 export function NoticeFormModal({ isOpen, onOpenChange, onSave, notice }: NoticeFormModalProps) {
   const { toast } = useToast()
+  // 새 공지는 클라이언트에서 id를 미리 생성해 (1) 에디터 이미지 업로드 폴더와
+  // (2) 생성될 row의 id를 일치시킨다 → deleteNotice의 폴더 단위 정리와 호환.
+  const [noticeId, setNoticeId] = useState<string>("")
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
   const [active, setActive] = useState<boolean>(true)
@@ -52,12 +57,14 @@ export function NoticeFormModal({ isOpen, onOpenChange, onSave, notice }: Notice
   useEffect(() => {
     if (isOpen) {
       if (notice) {
+        setNoticeId(notice.id)
         setTitle(notice.title)
         setContent(notice.content || "")
         setActive(notice.active)
         setPinned(notice.pinned || false)
         setCategory(notice.category)
       } else {
+        setNoticeId(safeUuid())
         setTitle("")
         setContent("")
         setActive(true)
@@ -76,7 +83,7 @@ export function NoticeFormModal({ isOpen, onOpenChange, onSave, notice }: Notice
       })
       return
     }
-    onSave({ title, content, active, pinned, category })
+    onSave({ id: noticeId, title, content, active, pinned, category })
   }
 
   return (
@@ -101,7 +108,7 @@ export function NoticeFormModal({ isOpen, onOpenChange, onSave, notice }: Notice
               </div>
               <div className="grid gap-2">
                 <Label>내용</Label>
-                <TiptapEditor content={content} onChange={setContent} />
+                <TiptapEditor content={content} onChange={setContent} uploadFolder={noticeId} />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="grid gap-2">

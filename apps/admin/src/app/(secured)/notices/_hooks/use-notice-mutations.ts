@@ -11,6 +11,7 @@ import {
 import type { Notice } from "@/types/notices"
 
 type NoticeFormData = {
+  id: string
   title: string
   content: string
   active: boolean

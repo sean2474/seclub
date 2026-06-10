@@ -20,6 +20,7 @@ import {
   Undo,
 } from "lucide-react"
 import { cn } from "@seclub/utils"
+import { uploadNoticeImage } from "@/lib/client/notice-image"
 import {
   DEFAULT_FONT_SIZE,
   FONT_SIZE_PRECISION,
@@ -172,7 +173,14 @@ function FontSizeStepper({ editor }: { editor: Editor }) {
   )
 }
 
-export function EditorToolbar({ editor }: { editor: Editor }) {
+export function EditorToolbar({
+  editor,
+  uploadFolder,
+}: {
+  editor: Editor
+  /** notice id — uploaded images live under `${uploadFolder}/...` in storage. */
+  uploadFolder: string
+}) {
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   // Subscribe to transactions so toggle buttons reflect the live state — incl.
@@ -198,7 +206,7 @@ export function EditorToolbar({ editor }: { editor: Editor }) {
     fileInputRef.current?.click()
   }
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
     if (!files) return
 
@@ -210,22 +218,23 @@ export function EditorToolbar({ editor }: { editor: Editor }) {
       return true
     })
 
-    accepted.forEach((file) => {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        editor
-          .chain()
-          .focus()
-          .insertContent({
-            type: "resizableImage",
-            attrs: { src: reader.result as string },
-          })
-          .run()
-      }
-      reader.readAsDataURL(file)
-    })
-
+    // 같은 파일을 다시 선택해도 change가 발생하도록 미리 초기화
     e.target.value = ""
+
+    // base64를 본문에 박으면 서버 액션 페이로드가 한도를 넘어 저장이 실패한다.
+    // 클라이언트에서 스토리지에 먼저 올리고 URL만 삽입한다.
+    for (const file of accepted) {
+      const { url, error } = await uploadNoticeImage(file, uploadFolder)
+      if (error || !url) {
+        alert(`'${file.name}' 업로드에 실패했습니다. 잠시 후 다시 시도해주세요.`)
+        continue
+      }
+      editor
+        .chain()
+        .focus()
+        .insertContent({ type: "resizableImage", attrs: { src: url } })
+        .run()
+    }
   }
 
   return (
