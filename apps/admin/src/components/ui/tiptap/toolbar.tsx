@@ -226,7 +226,10 @@ export function EditorToolbar({
     for (const file of accepted) {
       const { url, error } = await uploadNoticeImage(file, uploadFolder)
       if (error || !url) {
-        alert(`'${file.name}' 업로드에 실패했습니다. 잠시 후 다시 시도해주세요.`)
+        // 실제 사유까지 노출해 권한/세션/네트워크 문제를 바로 구분할 수 있게 한다.
+        alert(
+          `'${file.name}' 업로드 실패: ${error?.message ?? "알 수 없는 오류"}`,
+        )
         continue
       }
       editor
