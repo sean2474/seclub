@@ -18,6 +18,17 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "nqsogxcasyjauqgwmrxi.supabase.co" },
     ],
   },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: "/:path*",
+          has: [{ type: "host", value: "chat.seclub.kr" }],
+          destination: "https://seclub.off2on.io/:path*",
+        },
+      ],
+    };
+  },
   async redirects() {
     return [
       {
