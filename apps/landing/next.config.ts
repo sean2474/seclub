@@ -13,8 +13,10 @@ const nextConfig: NextConfig = {
   ],
   images: {
     unoptimized: true,
+    qualities: [75, 100],
     remotePatterns: [
       { protocol: "https", hostname: "img.youtube.com" },
+      { protocol: "https", hostname: "nqsogxcasyjauqmipztkyt.supabase.co" },
       { protocol: "https", hostname: "nqsogxcasyjauqgwmrxi.supabase.co" },
     ],
   },

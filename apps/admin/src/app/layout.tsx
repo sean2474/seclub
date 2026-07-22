@@ -17,7 +17,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark" style={{ colorScheme: "dark" }}>
+    <html lang="en" style={{ colorScheme: "light" }}>
       <head>
         <style>{`
           html {
@@ -28,7 +28,7 @@ export default async function RootLayout({
         `}</style>
       </head>
       <body>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" forcedTheme="light" disableTransitionOnChange>
           {children}
         </ThemeProvider>
       </body>

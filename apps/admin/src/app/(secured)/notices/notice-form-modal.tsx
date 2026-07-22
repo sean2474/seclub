@@ -155,7 +155,8 @@ export function NoticeFormModal({ isOpen, onOpenChange, onSave, notice }: Notice
             </div>
           </TabsContent>
           <TabsContent value="preview" className="mt-4">
-            <div className="border rounded-md p-6 min-h-[300px]">
+            {/* 에디터(작성 탭)와 동일한 크림 배경으로 맞춰 실제 게시 모습과 일치시킨다. */}
+            <div className="border rounded-md p-6 min-h-[300px] bg-[#FAF5E9] text-[#020E1B]">
               <div className="border-b border-foreground pb-4 mb-4">
                 <p className="text-sm text-foreground/80 mb-1">{category || "(카테고리 미선택)"}</p>
                 <h1 className="text-2xl font-bold text-foreground flex items-center gap-2 flex-wrap">

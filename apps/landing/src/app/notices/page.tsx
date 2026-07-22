@@ -2,7 +2,7 @@ import { NoticeBoard } from "@/components/base/notice-board"
 import { getNoticeCategories, getNotices } from "@/lib/actions/notice"
 import { generateMetadata } from "@/utils/metadata-generator"
 
-export const revalidate = 3600
+export const revalidate = 60
 export const metadata = generateMetadata("SE Club | 공지사항", "SE Club 공지사항")
 
 export default async function Page() {

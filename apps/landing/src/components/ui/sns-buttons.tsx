@@ -51,7 +51,7 @@ export function SnsButtons({
   if (links.length === 0) return null
 
   return (
-    <div className="fixed bottom-20 right-5 z-40">
+    <div className="fixed bottom-5 right-5 z-40">
       <div className="relative h-12 w-12">
         {links.map((sns, idx) => {
           const { Icon, bg, fg } = PLATFORM_ICONS[sns.platform] ?? FALLBACK_ICON

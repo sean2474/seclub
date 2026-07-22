@@ -6,7 +6,7 @@ import { NoticeViewCounter } from "@/components/base/notice-view-counter"
 import { ImageGalleryWithModal } from "@/components/ui/image-modal"
 import { generateMetadata } from "@/utils/metadata-generator"
 
-export const revalidate = 3600
+export const revalidate = 60
 export const metadata = generateMetadata("SE Club | 공지사항", "SE Club 공지사항");
 
 export async function generateStaticParams() {

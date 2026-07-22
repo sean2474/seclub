@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Leaf, MessageCircle, X } from "lucide-react";
 
-const CHATBOT_URL = "https://seclub.off2on.io/";
+const CHATBOT_URL = "https://chat.seclub.kr/";
 // 로드가 이 시간을 넘으면 새 탭 fallback 안내 (cross-origin iframe 은 onError 가
 // 신뢰성 있게 안 떠서 timeout 으로 방어).
 const LOAD_TIMEOUT_MS = 12_000;
@@ -156,7 +156,7 @@ export function ChatbotWidget({ liftPx = 0 }: { liftPx?: number }) {
       <div
         inert={!teaser || open}
         style={{ transform: `translateY(${-liftPx}px)` }}
-        className={`fixed bottom-[5.75rem] right-6 z-50 hidden transition-[transform,opacity] duration-300 ease-out motion-reduce:transition-none sm:block ${
+        className={`fixed bottom-[8.75rem] right-6 z-50 hidden transition-[transform,opacity] duration-300 ease-out motion-reduce:transition-none sm:block ${
           teaser && !open ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
@@ -186,7 +186,7 @@ export function ChatbotWidget({ liftPx = 0 }: { liftPx?: number }) {
           위치 이동(SNS 열림 시 위로)은 래퍼의 translateY 로 처리해 버튼 자체의
           hover scale 변환과 충돌하지 않게 한다. */}
       <div
-        className="fixed bottom-5 right-5 z-50 transition-transform duration-300 ease-out motion-reduce:transition-none"
+        className="fixed bottom-20 right-5 z-50 transition-transform duration-300 ease-out motion-reduce:transition-none"
         style={{ transform: `translateY(${-liftPx}px)` }}
       >
         <button

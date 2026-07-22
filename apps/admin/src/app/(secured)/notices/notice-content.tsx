@@ -174,11 +174,13 @@ export function NoticesContent() {
                             }}
                             className="flex items-center gap-2"
                           >
+                            {/* 시각 표시용 — 클릭은 DropdownMenuItem(onSelect)이 받아야
+                                토글이 동작한다. 이전엔 Switch가 stopPropagation으로
+                                클릭을 먹어 스위치를 직접 누르면 작동하지 않았다. */}
                             <Switch
-                              className="data-[state=checked]:bg-primary scale-75 origin-left"
+                              className="data-[state=checked]:bg-primary scale-75 origin-left pointer-events-none"
                               checked={item.active}
                               tabIndex={-1}
-                              onClick={(e) => e.stopPropagation()}
                             />
                             <span className="whitespace-nowrap">
                               {item.active ? "비게시로 변경" : "게시로 변경"}
