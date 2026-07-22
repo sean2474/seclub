@@ -75,7 +75,8 @@ export function SnsButtons({
                 bottom: open ? `${(idx + 1) * SNS_ITEM_GAP}px` : "6px",
               }}
             >
-              <Icon size={20} color={fg} />
+              {/* style로 강제 — 브랜드 아이콘마다 viewBox가 달라 size prop만으론 시각적 크기가 다름 */}
+              <Icon color={fg} style={{ width: 22, height: 22, minWidth: 22, minHeight: 22 }} />
             </Link>
           )
         })}
