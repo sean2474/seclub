@@ -67,6 +67,8 @@ export default async function Page({
           src={roomInfo.heroImage}
           alt={`${roomInfo.title} Hero Image`}
           fill
+          sizes="100vw"
+          quality={85}
           className="object-cover"
         />
         <div className="absolute inset-0 bg-black/50" />
@@ -170,7 +172,14 @@ export default async function Page({
                 .map((room) => (
                   <Link href={`/rooms/${room.slug}`} key={room.slug}>
                     <div className="relative aspect-video w-72 overflow-hidden group">
-                      <Image src={room.images[0]} fill className="object-cover group-hover:scale-110 transition-all duration-300" alt={room.slug} />
+                      <Image
+                        src={room.images[0]}
+                        alt={room.slug}
+                        fill
+                        sizes="288px"
+                        quality={82}
+                        className="object-cover group-hover:scale-110 transition-all duration-300"
+                      />
                     </div>
                     <div className="p-2">
                       <div className="text-xs">{room.subtitle}</div>

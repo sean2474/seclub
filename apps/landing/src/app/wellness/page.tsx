@@ -11,7 +11,7 @@ export default function Page() {
   return (
     <main>
       <section className="fixed top-0 h-svh w-full overflow-x-hidden">
-        <Image src={"/images/wellness/hero.jpg"} sizes="100vw" alt={"SE Club 객실 전경"} fill className="object-cover" />
+        <Image src={"/images/wellness/hero.jpg"} sizes="100vw" quality={85} alt={"SE Club 객실 전경"} fill className="object-cover" />
         <div className="z-10 absolute w-full h-full top-0 left-0 bg-black/30" />
         <div className="z-10 absolute top-1/2 left-1/2 md:left-1/4 transform -translate-x-1/2 -translate-y-1/2 text-background whitespace-nowrap">
           <ScrollReveal side="top" type="h1"> SE Club 웰니스 </ScrollReveal>

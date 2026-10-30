@@ -21,7 +21,7 @@ export default function GroupReservationPage() {
   return (
     <div className="text-gray-800 font-sans">
       <section className="fixed top-0 h-svh w-full overflow-x-hidden">
-        <Image src={"/images/reservation/hero.jpg"} sizes="100vw" alt={"SE Club 객실 전경"} fill className="object-cover object-bottom" />
+        <Image src={"/images/reservation/hero.jpg"} sizes="100vw" quality={85} alt={"SE Club 객실 전경"} fill className="object-cover object-bottom" />
         <div className="z-10 absolute w-full h-full top-0 left-0 bg-black/30" />
         <div className="z-10 absolute top-1/2 left-1/2 md:left-1/4 transform -translate-x-1/2 -translate-y-1/2 text-background whitespace-nowrap">
           <ScrollReveal side="top" type="h1"> 기업·단체 예약 </ScrollReveal>
@@ -43,7 +43,14 @@ export default function GroupReservationPage() {
               </p>
             </div>
             <div className="relative h-96 md:h-[500px]">
-              <Image src={"/images/reservation/1.jpg"} alt="SE Club 소개" fill className="object-cover" />
+              <Image
+                src={"/images/reservation/1.jpg"}
+                alt="SE Club 소개"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                quality={82}
+                className="object-cover"
+              />
             </div>
           </div>
         </section>

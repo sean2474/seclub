@@ -97,7 +97,10 @@ export const Header = ({ showNoticesBadge = true }: HeaderProps) => {
                 className={`transition-all duration-300 delay-100 object-contain ${
                   scrolled ? "lg:scale-100" : "lg:scale-150"
                 }`}
-                alt="Main Logo" fill quality={100}
+                alt="Main Logo"
+                fill
+                sizes="(max-width: 1024px) 100px, 150px"
+                quality={85}
               />
             </div>
           </Link>

@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 import { cn } from '@seclub/utils';
-import { useSlider } from '@/hooks/use-slider';
+import { getAdjacentSlideIndices, useSlider } from '@/hooks/use-slider';
 
 interface ImageSliderProps {
   images: string[];
@@ -16,6 +16,7 @@ export function MainImageSlider({ images, color = 'default' }: ImageSliderProps)
   });
 
   if (images.length === 0) return null;
+  const visibleIndices = getAdjacentSlideIndices(current, images.length);
 
   return (
     <div className="w-full h-full">
@@ -24,21 +25,22 @@ export function MainImageSlider({ images, color = 'default' }: ImageSliderProps)
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
       >
-        {images.map((img, idx) => (
+        {visibleIndices.map((idx) => (
           <div
             key={idx}
             className={`
               absolute inset-0 mb-16 md:mb-20
               transition-opacity duration-1000 ease-in-out
-              ${idx === current ? 'opacity-100' : 'opacity-0'}
+              ${idx === current ? 'z-10 opacity-100' : 'z-0 opacity-0'}
             `}
           >
             <Image
-              src={img}
+              src={images[idx]}
               alt={idx.toString()}
               fill
+              sizes="(max-width: 768px) 100vw, 896px"
+              quality={85}
               className="object-cover"
-              priority={idx === 0}
             />
           </div>
         ))}
@@ -46,7 +48,7 @@ export function MainImageSlider({ images, color = 'default' }: ImageSliderProps)
         {/* 데스크톱 컨트롤 바 */}
         <div
           className={cn(
-            'absolute bottom-4 right-4 items-center px-3 py-1 hidden md:flex',
+            'absolute bottom-4 right-4 z-20 items-center px-3 py-1 hidden md:flex',
             color === 'default' ? 'text-white' : 'text-black',
           )}
         >
@@ -92,7 +94,7 @@ export function MainImageSlider({ images, color = 'default' }: ImageSliderProps)
         </div>
 
         {/* 모바일 슬라이드 카운트 */}
-        <div className="w-full center absolute bottom-4 md:hidden">
+        <div className="absolute bottom-4 z-20 flex w-full items-center justify-center md:hidden">
           {images.map((_, idx) => (
             <button
               key={idx}

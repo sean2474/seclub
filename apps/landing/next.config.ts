@@ -12,8 +12,11 @@ const nextConfig: NextConfig = {
     "reserve.seclub.local",
   ],
   images: {
-    unoptimized: true,
-    qualities: [75, 100],
+    // Keep source assets untouched while serving a responsive WebP variant
+    // sized for each viewport. The longer TTL avoids repeat transformations.
+    formats: ["image/webp"],
+    qualities: [50, 75, 82, 85],
+    minimumCacheTTL: 2_678_400,
     remotePatterns: [
       { protocol: "https", hostname: "img.youtube.com" },
       { protocol: "https", hostname: "nqsogxcasyjauqmipztkyt.supabase.co" },

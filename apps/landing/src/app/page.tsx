@@ -96,7 +96,9 @@ export default async function Home() {
                   <Image 
                     src="/images/landing/section-1.jpg" 
                     alt="SE Club 전경" 
-                    fill 
+                    fill
+                    sizes="(max-width: 768px) 200px, 448px"
+                    quality={82}
                     className="object-cover"
                   />
                 </div>
@@ -165,7 +167,14 @@ export default async function Home() {
                 <ScrollReveal side="left" delay="0ms" revealHeight="10%" className="relative" key={idx}>
                   <Link className="group" href={`/rooms/${room.slug}`}>
                     <div className="relative w-full h-24 md:h-32">
-                      <Image src={room.images[0]} alt={room.subtitle} fill className="object-cover group-hover:opacity-100 group-active:opacity-100 opacity-1 transition-all duration-300" />
+                      <Image
+                        src={room.images[0]}
+                        alt={room.subtitle}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 896px"
+                        quality={82}
+                        className="object-cover group-hover:opacity-100 group-active:opacity-100 opacity-1 transition-all duration-300"
+                      />
                     </div>
                     <div className="absolute w-full h-full top-0 left-0 flex justify-between items-center group-hover:text-white group-active:text-white p-4 md:p-10">
                       <div>

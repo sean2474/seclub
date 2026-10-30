@@ -3,7 +3,6 @@ import { Header } from "@/assets/header";
 import { Footer } from "@/assets/footer";
 import { FloatingWidgets } from "@/components/ui/floating-widgets";
 import { Analytics } from "@vercel/analytics/next"
-import { SpeedInsights } from "@vercel/speed-insights/next"
 import { getHeroText } from "@/lib/hero-text";
 import { getSnsLinks } from "@/lib/sns-links";
 
@@ -35,6 +34,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       {/* End Google Tag Manager */}
 
       <meta name="naver-site-verification" content="09b041ea9831b1189ef5506af8983de8bcca77ab" />
+
+      {/* Pretendard's official variable dynamic subset only downloads glyph slices used on the page. */}
+      <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+        crossOrigin="anonymous"
+      />
 
       {/* Primary metadata */}
       <meta name="description" content={description} />
@@ -90,7 +97,6 @@ export default async function RootLayout({
         <Footer />
         <FloatingWidgets links={snsLinks} />
         <Analytics />
-        <SpeedInsights />
       </body>
     </html>
   );

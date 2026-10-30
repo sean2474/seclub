@@ -44,7 +44,14 @@ export const WellnessTemplate = ({ wellnessPageData, slug }: { wellnessPageData:
         <div className="absolute h-60 md:h-[550px] bottom-0 w-full bg-beige" />
         <div className="w-full p-3.5">
           <ScrollReveal side="left" delay="400ms" className="relative w-full h-80 md:h-[700px] max-w-4xl mx-auto">
-            <Image src={wellnessPageData.header.image} alt={wellnessPageData.header.title} fill className="object-cover" />
+            <Image
+              src={wellnessPageData.header.image}
+              alt={wellnessPageData.header.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 896px"
+              quality={85}
+              className="object-cover"
+            />
           </ScrollReveal>
         </div>
       </section>
@@ -82,7 +89,14 @@ export const WellnessTemplate = ({ wellnessPageData, slug }: { wellnessPageData:
               .map((wellness) => (
                 <Link href={`/wellness/${wellness.slug}`} key={wellness.slug}>
                   <div className="relative h-[250px] sm:h-[250px] md:h-[200px] aspect-[3/2] overflow-hidden">
-                    <Image src={wellness.image} alt={wellness.title} fill className="object-cover group-hover:scale-110 transition-all duration-300" />
+                    <Image
+                      src={wellness.image}
+                      alt={wellness.title}
+                      fill
+                      sizes="288px"
+                      quality={82}
+                      className="object-cover group-hover:scale-110 transition-all duration-300"
+                    />
                   </div>
                   <div className="p-2">
                     <h2 className="text-lg md:text-xl font-medium">{wellness.title}</h2>

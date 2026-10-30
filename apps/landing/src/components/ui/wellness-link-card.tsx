@@ -11,7 +11,14 @@ export const WellnessLinkCard = ({ title, type, location, hours, image, slug, cl
   return (
     <Link href={`/wellness/${slug}`} className={cn("overflow-hidden rounded-lg bg-white/50 group", className)}> 
       <div className="relative h-[250px] sm:h-[350px] md:h-[300px] w-full overflow-hidden">
-        <Image src={image} alt={title} fill className="object-cover group-hover:scale-110 transition-all duration-300" />
+        <Image
+          src={image}
+          alt={title}
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          quality={82}
+          className="object-cover group-hover:scale-110 transition-all duration-300"
+        />
       </div>
       <div className="p-4 flex justify-start items-start flex-col">
         <div className="flex flex-col md:gap-1">

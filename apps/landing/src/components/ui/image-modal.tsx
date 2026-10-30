@@ -39,6 +39,8 @@ export function ImageGalleryWithModal({ images }: ImageModalProps) {
               src={image}
               alt={`image ${index + 1}`}
               fill
+              sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              quality={82}
               className="object-cover"
             />
           </div>
@@ -82,6 +84,8 @@ export function ImageGalleryWithModal({ images }: ImageModalProps) {
               src={images[selectedIndex]}
               alt={`image ${selectedIndex + 1}`}
               fill
+              sizes="90vw"
+              quality={85}
               className="object-contain"
             />
           </div>

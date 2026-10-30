@@ -11,6 +11,21 @@ interface UseSliderOptions {
 }
 
 /**
+ * Keep only the previous, current, and next slides mounted. This preserves the
+ * cross-fade while preventing every image in a carousel from downloading at once.
+ */
+export function getAdjacentSlideIndices(current: number, count: number): number[] {
+  if (count <= 0) return []
+  if (count <= 3) return Array.from({ length: count }, (_, index) => index)
+
+  return [
+    (current - 1 + count) % count,
+    current,
+    (current + 1) % count,
+  ]
+}
+
+/**
  * Shared slider state for image/content carousels. Handles index, prev/next,
  * swipe gestures, and optional auto-advance. Safely no-ops when `count <= 0`.
  */

@@ -1,4 +1,4 @@
-import { ParallaxScroll } from "@/components/ui/parallax-scroll";
+import { GalleryGrid } from "@/components/ui/gallery-grid";
 import { createClient } from "@seclub/supabase/public";
 import { generateMetadata } from "@/utils/metadata-generator";
 
@@ -33,8 +33,8 @@ export default async function GalleryPage() {
     );
 
   return (
-    <main className="pb-20">
-      <ParallaxScroll images={images} repeat={5} />
+    <main className="mt-[var(--header-height-expanded)] pb-20">
+      <GalleryGrid images={images} />
     </main>
   );
 }

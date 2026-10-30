@@ -14,7 +14,7 @@ export default function Page() {
       <Modal>
         <div className="relative h-[50svh] w-full p-2">
           <ModalTrigger>
-            <Image src="/images/about/map.png" alt="SE Club 전체 시설 배치도" fill className="object-contain" />
+            <Image src="/images/about/map.png" alt="SE Club 전체 시설 배치도" fill sizes="100vw" quality={85} className="object-contain" />
           </ModalTrigger>
         </div>
         <div className="flex gap-4">
@@ -25,7 +25,7 @@ export default function Page() {
         </div>
         <ModalBody className="w-svw h-svh">
           <div className="relative w-full h-full -z-1">
-            <Image src="/images/about/map.png" alt="SE Club 전체 시설 배치도" fill className="object-contain" />
+            <Image src="/images/about/map.png" alt="SE Club 전체 시설 배치도" fill sizes="100vw" quality={85} className="object-contain" />
           </div>
         </ModalBody>
       </Modal>

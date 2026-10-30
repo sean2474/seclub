@@ -50,7 +50,7 @@ export default function AboutPage() {
     <div className="font-sans text-wrap overflow-hidden">
       {/* Hero Section */}
       <section className="fixed top-0 h-svh w-full overflow-x-hidden text-white">
-        <Image src="/images/about/hero.jpg" alt="태안 꾸지나무골 해안의 아름다운 일몰" fill className="absolute inset-0 z-0 object-cover" priority
+        <Image src="/images/about/hero.jpg" alt="태안 꾸지나무골 해안의 아름다운 일몰" fill sizes="100vw" quality={85} className="absolute inset-0 z-0 object-cover" preload
         />
         <div className="absolute inset-0 bg-black/60 z-10"></div>
         <div className="absolute inset-0 flex items-center justify-center flex-col z-20 p-6 max-w-4xl mx-auto">
@@ -76,7 +76,7 @@ export default function AboutPage() {
               </ScrollReveal>
             </div>
             <ScrollReveal side="right" className="relative h-96 md:h-[500px] overflow-hidden">
-              <Image src="/images/about/1.jpg" alt="자연과 예술이 어우러진 조각공원" fill className="object-cover" />
+              <Image src="/images/about/1.jpg" alt="자연과 예술이 어우러진 조각공원" fill sizes="(max-width: 768px) 100vw, 50vw" quality={82} className="object-cover" />
             </ScrollReveal>
             <ScrollReveal type="p" side="bottom" className="text-lg space-y-6 block md:hidden">
               태안 해안국립공원 꾸지나무골 해안에 자리 잡은 SE Club은 처음에 자연 속 오토캠핑장으로 여러분께 문을 열었습니다. 이후 풀빌라, 단독 주택형, 콘도, 캠핑하우스, 반려견 캠핑장 등 다양한 숙박 옵션을 순차 도입하며 ‘복합 힐링클럽’으로 진화했습니다. 관광농원 오솔길, 조각공원, 전망대를 조성해 김영중·김석우·이필언 등 국내 유수 작가 작품을 전시하며 자연과 예술을 결합한 공간으로 자리매김했습니다
@@ -92,7 +92,7 @@ export default function AboutPage() {
               <ScrollReveal type="h2" side="left" className="text-3xl md:text-4xl font-medium">오직 SE Club에서만 가능한 경험</ScrollReveal>
             </div>
             <ScrollReveal side="right" className="relative w-full h-[300px] md:h-[500px] overflow-hidden mb-8">
-              <Image src="/images/about/2.png" alt="SE Club의 프라이빗 해변" fill className="object-cover" />
+              <Image src="/images/about/2.png" alt="SE Club의 프라이빗 해변" fill sizes="(max-width: 768px) 100vw, 896px" quality={82} className="object-cover" />
             </ScrollReveal>
             <div className="grid md:grid-cols-3 gap-4 md:gap-12">
               <ScrollReveal side="left" className="text-left">
@@ -129,7 +129,7 @@ export default function AboutPage() {
             </div>
             <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
               <ScrollReveal side="right" className="relative h-[300px] md:h-[500px] overflow-hidden">
-                <Image src="/images/about/3.jpg" alt="오션뷰 풀빌라" fill className="object-cover" />
+                <Image src="/images/about/3.jpg" alt="오션뷰 풀빌라" fill sizes="(max-width: 768px) 100vw, 50vw" quality={82} className="object-cover" />
               </ScrollReveal>
               <div className="grid grid-cols-1 gap-y-4 md:gap-y-10 text-lg">
                 <ScrollReveal side="left" delay="100ms" className="text-left">

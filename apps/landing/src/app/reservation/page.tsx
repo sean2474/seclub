@@ -1,15 +1,18 @@
 import type React from "react"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@seclub/ui/accordion"
+import { ChevronDown } from "lucide-react"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@seclub/ui/table"
 import { generateMetadata } from "@/utils/metadata-generator"
 
 export const metadata = generateMetadata("SE Club | 예약 안내", "SE Club 이용을 위한 예약 규정을 안내합니다.")
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
-  <AccordionItem value={title}>
-    <AccordionTrigger className="text-xl md:text-2xl font-medium rounded-lg hover:bg-beige/30 transition-all duration-300 hover:no-underline p-6">{title}</AccordionTrigger>
-    <AccordionContent className="pt-4 text-base text-gray-600 leading-relaxed p-4">{children}</AccordionContent>
-  </AccordionItem>
+  <details name="reservation-guide" className="group border-b">
+    <summary className="flex cursor-pointer list-none items-center justify-between rounded-lg p-6 text-xl font-medium hover:bg-beige/30 focus-visible:outline-2 focus-visible:outline-offset-2 md:text-2xl [&::-webkit-details-marker]:hidden">
+      {title}
+      <ChevronDown aria-hidden className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180 motion-reduce:transition-none" />
+    </summary>
+    <div className="p-4 text-base leading-relaxed text-gray-600">{children}</div>
+  </details>
 )
 
 const InfoList = ({ items }: { items: React.ReactNode[] }) => (
@@ -39,7 +42,7 @@ export default function ReservationPage() {
       </section>
 
       <main className="max-w-4xl mx-auto px-6 lg:px-8 py-12">
-        <Accordion type="single" collapsible className="w-full">
+        <div className="w-full">
           <Section title="1. 예약 시스템">
             <InfoList
               items={[
@@ -143,7 +146,7 @@ export default function ReservationPage() {
               ]}
             />
           </Section>
-        </Accordion>
+        </div>
 
         <div className="mt-16 text-center">
           <h3 className="text-2xl font-semibold mb-4">Contact</h3>

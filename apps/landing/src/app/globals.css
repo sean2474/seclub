@@ -22,7 +22,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-pretendard: 'Pretendard', sans-serif;
+  --font-pretendard: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
   --font-black-han-sans: 'Black Han Sans', sans-serif;
   --font-nanum-square: 'NanumSquare', sans-serif;
   --font-thesignature: 'Thesignature', sans-serif;

@@ -1,10 +1,7 @@
-"use client";
-
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@seclub/ui/table"
 import { Notice } from "@/types";
 import { ChevronRight } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useCallback } from "react";
+import Link from "next/link";
 
 export const NoticeTable = ({
   notices,
@@ -13,21 +10,6 @@ export const NoticeTable = ({
   notices: Notice[];
   hasFilter: boolean;
 }) => {
-  const router = useRouter();
-
-  const buildDetailHref = useCallback(
-    (id: string | number) => `/notices/${id}`,
-    [],
-  )
-
-  // hover/touch 시 detail 페이지를 미리 prefetch해서 클릭 시 즉시 전환되도록 함
-  const handlePrefetch = useCallback(
-    (id: string | number) => {
-      router.prefetch(buildDetailHref(id))
-    },
-    [router, buildDetailHref],
-  )
-
   if (notices.length === 0) {
     return (
       <div className="py-16 text-center text-foreground/60">
@@ -42,12 +24,11 @@ export const NoticeTable = ({
     <div className="">
       <div className="md:hidden space-y-2 divide-y divide-foreground/30 mt-2">
         {notices.map((notice) => (
-          <div
+          <Link
             key={notice.id}
-            className="pb-2 relative cursor-pointer"
-            onClick={() => router.push(buildDetailHref(notice.id))}
-            onMouseEnter={() => handlePrefetch(notice.id)}
-            onTouchStart={() => handlePrefetch(notice.id)}
+            href={`/notices/${notice.id}`}
+            prefetch={false}
+            className="block pb-2 relative cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2"
           >
             <p className="text-sm text-foreground/80">{notice.category}</p>
             <h4 className="flex items-center gap-1.5">
@@ -59,7 +40,7 @@ export const NoticeTable = ({
               <p className="text-sm text-foreground/80">조회수: {notice.view}</p>
             </div>
             <ChevronRight className="absolute right-2 top-1/2 -translate-y-1/2 text-foreground/50" strokeWidth={1.5} />
-          </div>
+          </Link>
         ))}
       </div>
       <Table className="hidden md:table">
@@ -75,16 +56,14 @@ export const NoticeTable = ({
           {notices.map((item) => (
             <TableRow
               key={item.id}
-              className="cursor-pointer hover:bg-secondary/10"
-              onClick={() => router.push(buildDetailHref(item.id))}
-              onMouseEnter={() => handlePrefetch(item.id)}
+              className="relative hover:bg-secondary/10"
             >
               <TableCell className="text-center text-foreground/80">{item.category}</TableCell>
               <TableCell className="font-medium text-foreground">
-                <div className="flex items-center gap-2">
+                <Link href={`/notices/${item.id}`} prefetch={false} className="flex items-center gap-2 after:absolute after:inset-0 focus-visible:outline-2 focus-visible:outline-offset-2">
                   {item.pinned && <span className="text-xs bg-foreground text-background px-1.5 py-0.5 shrink-0">고정</span>}
                   {item.title}
-                </div>
+                </Link>
               </TableCell>
               <TableCell className="text-center text-foreground/80">{item.created_at.split("T")[0]}</TableCell>
               <TableCell className="text-center text-foreground/80">{item.view}</TableCell>

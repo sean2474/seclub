@@ -14,7 +14,14 @@ export const RoomsLinkCard = ({slug, title, subtitle, images, features}: CardPro
   return (
     <div className="w-full grid gap-4 grid-cols-1 md:grid-cols-[40%_60%]">
       <div className="relative aspect-video md:aspect-auto md:h-full w-full">
-        <Image src={images[0]} alt={subtitle} fill className="object-cover" />
+        <Image
+          src={images[0]}
+          alt={subtitle}
+          fill
+          sizes="(max-width: 768px) 100vw, 40vw"
+          quality={82}
+          className="object-cover"
+        />
       </div>
       <div className="p-3 relative">
         <p className="mb-2">{subtitle}</p>

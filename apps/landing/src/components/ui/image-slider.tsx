@@ -8,7 +8,7 @@ import {
   ChevronRightIcon,
 } from '@heroicons/react/24/solid';
 import Link from 'next/link';
-import { useSlider } from '@/hooks/use-slider';
+import { getAdjacentSlideIndices, useSlider } from '@/hooks/use-slider';
 
 type Slide = {
   img: string;
@@ -40,6 +40,7 @@ export function ImageSlider({
 
   if (slides.length === 0) return null;
   const active = slides[current];
+  const visibleIndices = getAdjacentSlideIndices(current, slides.length);
 
   return (
     <div className="w-full max-w-4xl mx-auto">
@@ -48,26 +49,30 @@ export function ImageSlider({
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
       >
-        {slides.map((slide, idx) => (
+        {visibleIndices.map((idx) => {
+          const slide = slides[idx];
+          return (
           <div
             key={idx}
             className={`
               absolute inset-0
               transition-opacity duration-1000 ease-in-out md:flex
-              ${idx === current ? 'opacity-100' : 'opacity-0'}
+              ${idx === current ? 'z-10 opacity-100' : 'z-0 opacity-0'}
             `}
           >
             <Image
               src={slide.img}
               alt={slide.title}
               fill
+              sizes="(max-width: 640px) 400px, (max-width: 1024px) 50vw, 448px"
+              quality={82}
               className="object-cover"
-              priority={idx === current}
             />
           </div>
-        ))}
+          );
+        })}
 
-        <div className="absolute bottom-4 right-4 flex items-center px-3 py-1">
+        <div className="absolute bottom-4 right-4 z-20 flex items-center px-3 py-1">
           <div className="relative h-1 w-24 bg-gray-400 overflow-hidden rounded-full mr-4">
             <div
               className="h-full bg-white"

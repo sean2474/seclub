@@ -1,9 +1,9 @@
-/* 나눔스퀘어 - 브랜드 로고/슬로건용 */
+/* 나눔스퀘어 - 동일 글리프를 손실 없는 WOFF2로 압축 */
 @font-face {
   font-family: 'NanumSquare';
   font-weight: 300;
   font-style: normal;
-  src: url('/fonts/nanum-square/NanumSquareL.ttf') format('truetype');
+  src: url('/fonts/nanum-square/NanumSquareL.woff2') format('woff2');
   font-display: swap;
 }
 
@@ -11,7 +11,7 @@
   font-family: 'NanumSquare';
   font-weight: 400;
   font-style: normal;
-  src: url('/fonts/nanum-square/NanumSquareR.ttf') format('truetype');
+  src: url('/fonts/nanum-square/NanumSquareR.woff2') format('woff2');
   font-display: swap;
 }
 
@@ -19,7 +19,7 @@
   font-family: 'NanumSquare';
   font-weight: 700;
   font-style: normal;
-  src: url('/fonts/nanum-square/NanumSquareB.ttf') format('truetype');
+  src: url('/fonts/nanum-square/NanumSquareB.woff2') format('woff2');
   font-display: swap;
 }
 
@@ -27,7 +27,7 @@
   font-family: 'NanumSquare';
   font-weight: 800;
   font-style: normal;
-  src: url('/fonts/nanum-square/NanumSquareEB.ttf') format('truetype');
+  src: url('/fonts/nanum-square/NanumSquareEB.woff2') format('woff2');
   font-display: swap;
 }
 
@@ -73,7 +73,11 @@
   font-display: swap;
 }
 
-/* Pretendard Variable - 본문 및 메뉴용 */
+/*
+ * Pretendard Variable fallback.
+ * The primary face is the official dynamic subset loaded in app/layout.tsx;
+ * this local full font is used only if that stylesheet is unavailable.
+ */
 @font-face {
   font-family: 'Pretendard';
   font-weight: 45 920;
