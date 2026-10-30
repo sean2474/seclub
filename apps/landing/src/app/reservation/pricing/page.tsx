@@ -14,10 +14,11 @@ const monthlyStayRates = [
   { name: "오션 스파빌라", capacity: "4명 / 6명", allocation: "1동", fourWeeks: 3490000, fourWeekDiscount: 61, twoWeeks: 1910000, twoWeekDiscount: 57 },
 ]
 
+// 할인율은 공지 원문 표기 기준: https://cafe.naver.com/taeancamp/16955
 const campingLongStayRates = [
-  { name: "일반 텐트 · 일반 사이트", winter: 299000, summer: 349000 },
-  { name: "일반 텐트 · S 사이트", winter: 379000, summer: 429000 },
-  { name: "카라반 · 캠핑카 · 폴딩트레일러", winter: 359000, summer: 429000 },
+  { name: "일반 텐트 · 일반 사이트", winter: 299000, winterDiscount: 78, summer: 349000, summerDiscount: 75 },
+  { name: "일반 텐트 · S 사이트", winter: 379000, winterDiscount: 77, summer: 429000, summerDiscount: 74 },
+  { name: "카라반 · 캠핑카 · 폴딩트레일러", winter: 359000, winterDiscount: 78, summer: 429000, summerDiscount: 74 },
 ]
 
 const formatCurrency = (value?: number) => {
@@ -189,7 +190,7 @@ export default async function PricingPage() {
             </div>
             <div>
               <h3 id="camping-long-stay-title" className="text-xl font-semibold text-center mb-2">캠핑 장박</h3>
-              <p className="text-center text-sm text-gray-600 mb-6">4주 기준 · 평일·주말 제한 없이 이용</p>
+              <p className="text-center text-sm text-gray-600 mb-6">4주 기준 · 평일·주말 제한 없이 이용 · 정상 이용료 대비 최대 78% 할인</p>
               <p className="text-xs text-gray-600 mb-2 md:hidden">표를 좌우로 밀어 전체 요금을 확인하세요.</p>
               <Table className="min-w-[560px]" aria-labelledby="camping-long-stay-title">
                 <TableHeader>
@@ -203,17 +204,28 @@ export default async function PricingPage() {
                   {campingLongStayRates.map((item) => (
                     <TableRow key={item.name}>
                       <TableHead scope="row" className="text-gray-900">{item.name}</TableHead>
-                      <TableCell className="text-right whitespace-nowrap">{formatCurrency(item.winter)}</TableCell>
-                      <TableCell className="text-right whitespace-nowrap">{formatCurrency(item.summer)}</TableCell>
+                      <TableCell className="text-right whitespace-nowrap">
+                        <span className="font-semibold">{formatCurrency(item.winter)}</span>
+                        <span className="block text-xs text-gray-600 mt-1">{item.winterDiscount}% 할인</span>
+                      </TableCell>
+                      <TableCell className="text-right whitespace-nowrap">
+                        <span className="font-semibold">{formatCurrency(item.summer)}</span>
+                        <span className="block text-xs text-gray-600 mt-1">{item.summerDiscount}% 할인</span>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
               </Table>
               <ul className="mt-4 space-y-2 text-sm text-gray-600 list-disc pl-5">
+                <li>사전 이용 최대 2박 · 퇴장 후 14일 이내 장박 결정 시 사전 이용료를 장박 이용료에서 차감해 드립니다.</li>
+                <li>반려견 최대 2마리 동반 가능 · 동반 이용료 면제 (1일·1마리당 5,000원)</li>
                 <li>기준 인원 4명, 차량 1대 · 초과 시 일별 차량 1대당 10,000원, 인원 1명당 10,000원이 추가됩니다.</li>
-                <li>캠핑 장비는 이용 고객께서 직접 유지·관리해 주셔야 합니다.</li>
+                <li>캠핑 장비는 이용 고객께서 직접 유지·관리해 주셔야 합니다. 바람·눈 등으로 텐트에 특별한 이상이 있는 경우 관리자가 사진을 촬영해 안내해 드립니다.</li>
                 <li>월별 장박 사이트 예약 완료 시 마감됩니다.</li>
               </ul>
+              <p className="mt-4 text-sm text-gray-600">
+                <a href="https://cafe.naver.com/taeancamp/16955" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">캠핑 장박 공지 원문 보기 (새 창)</a>
+              </p>
             </div>
             <div className="text-center text-sm text-gray-600 space-y-2">
               <p>예약 신청 및 상담: <a href="tel:01097031711" className="font-semibold text-gray-900 underline underline-offset-4">010-9703-1711</a></p>
