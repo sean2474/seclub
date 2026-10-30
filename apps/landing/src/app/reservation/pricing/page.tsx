@@ -147,7 +147,6 @@ export default async function PricingPage() {
         {/* Long Stay Discount Section */}
         <section id="long-stay-discount" className="max-w-4xl mx-auto">
           <SectionTitle title="장박 특별 할인" subtitle="Long-stay Discount" />
-          <p className="text-center text-gray-600 mb-8">2026년 11월 ~ 2027년 예약 안내</p>
           <div className="space-y-10">
             <div>
               <h3 id="monthly-stay-title" className="text-xl font-semibold text-center mb-2">숙박시설 한달살기</h3>
